@@ -1,2 +1,2 @@
 # GearSwap
-現在使用中のGearWapコード
+現在使用中のGearSWapコード
