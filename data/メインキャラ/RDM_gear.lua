@@ -129,7 +129,7 @@ function init_gear_sets()
         body={ name="ニャメメイル", augments={'Path: B',}},
         hands={ name="ニャメガントレ", augments={'Path: B',}},
         legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet="ＬＴウゾー+3"
+        feet="ＬＴウゾー+3",
         neck="共和プラチナ章",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="シェリダピアス",
