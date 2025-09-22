@@ -58,7 +58,10 @@ function init_gear_sets()
     sets.engaged.Hasso              = set_combine(sets.engaged,{feet="越脇戸筒脛当"})
     
     --OffenseMode=Seigan HybridMode=Normal
-    sets.engaged.Seigan             = set_combine(sets.engaged,{head="極春日烏帽子形兜",body="ムパカダブレット",hands="ムパカグローブ",back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},})
+    sets.engaged.Seigan             = set_combine(sets.engaged,{head="極春日烏帽子形兜",
+                                                                body="ムパカダブレット",
+                                                                hands="ムパカグローブ",
+                                                                back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},})
     
     --OffenseMode=Normal HybridMode=ThirdEye
     sets.engaged.ThirdEye           = set_combine(sets.engaged,{legs="極左近士板佩楯"})
@@ -70,16 +73,15 @@ function init_gear_sets()
     sets.engaged.Seigan.ThirdEye    = set_combine(sets.engaged.Seigan,{legs="極左近士板佩楯"})
     
     --OffenseMode=Normal HybridMode=SubtleBlow モクシャ42 II 20
-    sets.engaged.SubtleBlow = set_combine(sets.engaged,{
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-		body="デーゴンブレスト",--II 10
-        legs="ムパカホーズ",--II 5
-        feet="乾闥婆脛当改",--8
-        waist="サリサフロイベルト",--5
-        left_ear="ディグニタリピアス",--5
-        right_ear="シェレピアス",--3
-        left_ring="ニックマドゥリング",--II 5
-        right_ring="シーリチリング+1",--10
+    sets.engaged.SubtleBlow         = set_combine(sets.engaged,{neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
+                                                                body="デーゴンブレスト",--II 10
+                                                                legs="ムパカホーズ",--II 5
+                                                                feet="乾闥婆脛当改",--8
+                                                                waist="サリサフロイベルト",--5
+                                                                left_ear="ディグニタリピアス",--5
+                                                                right_ear="シェレピアス",--3
+                                                                left_ring="ニックマドゥリング",--II 5
+                                                                right_ring="シーリチリング+1",--10
     })
 
     --即時発動系
