@@ -16,9 +16,9 @@ function init_gear_sets()
     gear.Khonsu                 = {name="コーンスー"}
     
     --監視用バフ
-    sets.buff['八双'] = {}
-    sets.buff['星眼'] = {}
-    sets.buff['心眼'] = {}
+    sets.buff['八双']           = {}
+    sets.buff['星眼']           = {}
+    sets.buff['心眼']           = {}
 
     --待機装備
     sets.idle = {
@@ -55,40 +55,64 @@ function init_gear_sets()
     }
 
     --OffenseMode=Hasso  HybridMode=Normal
-    sets.engaged.Hasso              = set_combine(sets.engaged,{feet="越脇戸筒脛当"})
+    sets.engaged.Hasso = set_combine(sets.engaged,{
+        feet="越脇戸筒脛当"
+    })
     
     --OffenseMode=Seigan HybridMode=Normal
-    sets.engaged.Seigan             = set_combine(sets.engaged,{head="極春日烏帽子形兜",
-                                                                body="ムパカダブレット",
-                                                                hands="ムパカグローブ",
-                                                                back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},})
+    sets.engaged.Seigan = set_combine(sets.engaged,{
+        head="極春日烏帽子形兜",
+        body="ムパカダブレット",
+        hands="ムパカグローブ",
+        back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
+    })
     
     --OffenseMode=Normal HybridMode=ThirdEye
-    sets.engaged.ThirdEye           = set_combine(sets.engaged,{legs="極左近士板佩楯"})
+    sets.engaged.ThirdEye = set_combine(sets.engaged,{
+        legs="極左近士板佩楯"
+    })
     
     --OffenseMode=Hasso  HybridMode=ThirdEye
-    sets.engaged.Hasso.ThirdEye     = set_combine(sets.engaged.Hasso, {legs="極左近士板佩楯"})
+    sets.engaged.Hasso.ThirdEye = set_combine(sets.engaged.Hasso,{
+        legs="極左近士板佩楯"
+    })
     
     --OffenseMode=Seigan HybridMode=ThirdEye
-    sets.engaged.Seigan.ThirdEye    = set_combine(sets.engaged.Seigan,{legs="極左近士板佩楯"})
+    sets.engaged.Seigan.ThirdEye = set_combine(sets.engaged.Seigan,{
+        legs="極左近士板佩楯"
+    })
     
     --OffenseMode=Normal HybridMode=SubtleBlow モクシャ42 II 20
-    sets.engaged.SubtleBlow         = set_combine(sets.engaged,{neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-                                                                body="デーゴンブレスト",--II 10
-                                                                legs="ムパカホーズ",--II 5
-                                                                feet="乾闥婆脛当改",--8
-                                                                waist="サリサフロイベルト",--5
-                                                                left_ear="ディグニタリピアス",--5
-                                                                right_ear="シェレピアス",--3
-                                                                left_ring="ニックマドゥリング",--II 5
-                                                                right_ring="シーリチリング+1",--10
+    sets.engaged.SubtleBlow = set_combine(sets.engaged,{
+        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
+        body="デーゴンブレスト",--II 10
+        legs="ムパカホーズ",--II 5
+        feet="乾闥婆脛当改",--8
+        waist="サリサフロイベルト",--5
+        left_ear="ディグニタリピアス",--5
+        right_ear="シェレピアス",--3
+        left_ring="ニックマドゥリング",--II 5
+        right_ring="シーリチリング+1",--10
     })
 
     --即時発動系
-    sets.precast.JA['明鏡止水']     = {legs="左近士筒脛当改"}
-    sets.precast.JA['黙想']         = {head="極脇戸桃形兜",hands="極左近士筒篭手",back="スメルトリオマント"}
-    sets.precast.JA['先義後利']     = {legs="極春日筒脛当"}
-    sets.precast.JA['護摩の守護円'] = {head="極脇戸桃形兜"}
+    sets.precast.JA['明鏡止水'] = {
+        legs="左近士筒脛当改"
+    }
+    
+    sets.precast.JA['黙想'] = {
+        head="極脇戸桃形兜",
+        hands="極左近士筒篭手",
+        back="スメルトリオマント"
+    }
+
+    sets.precast.JA['先義後利'] = {
+        legs="極春日筒脛当"
+    }
+
+    sets.precast.JA['護摩の守護円'] = {
+        head="極脇戸桃形兜"
+    }
 
     --FC
     sets.precast.FC = {
