@@ -58,7 +58,7 @@ function init_gear_sets()
     sets.engaged.Hasso              = set_combine(sets.engaged,{feet="越脇戸筒脛当"})
     
     --OffenseMode=Seigan HybridMode=Normal
-    sets.engaged.Seigan             = set_combine(sets.engaged,{head="極春日烏帽子形兜"})
+    sets.engaged.Seigan             = set_combine(sets.engaged,{head="極春日烏帽子形兜",body="ムパカダブレット",hands="ムパカグローブ",back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},})
     
     --OffenseMode=Normal HybridMode=ThirdEye
     sets.engaged.ThirdEye           = set_combine(sets.engaged,{legs="極左近士板佩楯"})
