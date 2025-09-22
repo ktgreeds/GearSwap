@@ -55,7 +55,7 @@ function init_gear_sets()
     }
 
     --OffenseMode=Hasso  HybridMode=Normal
-    sets.engaged.Hasso              = set_combine(sets.engaged,{feet="極脇戸筒脛当"})
+    sets.engaged.Hasso              = set_combine(sets.engaged,{feet="越脇戸筒脛当"})
     
     --OffenseMode=Seigan HybridMode=Normal
     sets.engaged.Seigan             = set_combine(sets.engaged,{head="極春日烏帽子形兜"})
