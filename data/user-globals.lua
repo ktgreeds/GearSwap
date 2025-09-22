@@ -53,6 +53,10 @@ function user_buff_change(buff, gain)
         windower.add_to_chat(167,'■■■ ファランクス切れ ■■■')
     elseif buff == "八双" and not gain then
         windower.add_to_chat(167,'■■■ 八双切れ ■■■')
+    elseif buff == "星眼" and not gain then
+        windower.add_to_chat(167,'■■■ 星眼切れ ■■■')
+    elseif buff == "心眼" and not gain then
+        windower.add_to_chat(167,'■■■ 心眼切れ ■■■')
     elseif buff == "コルア展開" and not gain then
         windower.add_to_chat(167,'■■■ インデ切れ ■■■')
     elseif buff == "ヴァレション" and not gain then
