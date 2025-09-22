@@ -19,8 +19,8 @@ function init_gear_sets()
     sets.buff['八双']           = {}
     sets.buff['星眼']           = {}
     sets.buff['心眼']           = {}
-
-    --待機装備
+    
+    -- 待機装備
     sets.idle = {
         ammo="ストンチタスラム+1",
         head={ name="ニャメヘルム", augments={'Path: B',}},
@@ -37,7 +37,7 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    --抜刀装備
+    -- 抜刀装備
     sets.engaged = {
         ammo={ name="コイストボダー", augments={'Path: A',}},
         head="極春日烏帽子形兜",
@@ -54,12 +54,12 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
     }
 
-    --OffenseMode=Hasso  HybridMode=Normal
+    -- 抜刀装備　八双 : OffenseMode=Hasso  HybridMode=Normal
     sets.engaged.Hasso = set_combine(sets.engaged,{
         feet="越脇戸筒脛当"
     })
     
-    --OffenseMode=Seigan HybridMode=Normal
+    -- 抜刀装備　星眼 : OffenseMode=Seigan HybridMode=Normal
     sets.engaged.Seigan = set_combine(sets.engaged,{
         head="極春日烏帽子形兜",
         body="ムパカダブレット",
@@ -67,22 +67,22 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
     })
     
-    --OffenseMode=Normal HybridMode=ThirdEye
+    -- 抜刀装備　心眼 : OffenseMode=Normal HybridMode=ThirdEye
     sets.engaged.ThirdEye = set_combine(sets.engaged,{
         legs="極左近士板佩楯"
     })
     
-    --OffenseMode=Hasso  HybridMode=ThirdEye
+    -- 抜刀装備　八双心眼 : OffenseMode=Hasso  HybridMode=ThirdEye
     sets.engaged.Hasso.ThirdEye = set_combine(sets.engaged.Hasso,{
         legs="極左近士板佩楯"
     })
     
-    --OffenseMode=Seigan HybridMode=ThirdEye
+    -- 抜刀装備　星眼心眼 : OffenseMode=Seigan HybridMode=ThirdEye
     sets.engaged.Seigan.ThirdEye = set_combine(sets.engaged.Seigan,{
         legs="極左近士板佩楯"
     })
     
-    --OffenseMode=Normal HybridMode=SubtleBlow モクシャ42 II 20
+    -- 抜刀装備　モクシャ62(42,20) : OffenseMode=Normal HybridMode=SubtleBlow
     sets.engaged.SubtleBlow = set_combine(sets.engaged,{
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
         body="デーゴンブレスト",--II 10
@@ -95,26 +95,29 @@ function init_gear_sets()
         right_ring="シーリチリング+1",--10
     })
 
-    --即時発動系
+    -- 即時発動アビリティ　明鏡止水
     sets.precast.JA['明鏡止水'] = {
         legs="左近士筒脛当改"
     }
     
+    -- 即時発動アビリティ　黙想
     sets.precast.JA['黙想'] = {
         head="極脇戸桃形兜",
         hands="極左近士筒篭手",
         back="スメルトリオマント"
     }
 
+    -- 即時発動アビリティ　先義後利
     sets.precast.JA['先義後利'] = {
         legs="極春日筒脛当"
     }
 
+    -- 即時発動アビリティ　護摩の守護円
     sets.precast.JA['護摩の守護円'] = {
         head="極脇戸桃形兜"
     }
 
-    --FC
+    -- FC装備
     sets.precast.FC = {
         ammo="サピエンスオーブ",
         body="サクロブレスト",
@@ -127,7 +130,7 @@ function init_gear_sets()
         right_ring="ラハブリング",
     }
 
-    --WSダメージ
+    -- WSダメージ
     sets.precast.WS.Damage = {
         ammo="ノブキエリ",
         head={ name="ムパカキャップ", augments={'Path: A',}},
@@ -144,7 +147,7 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
-    --WS魔攻
+    -- WS魔攻
     sets.precast.WS.Magic = {
         ammo="ノブキエリ",
         head={ name="ニャメヘルム", augments={'Path: B',}},
@@ -161,8 +164,7 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
-
-    --モクシャ42 II 20
+    -- WSモクシャ62(42,20)
     sets.precast.WS.SubtleBlow = 
     {
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
