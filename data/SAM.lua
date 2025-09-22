@@ -5,7 +5,11 @@ function get_sets()
 end
 
 
-function job_setup()    
+function job_setup()
+    state.Buff['八双']      = buffactive['八双'] or false
+    state.Buff['星眼']      = buffactive['星眼'] or false
+    state.Buff['心眼']      = buffactive['心眼'] or false
+
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
 
