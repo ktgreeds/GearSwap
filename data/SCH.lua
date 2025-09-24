@@ -29,7 +29,7 @@ function job_setup()
     state.IdleMode:options('Normal','Refresh')
     
     --gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','Vagary')
+    state.OffenseMode:options('Normal')
     
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal')
@@ -43,7 +43,8 @@ function job_setup()
     -- gs c cycle SubWeapons
     state.SubWeapons    = M{'Khonsu','AmmurapiShield','Daybreak'}
 
-    state.Seidr  = M(false, 'Seidr Cotehardie')
+    -- gs c cycle VagaryMode
+    state.VagaryMode    = M(false, 'Vagary')
 
 end
 
@@ -53,18 +54,6 @@ function customize_idle_set(idleSet)
         idleSet = set_combine(idleSet, sets.buff['机上演習'])
     end
     return idleSet
-end
-
-
-function job_post_precast(spell, action, spellMap, eventArgs)
-    if string.find(spell.type, 'Magic') then
-        if spell.name == 'ディスペガ' then 
-        elseif buffactive['黒のグリモア'] or buffactive['黒の補遺'] then
-            equip(sets.precast.FC.Black)
-        else
-            equip(sets.precast.FC.White)
-        end
-    end
 end
 
 
@@ -87,17 +76,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     if (spell.skill == '精霊魔法' and spellMap ~= 'Helix') or (spellMap == 'Cure' or spellMap == 'Curaga') then
         equip(get_hachirin(spell.element))
     end
-
-    if state.Seidr.value then
-        equip(sets.Seidr)
-    end
 end
 
 
 function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if newValue == 'Vagary' then
-            equip(sets.Vagary)
+    if stateField == 'Vagary' then
+        if newValue then
+            equip(sets.precast.FC)
             disable('range','ammo','head','neck','left_ear','right_ear','body','hands','left_ring','right_ring','back','waist','legs','feet')
         else
             enable('range','ammo','head','neck','left_ear','right_ear','body','hands','left_ring','right_ring','back','waist','legs','feet')
@@ -110,6 +95,7 @@ end
 function job_buff_change(buff, gain)
     if buff == "机上演習:蓄積中" and gain then 
         equip(sets.buff['机上演習'])
+
     elseif (buff == "黒のグリモア" or buff == "黒の補遺" or buff == "白のグリモア" or buff == "白の補遺") and gain then
         send_command('gs c lockstyleset')
         IdleMelee()
@@ -138,12 +124,8 @@ function custom_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'lockstyleset' then --ロックスタイル固定処理
         if buffactive['黒のグリモア'] or buffactive['黒の補遺'] then
             send_command('gs c set MainWeapons BunzisRod; wait 0.1; gs c set SubWeapons AmmurapiShield; wait 1; input /lockstyleset '..lockstyleset_black)
-
-        elseif buffactive['白のグリモア'] or buffactive['白の補遺'] then
-            send_command('gs c set MainWeapons Musa; wait 0.1; gs c set SubWeapons Khonsu; wait 1; input /lockstyleset '..lockstyleset_white)
-
         else
-            send_command('input /lockstyleset '..lockstyleset_white)
+            send_command('gs c set MainWeapons Musa;      wait 0.1; gs c set SubWeapons Khonsu;         wait 1; input /lockstyleset '..lockstyleset_white)
 
         end
     elseif cmdParams[1] == 'sc' then --【学者】震天動地連携処理
