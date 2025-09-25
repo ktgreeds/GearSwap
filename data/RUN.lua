@@ -13,7 +13,7 @@ function job_setup()
     state.IdleMode:options('Normal')
     
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','Stp','SubtleBlow','KnockBack')
+    state.OffenseMode:options('Normal','Stp','KnockBack')
 
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal','Parry')
@@ -88,19 +88,21 @@ end
 
 
 function job_buff_change(buff, gain)
-    if buff == 'バットゥタ' and gain then
-        send_command('gs c set HybridMode Parry')
+    if buff == 'バットゥタ' then
+        if gain then
+            end_command('gs c set HybridMode Parry')
+        else
+            send_command('gs c set HybridMode Normal')
+        end
 
-    elseif buff == 'バットゥタ' and not gain then
-        send_command('gs c set HybridMode Normal')
-
-    elseif (buff == 'エンボルド' and gain) or state.Buff['エンボルド'] then
-        equip(sets.buff['エンボルド'])
-        disable('back')
-
-    elseif buff == 'エンボルド' and not gain then
-        enable('back')
-        IdleMelee()
+    elseif buff == 'エンボルド' or state.Buff['エンボルド'] then
+        if gain then
+            equip(sets.buff['エンボルド'])
+            disable('back')
+        else
+            enable('back')
+            IdleMelee()
+        end
     end
 end
 
@@ -114,7 +116,6 @@ function custom_self_command(cmdParams, eventArgs)
         end
     end
 end
-
 
 
 --▼▼▼▼▼▼ルーンカンニングペーパー▼▼▼▼▼
