@@ -1,23 +1,33 @@
 function init_weaponns()
-    --デフォルト武器を設定
+    -- デフォルト武器を設定
 	send_command('gs c set MainWeapons Burtgang')
 	send_command('gs c set SubWeapons Duban')
 end
 
 
 function init_gear_sets()
-	--ロックスタイル番号
+	-- ロックスタイル番号
 	lockstyleset = 41
 
-	--武器
-	gear.Burtgang	= {name="ブルトガング"}
-	gear.Malevolence= {name="マレヴォレンス", augments={'INT+9','Mag. Acc.+10','"Mag.Atk.Bns."+9','"Fast Cast"+4',}}
-	gear.Slip  		= {name="カリブルヌス"}
-	gear.Duban		= {name="ドゥバン"}
-	gear.Aegis 		= {name="イージス"}
+	-- 片手剣
+	gear.Burtgang	        = {name="ブルトガング"}
+	
+    -- 短剣
+    gear.Malevolence        = {name="マレヴォレンス", augments={'INT+9','Mag. Acc.+10','"Mag.Atk.Bns."+9','"Fast Cast"+4',}}
+	
+    -- 盾
+    gear.Duban		        = {name="ドゥバン"}
+	gear.Aegis 		        = {name="イージス"}
+    
+    -- その他
+	gear.Slip  		        = {name="カリブルヌス"}
+    
+	--監視用バフ
+    sets.buff['神聖の印']   = {
+        feet="ＣＶサバトン+3"
+    }
 
-
-	--待機装備（通常）
+	-- 待機装備（通常）
 	sets.idle = {
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
@@ -34,7 +44,7 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
     
-    --待機装備（対魔法）
+    -- 待機装備（対魔法）
 	sets.idle.Magical = {
         ammo="ヴァニアバッテリー",
         head="ＣＶアーメット+3",
@@ -50,11 +60,8 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
-	
-    --走り回る用
-    sets.Kiting={right_ring="シュネデックリング",}
 
-	--抜刀装備
+	-- 抜刀装備
     sets.engaged = {
         ammo="コイストボダー",
         head="サクパタヘルム",
@@ -71,7 +78,7 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
 
-    --近接対物理
+    -- 近接対物理
 	sets.engaged.Physical = {
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
@@ -88,7 +95,7 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
 
-    --近接対魔法
+    -- 近接対魔法
     sets.engaged.Magical = {
         ammo="ヴァニアバッテリー",
         head="ＣＶアーメット+3",
@@ -105,7 +112,7 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
     
-	--敵対心装備
+	-- 敵対心装備
 	sets.Enmity = {
         ammo="サピエンスオーブ",
         head={ name="ロースバルブータ+1", augments={'Path: A',}},
@@ -122,22 +129,49 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Damage taken-5%',},priority=16},
 	}
 
-	--監視用バフ
-    sets.buff['センチネル']         	= {feet="ＣＢレギンス+4"}
-    sets.buff['神聖の印'] 				= {feet="ＣＶサバトン+3"}
-    
-	--即時発動系バフ
 	sets.precast.JA = sets.Enmity
-	sets.precast.JA['かばう'] 	        = set_combine(sets.Enmity,{head="ＲＶコロネット+1",legs="ＣＢブリーチズ+3"})
-	sets.precast.JA['ホーリーサークル'] = set_combine(sets.Enmity,{feet="ＲＶレギンス+3"})
-	sets.precast.JA['インビンシブル'] 	= set_combine(sets.Enmity,{legs="ＣＢブリーチズ+3"})
-	sets.precast.JA['シールドバッシュ'] = set_combine(sets.Enmity,{hands="ＣＢガントレ+3"})
-	sets.precast.JA['ランパート'] 		= set_combine(sets.Enmity,{head="ＣＢコロネット+3"})
-	sets.precast.JA['フィールティ'] 	= set_combine(sets.Enmity,{body="ＣＢサーコート+3"})
-	sets.precast.JA['シバルリー'] 		= {
+    
+    -- 即時発動アビリティ　かばう
+	sets.precast.JA['かばう'] = set_combine(sets.Enmity,{
+        head="ＲＶコロネット+1",
+        legs="ＣＢブリーチズ+3"
+    })
+    
+    -- 即時発動アビリティ　センチネル
+	sets.precast.JA['センチネル'] = set_combine(sets.Enmity,{
+        feet="ＣＢレギンス+4"
+    })
+    
+    -- 即時発動アビリティ　ホーリーサークル
+	sets.precast.JA['ホーリーサークル'] = set_combine(sets.Enmity,{
+        feet="ＲＶレギンス+3"
+    })
+    
+    -- 即時発動アビリティ　インビンシブル
+	sets.precast.JA['インビンシブル'] = set_combine(sets.Enmity,{
+        legs="ＣＢブリーチズ+3"
+    })
+    
+    -- 即時発動アビリティ　シールドバッシュ
+    sets.precast.JA['シールドバッシュ'] = set_combine(sets.Enmity,{
+        hands="ＣＢガントレ+3"
+    })
+    
+    -- 即時発動アビリティ　ランパート
+	sets.precast.JA['ランパート'] = set_combine(sets.Enmity,{
+        head="ＣＢコロネット+3"
+    })
+    
+    -- 即時発動アビリティ　フィールティ
+	sets.precast.JA['フィールティ'] = set_combine(sets.Enmity,{
+        body="ＣＢサーコート+3"
+    })
+    
+    -- 即時発動アビリティ　シバルリー
+	sets.precast.JA['シバルリー'] = {
         ammo="クォーツタスラム+1",
         head="ＣＶアーメット+3",
-        body="ＲＶサーコート+3",
+        body="ＲＶサーコート+4",
         hands={ name="ＣＢガントレ+3", augments={'Enhances "Chivalry" effect',}},
         legs="ＣＶクウィス+3",
         feet="ＣＶサバトン+3",
@@ -150,11 +184,11 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
 
-	--FC
+	-- FC
 	sets.precast.FC = {--73
 		ammo="サピエンスオーブ",
 		head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
-		body="ＲＶサーコート+3",
+		body="ＲＶサーコート+4",
 		hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
 		legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',}},
 		feet={ name="オディシアグリーヴ", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','"Fast Cast"+6','VIT+2','Mag. Acc.+2','"Mag.Atk.Bns."+13',}},
@@ -167,7 +201,7 @@ function init_gear_sets()
 		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
 
-	--WSダメージ
+	-- WSダメージ
 	sets.precast.WS.Damage = {
 		ammo="昏黄の礫",
         head={ name="ニャメヘルム", augments={'Path: B',}},
@@ -184,7 +218,7 @@ function init_gear_sets()
 		back={name="月明の羽衣",priority=16},
     }
 
-	--WSクリティカル
+	-- WSクリティカル
 	sets.precast.WS.Critical = {
 		ammo="昏黄の礫",
 		head="サクパタヘルム",
@@ -201,7 +235,7 @@ function init_gear_sets()
 		back={name="月明の羽衣",priority=16},
     }
 
-	--WS魔攻
+	-- WS魔攻
 	sets.precast.WS.Magic = {
 		ammo="ストンチタスラム+1",
         head={ name="ニャメヘルム", augments={'Path: B',}},
@@ -218,7 +252,7 @@ function init_gear_sets()
 		back={name="月明の羽衣",priority=16},
     }
 
-    --WSモクシャ
+    -- WSモクシャ
     sets.precast.WS.SubtleBlow = 
     {
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
@@ -229,17 +263,17 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
     }
     
-	--共通WS定義読み込み
+	-- 共通WS定義読み込み
     init_weapon_skill()
     
-    --個別WS定義
+    -- 個別WS定義
     sets.precast.WS["サンギンブレード"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),sets.precast.WS.SubtleBlow)}
 
     sets.precast.WS["ロイエ"] = { Normal=sets.Enmity,
                                   SubtleBlow=set_combine(sets.Enmity,sets.precast.WS.SubtleBlow)}
 
-	--詠唱中断
+	-- 詠唱中断
 	sets.midcast.interruption = {
 		ammo="ストンチタスラム+1",
 		head={ name="ＳＶシャレル+1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
@@ -256,7 +290,7 @@ function init_gear_sets()
 		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
 
-	--ファランクス
+	-- ファランクス
 	sets.midcast.Phalanx = {
 		main="サクパタソード",
 		sub="プリュウェン",
@@ -275,26 +309,26 @@ function init_gear_sets()
 		back={ name="ウェルドマント", augments={'VIT+1','DEX+2','Enmity+1','Phalanx +5',}},
 	}
     
-    --被ファランクス
+    -- 被ファランクス
     sets.midcast.IncreasedPhalanx = sets.midcast.Phalanx
 
-    --被プロテス
+    -- 被プロテス
     sets.midcast.IncreasedProtect = {
         right_ring="シェルターリング",
     }
 
-    --被シェル
+    -- 被シェル
     sets.midcast.IncreasedShell = {
         right_ring="シェルターリング",
     }
 
-    --被リジェネ
+    -- 被リジェネ
     sets.midcast.IncreasedRegenerated = {
         neck="サクロゴルゲット",
         waist = "スローダベルト",
     }
 
-    --被カーズナ
+    -- 被カーズナ
     sets.midcast.IncreasedRegenerated = {
         neck = "ニカンダネックレス",
         waist = "ギシドゥバサッシュ",
@@ -302,7 +336,7 @@ function init_gear_sets()
         right_ring="ピュリティーリング",
     }
 
-	--ケアル
+	-- ケアル
 	sets.midcast.Cure = {
         ammo="ストンチタスラム+1",
         head={ name="ＳＶシャレル+1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
@@ -319,5 +353,8 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
 
-    sets.midcast.Flash = set_combine(sets.Enmity,{waist="コーネリアの黒帯"})
+    --フラッシュ
+    sets.midcast.Flash = set_combine(sets.Enmity,{
+        waist="コーネリアの黒帯"
+    })
 end
