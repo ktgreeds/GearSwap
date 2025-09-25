@@ -1,21 +1,25 @@
 function init_weaponns()
-    --デフォルト武器を設定
+    -- デフォルト武器を設定
     send_command('gs c set MainWeapons DojikiriYasutsuna')
     send_command('gs c set SubWeapons Khonsu')
 end
 
 
 function init_gear_sets()
-    --ロックスタイル番号
+    -- ロックスタイル番号
     lockstyleset = 81
 
-    --武器
+    -- 両手刀
     gear.DojikiriYasutsuna      = {name="童子切安綱"}
+    
+    -- 両手槍
     gear.ShiningOne             = {name="シャイニングワン"}
+    
+    -- グリップ
     gear.UtuGrip                = {name="ウトゥグリップ"}
     gear.Khonsu                 = {name="コーンスー"}
     
-    --監視用バフ
+    -- 監視用バフ
     sets.buff['八双']           = {}
     sets.buff['星眼']           = {}
     sets.buff['心眼']           = {}
@@ -45,7 +49,7 @@ function init_gear_sets()
         hands={ name="楯無篭手改", augments={'Path: A',}},
         legs={ name="楯無佩楯改", augments={'Path: A',}},
         feet={ name="楯無脛当改", augments={'Path: A',}},
-        neck="月明の喉輪",
+        neck="月光の喉輪",
         waist={ name="ケンタークベルト+1", augments={'Path: A',}},
         left_ear="アスプロピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
