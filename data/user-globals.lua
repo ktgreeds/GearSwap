@@ -2,12 +2,12 @@
 
 --■■■初期ロード
 function user_setup()
-    state.Buff['睡眠'] = buffactive['睡眠'] or false                   --監視するバフ・デバフ
+    state.Buff['睡眠'] = buffactive['睡眠'] or false                    --監視するバフ・デバフ
     
-    include(player.name .. '/weather_obi')                              --属性帯ロード    
+    include(player.name .. '/weather_obi')                              --属性帯ロード
     include('smn_avatar')                                               --召喚定義ファイルロード
     init_weaponns()                                                     --武器初期化
-    init_custom_spell_map()                                             --スペルマップ定義再構築    
+    init_custom_spell_map()                                             --スペルマップ定義再構築
     define_roll_values()                                                --ロール情報
 
     local res = require('resources')
@@ -74,7 +74,7 @@ end
 
 
 --■■■攻撃装備着替え処理
-function user_customize_melee_set(meleeSet)
+function customize_melee_set(meleeSet)
     if(player.sub_job == '忍') then
         --二刀流係数11
         meleeSet = set_combine(meleeSet,sets.engaged.dual11)
@@ -90,7 +90,7 @@ end
 --■■■武器変更処理
 function user_customize_weapon_set()
     if state.MainWeapons then
-        weapon = set_combine(weapon,{main=gear[state.MainWeapons.value]})
+        weapon = {main=gear[state.MainWeapons.value]}
     end
     
     if state.SubWeapons then
@@ -213,7 +213,7 @@ end
 
 --■■■待機攻撃装備着替え
 function IdleMelee()
-    if player.status == 'Idle'then 
+    if player.status == 'Idle'then
         equip(get_idle_set()) 
     else
         equip(get_melee_set()) 
