@@ -1,21 +1,25 @@
 function init_weaponns()
-    --デフォルト武器を設定
+    -- デフォルト武器を設定
     send_command('gs c set MainWeapons Epeolatry')
     send_command('gs c set SubWeapons AlberStrap')
 end
 
 
 function init_gear_sets()
-    --ロックスタイル番号
+    -- ロックスタイル番号
     lockstyleset = 151
 
-    --両手剣
+    -- 両手剣
     gear.Epeolatry          = {name="エピオラトリー"}
-    --グリップ
+    
+    -- グリップ
     gear.AlberStrap         = {name="アルバーストラップ"}
     gear.Khonsu             = {name="コーンスー"}
     
-    --待機装備（通常）
+	--監視用バフ
+    sets.buff['エンボルド'] = {back="ディバートケープ"}
+
+    -- 待機装備（通常）
     sets.idle = {
         ammo="ストンチタスラム+1",
         head="無の面",
@@ -23,8 +27,8 @@ function init_gear_sets()
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
-        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        --neck={ name="フサルクトルク+2", augments={'Path: A',}},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',},priority=15},
@@ -33,7 +37,7 @@ function init_gear_sets()
         back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
     }
     
-    --抜刀装備
+    -- 抜刀装備
     sets.engaged = {
         ammo="ストンチタスラム+1",
         head="無の面",
@@ -41,9 +45,9 @@ function init_gear_sets()
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
-        neck={ name="フサルクトルク+2", augments={'Path: A',}},
-        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        waist={name="プラチナモグベルト",priority=16},
+        --neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        waist={ name="プラチナモグベルト",priority=16},
         left_ear="シェリダピアス",
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
         left_ring="ワーデンリング",
@@ -51,7 +55,7 @@ function init_gear_sets()
         back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
     }
 
-    --STP
+    -- STP
     sets.engaged.Stp = {
         ammo="コイストボダー",
         head="無の面",
@@ -68,13 +72,21 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    --受け流し
-    sets.engaged.Parry = set_combine(sets.engaged,{ head="無の面", hands="トゥルムミトン+1",legs="ＥＲレグガード+3",feet="トゥルムレギンス+1",})
+    -- 受け流し
+    sets.engaged.Parry = set_combine(sets.engaged,{
+        head="無の面",
+        hands="トゥルムミトン+1",
+        legs="ＥＲレグガード+3",
+        feet="トゥルムレギンス+1"
+    })
     
-    --ノックバック+4
-    sets.engaged.KnockBack = set_combine(sets.engaged,{ legs="ダッシングサブリガ",back="リパルスマント",}) 
+    -- ノックバック+4
+    sets.engaged.KnockBack = set_combine(sets.engaged,{
+        legs="ダッシングサブリガ",
+        back="リパルスマント"
+    }) 
     
-    --モクシャ46
+    -- モクシャ46
     sets.engaged.SubtleBlow = 
     {
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
@@ -85,7 +97,7 @@ function init_gear_sets()
         right_ring="シーリチリング+1",--10
     }
 
-    --敵対心装備
+    -- 敵対心装備
     sets.Enmity = {
         ammo="サピエンスオーブ",
         head="ハリタスヘルム",
@@ -102,8 +114,6 @@ function init_gear_sets()
         back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
     }
 
-	--監視用バフ
-    sets.buff['エンボルド'] = {back="ディバートケープ"}
 
 	--即時発動系バフ
     sets.precast.JA = sets.Enmity
@@ -131,7 +141,7 @@ function init_gear_sets()
                                                 back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}}}
     sets.precast.JA['ランジ']               = sets.precast.JA['スワイプ']
 
-    --FC:70
+    -- FC:70
     sets.precast.FC = {
         ammo="サピエンスオーブ",
         head="ＲＮバンド+3",
@@ -148,7 +158,7 @@ function init_gear_sets()
         back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',}},
     }
   
-    --WSダメージ
+    -- WSダメージ
     sets.precast.WS.Damage = {
         ammo="コイストボダー",
         head="ニャメヘルム",
@@ -165,11 +175,11 @@ function init_gear_sets()
         back="無の外装",
     }
     
-    --WSクリティカル
+    -- WSクリティカル
     sets.precast.WS.Critical = {
     }
 
-    --WS魔攻
+    -- WS魔攻
     sets.precast.WS.Magic = {
         ammo="コイストボダー",
         head="ニャメヘルム",
@@ -186,7 +196,7 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    --WSモクシャ
+    -- WSモクシャ
     sets.precast.WS.SubtleBlow = 
     {
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
@@ -197,10 +207,10 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
     }
     
-    --共通WS定義読み込み
+    -- 共通WS定義読み込み
     init_weapon_skill()
 
-    --詠唱中断
+    -- 詠唱中断
     sets.midcast.interruption = {
         ammo="ストンチタスラム+1",
         head="ＥＲガレア+3",
@@ -217,7 +227,7 @@ function init_gear_sets()
         back={ name="月明の羽衣",priority=16}
 	}
 
-    --強化魔法
+    -- 強化魔法
     sets.midcast.EnhancingMagic = {
         ammo="ストンチタスラム+1",
         head="ＥＲガレア+3",
@@ -234,7 +244,7 @@ function init_gear_sets()
         back={ name="月明の羽衣",priority=16}
     }
 
-    --ストンスキン
+    -- ストンスキン
     sets.midcast.Stoneskin= set_combine(sets.midcast.EnhancingMagic ,{
         body="アダマンアーマー",
         hands="ストーンマフラ",
@@ -245,7 +255,7 @@ function init_gear_sets()
         back={ name="月明の羽衣",priority=16},
     })
 
-    --ファランクス
+    -- ファランクス
     sets.midcast.Phalanx = {
         main="ザルフィカール",
         sub="ウトゥグリップ",
@@ -264,27 +274,27 @@ function init_gear_sets()
         back={ name="ディバートケープ", augments={'Enmity+1','"Embolden"+15','"Dbl.Atk."+3',}},
     }
 
-    --被ファランクス
+    -- 被ファランクス
     sets.midcast.IncreasedPhalanx = sets.midcast.Phalanx
 
-    --被プロテス
+    -- 被プロテス
     sets.midcast.IncreasedProtect = {
         right_ring="シェルターリング",
     }
 
-    --被シェル
+    -- 被シェル
     sets.midcast.IncreasedShell = {
         right_ring="シェルターリング",
     }
 
-    --被リジェネ
+    -- 被リジェネ
     sets.midcast.IncreasedRegenerated = {
         neck="サクロゴルゲット",
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
         waist = "スローダベルト",
     }
 
-    --被カーズナ
+    -- 被カーズナ
     sets.midcast.IncreasedRegenerated = {
         neck = "ニカンダネックレス",
         waist = "ギシドゥバサッシュ",
@@ -292,10 +302,11 @@ function init_gear_sets()
         right_ring="ピュリティーリング",
     }
     
-    --リジェネ
-    sets.midcast.Regen = set_combine(sets.midcast.EnhancingMagic,{head="ＲＮバンド+3",body="ＦＵコート+3",neck="サクロゴルゲット",waist="スローダベルト"})
-
-    --ケアル
-    sets.midcast.Cure = sets.Enmity
-
+    -- リジェネ
+    sets.midcast.Regen = set_combine(sets.midcast.EnhancingMagic,{
+        head="ＲＮバンド+3",
+        body="ＦＵコート+3",
+        neck="サクロゴルゲット",
+        waist="スローダベルト"
+    })
 end
