@@ -6,7 +6,8 @@ end
 
 
 function job_setup()
-    
+    state.Buff['神聖の印']      = buffactive['神聖の印'] or false
+
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
 
@@ -17,36 +18,13 @@ function job_setup()
     state.HybridMode:options('Normal','Sentinel')
     
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
 
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Burtgang','Malevolence'}
 
     -- gs c cycle SubWeapons
     state.SubWeapons    = M{'Duban','Aegis'}
-
-    -- gs c cycle SubWeapons
-    state.LowEnmity = M(false, 'LowEnmity')
-end
-
-
-function customize_idle_set(idleSet)
-    if state.SubWeapons.value == 'Duban' then
-        return set_combine(idleSet,sets.idle)
-    else
-        return set_combine(idleSet,sets.idle.Magical)
-    end
-end
-
-
-function customize_melee_set(meleeSet)
-    if state.OffenseMode.value == 'Multi'then
-        return set_combine(meleeSet,sets.engaged)
-    elseif state.SubWeapons.value == 'Duban' then
-        return set_combine(meleeSet,sets.engaged.Physical)
-    else
-        return set_combine(meleeSet,sets.engaged.Magical)
-    end
 end
 
 
@@ -90,23 +68,25 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
  
 
-function job_buff_change(buff, gain)
-    if buff == 'センチネル' then
-        if gain then
-            equip(sets.buff['センチネル'])
-            disable('feet') 
-        else
-            enable('feet')
-            IdleMelee()
-        end
-
-    elseif buff == '神聖の印' then
-        if gain then
-            equip(sets.buff['神聖の印'])
-            disable('feet') 
-        else
-            enable('feet')
-            IdleMelee()
-        end
+function customize_idle_set(idleSet)
+    if state.SubWeapons.value == 'Duban' then
+        return set_combine(idleSet,sets.idle)
+    else
+        return set_combine(idleSet,sets.idle.Magical)
     end
+end
+
+
+function user_customize_melee_set(meleeSet)
+    if state.OffenseMode.value == 'Multi'then
+        return set_combine(meleeSet,sets.engaged)
+    elseif state.SubWeapons.value == 'Duban' then
+        return set_combine(meleeSet,sets.engaged.Physical)
+    else
+        return set_combine(meleeSet,sets.engaged.Magical)
+    end
+end
+
+
+function job_buff_change(buff, gain)
 end
