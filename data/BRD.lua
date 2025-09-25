@@ -26,7 +26,7 @@ function job_setup()
     state.MainWeapons   = M{'Carnwenhan','Naegling'}
 
     -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'Aeneas','Malevolence','Genbu'}
+    state.SubWeapons    = M{'Genbu','Aeneas','Malevolence'}
     
     -- gs c cycle Instruments
     state.Instruments =  M{'Gjallarhorn','Daurdabla','Marsyas','Blurred'}
