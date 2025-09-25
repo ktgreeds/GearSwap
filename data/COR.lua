@@ -27,47 +27,24 @@ function job_setup()
     state.SubWeapons        = M{'CrepuscularKnife','Tauret','BlurredKnife','NuskuShield'}
     
     -- gs c cycle RangeWeapons
-    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','TPBonus'}
-    state.RangedMode        = M('Marksmanship')
-end
+    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty'}
 
+    state.CombatWeapon      = M{'Normal'}
 
-function job_state_change(stateField,  ewValue, oldValue)
-    if stateField == 'MainWeapons' then
-        if newValue == 'Naegling' then
-            send_command('gs c set RangeWeapons TPBonus')
-        end
-
-    elseif stateField == 'RangeWeapons' then
-        if newValue == 'Fomalhaut' then
-            send_command('gs c set RangedMode Marksmanship')
-
-        elseif newValue == 'TPBonus' then
-            send_command('gs c set RangedMode Marksmanship')
-        end
-    end
 end
 
 
 function job_post_pretarget(spell, action, spellMap, eventArgs)
         --誤射防止
     if player.equipment.ammo == gear.HauksbokBullet.name then
-        send_command('input /equip ammo')
-    end
-
-    if spell.name == '飛び道具' then
-        if state.RangedMode.value == 'Marksmanship' then
-            equip({ammo = gear.MarksmanshipPhysics})
-        end
-
-    elseif spell.name == 'イオリアンエッジ' then
-        equip({ammo=gear.HauksbokBullet})
+        equip({ammo=empty})
     end
 end
 
+
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if state.RangedMode.value == 'Marksmanship' then
-        equip({ammo = gear.MarksmanshipPhysics})
+    if spell.name == 'レデンサリュート' or spell.name == 'イオリアンエッジ' then
+        equip(get_hachirin(spell.element))
     end
 end
 
@@ -79,15 +56,33 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
                 equip(sets.buff[buff])
             end
         end
-    elseif spell.name == 'レデンサリュート'
-        or spell.name == 'イオリアンエッジ' then
-        equip(get_hachirin(spell.element))
     end
 end
 
+
 function job_post_aftercast(spell, action, spellMap, eventArgs)
     --誤射防止
-    if spell.name == 'イオリアンエッジ' then
-        send_command('input /equip ammo')
+    if player.equipment.ammo == gear.HauksbokBullet.name then
+        equip({ammo=empty})
     end
+end
+
+
+function customize_idle_set(idleSet)
+    return set_combine(idleSet,customize_weapon_set())
+end
+
+
+function user_customize_melee_set(meleeSet)
+    return set_combine(meleeSet,customize_weapon_set())
+end
+
+
+function customize_weapon_set()
+    if state.MainWeapons.value == 'Naegling' then
+        weapon = {range=gear.TPBonus}
+    else
+        weapon = {range=gear[state.RangeWeapons.value]}
+    end
+    return weapon
 end
