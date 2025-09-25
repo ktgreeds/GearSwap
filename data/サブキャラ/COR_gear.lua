@@ -1,7 +1,6 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons RostamA; wait 0.3; gs c set RangeWeapons Fomalhaut;wait 0.3; gs c set RangedMode Marksmanship')
-
+    -- デフォルト武器を設定
+    send_command('gs c set MainWeapons RostamA; wait 0.3; gs c set RangeWeapons Fomalhaut;wait 0.3;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
         send_command('gs c set SubWeapons BlurredKnife')
     else
@@ -11,10 +10,10 @@ end
 
 
 function init_gear_sets()
-    --ロックスタイル番号
+    -- ロックスタイル番号
     lockstyleset = 111
 
-    --短剣
+    -- 短剣
     gear.RostamA                = {name="ロスタム", augments={'Path: A'}}
     gear.RostamB                = {name="ロスタム", augments={'Path: B'}}
     gear.RostamC                = {name="ロスタム", augments={'Path: C'}}
@@ -22,38 +21,46 @@ function init_gear_sets()
     gear.Kustawi                = {name="クスタウィ+1"}
     gear.Tauret                 = {name="トーレット"}
     gear.BlurredKnife           = {name="ブラーナイフ+1"}
-    --片手剣
+
+    -- 片手剣
     gear.Naegling               = {name="ネイグリング"}
-    --盾
+
+    -- 盾
     gear.NuskuShield            = {name="ヌスクシールド"}
-    --銃
+
+    -- 銃
     gear.DeathPenalty           = {name="デスペナルティ"}
     gear.Fomalhaut              = {name="フォーマルハウト"}
     gear.TPBonus                = {name="アナーキー+2"}
-    --矢弾
+
+    -- 矢弾
     gear.MarksmanshipPhysics    = {name="クロノブレット"}
     gear.MarksmanshipMagical    = {name="ライヴブレット"}
-    gear.CorsairShot            = {name="ライヴブレット"}
+    gear.CorsairShot            = {name="ホクスボクブレット"}
     gear.HauksbokBullet         = {name="ホクスボクブレット"}
-    --その他
+    
+    -- その他
 
-    --待機装備（通常）
+    --監視用バフ
+    sets.buff['トリプルショット']   = {body="ＣＳフラック+3"}
+
+    -- 待機装備（通常）
     sets.idle = {
         head="無の面",
-        body="アダマンアーマー",
+        body={ name="ニャメメイル", augments={'Path: B',}},
         hands={ name="ニャメガントレ", augments={'Path: B',}},
         legs={ name="ニャメフランチャ", augments={'Path: B',}},
         feet={ name="ニャメソルレット", augments={'Path: B',}},
-        neck="無の喉輪",
+        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
         left_ear="エアバニピアス",
         right_ear="インフューズピアス",
-        left_ring="ヴェンジフルリング",
+        left_ring={ name="メランリング", augments={'Path: A',}},
         right_ring="シュネデックリング",
         back="無の外装",
     }
     
-    --待機装備（リフレ）
+    -- 待機装備（リフレ）
     sets.idle.Refresh = set_combine(sets.idle,{
         head={ name="ヘルクリアヘルム", augments={'Accuracy+24','INT+5','"Refresh"+2',}},
         body={ name="ヘルクリアベスト", augments={'Pet: Haste+1','"Mag.Atk.Bns."+16','"Refresh"+2',}},
@@ -61,7 +68,7 @@ function init_gear_sets()
         neck="シビルスカーフ",
     })
         
-    --抜刀装備
+    -- 抜刀装備
     sets.engaged = {
         head="マリグナスシャポー",
         body="マリグナスタバード",
@@ -69,8 +76,8 @@ function init_gear_sets()
         legs="ＣＳトルーズ+3",
         feet="マリグナスブーツ",
         neck="無の喉輪",
-        waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="昏黄の耳飾り",
+        waist={ name="ケンタークベルト+1", augments={'Path: A',}},
+        left_ear="アスプロピアス",
         right_ear="テロスピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
@@ -87,22 +94,34 @@ function init_gear_sets()
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
     })
-    --二刀流11（サポ忍）
+
+    -- 二刀流11（サポ忍）
     sets.engaged.dual11= {waist="霊亀腰帯",left_ear="エアバニピアス",}
 
-     --二刀流21（サポ踊）
+    -- 二刀流21（サポ踊）
    sets.engaged.dual21= set_combine(sets.engaged.dual11,{back={ name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},})
-    
-   --監視用バフ
-    sets.buff['トリプルショット'] = set_combine(sets.midcast.RA,{body="ＣＳフラック+3"})
 
-    --即時発動系
-    sets.precast.JA["ランダムディール"] = {body={ name="ＬＡフラック+3", augments={'Enhances "Loaded Deck" effect',}},}
-    sets.precast.JA["フォールド"]       = {hands={ name="ＬＡガントリー+3", augments={'Enhances "Fold" effect',}},}
-    sets.precast.JA["スネークアイ"]     = {legs={ name="ＬＡトルーズ+3", augments={'Enhances "Snake Eye" effect',}},}
-    sets.precast.JA["ワイルドカード"]   = {feet={ name="ＬＡブーツ+4", augments={'Enhances "Wild Card" effect',}},}
+    -- 即時発動アビリティ　ランダムディール
+    sets.precast.JA["ランダムディール"] = {
+        body="ＬＡフラック+3"
+    }
+
+    -- 即時発動アビリティ　フォールド
+    sets.precast.JA["フォールド"] = {
+        hands="ＬＡガントリー+3"
+    }
     
-    --FC
+    -- 即時発動アビリティ　スネークアイ
+    sets.precast.JA["スネークアイ"] = {
+        legs="ＬＡトルーズ+3"
+    }
+    
+    -- 即時発動アビリティ　ワイルドカード
+    sets.precast.JA["ワイルドカード"] = {
+        feet="ＬＡブーツ+4"
+    }
+
+    -- FC
     sets.precast.FC = {
         range={ name="ドゥームズデイ", augments={'"Fast Cast"+4',}},
         head={ name="ヘルクリアヘルム", augments={'"Fast Cast"+5',}},
@@ -117,8 +136,9 @@ function init_gear_sets()
         right_ring="メダダリング",
     }
 
-    --スナップ
+    -- スナップ
     sets.precast.RA = {
+        ammo=gear.MarksmanshipPhysics,
         head={ name="テーオンシャポー", augments={'"Snapshot"+5','"Snapshot"+5',}},
         body="ＬＫフラック+4",
         hands={ name="ＬＡガントリー+3", augments={'Enhances "Fold" effect',}},
@@ -129,7 +149,7 @@ function init_gear_sets()
         back={ name="カムラスマント", augments={'"Snapshot"+10',}},
     }
 
-    --ファントムロール
+    -- ファントムロール
     sets.precast.CorsairRoll = {
         main={name="ロスタム", augments={'Path: C',}},
         range={ name="コンペンセーター", augments={'DMG:+15','Rng.Atk.+15','"Mag.Atk.Bns."+15',}},
@@ -143,7 +163,7 @@ function init_gear_sets()
         back="ガンスリンガマント"
     }
 
-    --WSダメージ
+    -- WSダメージ
     sets.precast.WS.Damage = {
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body="ＬＫフラック+4",
@@ -159,8 +179,9 @@ function init_gear_sets()
         back={ name="カムラスマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
-    --WS遠隔ダメージ
+    -- WS遠隔ダメージ
     sets.precast.WS.Range = {
+        ammo=gear.MarksmanshipPhysics,
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body="ＬＫフラック+4",
         hands="ＣＳガントリー+3",
@@ -175,8 +196,9 @@ function init_gear_sets()
         back={ name="カムラスマント", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},    
     }
 
-    --WS遠隔魔攻
+    -- WS遠隔魔攻
     sets.precast.WS.Magic = {
+        ammo=gear.MarksmanshipMagical,
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body={ name="ＬＡフラック+3", augments={'Enhances "Loaded Deck" effect',}},
         hands="ニャメガントレ",
@@ -191,18 +213,20 @@ function init_gear_sets()
         back={ name="カムラスマント", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','Mag. Acc.+10','Weapon skill damage +10%',}},
     }
     
-    --WSモクシャ
+    -- WSモクシャ
     sets.precast.WS.SubtleBlow = sets.engaged.SubtleBlow
         
-    --共通WS定義読み込み
+    -- 共通WS定義読み込み
     init_weapon_skill()
     
     --個別WS定義
-    sets.precast.WS["レデンサリュート"] = { Normal=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",left_ring="アルコンリング",}),{ammo=gear.MarksmanshipMagical}),
-                                            SubtleBlow=set_combine(sets.precast.WS.LeadenSalute,sets.precast.WS.SubtleBlow)}
+    sets.precast.WS["レデンサリュート"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",left_ring="アルコンリング"}),
+                                            SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",left_ring="アルコンリング"}),sets.precast.WS.SubtleBlow )}
+    sets.precast.WS["イオリアンエッジ"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.HauksbokBullet}),
+                                            SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{ammo=gear.HauksbokBullet}),sets.precast.WS.SubtleBlow )}
 
 
-    --クイックドロー
+    -- クイックドロー
     sets.precast.CorsairShot = {
         ammo=gear.CorsairShot,
         head={ name="ニャメヘルム", augments={'Path: B',}},
@@ -221,6 +245,7 @@ function init_gear_sets()
 
     --遠隔攻撃
     sets.midcast.RA = {
+        ammo=gear.RAbulletphysics,
         head="マリグナスシャポー",
         body="マリグナスタバード",
         hands="マリグナスグローブ",
