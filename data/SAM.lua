@@ -14,10 +14,10 @@ function job_setup()
     state.IdleMode:options('Normal')
 
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal', 'Hasso', 'Seigan')
+    state.OffenseMode:options('Normal', 'SubtleBlow')
 
     -- gs c cycle HybridMode
-    state.HybridMode:options('Normal', 'SubtleBlow', 'ThirdEye')
+    state.HybridMode:options('Normal', 'Hasso', 'Seigan', 'ThirdEye')
 
     -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
@@ -33,16 +33,16 @@ end
 function job_buff_change(buff, gain)
     if buff == '八双' or state.Buff['八双'] then
         if gain then
-            send_command('gs c set OffenseMode Hasso')
+            send_command('gs c set HybridMode Hasso')
         else 
-            send_command('gs c set OffenseMode Normal')
+            send_command('gs c set HybridMode Normal')
         end
 
     elseif buff == '星眼' or state.Buff['星眼']then
         if gain then
-            send_command('gs c set OffenseMode Seigan')
+            send_command('gs c set HybridMode Seigan')
         else 
-            send_command('gs c set OffenseMode Normal')
+            send_command('gs c set HybridMode Normal')
         end
         
     elseif buff == '心眼' or state.Buff['心眼']then
