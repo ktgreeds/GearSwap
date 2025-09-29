@@ -31,24 +31,24 @@ end
 
 
 function job_buff_change(buff, gain)
-    if buff == '八双' or state.Buff['八双'] then
+    if buff == '八双' then
         if gain then
             send_command('gs c set OffenseMode Hasso')
-        elseif not gain then
+        else 
             send_command('gs c set OffenseMode Normal')
         end
 
-    elseif buff == '星眼' or state.Buff['星眼']then
+    elseif buff == '星眼' then
         if gain then
             send_command('gs c set OffenseMode Seigan')
-        elseid not gain then 
+        else 
             send_command('gs c set OffenseMode Normal')
         end
         
-    elseif buff == '心眼' or state.Buff['心眼']then
+    elseif buff == '心眼' then
         if gain then
             send_command('gs c set HybridMode ThirdEye')
-        elseif not gain then
+        else
             send_command('gs c set HybridMode Normal')
         end
     end
