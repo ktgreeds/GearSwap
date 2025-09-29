@@ -91,7 +91,7 @@ function job_buff_change(buff, gain)
     if buff == 'バットゥタ' then
         if gain then
             end_command('gs c set HybridMode Parry')
-        elseif not gain then
+        else
             send_command('gs c set HybridMode Normal')
         end
 
@@ -99,7 +99,7 @@ function job_buff_change(buff, gain)
         if gain then
             equip(sets.buff['エンボルド'])
             disable('back')
-        elseif not gain then
+        else
             enable('back')
             IdleMelee()
         end
