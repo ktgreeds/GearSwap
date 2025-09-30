@@ -12,10 +12,13 @@ function job_setup()
     state.IdleMode:options('Normal')
 
     --gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','Multi')
+    state.OffenseMode:options('Normal')
+
+    --gs c cycle DefenseMode
+    state.DefenseMode:options('Physical', 'Magical', 'None')
 
      -- gs c cycle HybridMode
-    state.HybridMode:options('Normal','Sentinel')
+    state.HybridMode:options('Normal','KnockBack')
     
     -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal','SubtleBlow')
@@ -23,8 +26,12 @@ function job_setup()
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Burtgang','Malevolence'}
 
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'Duban','Aegis'}
+    send_command('bind ~o gs c cycle DefenseMode')
+end
+
+
+function user_unload()
+    send_command('bind ~o gs c cycle DefenseMode')
 end
 
 
@@ -66,27 +73,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 end
- 
-
-function customize_idle_set(idleSet)
-    if state.SubWeapons.value == 'Duban' then
-        return set_combine(idleSet,sets.idle)
-    else
-        return set_combine(idleSet,sets.idle.Magical)
-    end
-end
 
 
 function user_customize_melee_set(meleeSet)
-    if state.OffenseMode.value == 'Multi'then
-        return set_combine(meleeSet,sets.engaged)
-    elseif state.SubWeapons.value == 'Duban' then
-        return set_combine(meleeSet,sets.engaged.Physical)
-    else
-        return set_combine(meleeSet,sets.engaged.Magical)
+    if state.HybridMode.value == "KnockBack" then
+        meleeSet =set_combine(meleeSet,sets.engaged.KnockBack)
     end
-end
-
-
-function job_buff_change(buff, gain)
+    return meleeSet
 end
