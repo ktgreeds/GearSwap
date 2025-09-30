@@ -1,7 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
 	send_command('gs c set MainWeapons Burtgang')
-	send_command('gs c set SubWeapons Duban')
 end
 
 
@@ -29,6 +28,7 @@ function init_gear_sets()
 
 	-- 待機装備（通常）
 	sets.idle = {
+        sub="ドゥバン",
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
         body="サクロブレスト",
@@ -43,9 +43,13 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
-    
+
+    --敵集め用
+    sets.Kiting = {feet="ヒポメネソックス+1",right_ring="シュネデックリング",}
+
     -- 待機装備（対魔法）
 	sets.idle.Magical = {
+        sub="イージス",
         ammo="ヴァニアバッテリー",
         head="ＣＶアーメット+3",
         body="アダマンアーマー",
@@ -63,6 +67,7 @@ function init_gear_sets()
 
 	-- 抜刀装備
     sets.engaged = {
+        sub="ドゥバン",
         ammo="コイストボダー",
         head="サクパタヘルム",
         body="サクパタブレスト",
@@ -77,9 +82,14 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
+    sets.engaged.KnockBack = {
+        legs = "ダッシングサブリガ",
+        back="リパルスマント",
+    }
 
     -- 近接対物理
-	sets.engaged.Physical = {
+	sets.defense.PDT = {
+        sub="ドゥバン",
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
         body="サクロブレスト",
@@ -96,7 +106,8 @@ function init_gear_sets()
 	}
 
     -- 近接対魔法
-    sets.engaged.Magical = {
+    sets.defense.MDT = {
+        sub="イージス",
         ammo="ヴァニアバッテリー",
         head="ＣＶアーメット+3",
         body="アダマンアーマー",
@@ -111,7 +122,7 @@ function init_gear_sets()
         right_ring={name="ヴェクサーリング+1",priority=14},
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
-    
+
 	-- 敵対心装備
 	sets.Enmity = {
         ammo="サピエンスオーブ",
