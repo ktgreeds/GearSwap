@@ -17,7 +17,7 @@ function job_setup()
     --gs c cycle DefenseMode
     state.DefenseMode:options('Physical', 'Magical', 'None')
 
-     -- gs c cycle HybridMode
+    -- gs c cycle HybridMode
     state.HybridMode:options('Normal','KnockBack')
     
     -- gs c cycle WeaponskillMode
@@ -31,7 +31,7 @@ end
 
 
 function user_unload()
-    send_command('bind ~o gs c cycle DefenseMode')
+    send_command('bind ~o gs c cycle OffenseMode')
 end
 
 
