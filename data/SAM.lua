@@ -6,6 +6,8 @@ end
 
 
 function job_setup()
+    state.Buff['八双']      = buffactive['八双'] or false
+    state.Buff['星眼']      = buffactive['星眼'] or false
     state.Buff['心眼']      = buffactive['心眼'] or false
 
     -- gs c cycle IdleMode
@@ -29,21 +31,17 @@ end
 
 
 function job_buff_change(buff, gain)
-    if buff == '八双' then
-        if gain then
-            send_command('gs c set HybridMode Hasso')
-        else 
-            send_command('gs c set HybridMode Normal')
-        end
+    if buff == '八双' and gain then
+        send_command('gs c set HybridMode Hasso')
+ 
+    elseif buff == '星眼' and gain then
+        send_command('gs c set HybridMode Seigan')
 
-    elseif buff == '星眼' then
-        if gain then
-            send_command('gs c set HybridMode Seigan')
-        else 
-            send_command('gs c set HybridMode Normal')
-        end
+    elseif not state.Buff['八双'] and not state.Buff['星眼'] then
+        send_command('gs c set HybridMode Normal')
+    end
 
-    elseif buff == '心眼' then
+    if buff == '心眼' then
         IdleMelee()
     end
 end
