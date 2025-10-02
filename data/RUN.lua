@@ -6,9 +6,9 @@ end
 
 
 function job_setup()
-    state.Buff['エンボルド']       = buffactive['エンボルド'] or false
-    state.Buff['バットゥタ']       = buffactive['バットゥタ'] or false
-    state.Buff['ファストキャスト'] = buffactive['ファストキャスト'] or false
+    state.Buff['エンボルド']        = buffactive['エンボルド'] or false
+    state.Buff['バットゥタ']        = buffactive['バットゥタ'] or false
+    state.Buff['ファストキャスト']  = buffactive['ファストキャスト'] or false
     
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
@@ -98,7 +98,7 @@ function job_buff_change(buff, gain)
     elseif buff == 'エンボルド' gain then
         equip(sets.buff['エンボルド'])
         disable('back')
-        
+
     elseif not state.Buff['エンボルド'] then
         enable('back')
         IdleMelee()
