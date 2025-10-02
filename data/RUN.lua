@@ -7,16 +7,17 @@ end
 
 function job_setup()
     state.Buff['エンボルド']       = buffactive['エンボルド'] or false
+    state.Buff['バットゥタ']       = buffactive['バットゥタ'] or false
     state.Buff['ファストキャスト'] = buffactive['ファストキャスト'] or false
     
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
     
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','Stp','KnockBack')
+    state.OffenseMode:options('Normal','Stp')
 
     -- gs c cycle HybridMode
-    state.HybridMode:options('Normal','Parry')
+    state.HybridMode:options('Normal','Parry','KnockBack')
     
     -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
@@ -88,21 +89,19 @@ end
 
 
 function job_buff_change(buff, gain)
-    if buff == 'バットゥタ' then
-        if gain then
-            send_command('gs c set HybridMode Parry')
-        else
-            send_command('gs c set HybridMode Normal')
-        end
+    if buff == 'バットゥタ' and gain then
+        send_command('gs c set HybridMode Parry')
 
-    elseif buff == 'エンボルド' or state.Buff['エンボルド'] then
-        if gain then
-            equip(sets.buff['エンボルド'])
-            disable('back')
-        else
-            enable('back')
-            IdleMelee()
-        end
+    elseif not state.Buff['バットゥタ'] then
+        send_command('gs c set HybridMode Normal')
+
+    elseif buff == 'エンボルド' gain then
+        equip(sets.buff['エンボルド'])
+        disable('back')
+        
+    elseif not state.Buff['エンボルド'] then
+        enable('back')
+        IdleMelee()
     end
 end
 
