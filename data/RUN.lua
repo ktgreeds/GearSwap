@@ -95,7 +95,7 @@ function job_buff_change(buff, gain)
     elseif not state.Buff['バットゥタ'] then
         send_command('gs c set HybridMode Normal')
 
-    elseif buff == 'エンボルド' gain then
+    elseif buff == 'エンボルド' and gain then
         equip(sets.buff['エンボルド'])
         disable('back')
 
