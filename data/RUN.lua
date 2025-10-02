@@ -90,7 +90,7 @@ end
 function job_buff_change(buff, gain)
     if buff == 'バットゥタ' then
         if gain then
-            end_command('gs c set HybridMode Parry')
+            send_command('gs c set HybridMode Parry')
         else
             send_command('gs c set HybridMode Normal')
         end
