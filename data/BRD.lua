@@ -57,11 +57,13 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip({range=gear.Daurdabla})
 
         else
-            if state.UseMiracleCheer.value then
-               equip({range=gear.MiracleCheer})
-
-            else
+            print(spell.target.type)
+            if not state.UseMiracleCheer.value 
+            or spell.target.type == "MONSTER" then
                 equip({range=gear.Gjallarhorn})
+                
+            else
+                equip({range=gear.MiracleCheer})
             end
         end
     end 
