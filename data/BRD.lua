@@ -29,7 +29,10 @@ function job_setup()
     state.SubWeapons    = M{'Genbu','Aeneas','Malevolence'}
     
     -- gs c cycle Instruments
-    state.Instruments =  M{'Gjallarhorn','Daurdabla','Marsyas','Blurred'}
+    state.Instruments =  M{'Gjallarhorn','Daurdabla','Marsyas','Blurred','MiracleCheer'}
+
+    state.UseMiracleCheer = M(false, 'Miracle Cheer')
+
 end
 
 
@@ -54,7 +57,12 @@ function job_post_precast(spell, action, spellMap, eventArgs)
             equip({range=gear.Daurdabla})
 
         else
-            equip({range=gear.Gjallarhorn})
+            if state.UseMiracleCheer.value then
+               equip({range=gear.MiracleCheer})
+
+            else
+                equip({range=gear.Gjallarhorn})
+            end
         end
     end 
 end
