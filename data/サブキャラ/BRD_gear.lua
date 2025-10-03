@@ -28,7 +28,7 @@ function init_gear_sets()
     gear.Marsyas                = {name="マルシュアス"}
     gear.Blurred                = {name="ブラーハープ+1"}
     gear.MiracleCheer           = {name="ミラクルチアー"}
-    
+
     -- 盾
     gear.Genbu                  = {name="玄冥盾"}
     gear.Loughnashade           = {name="ラックナシェード"}
@@ -42,7 +42,7 @@ function init_gear_sets()
         head="無の面",
         body={ name="ニャメメイル", augments={'Path: B',}},
         hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs="ＦＬラングラヴ+3",
+        legs="ＢＲキャニオン+4",
         feet={ name="ニャメソルレット", augments={'Path: B',}},
         neck="バーシチョーカー+1",
         waist="無の腰当",
