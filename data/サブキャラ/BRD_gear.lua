@@ -2,7 +2,7 @@ function init_weaponns()
     -- デフォルト武器を設定
     send_command('gs c set MainWeapons Carnwenhan')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('gs c set SubWeapons Aeneas')
+        send_command('gs c set SubWeapons Genbu')
     else
         send_command('gs c set SubWeapons Genbu')
     end
@@ -27,6 +27,7 @@ function init_gear_sets()
     gear.Daurdabla              = {name="ダウルダヴラ"}
     gear.Marsyas                = {name="マルシュアス"}
     gear.Blurred                = {name="ブラーハープ+1"}
+    gear.MiracleCheer           = {name="ミラクルチアー"}
     
     -- 盾
     gear.Genbu                  = {name="玄冥盾"}
@@ -122,7 +123,7 @@ function init_gear_sets()
     -- FC（歌）
     sets.precast.FC.BardSong = set_combine(sets.precast.FC,{
         head="ＦＬキャロ+3",
-        body="ＢＲジュスト+3",
+        body="ＢＲジュスト+4",
         legs="ＢＩスリッパー+4"
     })
 
@@ -232,7 +233,7 @@ function init_gear_sets()
         head="ＢＲランドリト+4",
         body="ＦＬオングルリヌ+3",
         hands="ＦＬマンシェト+3",
-        legs="ＢＲキャニオン+3",
+        legs="ＢＲキャニオン+4",
         feet="ＢＲスリッパー+4",
         neck="月虹の呼び子+1",
         waist="無の腰当",
