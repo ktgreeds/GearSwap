@@ -1,7 +1,6 @@
 function init_weaponns()
     --デフォルト武器を設定
-    send_command('gs c set MainWeapons Tizona')
-    send_command('gs c set SubWeapons SakpatasSword')
+    send_command('gs c set MainWeapons Tizona; wait 0.3; gs c set SubWeapons SakpatasSword')
 end
 
 
@@ -13,11 +12,15 @@ function init_gear_sets()
     gear.Tizona                 = {name="ティソーナ"}
     gear.SakpatasSword          = {name="サクパタソード"}
     gear.Naegling               = {name="ネイグリング"}
+    
     --片手棍
     gear.Maxentius              = {name="マクセンチアス"}
+    gear.Nehushtan              = {name="シャルウル", augments={'Evasion+15','Phys. dmg. taken -4%','AGI+17',}}
+
     --短剣
     gear.QutrubKnife            = {name="クトゥルブナイフ"}
     gear.EtherealDagger         = {name="幽世の短剣"}
+    
     --その他
     gear.Slip  					= {name="カリブルヌス"}
     
@@ -27,12 +30,12 @@ function init_gear_sets()
         head="無の面",
         body="ニャメメイル",
         hands="ニャメガントレ",
-        legs="ニャメフランチャ",
+        legs="ＡＳシャルワー+4",
         feet="ＡＳチャルク+4",
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
-        left_ear="エアバニピアス",
-        right_ear="インフューズピアス",
+        left_ear={name="アスプロピアス",priority=16},
+        right_ear="エアバニピアス",
         left_ring="メランリング",
         right_ring="シュネデックリング",
         back="無の外装",
@@ -101,15 +104,15 @@ function init_gear_sets()
         ammo="サピエンスオーブ",
         head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
         body="ピンガチュニック+1",
-        hands="ＨＳバズバンド+3",
+        hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
         legs="ピンガズボン+1",
-        feet="ニャメソルレット",
+        feet={ name="ニャメソルレット", augments={'Path: B',}},
         neck="オルンミラトルク",
-        waist={name="プラチナモグベルト",priority=16},
-        left_ear="エテオレートピアス",
+        waist="コーネリアの黒帯",
+        left_ear="アスプロピアス",
         right_ear="エンチャンピアス+1",
-        left_ring="メダダリング",
-        right_ring="ラハブリング",
+        left_ring="キシャールリング",
+        right_ring="メダダリング",
         back={ name="フィフォレケープ+1", augments={'Path: A',}},
     }
 
@@ -162,8 +165,8 @@ function init_gear_sets()
         waist="スクリミルコード",
         left_ear="王将の耳飾り",
         right_ear="フリオミシピアス",
-        left_ring="メダダリング",
-        right_ring="エパミノダスリング",
+        left_ring="エパミノダスリング",
+        right_ring="メダダリング",
         back={ name="コンフラワーケープ", augments={'MP+23','Accuracy+3','Blue Magic skill +10',}},
     }
 
@@ -183,6 +186,20 @@ function init_gear_sets()
     --個別WS定義
     sets.precast.WS["サンギンブレード"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),sets.precast.WS.SubtleBlow)}
+	-- 詠唱中断
+	sets.midcast.interruption = {
+        main="エレマイトワンド",
+        sub="エレマイトワンド",
+        ammo="ストンチタスラム+1",
+        head="無の面",
+        body="アダマンアーマー",
+        legs="ＡＳシャルワー+4",
+        neck={ name="アンムーヴカラー+1", augments={'Path: A',}},
+        waist="プラチナモグベルト",
+        left_ring={ name="メランリング", augments={'Path: A',}},
+        right_ring="守りの指輪",
+        back={ name="フィフォレケープ+1", augments={'Path: A',}},
+    }
 
     --強化魔法
     sets.midcast['強化魔法'] = {
@@ -226,6 +243,8 @@ function init_gear_sets()
 
     --青魔法魔攻
     sets.midcast.BlueMagical = {
+        main="ブンジロッド",
+        sub="マクセンチアス",
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
         head="ＨＳカヴク+3",
         body="ＨＳミンタン+3",
@@ -236,14 +255,16 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="王将の耳飾り",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="メダダリング",
-        right_ring={ name="メタモルリング+1", augments={'Path: A',}},
+        left_ring={ name="メタモルリング+1", augments={'Path: A',}},
+        right_ring="メダダリング",
         back={ name="コンフラワーケープ", augments={'MP+23','Accuracy+3','Blue Magic skill +10',}},
 
     }
 
     --青魔法魔命
     sets.midcast.BlueMagicAcc = {
+        main="ブンジロッド",
+        sub="マクセンチアス",
         ammo="ペムフレドタスラム",
         head="ＨＳカヴク+3",
         body="ＨＳミンタン+3",
@@ -290,5 +311,7 @@ function init_gear_sets()
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
         hands={ name="ヘルクリアグローブ", augments={'Magic Damage +1','Crit. hit damage +3%','Phalanx +4','Accuracy+10 Attack+10','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
         legs={ name="ヘルクリアトラウザ", augments={'AGI+8','Attack+7','Phalanx +4','Accuracy+1 Attack+1','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
-        feet={ name="ヘルクリアブーツ", augments={'Weapon skill damage +2%','"Fast Cast"+3','Phalanx +5','Accuracy+16 Attack+16',}},},HPBoost)
+        feet={ name="ヘルクリアブーツ", augments={'Weapon skill damage +2%','"Fast Cast"+3','Phalanx +5','Accuracy+16 Attack+16',}},})
+    sets.midcast.Aquaveil = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1", legs="シェダルサラウィル", waist="エンパチコスロープ"})
+
 end
