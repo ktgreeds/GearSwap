@@ -127,6 +127,9 @@ function init_gear_sets()
         legs="ＢＩスリッパー+4"
     })
 
+   --FC（ディスペガ用）
+   sets.precast.FC['ディスペガ'] = set_combine( sets.precast.FC,{main="デイブレイクワンド",})
+
     -- WSダメージ
     sets.precast.WS.Damage = {
         range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','Quadruple Attack +3',}},
@@ -244,6 +247,11 @@ function init_gear_sets()
         back="無の外装",
     }
 
+    -- 弱体魔法　ディスペガ
+    sets.midcast['ディスペガ'] = set_combine(sets.midcast['弱体魔法'],{
+        main="デイブレイクワンド",
+    })
+    
     -- ダミー歌
     sets.midcast.song_dummy = {
         range="ダウルダヴラ",
@@ -386,5 +394,24 @@ function init_gear_sets()
     -- ヴィルレー
     sets.midcast.BardSong['乙女のヴィルレー']   = sets.midcast['弱体魔法']
 
-
+    -- ミラクルチアーセット
+    sets.midcast.BardSong.MiracleCheerBase  = set_combine(sets.midcast.song_base, {
+        head="ＦＬキャロ+3",
+        body="ＦＬオングルリヌ+3",
+        hands="ＦＬマンシェト+3",
+        legs="ＦＬラングラヴ+3",
+        feet="ＦＬコテュルヌ+3"
+    })
+    sets.midcast.BardSong.MiracleCheerEtude  = set_combine(sets.midcast.BardSong.MiracleCheerBase, {
+        head="ムセスターバン+1",
+    })
+    sets.midcast.BardSong.MiracleCheerCarol  = set_combine(sets.midcast.BardSong.MiracleCheerBase, {
+        hands="ムセスゲージ+1",
+    })
+    sets.midcast.BardSong.MiracleCheerMinne = set_combine(sets.midcast.BardSong.MiracleCheerBase, {
+        legs="ムセスサラウィル+1",
+    })
+    sets.midcast.BardSong.MiracleCheerMambo = set_combine(sets.midcast.BardSong.MiracleCheerBase, {
+        feet="ムセスクラッコー+1"
+    })
 end
