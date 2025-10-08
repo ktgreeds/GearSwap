@@ -76,11 +76,12 @@ function init_gear_sets()
         hands="マリグナスグローブ",
         legs="ＣＳトルーズ+3",
         feet="マリグナスブーツ",
-        neck="無の喉輪",
-        waist={ name="ケンタークベルト+1", augments={'Path: A',}},
-        left_ear="アスプロピアス",
+        neck="コンバタントトルク",
+        waist="セールフィベルト+1",
+        left_ear="ディグニタリピアス",
         right_ear="テロスピアス",
-        left_ring="シーリチリング+1",
+        left_ring={ name="メランリング", augments={'Path: A',}},
+--        left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back="無の外装",
     }
@@ -91,17 +92,16 @@ function init_gear_sets()
         hands={ name="アデマリスト+1", augments={'Accuracy+20','Attack+20','"Subtle Blow"+8',}},
         feet="ムンムゲマッシュ+2",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        right_ear="ディグニタリピアス",
+        left_ear="ディグニタリピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
     })
 
     -- 二刀流11（サポ忍）
-    sets.engaged.dual11= {waist="霊亀腰帯",left_ear="エアバニピアス",}
-    
-    -- 二刀流21（サポ踊）
-    sets.engaged.dual21= set_combine(sets.engaged.dual11,{back={ name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},})
+    sets.engaged.dual11= {back={ name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},}
 
+    -- 二刀流21（サポ踊）
+   sets.engaged.dual21= set_combine(sets.engaged.dual11,{waist="霊亀腰帯",left_ear="エアバニピアス",})
 
     -- 即時発動アビリティ　ランダムディール
     sets.precast.JA["ランダムディール"] = {
@@ -164,6 +164,10 @@ function init_gear_sets()
         neck="王将の首飾り",
         left_ring="ルザフリング",
         back={ name="ガンスリンガマント", augments={'Enmity-1','"Phantom Roll" ability delay -5',}},
+    }
+    
+    sets.precast.CorsairRoll['ボルターズロール'] = {
+        main={ name="ロスタム", augments={'Path: C',}},
     }
 
     -- WSダメージ
