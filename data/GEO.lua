@@ -52,7 +52,20 @@ end
 function job_status_change(new,old)
     if state.AutoHealing.value then
         if new == "Idle" then
-            send_command("wait 5; input /heal on")
+            send_command("wait 10; input /heal on")
+        end
+    end
+end
+
+function job_state_change(stateField, newValue, oldValue)
+    if stateField == 'AutoHealing' then
+        if newValue then
+            send_command("input /heal on")
+            windower.add_to_chat(167,'■■■ 自動ヒーリング開始 ■■■')
+
+        else
+            send_command("input /heal off")
+            windower.add_to_chat(167,'■■■ 自動ヒーリング停止 ■■■')
         end
     end
 end
