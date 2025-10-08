@@ -24,7 +24,7 @@ function init_gear_sets()
         feet="ＡＺゲートル+3",
         neck="シビルスカーフ",
         waist="無の腰当",
-        left_ear="ハーティーピアス",
+        left_ear={ name="アスプロピアス", augments={'Path: A',}},
         right_ear={ name="アジムスピアス+2", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+17','Damage taken-6%','INT+9 MND+9',}},
         left_ring="スティキニリング+1",
         right_ring="シュネデックリング",
@@ -48,44 +48,42 @@ function init_gear_sets()
     sets.idle.Luopan = {
         range={ name="デュンナ", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
         head="ＡＺフード+3",
-        body={ name="テルキネシャジュブ", augments={'Pet: "Regen"+3','Pet: Damage taken -4%',}},
-        hands="ＡＺグローブ+3",
-        legs={ name="テルキネブラコーニ", augments={'Pet: "Regen"+3','Pet: Damage taken -4%',}},
-        feet="ＢＡサンダル+3",
+        body={ name="テルキネシャジュブ", augments={'Mag. Evasion+25','Pet: "Regen"+3','Pet: Damage taken -4%',}},
+        hands={ name="テルキネグローブ", augments={'Mag. Evasion+24','Pet: "Regen"+3','Pet: Damage taken -4%',}},
+        legs={ name="テルキネブラコーニ", augments={'Mag. Evasion+25','Pet: "Regen"+3','Pet: Damage taken -4%',}},
+        feet={ name="ＢＡサンダル+4", augments={'Enhances "Radial Arcana" effect',}},
         neck={ name="バグアチャーム+2", augments={'Path: A',}},
         waist="イーサベルト",
-        left_ear="ハンドラーピアス+1",
+        left_ear={ name="アスプロピアス", augments={'Path: A',}},
         right_ear={ name="アジムスピアス+2", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+17','Damage taken-6%','INT+9 MND+9',}},
-        left_ring="メランリング",
-        right_ring="シュネデックリング",
-        back={ name="ナントセルタケープ", augments={'Pet: "Regen"+10','Pet: "Regen"+5',}},
+        left_ring={ name="メランリング", augments={'Path: A',}},
+        right_ring="守りの指輪",
+        back={ name="ナントセルタケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Pet: "Regen"+10','Pet: "Regen"+5',}},
     }
 
     --待機装備（羅盤リフレ）
     sets.idle.Luopan.Refresh = set_combine(sets.idle.Luopan,sets.idle.Refresh)
     
-    --走り回る用
-    sets.Kiting = {right_ring="シュネデックリング",}
-
     --FC
     sets.precast.FC = {
-        main="パルーグハンマー",
-        sub="玄冥盾",
         range={ name="デュンナ", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
         head={ name="マーリンフード", augments={'"Fast Cast"+5','DEX+9','Mag. Acc.+9',}},
         body={ name="マーリンジュバ", augments={'Mag. Acc.+26','"Fast Cast"+6','MND+1',}},
-        hands={ name="マーリンダスタナ", augments={'"Mag.Atk.Bns."+8','"Fast Cast"+5','CHR+6',}},
+        hands={ name="アグゥゲージ", augments={'Path: A',}},
         legs={ name="サイクロスラッパ", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
         feet={ name="マーリンクラッコー", augments={'"Mag.Atk.Bns."+2','"Fast Cast"+5','AGI+6','Mag. Acc.+14',}},
         neck="オルンミラトルク",
         waist="エンブラサッシュ",
         left_ear="マリグナスピアス",
-        right_ear="エテオレートピアス",
-        left_ring="キシャールリング",
-        right_ring="シュネデックリング",
+        right_ear="エンチャンピアス+1",
+        left_ring="メダダリング",
+        right_ring="守りの指輪",
         back={ name="フィフォレケープ+1", augments={'Path: A',}},
     }
-    
+
+    --FC（ディスペガ用）
+   sets.precast.FC['ディスペガ'] = set_combine( sets.precast.FC,{main="デイブレイクワンド",})
+
     --即時発動系
     sets.precast.JA["ライフサイクル"]               = {body="ＧＯチュニック+1"}
     sets.precast.JA["ボルスター"]                   = {body="ＢＡチュニック+1"}
@@ -140,16 +138,16 @@ function init_gear_sets()
     sets.midcast['精霊魔法']={
         sub="アムラピシールド",
         range={ name="デュンナ", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
-        head="アグゥキャップ",
+        head="エアハット+1",
         body={ name="アグゥローブ", augments={'Path: A',}},
         hands={ name="アグゥゲージ", augments={'Path: A',}},
         legs="ＡＺタイツ+3",
         feet="アグゥピガッシュ",
-        neck="水影の首飾り",
-        waist="スクリミルコード",
+        neck="シビルスカーフ",
+        waist="サクロコード",
         left_ear="マリグナスピアス",
         right_ear={ name="アジムスピアス+2", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+17','Damage taken-6%','INT+9 MND+9',}},
-        left_ring="フレキリング",
+        left_ring="メダダリング",
         right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back={ name="ナントセルタケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Pet: Damage taken -5%',}},
     }
@@ -167,14 +165,18 @@ function init_gear_sets()
         waist="無の腰当",
         left_ear="マリグナスピアス",
         right_ear={ name="アジムスピアス+2", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+17','Damage taken-6%','INT+9 MND+9',}},
-        left_ring="フレキリング",
+        left_ring="メダダリング",
         right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back="無の外装",
     }
     
+    -- 弱体魔法　ディスペガ
+    sets.midcast['ディスペガ'] = set_combine(sets.midcast['弱体魔法'],{
+        main="デイブレイクワンド",
+    })
+
     --風水魔法
     sets.midcast.Geomancy={
-        main="イドリス",
         range={ name="デュンナ", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
         head="ＡＺフード+3",
         body="ＡＺコート+3",
@@ -182,16 +184,16 @@ function init_gear_sets()
         legs={ name="ＢＡパンツ+3", augments={'Enhances "Mending Halation" effect',}},
         feet="ＡＺゲートル+3",
         neck={ name="バグアチャーム+2", augments={'Path: A',}},
-        waist="無の腰当",
-        left_ear="ハーティーピアス",
+        waist="プラチナモグベルト",
+        left_ear={ name="アスプロピアス", augments={'Path: A',}},
         right_ear={ name="アジムスピアス+2", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+17','Damage taken-6%','INT+9 MND+9',}},
-        left_ring="メランリング",
-        right_ring="ピュリティーリング",
+        left_ring={ name="メランリング", augments={'Path: A',}},
+        right_ring="守りの指輪",
         back={ name="龍脈の外套", augments={'Geomancy Skill +8','Indi. eff. dur. +20','Pet: Damage taken -3%',}},
     }
 
     --エントラスト
     sets.midcast.Entrust={
-        main={ name="ガーダ", augments={'Indi. eff. dur. +10','Mag. Acc.+11','"Mag.Atk.Bns."+15',}},
+        main={ name="ガーダ", augments={'Indi. eff. dur. +11','"Mag.Atk.Bns."+19','DMG:+7',}},
     }
 end
