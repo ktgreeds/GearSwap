@@ -22,6 +22,10 @@ function job_setup()
     
     -- gs c cycle SubWeapons
     state.SubWeapons    = M{'Genbu'}
+
+    -- gs c cycle AutoHealing
+    state.AutoHealing   = M(false)
+
 end
 
 
@@ -42,4 +46,13 @@ function customize_idle_set(idleSet)
     end
 
     return idleSet
+end
+
+-- 羅盤ヘイトのせ　自動ヒーリング
+function job_status_change(new,old)
+    if state.AutoHealing.value then
+        if new == "Idle" then
+            send_command("wait 5; input /heal on")
+        end
+    end
 end
