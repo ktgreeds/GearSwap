@@ -77,7 +77,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
     
     if spell.type=='BardSong' then
-        if state.UseMiracleCheer then
+        if state.UseMiracleCheer.value then
             if spellMap == "Etude" then
                 equip(sets.midcast.BardSong.MiracleCheerEtude)
             elseif spellMap == "Carol" then
@@ -91,7 +91,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             end
         end
     end
-
     if spell.name == 'イオリアンエッジ' then
         equip(get_hachirin(spell.element))
     end
