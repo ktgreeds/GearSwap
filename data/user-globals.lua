@@ -14,7 +14,8 @@ function user_setup()
     send_command('input /si '..res.jobs[player.main_job_id]["ens"])
     send_command('input /chatmode party')                               --チャットモード変更
     send_command('gs c set IdleMode Normal; wait 5; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
-    
+    state.SortieText = M(false)
+
     --include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
     --print(res.jobs[player.main_job_id]["ens"])
@@ -121,6 +122,12 @@ function job_self_command(cmdParams, eventArgs)
         ActionEnmity()
     elseif cmdParams[1] == 'EnmityRange' then       --範囲ヘイトアップ処理
         ActionEnmityRange()
+    elseif cmdParams[1] == 'Sortie' then            --ソーティカンニングペーパー
+        if state.SortieText.value then
+            showTextSortie()
+        else
+            hideTextSortie()
+        end
     elseif cmdParams[1] == 'lockstyleset' then      --ロックスタイル固定処理
         if player.main_job ~= '学' then
             send_command('input /lockstyleset '..lockstyleset)
@@ -692,4 +699,35 @@ function init_weapon_skill()
     sets.precast.WS["ワイルドファイア"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipMagical}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipMagical})}
     sets.precast.WS["ラストスタンド"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
     sets.precast.WS["ジ・エンド"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+end
+
+local Sortietexts = require('texts')
+message={
+    [1] = {name='アンジュレティングショックウェーブ', desc1='氷　'},
+    [2] = {name='シュリーキングゲイル', desc1='土　'},
+
+    [3] = {name='フレミングキック', desc1='水　'},
+    [4] = {name='アイシーグラスプ', desc1='火　'},
+    [5] = {name='エローディングフレッシュ', desc1='風　'},
+    [6] = {name='ファルミナススマッシュ', desc1='土　'},
+    [7] = {name='フラッシュフラッド', desc1='雷　'},
+}
+text_box = Sortietexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=200, y=200}, padding = 5, bg={alpha=180}})
+text_box.text='弱　特殊技名（　CGボス　）\n'..
+'\\cs(204, 255, 255)'..message[1].desc1..message[1].name..'\\cr'..'\n'..
+'\\cs(255, 255, 204)'..message[2].desc1..message[2].name..'\\cr'..'\n'..
+'\\cr'..'\n'..
+'\\cr'..'弱　特殊技名（　DFボス　）\n'..
+'\\cs(204, 204, 255)'..message[3].desc1..message[3].name..'\\cr'..'\n'..
+'\\cs(255, 204, 204)'..message[4].desc1..message[4].name..'\\cr'..'\n'..
+'\\cs(204, 255, 204)'..message[5].desc1..message[5].name..'\\cr'..'\n'..
+'\\cs(255, 255, 204)'..message[6].desc1..message[6].name..'\\cr'..'\n'..
+'\\cs(255, 204, 255)'..message[7].desc1..message[7].name..'\\cr'
+
+function showTextSortie()
+    text_box:show()
+end
+
+function hideTextSortie()
+    text_box:hide()
 end
