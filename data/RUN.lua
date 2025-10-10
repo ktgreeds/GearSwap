@@ -131,14 +131,14 @@ message={
 }
 text_box = RUnetexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=10, y=220}, padding = 5, bg={alpha=180}})
 text_box.text='属性　　　　　　耐性\n'..
-'\\cs(255,128,128)'..message[1].desc1..message[1].name..message[1].desc2..message[1].desc3..'\\cr'..'\n'..
-'\\cs(128,255,255)'..message[2].desc1..message[2].name..message[2].desc2..message[2].desc3..'\\cr'..'\n'..
-'\\cs(128,255,128)'..message[3].desc1..message[3].name..message[3].desc2..message[3].desc3..'\\cr'..'\n'..
-'\\cs(255,255,128)'..message[4].desc1..message[4].name..message[4].desc2..message[4].desc3..'\\cr'..'\n'..
-'\\cs(255,128,255)'..message[5].desc1..message[5].name..message[5].desc2..message[5].desc3..'\\cr'..'\n'..
-'\\cs(128,128,255)'..message[6].desc1..message[6].name..message[6].desc2..message[6].desc3..'\\cr'..'\n'..
-'\\cs(255,255,255)'..message[7].desc1..message[7].name..message[7].desc2..message[7].desc3..'\\cr'..'\n'..
-'\\cs(128,128,128)'..message[8].desc1..message[8].name..message[8].desc2..message[8].desc3..'\\cr'
+'\\cs(255, 204, 204)'..message[1].desc1..message[1].name..message[1].desc2..message[1].desc3..'\\cr'..'\n'..
+'\\cs(204, 255, 255)'..message[2].desc1..message[2].name..message[2].desc2..message[2].desc3..'\\cr'..'\n'..
+'\\cs(204, 255, 204)'..message[3].desc1..message[3].name..message[3].desc2..message[3].desc3..'\\cr'..'\n'..
+'\\cs(255, 255, 204)'..message[4].desc1..message[4].name..message[4].desc2..message[4].desc3..'\\cr'..'\n'..
+'\\cs(255, 204, 255)'..message[5].desc1..message[5].name..message[5].desc2..message[5].desc3..'\\cr'..'\n'..
+'\\cs(204, 204, 255)'..message[6].desc1..message[6].name..message[6].desc2..message[6].desc3..'\\cr'..'\n'..
+'\\cs(255, 255, 255)'..message[7].desc1..message[7].name..message[7].desc2..message[7].desc3..'\\cr'..'\n'..
+'\\cs(204, 204, 204)'..message[8].desc1..message[8].name..message[8].desc2..message[8].desc3..'\\cr'
 
 function showTextRune()
     text_box:show()
