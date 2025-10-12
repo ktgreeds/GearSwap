@@ -14,7 +14,11 @@ function user_setup()
     send_command('input /si '..res.jobs[player.main_job_id]["ens"])
     send_command('input /chatmode party')                               --チャットモード変更
     send_command('gs c set IdleMode Normal; wait 5; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
+
+    -- gs c cycle SortieText
     state.SortieText = M(false)
+    -- gs c cycle RuneText
+    state.RuneText = M(false)
 
     --include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
@@ -105,7 +109,6 @@ function user_customize_weapon_set()
     return weapon
 end
 
-
 --■■■セルフコマンド
 function job_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'Idle' then                  --待機装備着替え
@@ -122,12 +125,20 @@ function job_self_command(cmdParams, eventArgs)
         ActionEnmity()
     elseif cmdParams[1] == 'EnmityRange' then       --範囲ヘイトアップ処理
         ActionEnmityRange()
-    elseif cmdParams[1] == 'Sortie' then            --ソーティカンニングペーパー
-        if state.SortieText.value then
+    elseif cmdParams[1] == 'SortieText' then       --ソーティカンニングペーパー
+        if not state.SortieText.value then
             showTextSortie()
         else
             hideTextSortie()
         end
+        send_command('gs c cycle SortieText')
+    elseif cmdParams[1] == 'RuneText' then       --ルーンカンニングペーパー
+        if not state.SortieText.value then
+            showTextRune()
+        else
+            hideTextRune()
+        end
+        send_command('gs c cycle RuneText')
     elseif cmdParams[1] == 'lockstyleset' then      --ロックスタイル固定処理
         if player.main_job ~= '学' then
             send_command('input /lockstyleset '..lockstyleset)
@@ -702,7 +713,7 @@ function init_weapon_skill()
 end
 
 local Sortietexts = require('texts')
-message={
+message_sortie={
     [1] = {name='アンジュレティングショックウェーブ', desc1='氷　'},
     [2] = {name='シュリーキングゲイル', desc1='土　'},
 
@@ -712,22 +723,53 @@ message={
     [6] = {name='ファルミナススマッシュ', desc1='土　'},
     [7] = {name='フラッシュフラッド', desc1='雷　'},
 }
-text_box = Sortietexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=200, y=200}, padding = 5, bg={alpha=180}})
-text_box.text='弱　特殊技名（　CGボス　）\n'..
-'\\cs(204, 255, 255)'..message[1].desc1..message[1].name..'\\cr'..'\n'..
-'\\cs(255, 255, 204)'..message[2].desc1..message[2].name..'\\cr'..'\n'..
+text_box_sortie = Sortietexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=200, y=200}, padding = 5, bg={alpha=180}})
+text_box_sortie.text='弱　特殊技名（　CGボス　）\n'..
+'\\cs(204, 255, 255)'..message_sortie[1].desc1..message_sortie[1].name..'\\cr'..'\n'..
+'\\cs(255, 255, 204)'..message_sortie[2].desc1..message_sortie[2].name..'\\cr'..'\n'..
 '\\cr'..'\n'..
 '\\cr'..'弱　特殊技名（　DFボス　）\n'..
-'\\cs(204, 204, 255)'..message[3].desc1..message[3].name..'\\cr'..'\n'..
-'\\cs(255, 204, 204)'..message[4].desc1..message[4].name..'\\cr'..'\n'..
-'\\cs(204, 255, 204)'..message[5].desc1..message[5].name..'\\cr'..'\n'..
-'\\cs(255, 255, 204)'..message[6].desc1..message[6].name..'\\cr'..'\n'..
-'\\cs(255, 204, 255)'..message[7].desc1..message[7].name..'\\cr'
+'\\cs(204, 204, 255)'..message_sortie[3].desc1..message_sortie[3].name..'\\cr'..'\n'..
+'\\cs(255, 204, 204)'..message_sortie[4].desc1..message_sortie[4].name..'\\cr'..'\n'..
+'\\cs(204, 255, 204)'..message_sortie[5].desc1..message_sortie[5].name..'\\cr'..'\n'..
+'\\cs(255, 255, 204)'..message_sortie[6].desc1..message_sortie[6].name..'\\cr'..'\n'..
+'\\cs(255, 204, 255)'..message_sortie[7].desc1..message_sortie[7].name..'\\cr'
 
 function showTextSortie()
-    text_box:show()
+    text_box_sortie:show()
 end
 
 function hideTextSortie()
-    text_box:hide()
+    text_box_sortie:hide()
+end
+
+
+local Runetexts = require('texts')
+message_rune={
+    [1] = {name='イグニス　', desc1='火：',desc2='（氷：',desc3='麻痺、バインド）'},
+    [2] = {name='ゲールス　', desc1='氷：',desc2='（風：',desc3='静寂、ヘヴィ）'},
+    [3] = {name='フラブラ　', desc1='風：',desc2='（土：',desc3='石化、テラー、スロウ）'},
+    [4] = {name='テッルス　', desc1='土：',desc2='（雷：',desc3='スタン）'},
+    [5] = {name='スルポール', desc1='雷：',desc2='（水：',desc3='毒）'},
+    [6] = {name='ウンダ　　', desc1='水：',desc2='（火：',desc3='病気、悪疫、アムネジア）'},
+    [7] = {name='ルックス　', desc1='光：',desc2='（闇：',desc3='呪い、睡眠）'},
+    [8] = {name='テネブレイ', desc1='闇：',desc2='（光：',desc3='魅了、睡眠）'},
+}
+text_box_rune = Runetexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=10, y=220}, padding = 5, bg={alpha=180}})
+text_box_rune.text='属性　　　　　　耐性\n'..
+'\\cs(255, 204, 204)'..message_rune[1].desc1..message_rune[1].name..message_rune[1].desc2..message_rune[1].desc3..'\\cr'..'\n'..
+'\\cs(204, 255, 255)'..message_rune[2].desc1..message_rune[2].name..message_rune[2].desc2..message_rune[2].desc3..'\\cr'..'\n'..
+'\\cs(204, 255, 204)'..message_rune[3].desc1..message_rune[3].name..message_rune[3].desc2..message_rune[3].desc3..'\\cr'..'\n'..
+'\\cs(255, 255, 204)'..message_rune[4].desc1..message_rune[4].name..message_rune[4].desc2..message_rune[4].desc3..'\\cr'..'\n'..
+'\\cs(255, 204, 255)'..message_rune[5].desc1..message_rune[5].name..message_rune[5].desc2..message_rune[5].desc3..'\\cr'..'\n'..
+'\\cs(204, 204, 255)'..message_rune[6].desc1..message_rune[6].name..message_rune[6].desc2..message_rune[6].desc3..'\\cr'..'\n'..
+'\\cs(255, 255, 255)'..message_rune[7].desc1..message_rune[7].name..message_rune[7].desc2..message_rune[7].desc3..'\\cr'..'\n'..
+'\\cs(204, 204, 204)'..message_rune[8].desc1..message_rune[8].name..message_rune[8].desc2..message_rune[8].desc3..'\\cr'
+
+function showTextRune()
+    text_box_rune:show()
+end
+
+function hideTextRune()
+    text_box_rune:hide()
 end
