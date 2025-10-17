@@ -26,12 +26,14 @@ function job_setup()
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Burtgang','Malevolence'}
 
-    send_command('bind ~o gs c cycle DefenseMode')
+    state.Kiting = M(true)
+
+    send_command('bind ~F7 gs c cycle DefenseMode')
 end
 
 
 function user_unload()
-    send_command('bind ~o gs c cycle OffenseMode')
+    send_command('bind ~F7 gs c cycle OffenseMode')
 end
 
 
@@ -80,4 +82,16 @@ function user_customize_melee_set(meleeSet)
         meleeSet =set_combine(meleeSet,sets.engaged.KnockBack)
     end
     return meleeSet
+end
+
+function job_buff_change(buff, gain)
+    if player.status == 'Idle'then
+        if buff == "とんずら" and gain then 
+            send_command('gs c set Kiting false')
+        else
+            send_command('gs c set  Kiting true')
+        end
+    else
+        send_command('gs c set Kiting false')
+    end
 end
