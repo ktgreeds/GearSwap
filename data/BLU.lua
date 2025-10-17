@@ -14,7 +14,7 @@ function job_setup()
     state.Buff["ブルーバースト"]     = buffactive["ブルーバースト"] or false
     
     -- gs c cycle IdleMode
-    state.IdleMode:options('Normal','Refresh')
+    state.IdleMode:options('Kiting','Normal','Refresh')
     
     -- gs c cycle OffenseMode
     state.OffenseMode:options('Normal','LockWeapons')
@@ -35,6 +35,8 @@ function job_setup()
     state.TreasureHunter = M(false)
     -- gs c cycle LockWeapons
     state.LockWeapons = M(false)
+
+    state.Kiting = M(true)
 end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
@@ -56,7 +58,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
 
         equip(sets.midcast.interruption)
-        local adjust=0.9
+        local adjust=0.8
         local cast_time = (spell.cast_time*(1-fc))*adjust
 
         if spellMap == 'BlueMagical' then
@@ -104,5 +106,17 @@ function job_state_change(stateField, newValue, oldValue)
             equip({main=gear.Tizona,sub=gear.SakpatasSword})
             disable('main','sub')
         end
+    end
+end
+
+function job_buff_change(buff, gain)
+    if player.status == 'Idle'then
+        if buff == "とんずら" and gain then 
+            send_command('gs c set Kiting false')
+        else
+            send_command('gs c set  Kiting true')
+        end
+    else
+        send_command('gs c set Kiting false')
     end
 end
