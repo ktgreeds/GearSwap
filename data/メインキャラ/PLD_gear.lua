@@ -25,6 +25,8 @@ function init_gear_sets()
     sets.buff['神聖の印']   = {
         feet="ＣＶサバトン+3"
     }
+    
+    sets.Kiting = {feet="ヒポメネソックス+1"}
 
 	-- 待機装備（通常）
 	sets.idle = {
@@ -82,6 +84,7 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
+    
     sets.engaged.KnockBack = {
         legs = "ダッシングサブリガ",
         back="リパルスマント",
@@ -320,6 +323,7 @@ function init_gear_sets()
 		back={ name="ウェルドマント", augments={'VIT+1','DEX+2','Enmity+1','Phalanx +5',}},
 	}
     
+    --[[
     -- 被ファランクス
     sets.midcast.IncreasedPhalanx = sets.midcast.Phalanx
 
@@ -346,7 +350,7 @@ function init_gear_sets()
         left_ring="サイダリング",
         right_ring="ピュリティーリング",
     }
-
+]]
 	-- ケアル
 	sets.midcast.Cure = {
         ammo="ストンチタスラム+1",
