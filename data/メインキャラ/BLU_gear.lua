@@ -24,6 +24,8 @@ function init_gear_sets()
     --その他
     gear.Slip  					= {name="カリブルヌス"}
     
+    sets.Kiting = {feet="ヒポメネソックス+1"}
+    
     --待機装備（通常）
     sets.idle = {
         ammo="アマークラスター",
@@ -62,12 +64,12 @@ function init_gear_sets()
         legs="マリグナスタイツ",
         feet="マリグナスブーツ",
         neck={ name="ミラージストール+2", augments={'Path: A',}},
-        waist="霊亀腰帯",
-        left_ear="素破の耳",
+        waist="セールフィベルト+1",
+        left_ear="テロスピアス",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
-		back="無の外装",
+        back={ name="ロスメルタケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
     }
 
     --モクシャ41
@@ -131,7 +133,7 @@ function init_gear_sets()
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="スローダリング",
+        left_ring="イラブラットリング",
         right_ring="エパミノダスリング",
         back={ name="ロスメルタケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}},
     }
@@ -144,7 +146,7 @@ function init_gear_sets()
         hands="グレティガントレ",
         legs="グレティブリーチズ",
         feet="グレティブーツ",
-        neck="フォシャゴルゲット",
+        neck={ name="ミラージストール+2", augments={'Path: A',}},
         waist="フォシャベルト",
         left_ear="オドルピアス",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
@@ -184,6 +186,9 @@ function init_gear_sets()
     init_weapon_skill()
 
     --個別WS定義
+    sets.precast.WS["サベッジブレード"] = { Normal=set_combine(sets.precast.WS.Damage,{left_ring="スローダリング",}),
+                                            SubtleBlow=set_combine(set_combine(sets.precast.WS.Damage,{left_ring="スローダリング",}),sets.precast.WS.SubtleBlow)}
+
     sets.precast.WS["サンギンブレード"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),sets.precast.WS.SubtleBlow)}
 	-- 詠唱中断
@@ -310,7 +315,7 @@ function init_gear_sets()
         head={ name="ヘルクリアヘルム", augments={'Accuracy+11','STR+4','Phalanx +4','Accuracy+6 Attack+6','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
         hands={ name="ヘルクリアグローブ", augments={'Magic Damage +1','Crit. hit damage +3%','Phalanx +4','Accuracy+10 Attack+10','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
-        legs={ name="ヘルクリアトラウザ", augments={'AGI+8','Attack+7','Phalanx +4','Accuracy+1 Attack+1','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
+        legs={ name="ヘルクリアトラウザ", augments={'Attack+25','Crit. hit damage +1%','Phalanx +5','Accuracy+5 Attack+5','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
         feet={ name="ヘルクリアブーツ", augments={'Weapon skill damage +2%','"Fast Cast"+3','Phalanx +5','Accuracy+16 Attack+16',}},})
     sets.midcast.Aquaveil = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1", legs="シェダルサラウィル", waist="エンパチコスロープ"})
 
