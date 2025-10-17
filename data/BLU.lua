@@ -114,7 +114,9 @@ function job_buff_change(buff, gain)
         if buff == "とんずら" and gain then 
             send_command('gs c set Kiting false')
         else
-            send_command('gs c set  Kiting true')
+            if not state.Kiting.value then
+                send_command('gs c set  Kiting true')
+            end
         end
     else
         send_command('gs c set Kiting false')
