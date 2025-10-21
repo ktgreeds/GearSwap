@@ -46,7 +46,7 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back={name="月明の羽衣",priority=15}
     }
-    
+    sets.idle.Avatar.Favor = sets.idle.Avatar
     --走り回る用
     sets.Kiting={right_ring="シュネデックリング",}
 
