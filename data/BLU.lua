@@ -14,7 +14,7 @@ function job_setup()
     state.Buff["ブルーバースト"]     = buffactive["ブルーバースト"] or false
     
     -- gs c cycle IdleMode
-    state.IdleMode:options('Kiting','Normal','Refresh')
+    state.IdleMode:options('Normal','Refresh')
     
     -- gs c cycle OffenseMode
     state.OffenseMode:options('Normal','LockWeapons')
@@ -23,7 +23,7 @@ function job_setup()
     state.HybridMode:options('Normal')
 
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
+    state.WeaponskillMode:options('Normal')
 
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Tizona','Naegling','Maxentius','QutrubKnife'}
@@ -33,11 +33,11 @@ function job_setup()
     
     -- gs c cycle TreasureHunter
     state.TreasureHunter = M(false)
+
     -- gs c cycle LockWeapons
     state.LockWeapons = M(false)
-
-    state.Kiting = M(true)
 end
+
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == '青魔法' then
@@ -57,7 +57,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             fc = 80/100
         end
 
-        equip(sets.midcast.interruption)
+        if spell.cast_time > 1 then
+            equip(sets.midcast.interruption)
+        end
+        
         local adjust=0.8
         local cast_time = (spell.cast_time*(1-fc))*adjust
 
@@ -79,7 +82,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         
         elseif spell.name== 'アクアベール' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.Aquaveil')        
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('アクアベール')..']')
+
+        elseif spellMap == 'Phalanx' then
+            eventArgs.handled = true
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
         end
     end
 
@@ -94,7 +101,6 @@ function customize_idle_set(idleSet)
 end
 
 function user_customize_melee_set(meleeSet)
-
     return meleeSet
 end
 
@@ -106,19 +112,5 @@ function job_state_change(stateField, newValue, oldValue)
             equip({main=gear.Tizona,sub=gear.SakpatasSword})
             disable('main','sub')
         end
-    end
-end
-
-function job_buff_change(buff, gain)
-    if player.status == 'Idle'then
-        if buff == "とんずら" and gain then 
-            send_command('gs c set Kiting false')
-        else
-            if not state.Kiting.value and not buffactive['とんずら'] then
-                send_command('gs c set  Kiting true')
-            end
-        end
-    else
-        send_command('gs c set Kiting false')
     end
 end
