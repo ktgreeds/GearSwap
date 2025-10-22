@@ -56,16 +56,16 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if fc >= 80/100 then
             fc = 80/100
         end
+        
+        local adjust=0.8
+        local cast_time = (spell.cast_time*(1-fc))*adjust
+        eventArgs.handled = true
 
         if spell.cast_time > 1 then
             equip(sets.midcast.interruption)
         end
-        
-        local adjust=0.8
-        local cast_time = (spell.cast_time*(1-fc))*adjust
 
         if spellMap == 'BlueMagical' then
-            eventArgs.handled = true
             if spell.name == 'エントゥーム' then
                 send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('エントゥーム')..']')
             elseif spell.name == 'テネブラルクラッシュ' then
@@ -77,27 +77,22 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             end
 
         elseif spellMap == 'BlueMagicAcc' then
-            eventArgs.handled = true
             if spell.name == '夢想花' then
                 send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('夢想花')..']')
             else
                 send_command('wait '..cast_time..'; gs equip sets.midcast.BlueMagicAcc')
             end
-            
+
         elseif spellMap == 'BlueHealing' then
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.BlueHealing')
 
         elseif spellMap == 'BlueBuff' then
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.BlueBuff')
         
         elseif spell.name== 'アクアベール' then
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('アクアベール')..']')
 
         elseif spellMap == 'Phalanx' then
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
         end
     end
