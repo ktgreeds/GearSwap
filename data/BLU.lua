@@ -66,12 +66,24 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
         if spellMap == 'BlueMagical' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.BlueMagical')
+            if spell.name == 'エントゥーム' then
+                send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('エントゥーム')..']')
+            elseif spell.name == 'テネブラルクラッシュ' then
+                send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('テネブラルクラッシュ')..']')
+            elseif spell.name == 'アンビルライトニング' then
+                send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('アンビルライトニング')..']')
+            else
+                send_command('wait '..cast_time..'; gs equip sets.midcast.BlueMagical')
+            end
 
         elseif spellMap == 'BlueMagicAcc' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.BlueMagicAcc')
-
+            if spell.name == '夢想花' then
+                send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('夢想花')..']')
+            else
+                send_command('wait '..cast_time..'; gs equip sets.midcast.BlueMagicAcc')
+            end
+            
         elseif spellMap == 'BlueHealing' then
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.BlueHealing')
@@ -96,7 +108,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 function customize_idle_set(idleSet)
-    idleSet = set_combine(idleSet, {main=gear.Nehushtan,sub=gear.Nehushtan})
+    idleSet = set_combine(idleSet, {main=gear.ClaidheamhSoluis,sub=gear.Nehushtan})
     return idleSet
 end
 
