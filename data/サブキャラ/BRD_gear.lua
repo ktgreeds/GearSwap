@@ -1,12 +1,9 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Carnwenhan')
+    send_command('gs c set MainWeapons Carnwenhan; wait 0.3; gc set SubWeapons Genbu; wait 0.3; gs c set Instruments Gjallarhorn')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('gs c set SubWeapons Genbu')
-    else
-        send_command('gs c set SubWeapons Genbu')
+        send_command('wait 0.9; gs c set SubWeapons Aeneas')
     end
-    send_command('gs c set Instruments Gjallarhorn')
 end
 
 
@@ -55,7 +52,7 @@ function init_gear_sets()
 
     -- 待機装備（リフレ）
     sets.idle.Refresh = set_combine(sets.idle,{
-        head="無の面",
+        head={ name="カイロンハット", augments={'Pet: Phys. dmg. taken -2%','Attack+4','"Refresh"+2','Accuracy+18 Attack+18',}},
         body={ name="カイロンダブレット", augments={'Mag. Acc.+7','Pet: Haste+3','"Refresh"+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
         hands={ name="カイロングローブ", augments={'"Mag.Atk.Bns."+23','Accuracy+23','"Refresh"+2',}},
         legs={ name="カイロンホーズ", augments={'Damage taken-2%','Rng.Acc.+3','"Refresh"+2','Accuracy+5 Attack+5','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
@@ -69,7 +66,7 @@ function init_gear_sets()
         range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
         head="ＦＬキャロ+3",
         body="アシェーラハーネス",
-        hands="ブンジグローブ",
+        hands="ＦＬマンシェト+3",
         legs="ＦＬラングラヴ+3",
         feet="ＦＬコテュルヌ+3",
         neck={ name="バードチャーム+1", augments={'Path: A',}},
@@ -164,7 +161,7 @@ function init_gear_sets()
     }
 
     -- WS魔攻
-    sets.precast.WS.Magic={
+    sets.precast.WS.Magic = {
         range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','Quadruple Attack +3',}},
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body={ name="ニャメメイル", augments={'Path: B',}},
@@ -172,22 +169,12 @@ function init_gear_sets()
         legs={ name="ニャメフランチャ", augments={'Path: B',}},
         feet={ name="ニャメソルレット", augments={'Path: B',}},
         neck="シビルスカーフ",
-        waist="オルペウスサッシュ",
+        waist="アキュイテベルト+1",
         left_ear="王将の耳飾り",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
+        left_ring="メダダリング",
+        right_ring="メタモルリング+1",
         back={ name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}},    
-    }
-    
-    -- WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
     }
 
     --共通WS定義読み込み
