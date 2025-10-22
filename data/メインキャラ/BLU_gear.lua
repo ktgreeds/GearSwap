@@ -1,38 +1,37 @@
 function init_weaponns()
-    --デフォルト武器を設定
+    -- デフォルト武器を設定
     send_command('gs c set MainWeapons Tizona; wait 0.3; gs c set SubWeapons SakpatasSword')
 end
 
 
 function init_gear_sets()
-    --ロックスタイル番号
+    -- ロックスタイル番号
     lockstyleset = 101
     
-    --片手剣
+    -- 片手剣
     gear.Tizona                 = {name="ティソーナ"}
     gear.SakpatasSword          = {name="サクパタソード"}
     gear.Naegling               = {name="ネイグリング"}
     
-    --片手棍
+    -- 片手棍
     gear.Maxentius              = {name="マクセンチアス"}
     gear.Nehushtan              = {name="シャルウル", augments={'Evasion+15','Phys. dmg. taken -4%','AGI+17',}}
 
-    --短剣
+    -- 短剣
     gear.QutrubKnife            = {name="クトゥルブナイフ"}
     gear.EtherealDagger         = {name="幽世の短剣"}
     
-    --その他
+    -- その他
     gear.Slip  					= {name="カリブルヌス"}
-    
-    sets.Kiting = {feet="ヒポメネソックス+1"}
-    
-    --待機装備（通常）
+        
+    -- 待機装備（通常）
     sets.idle = {
         ammo="アマークラスター",
         head="無の面",
         body="ニャメメイル",
         hands="ニャメガントレ",
         legs="ＡＳシャルワー+4",
+        --feet="ヒポメネソックス+1",
         feet="ＡＳチャルク+4",
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
@@ -43,7 +42,7 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    --待機装備（リフレ）
+    -- 待機装備（リフレ）
     sets.idle.Refresh = set_combine(sets.idle, {
         ammo="ストンチタスラム+1",
         head={ name="ヘルクリアヘルム", augments={'Weapon skill damage +2%','AGI+6','"Refresh"+2','Accuracy+9 Attack+9',}},
@@ -52,7 +51,7 @@ function init_gear_sets()
         legs={ name="ヘルクリアトラウザ", augments={'Pet: VIT+10','"Subtle Blow"+10','"Refresh"+2','Accuracy+8 Attack+8',}},
         feet={ name="ヘルクリアブーツ", augments={'"Mag.Atk.Bns."+17','STR+9','"Refresh"+2',}},
         neck="シビルスカーフ",
-        waist="プラチナモグベルト",
+        waist={name="プラチナモグベルト",priority=16},
     })
 
     --抜刀装備
@@ -64,39 +63,32 @@ function init_gear_sets()
         legs="マリグナスタイツ",
         feet="マリグナスブーツ",
         neck={ name="ミラージストール+2", augments={'Path: A',}},
-        waist="セールフィベルト+1",
-        left_ear="テロスピアス",
+        waist="霊亀腰帯",
+        left_ear="エアバニピアス",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
-        back={ name="ロスメルタケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
-    }
-
-    --モクシャ41
-    sets.engaged.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-        waist="サリサフロイベルト",--5
-        left_ear="ディグニタリピアス",--5
-        left_ring="シーリチリング+1",--10
-        right_ring="シーリチリング+1",--10
+        back="無の外装",
     }
 
     --トレハン
     sets.TreasureHunter = {
         head={ name="ヘルクリアヘルム", augments={'Pet: Mag. Acc.+24','VIT+9','"Treasure Hunter"+2',}},
         hands={ name="ヘルクリアグローブ", augments={'Accuracy+6 Attack+6','Weapon skill damage +1%','"Treasure Hunter"+2',}},
+        waist="コーネリアの黒帯"
     }
 
-    --バフ監視用
+    -- バフ監視用
     sets.buff['エフラックス']           = {legs="ＨＳタイト+3"}
     sets.buff['エンチェーンメント']     = {}
     sets.buff['コンバージェンス']       = {}
     sets.buff['ディフュージョン']       = {feet="ＬＬチャルク+3"}
     sets.buff['ブルーチェーン']         = {}
     sets.buff['ブルーバースト']         = {feet="ＨＳバシュマク+3"}
+    
+	-- 即時発動系バフ
     sets.precast.JA['アジュールロー']   = {hands="ＬＬバズバンド+1"}
-    sets.precast.JA['ブルーバースト']   = {hands="ＨＳバズバンド+3"}
+    sets.precast.JA['N.ウィズドム']     = {}
 
     --遠隔攻撃
     sets.precast.RA = {range="ラミアベーン"}
@@ -113,13 +105,10 @@ function init_gear_sets()
         waist="コーネリアの黒帯",
         left_ear="アスプロピアス",
         right_ear="エンチャンピアス+1",
-        left_ring="キシャールリング",
-        right_ring="メダダリング",
+        left_ring="メダダリング",
+        right_ring="キシャールリング",
         back={ name="フィフォレケープ+1", augments={'Path: A',}},
     }
-
-    --FC（青魔法）
-    sets.precast.FC['青魔法']=set_combine(sets.precast.FC,{body="ＨＳミンタン+3"})
 
     --WSダメージ
     sets.precast.WS.Damage = {
@@ -167,8 +156,8 @@ function init_gear_sets()
         waist="スクリミルコード",
         left_ear="王将の耳飾り",
         right_ear="フリオミシピアス",
-        left_ring="エパミノダスリング",
-        right_ring="メダダリング",
+        left_ring="メダダリング",
+        right_ring="エパミノダスリング",
         back={ name="コンフラワーケープ", augments={'MP+23','Accuracy+3','Blue Magic skill +10',}},
     }
 
@@ -231,7 +220,7 @@ function init_gear_sets()
     --ケアル
     sets.midcast.Cure={
         ammo="ストンチタスラム+1",
-        head="ニャメヘルム",
+        head="無の面",
         body="ピンガチュニック+1",
         hands={ name="テルキネグローブ", augments={'"Cure" potency +7%','Enh. Mag. eff. dur. +10',}},
         legs="ピンガズボン+1",
@@ -239,8 +228,10 @@ function init_gear_sets()
         neck={ name="アンムーヴカラー+1", augments={'Path: A',}},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
+        right_ear={ name="アスプロピアス",priority=14},
         left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=15},
-        back="ソレムニティケープ",
+        right_ring={ name="ヴェクサーリング+1",priority=13},
+        back="月明の羽衣",
     }
 
     --青魔法ケアル
@@ -260,8 +251,8 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="王将の耳飾り",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring={ name="メタモルリング+1", augments={'Path: A',}},
-        right_ring="メダダリング",
+        left_ring="メダダリング",
+        right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back={ name="コンフラワーケープ", augments={'MP+23','Accuracy+3','Blue Magic skill +10',}},
 
     }
@@ -303,15 +294,13 @@ function init_gear_sets()
 
     sets.midcast['精霊魔法']              = sets.midcast.BlueMagical
     sets.midcast['夢想花']                = set_combine(sets.midcast.BlueMagicAcc,sets.TreasureHunter)
-    sets.midcast['クルエルジョーク']      = set_combine(sets.midcast.BlueMagicAcc,{})
-    sets.midcast['サドンランジ']          = set_combine(sets.midcast.BlueMagicAcc,{})
-    sets.midcast['マジックハンマー']      = set_combine(sets.midcast.BlueMagical ,sets.midcast.BlueMagicAcc)
+    sets.midcast['マジックハンマー']      = set_combine(sets.midcast.BlueMagical ,{waist="コーネリアの黒帯"})
     sets.midcast['エントゥーム']          = set_combine(sets.midcast.BlueMagical ,{neck="クアンプネックレス",left_ring="ゼラチナスリング+1"})
     sets.midcast['エンバームアース']      = set_combine(sets.midcast.BlueMagical ,{neck="クアンプネックレス",left_ring="ゼラチナスリング+1"})
     sets.midcast['テネブラルクラッシュ']  = set_combine(sets.midcast.BlueMagical ,{head="妖蟲の髪飾り+1",ring2="アルコンリング"})
     sets.midcast['アンビルライトニング']  = set_combine(sets.midcast.BlueMagical ,{left_ring="イラブラットリング",back={ name="ロスメルタケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}}})
     sets.midcast['ファランクス']          = set_combine({
-        main="サクパタソード",
+        sub="サクパタソード",
         head={ name="ヘルクリアヘルム", augments={'Accuracy+11','STR+4','Phalanx +4','Accuracy+6 Attack+6','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
         hands={ name="ヘルクリアグローブ", augments={'Magic Damage +1','Crit. hit damage +3%','Phalanx +4','Accuracy+10 Attack+10','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
