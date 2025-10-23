@@ -287,18 +287,22 @@ function init_gear_sets()
         waist="コーネリアの黒帯"
     })
 
+    -- プロテス
+    sets.midcast.Protect = {
+        right_ring="シェルターリング",
+    }
+
+    -- シェル
+    sets.midcast.Shell = sets.midcast.Protect 
+
     -- 被ファランクス
     sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
-    sets.midcast.IncreasedProtect = {
-        right_ring="シェルターリング",
-    }
+    sets.midcast.IncreasedProtect = sets.midcast.Protect
 
     -- 被シェル
-    sets.midcast.IncreasedShell = {
-        right_ring="シェルターリング",
-    }
+    sets.midcast.IncreasedShell = sets.midcast.Shell
 
     -- 被リジェネ
     sets.midcast.IncreasedRegenerated = {
