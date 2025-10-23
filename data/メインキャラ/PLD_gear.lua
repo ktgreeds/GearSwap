@@ -1,6 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-	send_command('gs c set MainWeapons Burtgang')
+	send_command('gs c set MainWeapons Burtgang; wait 0.3; gs c set SubWeapons Duban;')
 end
 
 
@@ -28,7 +28,6 @@ function init_gear_sets()
     
     --HP低下装備（自己ケアル用）
     sets.LowHp={
-
         ammo="ストンチタスラム+1",
         head={ name="ブリスタサリット+1", augments={'Path: A',}},
         body="エメットハーネス+1",
@@ -43,9 +42,7 @@ function init_gear_sets()
         right_ring="守りの指輪",
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
-
-    sets.Kiting = {feet="ヒポメネソックス+1"}
-
+ 
 	-- 待機装備（通常）
 	sets.idle = {
         sub="ドゥバン",
@@ -99,14 +96,9 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
-    
-    sets.engaged.KnockBack = {
-        legs = "ダッシングサブリガ",
-        back="リパルスマント",
-    }
 
     -- 近接対物理
-	sets.defense.PDT = {
+	sets.engaged.Physical = {
         sub="ドゥバン",
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
@@ -119,12 +111,12 @@ function init_gear_sets()
         left_ear={ name="ズワゾピアス+1", augments={'Path: A',}},
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
         left_ring="ワーデンリング",
-        right_ring="シュネデックリング",
+        right_ring="月明の指輪",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
 
     -- 近接対魔法
-    sets.defense.MDT = {
+    sets.engaged.Magical = {
         sub="イージス",
         ammo="ヴァニアバッテリー",
         head="ＣＶアーメット+3",
@@ -140,6 +132,12 @@ function init_gear_sets()
         right_ring={name="ヴェクサーリング+1",priority=14},
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
+
+    -- ノックバック
+    sets.engaged.KnockBack = {
+        legs = "ダッシングサブリガ",
+        back="リパルスマント",
+    }
 
 	-- 敵対心装備
 	sets.Enmity = {
