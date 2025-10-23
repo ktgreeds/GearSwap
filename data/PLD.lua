@@ -69,6 +69,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif spell.name == 'フラッシュ' then
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('フラッシュ')..']')
+            
+        elseif spellMap == 'Protect' then
+            eventArgs.handled = true
+            send_command('wait '..cast_time..'; gs equip sets.midcast.Protect')
 
         else
             eventArgs.handled = true
