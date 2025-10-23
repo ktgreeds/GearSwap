@@ -14,21 +14,19 @@ function job_setup()
     --gs c cycle OffenseMode
     state.OffenseMode:options('Normal')
 
-    --gs c cycle DefenseMode
-    state.DefenseMode:options('Physical', 'Magical', 'None')
-
     -- gs c cycle HybridMode
-    state.HybridMode:options('Normal','KnockBack')
+    state.HybridMode:options('Normal','Multi', 'KnockBack')
     
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.WeaponskillMode:options('Normal')
 
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Burtgang','Malevolence'}
 
-    state.Kiting = M(true)
+    -- gs c cycle SubWeapons
+    state.SubWeapons   = M{'Duban','Aegis'}
 
-    send_command('bind ~F7 gs c cycle DefenseMode')
+    send_command('bind ~F7 gs c cycle SubWeapons')
 end
 
 
@@ -53,7 +51,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             fc = 80/100
         end
 
-        equip(sets.midcast.interruption)
+        if spell.cast_time > 1 then
+            equip(sets.midcast.interruption)
+        end
+        
         local adjust=0.9
         local cast_time = (spell.cast_time*(1-fc))*adjust
 
@@ -63,11 +64,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
         elseif spellMap == 'Phalanx' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.Phalanx')
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
 
         elseif spell.name == 'フラッシュ' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.Flash')
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('フラッシュ')..']')
 
         else
             eventArgs.handled = true
@@ -75,25 +76,28 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 end
-
-
-function user_customize_melee_set(meleeSet)
-    if state.HybridMode.value == "KnockBack" then
-        meleeSet =set_combine(meleeSet,sets.engaged.KnockBack)
+function customize_idle_set(idleSet)
+    if state.SubWeapons.value == "Duban" then
+        idleSet = idleSet
+    else
+        idleSet = set_combine(idleSet,sets.idle.Magical)
     end
-    return meleeSet
+    
+    return idleSet
 end
 
-function job_buff_change(buff, gain)
-    if player.status == 'Idle'then
-        if buff == "とんずら" and gain then 
-            send_command('gs c set Kiting false')
-        else
-            if not state.Kiting.value and not buffactive['とんずら'] then
-                send_command('gs c set  Kiting true')
-            end
-        end
+function user_customize_melee_set(meleeSet)
+    if state.HybridMode.value == "Multi" then
+        meleeSet = meleeSet
+
+    elseif state.SubWeapons.value == "Duban" then
+        meleeSet = set_combine(meleeSet,sets.engaged.Physical)
     else
-        send_command('gs c set Kiting false')
+        meleeSet = set_combine(meleeSet,sets.engaged.Magical)
     end
+    
+    if state.HybridMode.value == "KnockBack" then
+        meleeSet = set_combine(meleeSet,sets.engaged.KnockBack)
+    end
+    return meleeSet
 end
