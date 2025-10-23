@@ -286,7 +286,7 @@ function init_gear_sets()
     sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
-    --[[
+
     -- 被ファランクス
     sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
@@ -308,11 +308,10 @@ function init_gear_sets()
     }
 
     -- 被カーズナ
-    sets.midcast.IncreasedRegenerated = {
+    sets.midcast.IncreasedCursna = {
         neck = "ニカンダネックレス",
         waist = "ギシドゥバサッシュ",
         left_ring="サイダリング",
         right_ring="ピュリティーリング",
     }
-    ]]
 end
