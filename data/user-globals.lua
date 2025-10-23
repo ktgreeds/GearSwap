@@ -157,7 +157,7 @@ sets.HolyWater = {
 }
 --■■■状態異常回復
 function Medicine()
-    send_command('input /si item')
+    --send_command('input /si item')
 
     if buffactive['死の宣告'] or buffactive['呪い'] then
         equip(sets.HolyWater)
@@ -335,17 +335,17 @@ filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
     if filter_mode:contains(original_mode) then
         if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
-            equip(sets.midcast.IncreasedRegenerated)
+            send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
         elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
-            equip(sets.midcast.IncreasedPhalanx)
+            send_command('gs equip sets.midcast.IncreasedPhalanx; wait 4; gs c Idle;')
         elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
-            equip(sets.midcast.IncreasedRefresh)
+            send_command('gs equip sets.midcast.IncreasedRefresh; wait 4; gs c Idle;')
         elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
-            equip(sets.midcast.IncreasedProtect)
+            send_command('gs equip sets.midcast.IncreasedProtect; wait 4; gs c Idle;')
         elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
-            equip(sets.midcast.IncreasedShell)
+            send_command('gs equip sets.midcast.IncreasedShell; wait 4; gs c Idle;')
         elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
-            equip(sets.midcast.IncreasedCursna)
+            send_command('gs equip sets.midcast.IncreasedCursna; wait 4; gs c Idle;')
         end
     end
 end)
