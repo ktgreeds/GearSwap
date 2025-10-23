@@ -52,7 +52,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             fc = 80/100
         end
 
-        equip(sets.midcast.interruption)
+        if spell.cast_time > 1 then
+            equip(sets.midcast.interruption)
+        end
+        
         local adjust=0.9
         local cast_time = (spell.cast_time*(1-fc))*adjust    
         
@@ -62,11 +65,15 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
         elseif spellMap == 'Phalanx' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.Phalanx')
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
+            
+        elseif spell.name == 'フラッシュ' then
+            eventArgs.handled = true
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('フラッシュ')..']')
 
         elseif spell.name == 'ストンスキン' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.Stoneskin')
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ストンスキン')..']')
 
         elseif spellMap == 'Regen' then
             eventArgs.handled = true
@@ -74,7 +81,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
         elseif spell.skill == '強化魔法' then
             eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.EnhancingMagic')
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('強化魔法')..']')
+
+        elseif spellMap == 'Shell' then
+            eventArgs.handled = true
+            send_command('wait '..cast_time..'; gs equip sets.midcast.Shell')
+
         else
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.Enmity')
