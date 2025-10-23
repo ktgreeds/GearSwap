@@ -26,6 +26,24 @@ function init_gear_sets()
         feet="ＣＶサバトン+3"
     }
     
+    --HP低下装備（自己ケアル用）
+    sets.LowHp={
+
+        ammo="ストンチタスラム+1",
+        head={ name="ブリスタサリット+1", augments={'Path: A',}},
+        body="エメットハーネス+1",
+        hands="ＣＶガントレ+3",
+        legs={ name="オディシアクウィス", augments={'"Fast Cast"+6','AGI+9','Mag. Acc.+2',}},
+        feet="ＣＶサバトン+3",
+        neck="オルンミラトルク",
+        waist="オドンブラサッシュ",
+        left_ear="メンデカントピアス",
+        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        left_ring="メランリング",
+        right_ring="守りの指輪",
+        back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
+    }
+
     sets.Kiting = {feet="ヒポメネソックス+1"}
 
 	-- 待機装備（通常）
@@ -45,9 +63,6 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
-
-    --敵集め用
-    sets.Kiting = {feet="ヒポメネソックス+1",right_ring="シュネデックリング",}
 
     -- 待機装備（対魔法）
 	sets.idle.Magical = {
@@ -304,8 +319,13 @@ function init_gear_sets()
 		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
 
+    --フラッシュ
+    sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
+        waist="コーネリアの黒帯"
+    })
+
 	-- ファランクス
-	sets.midcast.Phalanx = {
+	sets.midcast['ファランクス'] = {
 		main="サクパタソード",
 		sub="プリュウェン",
 		ammo="ストンチタスラム+1",
@@ -323,9 +343,25 @@ function init_gear_sets()
 		back={ name="ウェルドマント", augments={'VIT+1','DEX+2','Enmity+1','Phalanx +5',}},
 	}
     
+    -- ケアル
+	sets.midcast.Cure = {
+        ammo="ストンチタスラム+1",
+        head={ name="ＳＶシャレル+1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
+        body={ name="ＳＶキュイラス+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        hands={ name="ＳＶハントシュ+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        legs="ＣＶクウィス+3",
+        feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        neck="月光の首飾り",
+        waist="スローダベルト",
+        left_ear="磁界の耳",
+        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
+        right_ring={name="月明の指輪",priority=15},
+        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
+	}
     --[[
     -- 被ファランクス
-    sets.midcast.IncreasedPhalanx = sets.midcast.Phalanx
+    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
     sets.midcast.IncreasedProtect = {
@@ -351,25 +387,4 @@ function init_gear_sets()
         right_ring="ピュリティーリング",
     }
 ]]
-	-- ケアル
-	sets.midcast.Cure = {
-        ammo="ストンチタスラム+1",
-        head={ name="ＳＶシャレル+1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
-        body={ name="ＳＶキュイラス+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        hands={ name="ＳＶハントシュ+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        legs="ＣＶクウィス+3",
-        feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        neck="月光の首飾り",
-        waist="スローダベルト",
-        left_ear="磁界の耳",
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
-        right_ring={name="月明の指輪",priority=15},
-        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
-	}
-
-    --フラッシュ
-    sets.midcast.Flash = set_combine(sets.Enmity,{
-        waist="コーネリアの黒帯"
-    })
 end
