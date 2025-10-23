@@ -335,17 +335,29 @@ filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
     if filter_mode:contains(original_mode) then
         if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
-            send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
+            if sets.midcast.IncreasedRegenerated then
+                send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
+            end
         elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
-            send_command('gs equip sets.midcast.IncreasedPhalanx; wait 4; gs c Idle;')
+            if sets.midcast.IncreasedPhalanx then
+                send_command('gs equip sets.midcast.IncreasedPhalanx; wait 4; gs c Idle;')
+            end
         elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
-            send_command('gs equip sets.midcast.IncreasedRefresh; wait 4; gs c Idle;')
+            if sets.midcast.IncreasedRefresh then
+                send_command('gs equip sets.midcast.IncreasedRefresh; wait 4; gs c Idle;')
+            end
         elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
-            send_command('gs equip sets.midcast.IncreasedProtect; wait 4; gs c Idle;')
+            if sets.midcast.IncreasedProtect then
+                send_command('gs equip sets.midcast.IncreasedProtect; wait 4; gs c Idle;')
+            end
         elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
-            send_command('gs equip sets.midcast.IncreasedShell; wait 4; gs c Idle;')
+            if sets.midcast.IncreasedShell then
+                send_command('gs equip sets.midcast.IncreasedShell; wait 4; gs c Idle;')
+            end
         elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
-            send_command('gs equip sets.midcast.IncreasedCursna; wait 4; gs c Idle;')
+            if sets.midcast.IncreasedCursna then
+                send_command('gs equip sets.midcast.IncreasedCursna; wait 4; gs c Idle;')
+            end
         end
     end
 end)
