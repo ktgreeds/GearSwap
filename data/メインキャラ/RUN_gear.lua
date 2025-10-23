@@ -228,7 +228,7 @@ function init_gear_sets()
 	}
 
     -- 強化魔法
-    sets.midcast.EnhancingMagic = {
+    sets.midcast['強化魔法'] = {
         ammo="ストンチタスラム+1",
         head="ＥＲガレア+3",
         body="アダマンアーマー",
@@ -244,8 +244,16 @@ function init_gear_sets()
         back={ name="月明の羽衣",priority=16}
     }
 
+    -- リジェネ
+    sets.midcast.Regen = set_combine(sets.midcast['強化魔法'],{
+        head="ＲＮバンド+3",
+        body="ＦＵコート+3",
+        neck="サクロゴルゲット",
+        waist="スローダベルト"
+    })
+
     -- ストンスキン
-    sets.midcast.Stoneskin= set_combine(sets.midcast.EnhancingMagic ,{
+    sets.midcast['ストンスキン']= set_combine(sets.midcast['強化魔法'] ,{
         body="アダマンアーマー",
         hands="ストーンマフラ",
         legs="ヘイヴンホーズ",
@@ -256,14 +264,14 @@ function init_gear_sets()
     })
 
     -- ファランクス
-    sets.midcast.Phalanx = {
+	sets.midcast['ファランクス'] = {
         main="ザルフィカール",
         sub="ウトゥグリップ",
         ammo="ストンチタスラム+1",
         head={ name="ＦＵバンド+3", augments={'Enhances "Battuta" effect',}},
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
         hands={ name="ヘルクリアグローブ", augments={'Magic Damage +1','Crit. hit damage +3%','Phalanx +4','Accuracy+10 Attack+10','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
-        legs={ name="ヘルクリアトラウザ", augments={'AGI+8','Attack+7','Phalanx +4','Accuracy+1 Attack+1','Mag. Acc.+2 "Mag.Atk.Bns."+2',}},
+        legs={ name="ヘルクリアトラウザ", augments={'Attack+25','Crit. hit damage +1%','Phalanx +5','Accuracy+5 Attack+5','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
         feet={ name="ヘルクリアブーツ", augments={'Weapon skill damage +2%','"Fast Cast"+3','Phalanx +5','Accuracy+16 Attack+16',}},
         neck="インカンタートルク",
         waist={ name="プラチナモグベルト",priority=16},
@@ -273,9 +281,14 @@ function init_gear_sets()
         right_ring={ name="月明の指輪",priority=15},
         back={ name="ディバートケープ", augments={'Enmity+1','"Embolden"+15','"Dbl.Atk."+3',}},
     }
-
+    
+    --フラッシュ
+    sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
+        waist="コーネリアの黒帯"
+    })
+    --[[
     -- 被ファランクス
-    sets.midcast.IncreasedPhalanx = sets.midcast.Phalanx
+    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
     sets.midcast.IncreasedProtect = {
@@ -301,12 +314,5 @@ function init_gear_sets()
         left_ring="サイダリング",
         right_ring="ピュリティーリング",
     }
-    
-    -- リジェネ
-    sets.midcast.Regen = set_combine(sets.midcast.EnhancingMagic,{
-        head="ＲＮバンド+3",
-        body="ＦＵコート+3",
-        neck="サクロゴルゲット",
-        waist="スローダベルト"
-    })
+    ]]
 end
