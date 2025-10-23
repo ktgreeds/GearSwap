@@ -79,13 +79,13 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.Regen')
 
-        elseif spell.skill == '強化魔法' then
-            eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('強化魔法')..']')
-
         elseif spellMap == 'Shell' then
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.Shell')
+
+        elseif spell.skill == '強化魔法' then
+            eventArgs.handled = true
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('強化魔法')..']')
 
         else
             eventArgs.handled = true
