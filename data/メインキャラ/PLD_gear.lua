@@ -357,6 +357,7 @@ function init_gear_sets()
         right_ring={name="月明の指輪",priority=15},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
+
     -- プロテス
     sets.midcast.Protect = {
         right_ring="シェルターリング",
@@ -369,14 +370,10 @@ function init_gear_sets()
     sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
-    sets.midcast.IncreasedProtect = {
-        right_ring="シェルターリング",
-    }
+    sets.midcast.IncreasedProtect = sets.midcast.Protect
 
     -- 被シェル
-    sets.midcast.IncreasedShell = {
-        right_ring="シェルターリング",
-    }
+    sets.midcast.IncreasedShell = sets.midcast.Shell
 
     -- 被リジェネ
     sets.midcast.IncreasedRegenerated = {
