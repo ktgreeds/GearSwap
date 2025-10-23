@@ -357,7 +357,14 @@ function init_gear_sets()
         right_ring={name="月明の指輪",priority=15},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
-    
+    -- プロテス
+    sets.midcast.Protect = {
+        right_ring="シェルターリング",
+    }
+
+    -- シェル
+    sets.midcast.Shell = sets.midcast.Protect 
+
     -- 被ファランクス
     sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
