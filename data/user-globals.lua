@@ -334,29 +334,32 @@ require('chat')
 filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
     if filter_mode:contains(original_mode) then
-        if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
-            if sets.midcast.IncreasedRegenerated then
-                send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
-            if sets.midcast.IncreasedPhalanx then
-                send_command('gs equip sets.midcast.IncreasedPhalanx; wait 4; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
-            if sets.midcast.IncreasedRefresh then
-                send_command('gs equip sets.midcast.IncreasedRefresh; wait 4; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
-            if sets.midcast.IncreasedProtect then
-                send_command('gs equip sets.midcast.IncreasedProtect; wait 4; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
-            if sets.midcast.IncreasedShell then
-                send_command('gs equip sets.midcast.IncreasedShell; wait 4; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
-            if sets.midcast.IncreasedCursna then
-                send_command('gs equip sets.midcast.IncreasedCursna; wait 4; gs c Idle;')
+        if not windower.wc_match(original,player.name..'*') then
+
+            if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
+                if sets.midcast.IncreasedRegenerated then
+                    send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
+                if sets.midcast.IncreasedPhalanx then
+                    send_command('gs equip sets.midcast.IncreasedPhalanx; wait 4; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
+                if sets.midcast.IncreasedRefresh then
+                    send_command('gs equip sets.midcast.IncreasedRefresh; wait 4; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
+                if sets.midcast.IncreasedProtect then
+                    send_command('gs equip sets.midcast.IncreasedProtect; wait 4; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
+                if sets.midcast.IncreasedShell then
+                    send_command('gs equip sets.midcast.IncreasedShell; wait 4; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
+                if sets.midcast.IncreasedCursna then
+                    send_command('gs equip sets.midcast.IncreasedCursna; wait 4; gs c Idle;')
+                end
             end
         end
     end
@@ -735,7 +738,7 @@ message_sortie={
     [6] = {name='ファルミナススマッシュ', desc1='土　'},
     [7] = {name='フラッシュフラッド', desc1='雷　'},
 }
-text_box_sortie = Sortietexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=200, y=200}, padding = 5, bg={alpha=180}})
+text_box_sortie = Sortietexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=20, y=200}, padding = 5, bg={alpha=180}})
 text_box_sortie.text='弱　特殊技名（　CGボス　）\n'..
 '\\cs(204, 255, 255)'..message_sortie[1].desc1..message_sortie[1].name..'\\cr'..'\n'..
 '\\cs(255, 255, 204)'..message_sortie[2].desc1..message_sortie[2].name..'\\cr'..'\n'..
