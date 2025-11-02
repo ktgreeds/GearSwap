@@ -270,7 +270,7 @@ function init_gear_sets()
         ammo="ストンチタスラム+1",
         head={ name="ＦＵバンド+3", augments={'Enhances "Battuta" effect',}},
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
-        hands={ name="ヘルクリアグローブ", augments={'Magic Damage +1','Crit. hit damage +3%','Phalanx +4','Accuracy+10 Attack+10','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+        hands={ name="ヘルクリアグローブ", augments={'STR+5','CHR+10','Phalanx +5','Accuracy+14 Attack+14','Mag. Acc.+8 "Mag.Atk.Bns."+8',}},
         legs={ name="ヘルクリアトラウザ", augments={'Attack+25','Crit. hit damage +1%','Phalanx +5','Accuracy+5 Attack+5','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
         feet={ name="ヘルクリアブーツ", augments={'Weapon skill damage +2%','"Fast Cast"+3','Phalanx +5','Accuracy+16 Attack+16',}},
         neck="インカンタートルク",
