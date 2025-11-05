@@ -1,10 +1,8 @@
 function init_weaponns()
     --デフォルト武器を設定
-    send_command('gs c set MainWeapons CroceaC')
+    send_command('gs c set MainWeapons CroceaC; wait 0.3; gs c set SubWeapons Genbu;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-		send_command('gs c set SubWeapons TernionDagger')
-	else
-		send_command('gs c set SubWeapons Genbu')
+		send_command('wait 2; gs c set SubWeapons TernionDagger')
 	end
 end
 
@@ -16,9 +14,9 @@ function init_gear_sets()
 	--片手剣
     gear.CroceaC                = {name="クロセアモース", augments={'Path: C'}}
     gear.Naegling               = {name="ネイグリング"}
+
     --短剣
     gear.Tauret                 = {name="トーレット"}
-    gear.CrepuscularKnife       = {name="クレパスクラナイフ"}
     gear.Malevolence            = {name="マレヴォレンス"}
     gear.TernionDagger          = {name="ターニオンダガー+1"}
 	gear.QutrubKnife    		= {name="クトゥルブナイフ"}
