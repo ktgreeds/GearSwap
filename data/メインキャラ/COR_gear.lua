@@ -2,7 +2,6 @@ function init_weaponns()
     -- デフォルト武器を設定
     send_command('gs c set MainWeapons RostamB; wait 0.3; gs c set SubWeapons NuskuShield; gs c set RangeWeapons Fomalhaut;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-         print(1)
         send_command('wait 2; gs c set SubWeapons GletisKnife')
     end
 end
