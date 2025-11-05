@@ -12,25 +12,22 @@ function job_setup()
     state.IdleMode:options('Normal','Refresh')
 
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','SubtleBlow')
+    state.OffenseMode:options('Normal')
     
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal')
     
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
+    state.WeaponskillMode:options('Normal')
     
     -- gs c cycle MainWeapons
     state.MainWeapons       = M{'RostamA','RostamB','Naegling'}
     
     -- gs c cycle SubWeapons
-    state.SubWeapons        = M{'CrepuscularKnife','Tauret','BlurredKnife','NuskuShield'}
+    state.SubWeapons        = M{'GletisKnife','Tauret','NuskuShield'}
     
     -- gs c cycle RangeWeapons
     state.RangeWeapons      = M{'Fomalhaut','DeathPenalty'}
-
-    state.CombatWeapon      = M{'Normal'}
-
 end
 
 
@@ -51,10 +48,8 @@ end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
-        for buff,active in pairs(state.Buff) do
-            if active and sets.buff[buff] then
-                equip(sets.buff[buff])
-            end
+        if state.Buff['トリプルショット'] then
+            equip(sets.buff['トリプルショット'])
         end
     end
 end
