@@ -20,7 +20,7 @@ function job_setup()
     state.HybridMode:options('Normal')
 
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
+    state.WeaponskillMode:options('Normal')
 
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Carnwenhan','Naegling'}
