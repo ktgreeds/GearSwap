@@ -1,6 +1,6 @@
 function init_weaponns()
     --デフォルト武器を設定
-    send_command('gs c set MainWeapons CroceaC; wait 0.3; gs c set SubWeapons Genbu;')
+    send_command('gs c set MainWeapons CroceaC; wait 0.5; gs c set SubWeapons Genbu;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
 		send_command('wait 2; gs c set SubWeapons TernionDagger')
 	end
