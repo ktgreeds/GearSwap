@@ -24,7 +24,7 @@ function job_setup()
     state.MainWeapons = M{'CroceaC','Naegling','Maxentius','Tauret','QutrubKnife'}
     
     -- gs c cycle SubWeapons
-    state.SubWeapons = M{'TernionDagger','Malevolence','Daybreak','EtherealDagger','Genbu'}
+    state.SubWeapons = M{'Genbu','TernionDagger','Malevolence','Daybreak','EtherealDagger',}
 end
 
 
