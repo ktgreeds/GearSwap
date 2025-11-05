@@ -1,8 +1,8 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Carnwenhan; wait 0.3; gc set SubWeapons Genbu; wait 0.3; gs c set Instruments Gjallarhorn')
+    send_command('gs c set MainWeapons Carnwenhan; wait 0.5; gs c set SubWeapons Genbu; wait 0.5; gs c set Instruments Gjallarhorn;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('wait 0.9; gs c set SubWeapons Aeneas')
+        send_command('wait 2; gs c set SubWeapons Aeneas')
     end
 end
 
@@ -139,7 +139,7 @@ function init_gear_sets()
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="テロスピアス",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="シーリチリング+1",
+        left_ring="イラブラットリング",
         right_ring="シーリチリング+1",
         back={ name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
@@ -182,9 +182,9 @@ function init_gear_sets()
     
     -- ケアル
     sets.midcast.Cure = {
-        head={ name="ケカスミトラ", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
-        body={ name="ケカスブリオー", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
-        hands={ name="テルキネグローブ", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
+        head={ name="ケカスミトラ+1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}},
+        body={ name="ケカスブリオー+1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}},
+        hands={ name="ケカスカフス+1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}},
         legs={ name="ケカスタイツ", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
         feet={ name="ケカスブーツ", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
         neck="インカンタートルク",
