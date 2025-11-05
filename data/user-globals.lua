@@ -20,7 +20,7 @@ function user_setup()
     -- gs c cycle RuneText
     state.RuneText = M(false)
 
-    --include('organizer-lib') 
+    include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
     --print(res.jobs[player.main_job_id]["ens"])
 end
@@ -335,7 +335,6 @@ filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
     if filter_mode:contains(original_mode) then
         if not windower.wc_match(original,player.name..'*') then
-
             if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
                 if sets.midcast.IncreasedRegenerated then
                     send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
@@ -366,6 +365,36 @@ windower.register_event("incoming text", function(original, modified, original_m
 end)
 --▲▲▲▲▲被強化バフ対応▲▲▲▲▲
 
+--▼▼▼▼▼▼ソーティボス技▼▼▼▼▼
+filter_mode_enemy = S {100,105,110,111,158}
+windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
+    target = windower.ffxi.get_mob_by_target('t')
+    if target then
+        if filter_mode_enemy:contains(original_mode) then
+            if windower.wc_match(original, windower.to_shift_jis('*シュリーキングゲイル*')) then
+                windower.add_to_chat(167,'★★★ 氷　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*アンジュレティングショックウェーブ*')) then
+                windower.add_to_chat(167,'★★★ 土　弱点')
+
+            elseif windower.wc_match(original, windower.to_shift_jis('*フレミングキック*')) then
+                windower.add_to_chat(167,'★★★ 水　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*アイシーグラスプ*')) then
+                windower.add_to_chat(167,'★★★ 火　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*エローディングフレッシュ*')) then
+                windower.add_to_chat(167,'★★★ 風　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*ファルミナススマッシュ*')) then
+                windower.add_to_chat(167,'★★★ 土　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*フラッシュフラッド*')) then
+                windower.add_to_chat(167,'★★★ 雷　弱点')
+            end
+        end
+    end
+end)
+--▲▲▲▲▲ソーティボス技▲▲▲▲▲
+
+
+
+
 --■■■スペルマップ再構築取得用
 function job_get_spell_map(spell, default_spell_map)
     local new_spell_map = default_spell_map
@@ -391,7 +420,7 @@ function init_custom_spell_map()
         ['いやしの風']='BlueHealing',['マジックフルーツ']='BlueHealing',['P.エンブレイス']='BlueHealing',['花粉']='BlueHealing',['レストラル']='BlueHealing',['ホワイトウィンド']='BlueHealing',['ワイルドカロット']='BlueHealing',['虚無の風']='BlueHealing',['イグジュビエーション']='BlueHealing',
         --強化系青魔法
         ['N.メディテイト']='BlueBuff',['エラチックフラッター']='BlueBuff',['カウンタースタンス']='BlueBuff',['カルカリアンヴァーヴ']='BlueBuff',['コクーン']='BlueBuff',['セイリーンコート']='BlueBuff',['ゼファーマント']='BlueBuff',['ねたみ種']='BlueBuff',['バッテリーチャージ']='BlueBuff',['ファンタッド']='BlueBuff',['フェザーバリア']='BlueBuff',['プラズマチャージ']='BlueBuff',['ポーラーブルワーク']='BlueBuff',['マイティガード']='BlueBuff',['メメントモーリ']='BlueBuff',['リジェネレーション']='BlueBuff',['リフュエリング']='BlueBuff',['ワームアップ']='BlueBuff',['牙門']='BlueBuff',['共鳴']='BlueBuff',['鯨波']='BlueBuff',['甲羅強化']='BlueBuff',['反応炉冷却']='BlueBuff',['金剛身']='BlueBuff',['マジックバリア']='BlueBuff',['メタルボディ']='BlueBuff',['オカルテーション']='BlueBuff',
-        }
+    }
 
     bp_spell_maps = {
         --召喚履行
@@ -480,6 +509,7 @@ function display_roll_info(spell)
     end
 end
 
+--WS
 function init_weapon_skill()
     --近接物理ダメージ：sets.precast.WS.Damage
     --近接クリティカル：sets.precast.WS.Critical
@@ -727,6 +757,7 @@ function init_weapon_skill()
     sets.precast.WS["ジ・エンド"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
 end
 
+--カンニングペーパー
 local Sortietexts = require('texts')
 message_sortie={
     [1] = {name='アンジュレティングショックウェーブ', desc1='氷　'},
