@@ -38,6 +38,8 @@ function job_setup()
     state.LockWeapons = M(false)
 end
 
+function job_post_precast(spell, action, spellMap, eventArgs)
+end
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.skill == '青魔法' then
@@ -94,12 +96,11 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
         elseif spellMap == 'Phalanx' then
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
+            
+        elseif state.TreasureHunter.value then
+            equip(sets.TreasureHunter)
         end
-    end
-
-    if state.TreasureHunter.value then
-        equip(sets.TreasureHunter)
-    end
+    end 
 end
 
 function customize_idle_set(idleSet)
