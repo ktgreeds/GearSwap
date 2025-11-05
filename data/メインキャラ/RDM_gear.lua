@@ -2,7 +2,7 @@ function init_weaponns()
     --デフォルト武器を設定
     send_command('gs c set MainWeapons CroceaC')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-		send_command('gs c set SubWeapons CrepuscularKnife')
+		send_command('gs c set SubWeapons TernionDagger')
 	else
 		send_command('gs c set SubWeapons Genbu')
 	end
@@ -20,11 +20,15 @@ function init_gear_sets()
     gear.Tauret                 = {name="トーレット"}
     gear.CrepuscularKnife       = {name="クレパスクラナイフ"}
     gear.Malevolence            = {name="マレヴォレンス"}
+    gear.TernionDagger          = {name="ターニオンダガー+1"}
 	gear.QutrubKnife    		= {name="クトゥルブナイフ"}
 	gear.EtherealDagger 		= {name="幽世の短剣"}
+
     --片手棍
     gear.Maxentius              = {name="マクセンチアス"}
     gear.KrakenClub             = {name="クラーケンクラブ"}
+    gear.Daybreak               = { name="デイブレイクワンド"}
+
     --盾
     gear.Genbu    				= {name="玄冥盾"}
     gear.AmmurapiShield			= {name="アムラピシールド"}
@@ -58,8 +62,8 @@ function init_gear_sets()
         feet="マリグナスブーツ",
         neck="無の喉輪",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="シェリダピアス",
-        right_ear="ディグニタリピアス",
+        left_ear="ディグニタリピアス",
+        right_ear="シェリダピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},
@@ -72,18 +76,9 @@ function init_gear_sets()
 		hands="アヤモマノポラ+2",
 		legs="ＶＩタイツ+3",
 		waist="オルペウスサッシュ",
-    })
-    
-    --モクシャ55
-    sets.engaged.SubtleBlow = set_combine(sets.engaged,{
-        hands="ヴォルトミトン",--6
-        feet="ヴォルトスパッツ",--6
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-        waist="サリサフロイベルト",--5
-        left_ear="シェリダピアス",--II 5
-        right_ear="ディグニタリピアス",--5
-        left_ring="シーリチリング+1",--10
-        right_ring="シーリチリング+1",--10
+        left_ear="素破の耳",
+        right_ear="エアバニピアス",
+        back={ name="ゴストファイケープ", augments={'Enfb.mag. skill +10','Enha.mag. skill +10','Mag. Acc.+5','Enh. Mag. eff. dur. +16',}},
     })
 
 	--二刀流11（サポ忍）
@@ -132,8 +127,8 @@ function init_gear_sets()
         feet="ＬＴウゾー+3",
         neck="共和プラチナ章",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="シェリダピアス",
-        right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
+        left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
+        right_ear="シェリダピアス",
         left_ring="スローダリング",
         right_ring="エパミノダスリング",
         back={ name="スセロスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
@@ -149,8 +144,8 @@ function init_gear_sets()
         feet="マリグナスブーツ",
         neck="フォシャゴルゲット",
         waist="フォシャベルト",
-        left_ear="シェリダピアス",
-        right_ear="マーケピアス+1",
+        left_ear="マーケピアス+1",
+        right_ear="シェリダピアス",
         left_ring="イラブラットリング",
         right_ring="シーリチリング+1",
         back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},
@@ -167,7 +162,7 @@ function init_gear_sets()
         neck="シビルスカーフ",
         waist="オルペウスサッシュ",
         left_ear="マリグナスピアス",
-        right_ear="王将の耳飾り",
+        left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         left_ring="メダダリング",
         right_ring="エパミノダスリング",
         back={ name="スセロスケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','Weapon skill damage +10%',}},
@@ -276,9 +271,10 @@ function init_gear_sets()
 
 	--強化魔法（自分）
 	sets.midcast['強化魔法'] = {
+        sub='アムラピシールド',
         head={ name="テルキネキャップ", augments={'"Cure" potency +5%','Enh. Mag. eff. dur. +10',}},
 		body={ name="ＶＩタバード+3", augments={'Enhances "Chainspell" effect',}},
-        hands={ name="テルキネグローブ", augments={'"Cure" potency +7%','Enh. Mag. eff. dur. +10',}},
+        hands='ＡＴグローブ+3',
         legs={ name="テルキネブラコーニ", augments={'"Cure" potency +8%','Enh. Mag. eff. dur. +10',}},
 		feet="ＬＴウゾー+3",
 		neck={ name="デュエルトルク+2", augments={'Path: A',}},
@@ -292,15 +288,16 @@ function init_gear_sets()
 
 	--強化魔法（他者）
 	sets.midcast['強化魔法'].Other = set_combine(sets.midcast['強化魔法'] ,{
+        sub='アムラピシールド',
 		head="ＬＴシャペル+2",
 		body="ＬＴサヨン+3",
-		hands="ＬＴガントロ+2",
+        hands='ＡＴグローブ+3',
 		legs="ＬＴフュゾー+2",
 		feet="ＬＴウゾー+3",
 	})
 
 	--強化魔法スキル
-	sets.midcast.EnhancingSkill=
+	sets.midcast['強化魔法スキル'] =
 	{
 		ammo="ストンチタスラム+1",
 		head="ビファウルクラウン",
