@@ -67,17 +67,17 @@ function init_gear_sets()
     sets.engaged = {
         ammo="コイストボダー",
         head="マリグナスシャポー",
-        body="マリグナスタバード",
-        hands="マリグナスグローブ",
+        body={ name="アデマジャケット+1", augments={'DEX+12','AGI+12','Accuracy+20',}},
+        hands={ name="アデマリスト+1", augments={'Accuracy+20','Attack+20','"Subtle Blow"+8',}},
         legs="マリグナスタイツ",
         feet="マリグナスブーツ",
-        neck={ name="ミラージストール+2", augments={'Path: A',}},
-        waist="霊亀腰帯",
-        left_ear="エアバニピアス",
+        neck="無の喉輪",
+        waist="セールフィベルト+1",
+        left_ear="素破の耳",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
         left_ring="メランリング",
-        right_ring="シーリチリング+1",
-        back="無の外装",
+        right_ring="エポナリング",
+        back={ name="ロスメルタケープ", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
     }
 
     -- バフ監視用
@@ -194,6 +194,7 @@ function init_gear_sets()
 
     --青魔法魔攻
     sets.midcast.BlueMagical = {
+        main=gear.Tizona,
         sub="ブンジロッド",
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
         head="ＨＳカヴク+3",
@@ -287,7 +288,7 @@ function init_gear_sets()
         main="サクパタソード",
         head={ name="ヘルクリアヘルム", augments={'Accuracy+11','STR+4','Phalanx +4','Accuracy+6 Attack+6','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
-        hands={ name="ヘルクリアグローブ", augments={'Magic Damage +1','Crit. hit damage +3%','Phalanx +4','Accuracy+10 Attack+10','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+        hands={ name="ヘルクリアグローブ", augments={'STR+5','CHR+10','Phalanx +5','Accuracy+14 Attack+14','Mag. Acc.+8 "Mag.Atk.Bns."+8',}},
         legs={ name="ヘルクリアトラウザ", augments={'Attack+25','Crit. hit damage +1%','Phalanx +5','Accuracy+5 Attack+5','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
         feet={ name="ヘルクリアブーツ", augments={'Weapon skill damage +2%','"Fast Cast"+3','Phalanx +5','Accuracy+16 Attack+16',}},
     }
@@ -311,4 +312,29 @@ function init_gear_sets()
 
     --青魔法ケアル
     sets.midcast.BlueHealing = sets.midcast.Cure
+
+    -- プロテス
+    sets.midcast.Protect = {
+        right_ring="シェルターリング",
+    }
+
+    -- シェル
+    sets.midcast.Shell = sets.midcast.Protect
+    
+    -- 被ファランクス
+    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
+
+    -- 被プロテス
+    sets.midcast.IncreasedProtect = sets.midcast.Protect
+
+    -- 被シェル
+    sets.midcast.IncreasedShell = sets.midcast.Shell
+
+    -- 被カーズナ
+    sets.midcast.IncreasedCursna = {
+        neck = "ニカンダネックレス",
+        waist = "ギシドゥバサッシュ",
+        left_ring="サイダリング",
+        right_ring="ピュリティーリング",
+    }
 end
