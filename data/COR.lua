@@ -24,7 +24,7 @@ function job_setup()
     state.MainWeapons       = M{'RostamA','RostamB','Naegling'}
     
     -- gs c cycle SubWeapons
-    state.SubWeapons        = M{'GletisKnife','Tauret','NuskuShield'}
+    state.SubWeapons        = M{'NuskuShield','GletisKnife','Tauret'}
     
     -- gs c cycle RangeWeapons
     state.RangeWeapons      = M{'Fomalhaut','DeathPenalty'}
