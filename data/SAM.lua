@@ -14,13 +14,13 @@ function job_setup()
     state.IdleMode:options('Normal')
 
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal', 'SubtleBlow')
+    state.OffenseMode:options('Normal')
 
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal', 'Hasso', 'Seigan')
 
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
+    state.WeaponskillMode:options('Normal')
     
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'DojikiriYasutsuna','ShiningOne'}
@@ -31,25 +31,25 @@ end
 
 
 function job_buff_change(buff, gain)
-    if buff == '八双' and gain then
-        send_command('gs c set HybridMode Hasso')
- 
-    elseif buff == '星眼' and gain then
-        send_command('gs c set HybridMode Seigan')
-
-    elseif not state.Buff['八双'] and not state.Buff['星眼'] then
-        send_command('gs c set HybridMode Normal')
-    end
-
-    if buff == '心眼' then
-        IdleMelee()
+    if buff == '八双' then
+        if gain then
+            send_command('gs c set HybridMode Hasso')
+        else
+            send_command('gs c set HybridMode Normal')
+        end
+    elseif buff == '星眼' then
+        if gain then
+            send_command('gs c set HybridMode Seigan')
+        else
+            send_command('gs c set HybridMode Normal')
+        end
     end
 end
 
 
 function user_customize_melee_set(meleeSet)
     if state.Buff['心眼'] then
-        meleeSet =set_combine(meleeSet,sets.buff['心眼'] )
+        meleeSet = set_combine(meleeSet,sets.buff['心眼'] )
     end
     return meleeSet
 end
