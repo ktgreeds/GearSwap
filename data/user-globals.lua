@@ -315,6 +315,7 @@ function ActionEnmityRange()
     local recast_time_GeistWall = spell_recasts[605]/60
     local recast_time_Stinking  = spell_recasts[537]/60
     local recast_time_Poisonga  = spell_recasts[225]/60
+    local recast_time_Lullaby   = spell_recasts[376]/60
     if player.sub_job == '青' and recast_time_FrightfulRoar == 0 and player.sub_job_level>49 then
         send_command('input /ma '..windower.to_shift_jis('フライトフルロア')..' <stnpc>')--2
     elseif player.sub_job == '青' and recast_time_GeistWall == 0 then
@@ -325,6 +326,8 @@ function ActionEnmityRange()
         send_command('input /ma '..windower.to_shift_jis('サペリフィック')..' <stnpc>')--3
     elseif player.sub_job == '青' and recast_time_SheepSong == 0 then
         send_command('input /ma '..windower.to_shift_jis('シープソング')..' <stnpc>')--3
+    elseif player.sub_job == '詩' and recast_time_Lullaby == 0 then
+        send_command('input /ma '..windower.to_shift_jis('魔物達のララバイ')..' <stnpc>')--3
     end
 end
 
@@ -372,9 +375,9 @@ windower.register_event("incoming text", function(original, modified, original_m
     if target then
         if filter_mode_enemy:contains(original_mode) then
             if windower.wc_match(original, windower.to_shift_jis('*シュリーキングゲイル*')) then
-                windower.add_to_chat(167,'★★★ 氷　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*アンジュレティングショックウェーブ*')) then
                 windower.add_to_chat(167,'★★★ 土　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*アンジュレティングショックウェーブ*')) then
+                windower.add_to_chat(167,'★★★ 氷　弱点')
 
             elseif windower.wc_match(original, windower.to_shift_jis('*フレミングキック*')) then
                 windower.add_to_chat(167,'★★★ 水　弱点')
