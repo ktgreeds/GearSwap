@@ -15,7 +15,7 @@ function job_setup()
     state.OffenseMode:options('Normal','Stp')
 
     -- gs c cycle HybridMode
-    state.HybridMode:options('Normal','Parry','KnockBack')
+    state.HybridMode:options('Normal','KnockBack','Parry')
     
     -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
@@ -51,10 +51,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         if fc >= 80/100 then
             fc = 80/100
         end
-
-        if spell.cast_time > 1 then
-            equip(sets.midcast.interruption)
-        end
+        
+        equip(sets.midcast.interruption)
         
         local adjust=0.9
         local cast_time = (spell.cast_time*(1-fc))*adjust    
