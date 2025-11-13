@@ -51,13 +51,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             fc = 80/100
         end
 
-        if spell.cast_time > 1 then
-            equip(sets.midcast.interruption)
-        end
+        equip(sets.midcast.interruption)
         
         local adjust=0.9
         local cast_time = (spell.cast_time*(1-fc))*adjust
-
         if spellMap == 'Cure' then
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.Cure')
@@ -73,6 +70,10 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         elseif spellMap == 'Protect' then
             eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.Protect')
+
+        elseif spellMap == 'Banish' then
+            --バニシュは詠唱中断のまま
+            eventArgs.handled = true
 
         else
             eventArgs.handled = true
