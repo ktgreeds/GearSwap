@@ -48,14 +48,14 @@ function init_gear_sets()
         ammo="オゲルミルオーブ",
         head="極春日烏帽子形兜",
         body="極春日胴丸",
-        hands={ name="楯無篭手改", augments={'Path: A',}},
+        hands={ name="バロラスミトン", augments={'Accuracy+20 Attack+20','"Store TP"+1','Accuracy+15','Attack+10',}},
         legs="極春日板佩楯",
         feet={ name="龍王脛当改", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
         neck="月光の喉輪",
-        waist={ name="ケンタークベルト+1", augments={'Path: A',}},
+        waist="プラチナモグベルト",
         left_ear="アスプロピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring={ name="メランリング", augments={'Path: A',}},
+        left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
     }
@@ -103,6 +103,8 @@ function init_gear_sets()
         left_ring="メダダリング",
         right_ring="ラハブリング",
     }
+
+    sets.precast.FC.value = 40
 
     -- WSダメージ
     sets.precast.WS.Damage = {
