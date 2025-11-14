@@ -1,7 +1,6 @@
 function init_weaponns()
     --デフォルト武器を設定
-    send_command('gs c set MainWeapons Nirvana')
-    send_command('gs c set SubWeapons ElanStrap')
+    send_command('gs c set MainWeapons Nirvana; wait 0.3; gs c set SubWeapons ElanStrap')
 end
 
 
@@ -11,7 +10,7 @@ function init_gear_sets()
 
     gear.Nirvana                = {name="グリダーヴォル"}
     gear.ElanStrap              = {name="エランストラップ+1"}
-    gear.Slip                   = { name="プライムスタッフ"}
+    gear.Slip                   = {name="プライムスタッフ"}
 
     --待機装備（通常）
     sets.idle = {
