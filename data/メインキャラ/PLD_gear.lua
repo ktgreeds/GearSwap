@@ -7,7 +7,7 @@ end
 function init_gear_sets()
 	-- ロックスタイル番号
 	lockstyleset = 41
-
+    
 	-- 片手剣
 	gear.Burtgang	        = {name="ブルトガング"}
 	
@@ -214,6 +214,7 @@ function init_gear_sets()
 	}
 
 	-- FC
+    sets.precast.FC.value = 73
 	sets.precast.FC = {--73
 		ammo="サピエンスオーブ",
 		head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
