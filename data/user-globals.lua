@@ -63,6 +63,8 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
         end
         if player.sub_job == '赤' then
             fc = fc + 15/100
+        elseif player.main_job == '赤' then
+            fc = fc + 38/100
         end
         if fc >= 80/100 then
             fc = 80/100
@@ -72,7 +74,7 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
         
         local adjust = 0.07
         local cast_time = (spell.cast_time*(1-fc))-adjust
-        
+
         IdleMelee()
         equip(sets.midcast.interruption)
 
