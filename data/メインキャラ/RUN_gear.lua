@@ -87,15 +87,9 @@ function init_gear_sets()
         back="リパルスマント"
     }) 
     
-    -- モクシャ46
+    -- モクシャ
     sets.engaged.SubtleBlow = 
     {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-        waist="サリサフロイベルト",--5
-        left_ear="ディグニタリピアス",--5
-        right_ear="シェリダピアス",--II 5
-        left_ring="シーリチリング+1",--10
-        right_ring="シーリチリング+1",--10
     }
 
     -- 敵対心装備
@@ -158,6 +152,7 @@ function init_gear_sets()
         right_ring={ name="月明の指輪",priority=14},
         back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',}},
     }
+    
     sets.precast.FC.value = 70
     
     -- WSダメージ
@@ -284,14 +279,19 @@ function init_gear_sets()
         back={ name="ディバートケープ", augments={'Enmity+1','"Embolden"+15','"Dbl.Atk."+3',}},
     }
     
-    --フラッシュ
+    -- フラッシュ
     sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
-    --フラッシュ
+    
+    -- フォイル
     sets.midcast['フォイル'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
+
+    -- 青魔法
+	sets.midcast.BlueMagic = sets.Enmity
+
     -- プロテス
     sets.midcast.Protect = {
         right_ring="シェルターリング",
