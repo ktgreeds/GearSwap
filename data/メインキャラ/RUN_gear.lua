@@ -19,6 +19,8 @@ function init_gear_sets()
 	--監視用バフ
     sets.buff['エンボルド'] = {back="ディバートケープ"}
 
+    sets.Kiting             = {feet="ヒポメネソックス+1"}
+
     -- 待機装備（通常）
     sets.idle = {
         ammo="ストンチタスラム+1",
@@ -27,8 +29,8 @@ function init_gear_sets()
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
-        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        --neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        neck={ name="フサルクトルク+2", augments={'Path: A',}},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',},priority=15},
@@ -133,12 +135,12 @@ function init_gear_sets()
                                                 legs={ name="アグゥスロップス", augments={'Path: A',}},
                                                 feet={ name="アグゥピガッシュ", augments={'Path: A',}},
                                                 neck="シビルスカーフ",
-                                                waist="プラチナモグベルト",
+                                                waist={name="プラチナモグベルト",priority=15},
                                                 left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
                                                 right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
                                                 left_ring="メダダリング",
                                                 right_ring="月明の指輪",
-                                                back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}}}
+                                                back={name="月明の羽衣",priority=16}}
     sets.precast.JA['ランジ']               = sets.precast.JA['スワイプ']
 
     -- FC:70
@@ -284,6 +286,10 @@ function init_gear_sets()
     
     --フラッシュ
     sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
+        waist="コーネリアの黒帯"
+    })
+    --フラッシュ
+    sets.midcast['フォイル'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
 
