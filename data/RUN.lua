@@ -12,19 +12,19 @@ function job_setup()
     state.IdleMode:options('Normal')
     
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','Stp')
+    state.OffenseMode:options('Normal', 'Stp')
 
     -- gs c cycle HybridMode
-    state.HybridMode:options('Normal','KnockBack','Parry')
+    state.HybridMode:options('Normal',  'KnockBack', 'Parry')
     
     -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
 
     -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Epeolatry'}
+    state.MainWeapons   = M{'Epeolatry', 'Lycurgos'}
 
     -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'Khonsu','AlberStrap'}
+    state.SubWeapons    = M{'AlberStrap', 'Khonsu'}
 end
 
 
