@@ -6,57 +6,58 @@ end
 
 
 function job_setup()
-    state.Buff['神聖の印']      = buffactive['神聖の印'] or false
-
+    state.Buff['ファストキャスト'] = buffactive['ファストキャスト'] or false
+    
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
-
-    --gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
+    
+    -- gs c cycle OffenseMode
+    state.OffenseMode:options('Normal','Stp')
 
     -- gs c cycle HybridMode
-    state.HybridMode:options('Normal', 'KnockBack')
+    state.HybridMode:options('Normal','KnockBack','Parry')
     
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal')
+    state.WeaponskillMode:options('Normal', 'SubtleBlow')
 
     -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Burtgang','Malevolence'}
+    state.MainWeapons   = M{'Epeolatry'}
 
     -- gs c cycle SubWeapons
-    state.SubWeapons   = M{'Duban','Aegis'}
-
-    send_command('bind ~F7 gs c cycle SubWeapons')
-end
-
-
-function user_unload()
-    send_command('bind ~F7 gs c cycle OffenseMode')
+    state.SubWeapons    = M{'Khonsu','AlberStrap'}
 end
 
 
 function job_post_midcast(spell, action, spellMap, eventArgs) 
 end
 
-function customize_idle_set(idleSet)
-    if state.SubWeapons.value == "Duban" then
-        idleSet = idleSet
-    else
-        idleSet = set_combine(idleSet,sets.idle.Magical)
+function job_buff_change(buff, gain)
+    if buff == 'バットゥタ' then
+        if gain then
+            send_command('gs c set HybridMode Parry')
+        else
+            send_command('gs c set HybridMode Normal')
+        end
+
+    elseif buff == 'エンボルド' then
+        if gain then
+            equip(sets.buff['エンボルド'])
+            disable('back')
+        else
+            enable('back')
+            IdleMelee()
+        end
     end
-    
-    return idleSet
 end
 
-function user_customize_melee_set(meleeSet)
-    if state.SubWeapons.value == "Duban" then
-        meleeSet = set_combine(meleeSet,sets.engaged)
-    else
-        meleeSet = set_combine(meleeSet,sets.engaged.Magical)
+function job_state_change(stateField, newValue, oldValue)
+    if stateField == 'RuneText' then
+        if newValue then
+            showTextRune()
+        else
+            hideTextRune()
+        end
     end
-    
-    if state.HybridMode.value == "KnockBack" then
-        meleeSet = set_combine(meleeSet,sets.engaged.KnockBack)
-    end
-    return meleeSet
 end
+
+
