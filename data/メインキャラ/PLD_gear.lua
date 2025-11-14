@@ -42,7 +42,9 @@ function init_gear_sets()
         right_ring="守りの指輪",
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
- 
+
+    sets.Kiting             = {feet="ヒポメネソックス+1"}
+
 	-- 待機装備（通常）
 	sets.idle = {
         sub="ドゥバン",
@@ -111,7 +113,7 @@ function init_gear_sets()
         left_ear={ name="ズワゾピアス+1", augments={'Path: A',}},
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
         left_ring="ワーデンリング",
-        right_ring="月明の指輪",
+        right_ring="アペリエリング+1",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
 
@@ -221,7 +223,7 @@ function init_gear_sets()
 		feet={ name="オディシアグリーヴ", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','"Fast Cast"+6','VIT+2','Mag. Acc.+2','"Mag.Atk.Bns."+13',}},
 		neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},
-		left_ear="エテオレートピアス",
+		left_ear={name="アスプロピアス",priority=15},
 		right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
 		left_ring="メダダリング",
 		right_ring="ラハブリング",
@@ -319,6 +321,10 @@ function init_gear_sets()
 
     --フラッシュ
     sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
+        waist="コーネリアの黒帯"
+    })
+    --フラッシュ
+    sets.midcast['フォイル'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
 
