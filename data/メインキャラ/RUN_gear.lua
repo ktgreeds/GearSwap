@@ -10,6 +10,9 @@ function init_gear_sets()
 
     -- 両手剣
     gear.Epeolatry          = {name="エピオラトリー"}
+
+    -- 両手斧
+    gear.Lycurgos           = {name="ライカーゴス"}
     
     -- グリップ
     gear.AlberStrap         = {name="アルバーストラップ"}
@@ -28,8 +31,9 @@ function init_gear_sets()
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
-        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        --neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        --neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=15},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',},priority=15},
@@ -46,8 +50,9 @@ function init_gear_sets()
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
-        --neck={ name="フサルクトルク+2", augments={'Path: A',}},
-        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        --neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=15},
         waist={ name="プラチナモグベルト",priority=16},
         left_ear="シェリダピアス",
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
@@ -102,7 +107,7 @@ function init_gear_sets()
         feet="ＥＲグリーヴ+3",
         neck="月光の首飾り",
         waist={ name="プラチナモグベルト",priority=16},
-        left_ear={ name="オノワイヤリング+1", augments={'Path: A',},priority=15},
+        left_ear={name="アスプロピアス",priority=15},
         right_ear={ name="クリプティクピアス",priority=12},
         left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
         right_ring={ name="アイワツリング",priority=13},
@@ -146,11 +151,11 @@ function init_gear_sets()
         feet={ name="カマイングリーヴ", augments={'HP+60','STR+10','INT+10',}},
         neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},
-        left_ear={ name="オノワイヤリング+1", augments={'Path: A',},priority=15},
+        left_ear={name="アスプロピアス",priority=15},
         right_ear={ name="エテオレートピアス",priority=13},
         left_ring="メダダリング",
         right_ring={ name="月明の指輪",priority=14},
-        back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',}},
+        back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',},priority=12},
     }
     
     sets.precast.FC.value = 70
@@ -196,12 +201,6 @@ function init_gear_sets()
     -- WSモクシャ
     sets.precast.WS.SubtleBlow = 
     {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        right_ear="シェリダピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
     }
     
     -- 共通WS定義読み込み
@@ -212,16 +211,16 @@ function init_gear_sets()
         ammo="ストンチタスラム+1",
         head="ＥＲガレア+3",
         body="アダマンアーマー",
-        hands={ name="ローハイドグローブ", augments={'HP+50','Accuracy+15','Evasion+20',}},
-        legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',}},
+        hands={ name="ローハイドグローブ", augments={'HP+50','Accuracy+15','Evasion+20',},priority=12},
+        legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',},priority=11},
         feet="ＥＲグリーヴ+3",
         neck="月光の首飾り",
         waist="オドンブラサッシュ",
-        left_ear={ name="オノワイヤリング+1", augments={'Path: A',},priority=14},
-        right_ear="磁界の耳",
+        left_ear={name="アスプロピアス",priority=15},
+        right_ear={name="トゥイストピアス",priority=16},
         left_ring="メランリング",
-        right_ring={ name="月明の指輪",priority=15},
-        back={ name="月明の羽衣",priority=16}
+        right_ring={name="月明の指輪",priority=14},
+        back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Spell interruption rate down-10%',},priority=13},
 	}
 
     -- 強化魔法
@@ -280,14 +279,10 @@ function init_gear_sets()
     }
     
     -- フラッシュ
-    sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
-        waist="コーネリアの黒帯"
-    })
+    sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{})
     
     -- フォイル
-    sets.midcast['フォイル'] = set_combine(sets.Enmity,{
-        waist="コーネリアの黒帯"
-    })
+    sets.midcast['フォイル'] = set_combine(sets.Enmity,{})
 
     -- 青魔法
 	sets.midcast.BlueMagic = sets.Enmity
