@@ -143,7 +143,8 @@ function init_gear_sets()
                                                 back={name="月明の羽衣",priority=16}}
     sets.precast.JA['ランジ']               = sets.precast.JA['スワイプ']
 
-    -- FC:70
+	-- FC
+    sets.precast.FC.value = 70
     sets.precast.FC = {
         ammo="サピエンスオーブ",
         head="ＲＮバンド+3",
@@ -159,7 +160,7 @@ function init_gear_sets()
         right_ring={ name="月明の指輪",priority=14},
         back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',}},
     }
-  
+    
     -- WSダメージ
     sets.precast.WS.Damage = {
         ammo="コイストボダー",
