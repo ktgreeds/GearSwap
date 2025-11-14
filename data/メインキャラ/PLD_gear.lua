@@ -267,12 +267,6 @@ function init_gear_sets()
     -- WSモクシャ
     sets.precast.WS.SubtleBlow = 
     {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-		body="デーゴンブレスト",
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
     }
     
 	-- 共通WS定義読み込み
