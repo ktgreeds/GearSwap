@@ -36,7 +36,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     if string.find(spell.type, 'Magic') then
-        local fc=70/100 --自信のFCを左辺にセット
+        local fc = sets.precast.FC.value/100
         if buffactive['ファストキャスト'] then
             --フサルクトラウザ装備時メリポのインスパイア1につき+12％
             fc = fc + 12/100 --インスパイア1
