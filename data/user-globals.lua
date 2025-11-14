@@ -72,9 +72,8 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
         
         eventArgs.handled = true
         
-        local adjust = 0.07
+        local adjust = 0.1
         local cast_time = (spell.cast_time*(1-fc))-adjust
-
         IdleMelee()
         equip(sets.midcast.interruption)
 
