@@ -108,11 +108,8 @@ function init_gear_sets()
 
     -- FC
     sets.precast.FC = {
-        head={ name="ヘルクリアヘルム", augments={'"Mag.Atk.Bns."+9','"Fast Cast"+6','Mag. Acc.+9',}},
         body="ドレッドジュポン",
-        hands="レイライングローブ",
-        legs={ name="ヘルクリアトラウザ", augments={'Mag. Acc.+16','"Fast Cast"+6','STR+10',}},
-        feet={ name="ヘルクリアブーツ", augments={'"Fast Cast"+6','MND+2','Mag. Acc.+2',}},
+        hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
         neck="オルンミラトルク",
         waist="コーネリアの黒帯",
         left_ear="エテオレートピアス",
@@ -120,7 +117,9 @@ function init_gear_sets()
         left_ring="キシャールリング",
         right_ring="メダダリング",
     }
-    
+
+    sets.precast.FC.value = 37
+
     -- スナップ
     sets.precast.RA = {
         ammo=gear.MarksmanshipPhysics,
@@ -140,15 +139,34 @@ function init_gear_sets()
         main={name="ロスタム", augments={'Path: C',}},
         range="コンペンセーター",
         head="ＬＡトリコルヌ+3",
-        body="ＣＳフラック+3",
-        hands="ＣＳガントリー+3",
-        Legs="デサルタタセッツ",
-        feet="ＣＳブーツ+2",
+        body="イケンガベスト",          --敵対心-10
+        hands="イケンガグローブ",       --敵対心-8
+        Legs="デサルタタセッツ",        --敵対心-4
+        feet="イケンガクロッグ",        --敵対心-6
         neck="王将の首飾り",
+        waist="霊亀腰帯",               --敵対心-2
+        left_ear="ベイラピアス",        --敵対心-8
+        right_ear="シテレアパール",     --敵対心-4
         left_ring="ルザフリング", 
-        back="ガンスリンガマント"
+        right_ring="クチェクラリング",  --敵対心-7
+        back="ガンスリンガマント"       --敵対心-1
     }
     
+    sets.precast.CorsairRoll['プリッツアロール'] = {
+        head="ＣＳトリコルヌ+3",
+    }
+    sets.precast.CorsairRoll['タクティックロール'] = {
+        body="ＣＳフラック+3",
+    }
+    sets.precast.CorsairRoll['アライズロール'] = {
+        hands="ＣＳガントリー+3",
+    }
+    sets.precast.CorsairRoll['キャスターズロール'] = {
+        Legs="ＣＳトルーズ+3",
+    }
+    sets.precast.CorsairRoll['コアサーズロール'] = {
+        feet="ＣＳブーツ+3",
+    }
     sets.precast.CorsairRoll['ボルターズロール'] = {
         main={ name="ロスタム", augments={'Path: C',}},
     }
