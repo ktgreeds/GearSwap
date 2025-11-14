@@ -29,17 +29,17 @@ function init_gear_sets()
     gear.Slip           = { name="プライムスタッフ"}
 	
     -- 監視用バフ
-    sets.buff['机上演習']       = {head="ＡＣボード+4",body="ＰＤガウン+3",waist="エンブラサッシュ",}
-    sets.buff['電光石火の章']   = {feet="ＰＤローファー+4"}
-    sets.buff['疾風迅雷の章']   = {feet="ＰＤローファー+4"}
-    sets.buff['意気昂然の章']   = {head="ＡＢボネット+3"}
-    sets.buff['気炎万丈の章']   = {head="ＡＢボネット+3"}
-    sets.buff['令狸執鼠の章']   = {hands="ＡＢブレーサー+3"}
-    sets.buff['簡素清貧の章']   = {legs="ＡＢパンツ+3"}
-    sets.buff['勤倹小心の章']   = {legs="ＡＢパンツ+3"}
-    sets.buff['虚誘掩殺の策']   = {feet="ＡＢローファー+3"}
+    sets.buff['机上演習']       = { head="ＡＣボード+4",body="ＰＤガウン+3",waist="エンブラサッシュ",}
+    sets.buff['電光石火の章']   = { feet="ＰＤローファー+4"}
+    sets.buff['疾風迅雷の章']   = { feet="ＰＤローファー+4"}
+    sets.buff['意気昂然の章']   = { head="ＡＢボネット+3"}
+    sets.buff['気炎万丈の章']   = { head="ＡＢボネット+3"}
+    sets.buff['令狸執鼠の章']   = { hands="ＡＢブレーサー+3"}
+    sets.buff['簡素清貧の章']   = { legs="ＡＢパンツ+3"}
+    sets.buff['勤倹小心の章']   = { legs="ＡＢパンツ+3"}
+    sets.buff['虚誘掩殺の策']   = { feet="ＡＢローファー+3"}
     sets.buff['震天動地の章']   = { main="エレマイトワンド",
-                                    sub="玄冥盾",
+                                    Ssub="玄冥盾",
                                     ammo="ストンチタスラム+1",
                                     head="レノーアの髪飾り",
                                     body="アダマンアーマー",
@@ -130,7 +130,7 @@ function init_gear_sets()
         right_ring="メダダリング",
         back="フィフォレケープ+1",
     }
-    
+
     sets.precast.FC.value = 80
 
     -- FC（白グリ用）
