@@ -814,11 +814,11 @@ message_sortie={
     [7] = {name='フラッシュフラッド', desc1='雷　'},
 }
 text_box_sortie = Sortietexts.new('${text}',{text={font='Meiryo', size=10}, pos={x=20, y=200}, padding = 5, bg={alpha=180}})
-text_box_sortie.text='弱　特殊技名（　CGボス　）\n'..
+text_box_sortie.text='弱　特殊技名（　BFボス　）\n'..
 '\\cs(204, 255, 255)'..message_sortie[1].desc1..message_sortie[1].name..'\\cr'..'\n'..
 '\\cs(255, 255, 204)'..message_sortie[2].desc1..message_sortie[2].name..'\\cr'..'\n'..
 '\\cr'..'\n'..
-'\\cr'..'弱　特殊技名（　DFボス　）\n'..
+'\\cr'..'弱　特殊技名（　DHボス　）\n'..
 '\\cs(204, 204, 255)'..message_sortie[3].desc1..message_sortie[3].name..'\\cr'..'\n'..
 '\\cs(255, 204, 204)'..message_sortie[4].desc1..message_sortie[4].name..'\\cr'..'\n'..
 '\\cs(204, 255, 204)'..message_sortie[5].desc1..message_sortie[5].name..'\\cr'..'\n'..
