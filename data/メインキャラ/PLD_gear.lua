@@ -84,24 +84,6 @@ function init_gear_sets()
 	-- 抜刀装備
     sets.engaged = {
         sub="ドゥバン",
-        ammo="コイストボダー",
-        head="サクパタヘルム",
-        body="サクパタブレスト",
-        hands="サクパタガントレ",
-        legs="サクパタクウィス",
-        feet="サクパタレギンス",
-        neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=16},
-        waist={ name="ケンタークベルト+1", augments={'Path: A',}},
-        left_ear="テロスピアス",
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-        back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
-    }
-
-    -- 近接対物理
-	sets.engaged.Physical = {
-        sub="ドゥバン",
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
         body="サクロブレスト",
@@ -115,7 +97,7 @@ function init_gear_sets()
         left_ring="ワーデンリング",
         right_ring="アペリエリング+1",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
-	}
+    }
 
     -- 近接対魔法
     sets.engaged.Magical = {
@@ -214,22 +196,22 @@ function init_gear_sets()
 	}
 
 	-- FC
-    sets.precast.FC.value = 73
-	sets.precast.FC = {--73
-		ammo="サピエンスオーブ",
-		head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
-		body="ＲＶサーコート+4",
-		hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
-		legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',}},
-		feet={ name="オディシアグリーヴ", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','"Fast Cast"+6','VIT+2','Mag. Acc.+2','"Mag.Atk.Bns."+13',}},
-		neck="オルンミラトルク",
+	sets.precast.FC = {
+        ammo="サピエンスオーブ",
+        head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+        body="ＲＶサーコート+4",
+        hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+        legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',}},
+        feet={ name="オディシアグリーヴ", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','"Fast Cast"+6','VIT+2','Mag. Acc.+2','"Mag.Atk.Bns."+13',}},
+        neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},
-		left_ear={name="アスプロピアス",priority=15},
-		right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-		left_ring="メダダリング",
-		right_ring="ラハブリング",
-		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
+        left_ear={name="アスプロピアス",priority=15},
+        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        left_ring="メダダリング",
+        right_ring="ラハブリング",
+        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
+    sets.precast.FC.value = 73
 
 	-- WSダメージ
 	sets.precast.WS.Damage = {
@@ -327,8 +309,7 @@ function init_gear_sets()
     --フラッシュ
     sets.midcast['フォイル'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
-    })
-
+    })    
 	-- ファランクス
 	sets.midcast['ファランクス'] = {
 		main="サクパタソード",
