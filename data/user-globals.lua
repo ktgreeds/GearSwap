@@ -70,7 +70,7 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
         
         eventArgs.handled = true
         
-        local adjust=0.07
+        local adjust = 0.07
         local cast_time = (spell.cast_time*(1-fc))-adjust
         equip(sets.midcast.interruption)
 
@@ -78,6 +78,8 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis(spell.name)..']')
         elseif sets.midcast[spellMap] then
             send_command('wait '..cast_time..'; gs equip sets.midcast.'..spellMap)
+        elseif sets.midcast[spell.type] then
+            send_command('wait '..cast_time..'; gs equip sets.midcast.'..spell.type) 
         end
     end
 end
