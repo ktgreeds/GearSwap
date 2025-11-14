@@ -43,7 +43,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     end
 
     if string.find(spell.type, 'Magic') then
-        local fc=73/100
+        local fc = sets.precast.FC.value/100
         if player.sub_job == '赤' then
             fc = fc + 15/100
         end
