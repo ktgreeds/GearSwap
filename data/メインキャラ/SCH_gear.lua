@@ -1,7 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Musa')
-    send_command('gs c set SubWeapons Khonsu')
+    send_command('gs c set MainWeapons Musa; wait 0.3; gc set SubWeapons Khonsu')
 end
 
 
@@ -31,15 +30,15 @@ function init_gear_sets()
 	
     -- 監視用バフ
     sets.buff['机上演習']       = {head="ＡＣボード+4",body="ＰＤガウン+3",waist="エンブラサッシュ",}
-    sets.buff['電光石火の章']   = {feet="ＰＤローファー+3"}
-    sets.buff['疾風迅雷の章']   = {feet="ＰＤローファー+3"}
+    sets.buff['電光石火の章']   = {feet="ＰＤローファー+4"}
+    sets.buff['疾風迅雷の章']   = {feet="ＰＤローファー+4"}
     sets.buff['意気昂然の章']   = {head="ＡＢボネット+3"}
     sets.buff['気炎万丈の章']   = {head="ＡＢボネット+3"}
     sets.buff['令狸執鼠の章']   = {hands="ＡＢブレーサー+3"}
     sets.buff['簡素清貧の章']   = {legs="ＡＢパンツ+3"}
     sets.buff['勤倹小心の章']   = {legs="ＡＢパンツ+3"}
     sets.buff['虚誘掩殺の策']   = {feet="ＡＢローファー+3"}
-    sets.buff['震天動地の章']   = { main="ハーミットワンド",
+    sets.buff['震天動地の章']   = { main="エレマイトワンド",
                                     sub="玄冥盾",
                                     ammo="ストンチタスラム+1",
                                     head="レノーアの髪飾り",
@@ -98,17 +97,16 @@ function init_gear_sets()
         feet={ name="ニャメソルレット", augments={'Path: B',}},
         neck="コンバタントトルク",
         waist="ウィンバフベルト+1",
-        left_ear="マーケピアス+1",
-        right_ear="テロスピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-        back="無の外装",
+        left_ear="テロスピアス",
+        right_ear="アスプロピアス",
+        left_ring="メランリング",
+        right_ring="守りの指輪",
+        back={ name="ルッフケープ", augments={'DEX+20','Accuracy+20 Attack+20','"Dbl.Atk."+10','Damage taken-5%',}},
     }
-
 
     -- 即時発動アビリティ　連環計
     sets.precast.JA['連環計'] = {
-        legs="ＰＤパンツ+3"
+        legs="ＰＤパンツ+4"
     }
 
     -- 即時発動アビリティ　大悟徹底
@@ -121,26 +119,27 @@ function init_gear_sets()
         ammo="サピエンスオーブ",
         head="ＰＤボード+4",
         body="ピンガチュニック+1",
-        hands="ＡＣブレーサー+3",
+        hands="ＡＣブレーサー+4",
         legs="ピンガズボン+1",
         feet="ＡＣローファー+4",
         neck="オルンミラトルク",
         waist="エンブラサッシュ",
         left_ear="マリグナスピアス",
-        right_ear={name="アスプロピアス",priority=16},
-        left_ring="メランリング",
+        right_ear="エンチャンピアス+1",
+        left_ring="キシャールリング",
         right_ring="メダダリング",
         back="フィフォレケープ+1",
     }
+    
+    sets.precast.FC.value = 80
 
     -- FC（白グリ用）
     sets.precast.FC.WhiteMagic=set_combine(sets.precast.FC,{
-        main="ムサ"
+        --main="ムサ"
     })
 
     -- FC（黒グリ用）
     sets.precast.FC.BlackMagic=set_combine(sets.precast.FC,{
-        main={ name="ガーダ", augments={'"Fast Cast"+5','Mag. Acc.+14','"Mag.Atk.Bns."+14','DMG:+17',}},
         sub="チャンターシールド",
     })
 
@@ -193,16 +192,16 @@ function init_gear_sets()
 
     --弱体魔法
     sets.midcast['弱体魔法'] = {
-        main={ name="ブンジロッド", augments={'Path: A',}},
+        main="デイブレイクワンド",
         sub="アムラピシールド",
         ammo="クォーツタスラム+1",
         head="ＡＣボード+4",
-        body="ＡＣガウン+3",
+        body="ＡＣガウン+4",
         hands="ＡＣブレーサー+4",
         legs="ＡＢパンツ+3",
         feet="ＡＣローファー+4",
         neck={ name="アギュトストール+2", augments={'Path: A',}},
-        waist="エンブラサッシュ",
+        waist={ name="オブシテナサッシュ", augments={'Path: A',}},
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="キシャールリング",
@@ -219,6 +218,7 @@ function init_gear_sets()
     sets.midcast['インパクト']  = set_combine(sets.midcast['弱体魔法'],{
         head=empty,body="クレパスクラプリス",
     })
+    
     -- 弱体魔法　スタン
     sets.midcast['スタン']      = set_combine(sets.midcast['弱体魔法'],{
         ammo="ペムフレドタスラム"
@@ -239,7 +239,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="フレキリング",
-        right_ring={ name="メタモルリング+1", augments={'Path: A',}},
+        right_ring="メダダリング",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
     
@@ -263,8 +263,8 @@ function init_gear_sets()
     -- アスピル系
     sets.midcast.Aspir = set_combine(sets.midcast['精霊魔法'] ,{
         main="ルビカンディティー",
-        legs={ name="ＰＤパンツ+3", augments={'Enhances "Tabula Rasa" effect',}},
-        feet={ name="マーリンクラッコー", augments={'Mag. Acc.+30','"Drain" and "Aspir" potency +11','INT+5','"Mag.Atk.Bns."+2',}},
+        legs="ＰＤパンツ+4",
+        feet="アグゥピガッシュ",
         neck="エーラペンダント",
         waist="風鳥の帯",
         left_ring="エバネセンスリング",
@@ -292,7 +292,7 @@ function init_gear_sets()
 
     -- 陣系
     sets.midcast.Storm = set_combine(sets.midcast['強化魔法'], {
-        feet="ＰＤローファー+3"
+        feet="ＰＤローファー+4"
     })
 
     -- リジェネ
@@ -328,12 +328,11 @@ function init_gear_sets()
         
     --ケアル
     sets.midcast.Cure = {
-        main="レテクロッド+1",
-        sub="玄冥盾",
+       -- sub="玄冥盾",
         ammo="ストンチタスラム+1",
         head={ name="ケカスミトラ", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
         body={ name="ケカスブリオー", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
-        hands={ name="ＰＤブレーサー+3", augments={'Enh. "Tranquility" and "Equanimity"',}},
+        hands={ name="ＰＤブレーサー+4", augments={'Enh. "Tranquility" and "Equanimity"',}},
         legs={ name="ケカスタイツ", augments={'MP+60','"Cure" spellcasting time -5%','Enmity-5',}},
         feet="ＡＣローファー+4",
         neck="オルンミラトルク",
