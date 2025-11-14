@@ -61,8 +61,8 @@ function init_gear_sets()
         ammo="サピエンスオーブ",
         head={ name="マーリンフード", augments={'"Mag.Atk.Bns."+24','"Fast Cast"+7','Mag. Acc.+1',}},
         body="インヤガジュバ+2",
-        hands={ name="マーリンダスタナ", augments={'Accuracy+14','"Fast Cast"+5','MND+9','"Mag.Atk.Bns."+13',}},
-        legs={ name="マーリンシャルワ", augments={'"Fast Cast"+6',}},
+        hands="ニャメガントレ",
+        legs="ニャメフランチャ",
         feet={ name="マーリンクラッコー", augments={'"Fast Cast"+7','MND+5',}},
         neck="オルンミラトルク",
         waist={name="プラチナモグベルト",priority=16},
@@ -70,9 +70,11 @@ function init_gear_sets()
         right_ear="エンチャンピアス+1",
         left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
         right_ring="ラハブリング",
-        back={name="月明の羽衣",priority=15}
+        back="フィフォレケープ+1"
     }
     
+    sets.precast.FC.value = 80
+
     --履行短縮（バフ・デバフ）
     sets.precast.BloodPactWard = {
         ammo="エピタフサシェ",
