@@ -41,7 +41,6 @@ end
 
 --■■■アクション中処理（共通実装なし）
 function user_post_midcast(spell, action, spellMap, eventArgs)
-    table.vprint(spell)
     for buff,active in pairs(state.Buff) do
         if active and sets.buff[buff] then
             equip(sets.buff[buff])
