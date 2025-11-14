@@ -41,6 +41,7 @@ end
 
 --■■■アクション中処理（共通実装なし）
 function user_post_midcast(spell, action, spellMap, eventArgs)
+    table.vprint(spell)
     for buff,active in pairs(state.Buff) do
         if active and sets.buff[buff] then
             equip(sets.buff[buff])
@@ -82,6 +83,8 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis(spell.name)..']')
         elseif sets.midcast[spellMap] then
             send_command('wait '..cast_time..'; gs equip sets.midcast.'..spellMap)
+        elseif sets.midcast[spell.skill] then
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis(spell.skill)..']')
         elseif sets.midcast[spell.type] then
             send_command('wait '..cast_time..'; gs equip sets.midcast.'..spell.type) 
         end
