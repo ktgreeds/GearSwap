@@ -48,6 +48,7 @@ end
 function user_post_aftercast(spell, action, spellMap, eventArgs)
 end
 
+--詠唱中段非同期処理（sets.Buffを組み込めない）
 function Interruption(spell, action, spellMap, eventArgs)
     if string.find(spell.type, 'Magic') then
         if not sets.precast.FC.value then
