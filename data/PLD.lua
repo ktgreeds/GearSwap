@@ -51,36 +51,47 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             fc = 80/100
         end
 
+        eventArgs.handled = true
         equip(sets.midcast.interruption)
-        
-        local adjust=0.9
-        local cast_time = (spell.cast_time*(1-fc))*adjust
+
+        local adjust=0.07
+        local cast_time = (spell.cast_time*(1-fc))-adjust
         if spellMap == 'Cure' then
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast.Cure')
 
-        elseif spellMap == 'Phalanx' then
-            eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
-
         elseif spell.name == 'フラッシュ' then
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('フラッシュ')..']')
-            
-        elseif spellMap == 'Protect' then
-            eventArgs.handled = true
-            send_command('wait '..cast_time..'; gs equip sets.midcast.Protect')
 
         elseif spellMap == 'Banish' then
             --バニシュは詠唱中断のまま
-            eventArgs.handled = true
+
+        elseif spellMap == 'Phalanx' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ファランクス')..']')
+            
+        elseif spellMap == 'Protect' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast.Protect')
+            
+        elseif spellMap == 'Shell' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast.Shell')
+
+        elseif spellMap == 'Regen' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast.Regen')
+
+        elseif spell.name == 'ストンスキン' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('ストンスキン')..']')
+
+        elseif spell.name == 'フォイル' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('フォイル')..']')
+
+        elseif spell.skill == '強化魔法' then
+            send_command('wait '..cast_time..'; gs equip sets.midcast['..windower.to_shift_jis('強化魔法')..']')
 
         else
-            eventArgs.handled = true
             send_command('wait '..cast_time..'; gs equip sets.Enmity')
         end
     end
 end
+
 function customize_idle_set(idleSet)
     if state.SubWeapons.value == "Duban" then
         idleSet = idleSet
