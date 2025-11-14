@@ -39,7 +39,7 @@ function init_gear_sets()
     sets.buff['勤倹小心の章']   = { legs="ＡＢパンツ+3"}
     sets.buff['虚誘掩殺の策']   = { feet="ＡＢローファー+3"}
     sets.buff['震天動地の章']   = { main="エレマイトワンド",
-                                    Ssub="玄冥盾",
+                                    sub="玄冥盾",
                                     ammo="ストンチタスラム+1",
                                     head="レノーアの髪飾り",
                                     body="アダマンアーマー",
