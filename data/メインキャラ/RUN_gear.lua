@@ -1,7 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Epeolatry')
-    send_command('gs c set SubWeapons AlberStrap')
+    send_command('gs c set MainWeapons Epeolatry; wait 0.3; gs c set SubWeapons AlberStrap;')
 end
 
 
@@ -29,8 +28,8 @@ function init_gear_sets()
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
-        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        --neck={ name="フサルクトルク+2", augments={'Path: A',}},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',},priority=15},
@@ -144,7 +143,6 @@ function init_gear_sets()
     sets.precast.JA['ランジ']               = sets.precast.JA['スワイプ']
 
 	-- FC
-    sets.precast.FC.value = 70
     sets.precast.FC = {
         ammo="サピエンスオーブ",
         head="ＲＮバンド+3",
@@ -160,6 +158,7 @@ function init_gear_sets()
         right_ring={ name="月明の指輪",priority=14},
         back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',}},
     }
+    sets.precast.FC.value = 70
     
     -- WSダメージ
     sets.precast.WS.Damage = {
@@ -293,7 +292,6 @@ function init_gear_sets()
     sets.midcast['フォイル'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
-
     -- プロテス
     sets.midcast.Protect = {
         right_ring="シェルターリング",
