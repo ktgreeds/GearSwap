@@ -43,6 +43,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.name == 'レデンサリュート' or spell.name == 'イオリアンエッジ' then
         equip(get_hachirin(spell.element))
     end
+    if spell.type == 'CorsairRoll' then
+        if not buffactive[spell.name] then
+            equip({main = gear.RostamC})
+        end
+    end
 end
 
 
@@ -52,6 +57,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.buff['トリプルショット'])
         end
     end
+
 end
 
 
