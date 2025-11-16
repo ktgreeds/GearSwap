@@ -19,28 +19,32 @@ function job_setup()
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
     
     -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'BunzisRod'}
+    state.MainWeapons   = M{'BunzisRod','MarinStaff'}
 
     -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'AmmurapiShield'}
+    state.SubWeapons    = M{'AmmurapiShield','EnkiStrap'}
     
     --gs c cycle MPsavings
     state.MPsavings = M(true, 'MPsave')
 end
 
+weakmagic = S{'ストーン','ストーンII','ストーンIII','ウォータ','ウォータII','ウォータIII','エアロ','エアロII','エアロIII','ファイア','ファイアII','ファイアIII','ブリザド','ブリザドII','ブリザドIII','サンダー','サンダーII','サンダーIII'}
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
     for buff,active in pairs(state.Buff) do
         if active and sets.buff[buff] then
             equip(sets.buff[buff])
         end
+
         if spell.skill == '精霊魔法' then
             if not state.Buff["魔力の泉"] then
                 if state.MPsavings.value and spell.name ~= "インパクト" then
                     equip(sets.midcast['精霊魔法'].MPsavings)
                 end
             end
-
+            if weakmagic:contains(spell.japanese) then
+                equip(sets.midcast['精霊魔法'].weak)
+            end
             equip(get_hachirin(spell.element))
         end
     end
