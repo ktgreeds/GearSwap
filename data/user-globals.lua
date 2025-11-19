@@ -3,7 +3,7 @@
 --■■■初期ロード
 function user_setup()
     state.Buff['睡眠'] = buffactive['睡眠'] or false                    --監視するバフ・デバフ
-    
+
     include(player.name .. '/weather_obi')                              --属性帯ロード
     include('smn_avatar')                                               --召喚定義ファイルロード
     init_weaponns()                                                     --武器初期化
@@ -17,6 +17,7 @@ function user_setup()
 
     -- gs c cycle SortieText
     state.SortieText = M(false)
+
     -- gs c cycle RuneText
     state.RuneText = M(false)
 
@@ -41,6 +42,16 @@ end
 
 --■■■アクション中処理（共通実装なし）
 function user_post_midcast(spell, action, spellMap, eventArgs)
+    --詠唱中断処理
+    if state.Interruption and state.Interruption.value then
+        Interruption(spell, action, spellMap, eventArgs)
+    end
+
+    --トレハン処理
+    if state.TreasureHunter and state.TreasureHunter.value then
+        --詠唱中断処理のフラグをONにしている場合wait処理の影響でトレハン装備に着替えられない
+        equip(sets.TreasureHunter)
+    end
 end
 
 
@@ -51,7 +62,7 @@ end
 --詠唱中段非同期処理（sets.Buffを組み込めない）
 function Interruption(spell, action, spellMap, eventArgs)
     if string.find(spell.type, 'Magic') then
-        if not sets.precast.FC.value then
+        if not sets.precast.FC then
             sets.precast.FC.value = 80
         end
 
@@ -163,20 +174,20 @@ function job_self_command(cmdParams, eventArgs)
         Aspir()
     elseif cmdParams[1] == 'drain' then             --ドレインマクロ節約
         Drain()
-    elseif cmdParams[1] == 'AutoMB' then             --ドレインマクロ節約
+    elseif cmdParams[1] == 'AutoMB' then            --ドレインマクロ節約
         AutoMB()
     elseif cmdParams[1] == 'Enmity' then            --単体ヘイトアップ処理
         ActionEnmity()
     elseif cmdParams[1] == 'EnmityRange' then       --範囲ヘイトアップ処理
         ActionEnmityRange()
-    elseif cmdParams[1] == 'SortieText' then       --ソーティカンニングペーパー
+    elseif cmdParams[1] == 'SortieText' then        --ソーティカンニングペーパー
         if not state.SortieText.value then
             showTextSortie()
         else
             hideTextSortie()
         end
         send_command('gs c cycle SortieText')
-    elseif cmdParams[1] == 'RuneText' then       --ルーンカンニングペーパー
+    elseif cmdParams[1] == 'RuneText' then          --ルーンカンニングペーパー
         if not state.SortieText.value then
             showTextRune()
         else
@@ -543,6 +554,8 @@ function define_roll_values()
         ["カウンターロール"]     = {lucky=4, unlucky=8, bonus="カウンター確率"},
     }
 end
+
+weakmagic = S{'ストーン','ストーンII','ストーンIII','ウォータ','ウォータII','ウォータIII','エアロ','エアロII','エアロIII','ファイア','ファイアII','ファイアIII','ブリザド','ブリザドII','ブリザドIII','サンダー','サンダーII','サンダーIII'}
 
 
 --■■■ロール情報出力
