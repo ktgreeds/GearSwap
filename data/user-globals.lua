@@ -174,6 +174,8 @@ function job_self_command(cmdParams, eventArgs)
         Aspir()
     elseif cmdParams[1] == 'drain' then             --ドレインマクロ節約
         Drain()
+    elseif cmdParams[1] == 'Utsusemi' then           --空蝉の術節約
+        Utsusemi()
     elseif cmdParams[1] == 'AutoMB' then            --ドレインマクロ節約
         AutoMB()
     elseif cmdParams[1] == 'Enmity' then            --単体ヘイトアップ処理
@@ -304,11 +306,11 @@ function Aspir()
     local recast_time_1 = recasts[247]/60
 
     if recast_time_3 == 0 and (player.main_job == '風' or player.main_job == '黒') then
-       send_command('input /magic '..windower.to_shift_jis('アスピルIII')..' <stnpc>')
+       send_command('input /ma '..windower.to_shift_jis('アスピルIII')..' <stnpc>')
     elseif recast_time_2 == 0 then
-        send_command('input /magic '..windower.to_shift_jis('アスピルII')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('アスピルII')..' <stnpc>')
     elseif recast_time_1 == 0 then
-        send_command('input /magic '..windower.to_shift_jis('アスピル')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('アスピル')..' <stnpc>')
     else
         windower.add_to_chat(30, 'アスピル リキャスト---> III: %.1fs, II: %.1fs, I: %.1fs':format(recast_time_3, recast_time_1, recast_time_1))
     end
@@ -323,13 +325,31 @@ function Drain()
     local recast_time_1 = recasts[245]/60
 
     if recast_time_3 == 0 and player.main_job == '暗' then
-        send_command('input /magic '..windower.to_shift_jis('ドレインIII')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('ドレインIII')..' <stnpc>')
     elseif recast_time_2 == 0 and player.main_job == '暗' then
-        send_command('input /magic '..windower.to_shift_jis('ドレインII')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('ドレインII')..' <stnpc>')
     elseif recast_time_1 == 0 then
-        send_command('input /magic '..windower.to_shift_jis('ドレイン')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('ドレイン')..' <stnpc>')
     else
         windower.add_to_chat(30, 'ドレイン リキャスト---> III: %.1fs,II: %.1fs, I: %.1fs':format(recast_time_3, recast_time_2, recast_time_1))
+    end
+end
+
+--■■■空蝉の術
+function Utsusemi()
+    local recasts = windower.ffxi.get_spell_recasts()
+    local recast_time_3 = recasts[340]/60
+    local recast_time_2 = recasts[339]/60
+    local recast_time_1 = recasts[338]/60
+
+    if recast_time_3 == 0 and player.main_job == '忍' then
+        send_command('input /ma '..windower.to_shift_jis('空蝉の術:参')..' <stpc>')
+    elseif recast_time_2 == 0 then
+        send_command('input /ma '..windower.to_shift_jis('空蝉の術:弐')..' <stpc>')
+    elseif recast_time_1 == 0 then
+        send_command('input /ma '..windower.to_shift_jis('空蝉の術:壱')..' <stpc>')
+    else
+        windower.add_to_chat(30, '空蝉の術 リキャスト---> 参: %.1fs, 弐: %.1fs, 壱: %.1fs':format(recast_time_3, recast_time_2, recast_time_1))
     end
 end
 
