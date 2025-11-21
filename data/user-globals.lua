@@ -214,25 +214,10 @@ sets.HolyWater = {
 }
 --■■■状態異常回復
 function Medicine()
-    --send_command('input /si item')
-
     if buffactive['死の宣告'] or buffactive['呪い'] then
         equip(sets.HolyWater)
         send_command('input /item '..windower.to_shift_jis('聖水')..' <me>')
         send_command('wait 3; gs c IdleMelee')
-    elseif buffactive['麻痺'] then
-        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
-    elseif buffactive['静寂'] then
-        send_command('input /item '..windower.to_shift_jis('やまびこ薬')..' <me>')
-        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
-    elseif buffactive['毒'] then
-        send_command('input /item '..windower.to_shift_jis('毒消し')..' <me>')
-        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
-    elseif buffactive['病気'] then
-        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
-    elseif buffactive['暗闇'] then
-        send_command('input /item '..windower.to_shift_jis('目薬')..' <me>')
-        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
     elseif buffactive['ディア'] 
         or buffactive['バイオ'] 
         or buffactive['ヘヴィ'] 
@@ -284,6 +269,19 @@ function Medicine()
         or buffactive['インヒビットTP'] 
         or buffactive['まどわす'] then
         send_command('input /item '..windower.to_shift_jis('パナケイア')..' <me>')
+    elseif buffactive['麻痺'] then
+        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
+    elseif buffactive['静寂'] then
+        send_command('input /item '..windower.to_shift_jis('やまびこ薬')..' <me>')
+        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
+    elseif buffactive['毒'] then
+        send_command('input /item '..windower.to_shift_jis('毒消し')..' <me>')
+        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
+    elseif buffactive['病気'] then
+        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
+    elseif buffactive['暗闇'] then
+        send_command('input /item '..windower.to_shift_jis('目薬')..' <me>')
+        send_command('input /item '..windower.to_shift_jis('万能薬')..' <me>')
     end
 end
 
