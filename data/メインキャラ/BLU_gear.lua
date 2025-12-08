@@ -28,9 +28,9 @@ function init_gear_sets()
         
     -- トレハン
     sets.TreasureHunter = {
-        head={ name="ヘルクリアヘルム", augments={'Pet: Mag. Acc.+24','VIT+9','"Treasure Hunter"+2',}},
-        hands={ name="ヘルクリアグローブ", augments={'Accuracy+6 Attack+6','Weapon skill damage +1%','"Treasure Hunter"+2',}},
-        waist="コーネリアの黒帯"
+        ammo="完璧な幸運の卵",
+        body="ヴォルトジュポン",
+        waist="チャークベルト"
     }
 
     -- 待機装備（通常）
@@ -97,20 +97,15 @@ function init_gear_sets()
 
     -- FC
     sets.precast.FC = {
-        ammo="サピエンスオーブ",
-        head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
-        body="ピンガチュニック+1",
-        hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
-        legs="ピンガズボン+1",
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
-        neck="オルンミラトルク",
+        head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},--14
+        body="ピンガチュニック+1",--15
+        legs="ピンガズボン+1",--13
+        neck="オルンミラトルク",--5
         waist="コーネリアの黒帯",
-        left_ear="アスプロピアス",
-        right_ear="エンチャンピアス+1",
-        left_ring="メダダリング",
-        right_ring="キシャールリング",
-        back={ name="フィフォレケープ+1", augments={'Path: A',}},
+        left_ring="メダダリング",--10
+        back={ name="フィフォレケープ+1", augments={'Path: A',}},--10
     }
+    sets.precast.FC.value = 80 --67 + 15（えらチックフラッター特性）
 
     -- WSダメージ
     sets.precast.WS.Damage = {
@@ -173,24 +168,6 @@ function init_gear_sets()
     sets.precast.WS["サンギンブレード"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),sets.precast.WS.SubtleBlow)}
 
-                                            
-	-- 詠唱中断
-	sets.midcast.interruption = {
-        sub="エレマイトワンド",
-        ammo="ストンチタスラム+1",
-        head="無の面",
-        body="アダマンアーマー",
-        hands={ name="ＡＭゲージ+1", augments={'INT+12','Elem. magic skill +20','Dark magic skill +20',}},
-        legs="ＡＳシャルワー+4",
-        feet={ name="ＡＭネール+1", augments={'INT+12','Elem. magic skill +20','Dark magic skill +20',}},
-        neck="アンムーヴカラー+1",
-        waist="プラチナモグベルト",
-        left_ear="アスプロピアス",
-        right_ear="オノワイヤリング+1",
-        left_ring="メランリング",
-        right_ring="守りの指輪",
-        back="フィフォレケープ+1",
-    }
 
     --青魔法魔攻
     sets.midcast.BlueMagical = {
