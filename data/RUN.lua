@@ -27,17 +27,6 @@ function job_setup()
     state.SubWeapons    = M{'AlberStrap', 'Khonsu'}
 end
 
-
-function job_post_midcast(spell, action, spellMap, eventArgs) 
-    Interruption(spell, action, spellMap, eventArgs)
-    for buff,active in pairs(state.Buff) do
-        if active and sets.buff[buff] then
-            equip(sets.buff[buff])
-        end
-    end
-
-end
-
 function job_buff_change(buff, gain)
     if buff == 'バットゥタ' then
         if gain then
