@@ -1,6 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Epeolatry; wait 0.3; gs c set SubWeapons AlberStrap;')
+    send_command('gs c set MainWeapons Epeolatry; wait 0.3; gs c set SubWeapons Khonsu;')
 end
 
 
@@ -26,18 +26,16 @@ function init_gear_sets()
     -- 待機装備（通常）
     sets.idle = {
         ammo="ストンチタスラム+1",
-        head="無の面",
+        head="ＥＲガレア+3",
         body="ＥＲサーコート+3",
         hands="ＥＲガントレ+3",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
         neck={ name="フサルクトルク+2", augments={'Path: A',}},
-        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        --neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=15},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',},priority=15},
-        left_ring="ワーデンリング",
+        left_ring="フォテファイリング",
         right_ring="シュネデックリング",
         back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
     }
@@ -45,19 +43,17 @@ function init_gear_sets()
     -- 抜刀装備
     sets.engaged = {
         ammo="ストンチタスラム+1",
-        head="無の面",
+        head="ＥＲガレア+3",
         body="ＥＲサーコート+3",
-        hands="ＥＲガントレ+3",
+        hands="トゥルムミトン+1",
         legs="ＥＲレグガード+3",
         feet="ＥＲグリーヴ+3",
         neck={ name="フサルクトルク+2", augments={'Path: A',}},
-        --neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        --neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=15},
-        waist={ name="プラチナモグベルト",priority=16},
-        left_ear="シェリダピアス",
+        waist="プラチナモグベルト",
+        left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
-        left_ring="ワーデンリング",
-        right_ring="ニックマドゥリング",
+        left_ring="フォテファイリング",
+        right_ring="月明の指輪",
         back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
     }
 
@@ -71,7 +67,7 @@ function init_gear_sets()
         feet="ＥＲグリーヴ+3",
         neck="無の喉輪",
         waist={name="プラチナモグベルト",priority=16},
-        left_ear="シェリダピアス",
+        left_ear={name="アスプロピアス",priority=15},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
@@ -80,9 +76,6 @@ function init_gear_sets()
 
     -- 受け流し
     sets.engaged.Parry = set_combine(sets.engaged,{
-        head="無の面",
-        hands="トゥルムミトン+1",
-        legs="ＥＲレグガード+3",
         feet="トゥルムレギンス+1"
     })
     
@@ -92,12 +85,8 @@ function init_gear_sets()
         back="リパルスマント"
     }) 
     
-    -- モクシャ
-    sets.engaged.SubtleBlow = 
-    {
-    }
 
-    -- 敵対心装備
+    -- 敵対心装備 102
     sets.Enmity = {
         ammo="サピエンスオーブ",
         head="ハリタスヘルム",
@@ -197,11 +186,6 @@ function init_gear_sets()
         right_ring="王将の指輪",
         back="無の外装",
     }
-
-    -- WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-    }
     
     -- 共通WS定義読み込み
     init_weapon_skill()
@@ -296,7 +280,7 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect 
 
     -- 被ファランクス
-    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
+    --sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
     sets.midcast.IncreasedProtect = sets.midcast.Protect
