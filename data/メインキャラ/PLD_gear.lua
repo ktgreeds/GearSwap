@@ -25,7 +25,23 @@ function init_gear_sets()
     sets.buff['神聖の印']   = {
         feet="ＣＶサバトン+3"
     }
-    
+
+    sets.BoostHP={
+        ammo="ストンチタスラム+1",
+        head={ name="ＳＶシャレル+1", augments={'HP+105','VIT+12','Phys. dmg. taken -4',}},
+        body="ＲＶサーコート+4",
+        hands={ name="ＳＶハントシュ+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        legs={ name="ＳＶディヒリン+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        neck={name="アンムーヴカラー+1",priority=14},
+        waist={name="プラチナモグベルト",priority=16},
+        left_ear={name="アスプロピアス",priority=11},
+        right_ear={name="エテオレートピアス",priority=10},
+        left_ring={name="ゼラチナスリング+1",priority=12},
+        right_ring={name="月明の指輪",priority=13},
+        back={"月明の羽衣",priority=15},
+    }
+
     --HP低下装備（自己ケアル用）
     sets.LowHp={
         ammo="ストンチタスラム+1",
@@ -43,8 +59,6 @@ function init_gear_sets()
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
     }
 
-    sets.Kiting             = {feet="ヒポメネソックス+1"}
-
 	-- 待機装備（通常）
 	sets.idle = {
         sub="ドゥバン",
@@ -53,77 +67,52 @@ function init_gear_sets()
         body="サクロブレスト",
         hands="ＣＶガントレ+3",
         legs="ＣＶクウィス+3",
-        feet="ＣＶサバトン+3",
+        feet="ヒポメネソックス+1",
         neck={ name="騎士の数珠+2", augments={'Path: A',}},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="ズワゾピアス+1", augments={'Path: A',}},
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="ワーデンリング",
+        left_ring="フォテファイリング",
         right_ring="シュネデックリング",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
 
     -- 待機装備（対魔法）
 	sets.idle.Magical = {
+        main="マリグナスソード",
         sub="イージス",
         ammo="ヴァニアバッテリー",
-        head="ＣＶアーメット+3",
+        head="サクパタヘルム",
         body="アダマンアーマー",
-        hands="ＣＶガントレ+3",
-        legs="ＣＶクウィス+3",
-        feet="ＣＶサバトン+3",
-        neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=16},
-        waist="無の腰当",
+        hands="サクパタガントレ",
+        legs="サクパタクウィス",
+        feet="サクパタレギンス",
+        neck="コアトゴルゲット+1",
+        waist="クリードボードリエ",
         left_ear="驕慢の耳",
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
         left_ring="ヴェクサーリング+1",
         right_ring="シュネデックリング",
-        back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
+        back="サルブスマント",
 	}
 
 	-- 抜刀装備
-    sets.engaged = {
-        sub="ドゥバン",
-        ammo="ストンチタスラム+1",
-        head="ＣＶアーメット+3",
-        body="サクロブレスト",
-        hands="ＣＶガントレ+3",
-        legs="ＣＶクウィス+3",
-        feet="ＣＶサバトン+3",
-        neck={ name="騎士の数珠+2", augments={'Path: A',}},
-        waist={name="プラチナモグベルト",priority=16},
-        left_ear={ name="ズワゾピアス+1", augments={'Path: A',}},
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="ワーデンリング",
+    sets.engaged = set_combine(sets.idle,{
         right_ring="アペリエリング+1",
-        back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
-    }
+    })
 
     -- 近接対魔法
-    sets.engaged.Magical = {
-        sub="イージス",
-        ammo="ヴァニアバッテリー",
-        head="ＣＶアーメット+3",
-        body="アダマンアーマー",
-        hands="ＣＶガントレ+3",
-        legs="ＣＶクウィス+3",
-        feet="ＣＶサバトン+3",
-        neck={ name="アンムーヴカラー+1", augments={'Path: A',},priority=16},
-        waist="無の腰当",
-        left_ear="驕慢の耳",
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring={name="ヴェクサーリング+1",priority=15},
-        right_ring={name="ヴェクサーリング+1",priority=14},
-        back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
-	}
+    sets.engaged.Magical = set_combine(sets.idle,{
+        right_ring="ヴェクサーリング+1",
+	})
 
     -- ノックバック
     sets.engaged.KnockBack = {
-        legs = "ダッシングサブリガ",
+        legs="ダッシングサブリガ",
         back="リパルスマント",
     }
 
-	-- 敵対心装備
+	-- 敵対心装備　149
 	sets.Enmity = {
         ammo="サピエンスオーブ",
         head={ name="ロースバルブータ+1", augments={'Path: A',}},
@@ -208,10 +197,10 @@ function init_gear_sets()
         left_ear={name="アスプロピアス",priority=15},
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
         left_ring="メダダリング",
-        right_ring="ラハブリング",
+        right_ring={name="月明の指輪",priority=14},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
-    sets.precast.FC.value = 73
+    sets.precast.FC.value = 71
 
 	-- WSダメージ
 	sets.precast.WS.Damage = {
@@ -263,11 +252,6 @@ function init_gear_sets()
 		right_ring="メダダリング",
 		back={name="月明の羽衣",priority=16},
     }
-
-    -- WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-    }
     
 	-- 共通WS定義読み込み
     init_weapon_skill()
@@ -296,14 +280,16 @@ function init_gear_sets()
 		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
 
-    --フラッシュ
+    -- フラッシュ
     sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
     })
-    --フラッシュ
+
+    -- フォイル
     sets.midcast['フォイル'] = set_combine(sets.Enmity,{
         waist="コーネリアの黒帯"
-    })    
+    })
+
 	-- ファランクス
 	sets.midcast['ファランクス'] = {
 		main="サクパタソード",
@@ -339,6 +325,8 @@ function init_gear_sets()
         right_ring={name="月明の指輪",priority=15},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
+    
+    -- 青魔法
 	sets.midcast.BlueMagic = sets.Enmity
 
     -- プロテス
@@ -350,7 +338,7 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect 
 
     -- 被ファランクス
-    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
+    --sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
     sets.midcast.IncreasedProtect = sets.midcast.Protect
@@ -361,7 +349,7 @@ function init_gear_sets()
     -- 被リジェネ
     sets.midcast.IncreasedRegenerated = {
         neck="サクロゴルゲット",
-        waist = "スローダベルト",
+        waist="スローダベルト",
     }
 
     -- 被カーズナ
