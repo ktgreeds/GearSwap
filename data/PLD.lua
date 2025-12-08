@@ -25,22 +25,13 @@ function job_setup()
 
     -- gs c cycle SubWeapons
     state.SubWeapons   = M{'Duban','Aegis'}
-
+    
     send_command('bind ~F7 gs c cycle SubWeapons')
 end
 
 
 function user_unload()
     send_command('bind ~F7 gs c cycle OffenseMode')
-end
-
-function job_post_midcast(spell, action, spellMap, eventArgs) 
-    Interruption(spell, action, spellMap, eventArgs)
-    for buff,active in pairs(state.Buff) do
-        if active and sets.buff[buff] then
-            equip(sets.buff[buff])
-        end
-    end
 end
 
 function customize_idle_set(idleSet)
