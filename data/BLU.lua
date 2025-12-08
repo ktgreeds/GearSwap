@@ -6,12 +6,12 @@ end
 
 
 function job_setup()
-    state.Buff["エフラックス"]       = buffactive["エフラックス"] or false
-    state.Buff["エンチェーンメント"] = buffactive["エンチェーンメント"] or false
-    state.Buff["コンバージェンス"]   = buffactive["コンバージェンス"] or false
-    state.Buff["ディフュージョン"]   = buffactive["ディフュージョン"] or false
-    state.Buff["ブルーチェーン"]     = buffactive["ブルーチェーン"] or false
-    state.Buff["ブルーバースト"]     = buffactive["ブルーバースト"] or false
+    state.Buff["エフラックス"]          = buffactive["エフラックス"] or false
+    state.Buff["エンチェーンメント"]    = buffactive["エンチェーンメント"] or false
+    state.Buff["コンバージェンス"]      = buffactive["コンバージェンス"] or false
+    state.Buff["ディフュージョン"]      = buffactive["ディフュージョン"] or false
+    state.Buff["ブルーチェーン"]        = buffactive["ブルーチェーン"] or false
+    state.Buff["ブルーバースト"]        = buffactive["ブルーバースト"] or false
     
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
