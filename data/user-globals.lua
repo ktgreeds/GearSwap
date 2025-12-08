@@ -34,7 +34,6 @@ function user_post_pretarget(spell, action, spellMap, eventArgs)
     end
 end
 
-
 --■■■アクション前処理（共通実装なし）
 function user_post_precast(spell, action, spellMap, eventArgs)
 end
@@ -42,8 +41,13 @@ end
 
 --■■■アクション中処理（共通実装なし）
 function user_post_midcast(spell, action, spellMap, eventArgs)
+    for buff,active in pairs(state.Buff) do
+        if active and sets.buff[buff] then
+            equip(sets.buff[buff])
+        end
+    end
     --詠唱中断処理
-    if state.Interruption and state.Interruption.value then
+    if sets.midcast.interruption then
         Interruption(spell, action, spellMap, eventArgs)
     end
 
@@ -69,7 +73,7 @@ function Interruption(spell, action, spellMap, eventArgs)
         local fc = sets.precast.FC.value/100
         if player.main_job == '剣' and buffactive['ファストキャスト'] then
             --フサルクトラウザ装備時メリポのインスパイア1につき+12％
-            fc = fc + 12/100 --インスパイア1
+            --fc = fc + 12/100 --インスパイア1
             --fc = fc + 24/100 --インスパイア2
             --fc = fc + 36/100 --インスパイア3
             --fc = fc + 48/100 --インスパイア4
@@ -135,10 +139,10 @@ end
 
 --■■■攻撃装備着替え処理
 function customize_melee_set(meleeSet)
-    if(player.sub_job == '忍') then
+    if player.sub_job == '忍' then
         --二刀流係数11
         meleeSet = set_combine(meleeSet,sets.engaged.dual11)
-    elseif(player.sub_job == '踊') then
+    elseif player.sub_job == '踊' then
         --二刀流係数21
         meleeSet = set_combine(meleeSet,sets.engaged.dual21)
     end
@@ -174,7 +178,7 @@ function job_self_command(cmdParams, eventArgs)
         Aspir()
     elseif cmdParams[1] == 'drain' then             --ドレインマクロ節約
         Drain()
-    elseif cmdParams[1] == 'Utsusemi' then           --空蝉の術節約
+    elseif cmdParams[1] == 'Utsusemi' then          --空蝉の術節約
         Utsusemi()
     elseif cmdParams[1] == 'AutoMB' then            --ドレインマクロ節約
         AutoMB()
@@ -341,11 +345,11 @@ function Utsusemi()
     local recast_time_1 = recasts[338]/60
 
     if recast_time_3 == 0 and player.main_job == '忍' then
-        send_command('input /ma '..windower.to_shift_jis('空蝉の術:参')..' <stpc>')
+        send_command('input /ma '..windower.to_shift_jis('空蝉の術:参')..' <me>')
     elseif recast_time_2 == 0 then
-        send_command('input /ma '..windower.to_shift_jis('空蝉の術:弐')..' <stpc>')
+        send_command('input /ma '..windower.to_shift_jis('空蝉の術:弐')..' <me>')
     elseif recast_time_1 == 0 then
-        send_command('input /ma '..windower.to_shift_jis('空蝉の術:壱')..' <stpc>')
+        send_command('input /ma '..windower.to_shift_jis('空蝉の術:壱')..' <me>')
     else
         windower.add_to_chat(30, '空蝉の術 リキャスト---> 参: %.1fs, 弐: %.1fs, 壱: %.1fs':format(recast_time_3, recast_time_2, recast_time_1))
     end
@@ -410,31 +414,29 @@ require('chat')
 filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
     if filter_mode:contains(original_mode) then
-        if not windower.wc_match(original,player.name..'*') then
-            if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
-                if sets.midcast.IncreasedRegenerated then
-                    send_command('gs equip sets.midcast.IncreasedRegenerated; wait 4; gs c Idle;')
-                end
-            elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
-                if sets.midcast.IncreasedPhalanx then
-                    send_command('gs equip sets.midcast.IncreasedPhalanx; wait 4; gs c Idle;')
-                end
-            elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
-                if sets.midcast.IncreasedRefresh then
-                    send_command('gs equip sets.midcast.IncreasedRefresh; wait 4; gs c Idle;')
-                end
-            elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
-                if sets.midcast.IncreasedProtect then
-                    send_command('gs equip sets.midcast.IncreasedProtect; wait 4; gs c Idle;')
-                end
-            elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
-                if sets.midcast.IncreasedShell then
-                    send_command('gs equip sets.midcast.IncreasedShell; wait 4; gs c Idle;')
-                end
-            elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
-                if sets.midcast.IncreasedCursna then
-                    send_command('gs equip sets.midcast.IncreasedCursna; wait 4; gs c Idle;')
-                end
+        if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
+            if sets.midcast.IncreasedRegenerated then
+                send_command('gs equip sets.midcast.IncreasedRegenerated; wait 3; gs c Idle;')
+            end
+        elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
+            if sets.midcast.IncreasedPhalanx then
+                send_command('gs equip sets.midcast.IncreasedPhalanx; wait 3; gs c Idle;')
+            end
+        elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
+            if sets.midcast.IncreasedRefresh then
+                send_command('gs equip sets.midcast.IncreasedRefresh; wait 3; gs c Idle;')
+            end
+        elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
+            if sets.midcast.IncreasedProtect then
+                send_command('gs equip sets.midcast.IncreasedProtect; wait 3; gs c Idle;')
+            end
+        elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
+            if sets.midcast.IncreasedShell then
+                send_command('gs equip sets.midcast.IncreasedShell; wait 3; gs c Idle;')
+            end
+        elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
+            if sets.midcast.IncreasedCursna then
+                send_command('gs equip sets.midcast.IncreasedCursna; wait 3; gs c Idle;')
             end
         end
     end
