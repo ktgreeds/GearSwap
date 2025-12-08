@@ -26,7 +26,7 @@ function job_setup()
     state.WeaponskillMode:options('Normal')
 
     -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Tizona','Naegling','Maxentius','QutrubKnife'}
+    state.MainWeapons   = M{'Tizona','Naegling','Maxentius'}
     
     -- gs c cycle SubWeapons
     state.SubWeapons    = M{'SakpatasSword'}
