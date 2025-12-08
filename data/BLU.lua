@@ -38,18 +38,6 @@ function job_setup()
     state.LockWeapons = M(false)
 end
 
-function job_post_precast(spell, action, spellMap, eventArgs)
-end
-
-function job_post_midcast(spell, action, spellMap, eventArgs)
-    Interruption(spell, action, spellMap, eventArgs)
-    for buff,active in pairs(state.Buff) do
-        if active and sets.buff[buff] then
-            equip(sets.buff[buff])
-        end
-    end
-end
-
 function customize_idle_set(idleSet)
     idleSet = set_combine(idleSet, {main=gear.ClaidheamhSoluis,sub=gear.Nehushtan})
     return idleSet
