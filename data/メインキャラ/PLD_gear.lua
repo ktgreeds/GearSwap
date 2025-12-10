@@ -98,6 +98,7 @@ function init_gear_sets()
 
 	-- 抜刀装備
     sets.engaged = set_combine(sets.idle,{
+        feet="ＣＶサバトン+3",
         right_ring="アペリエリング+1",
     })
 
@@ -250,7 +251,7 @@ function init_gear_sets()
 		right_ear="フリオミシピアス",
 		left_ring={ name="メタモルリング+1", augments={'Path: A',}},
 		right_ring="メダダリング",
-		back={name="月明の羽衣",priority=16},
+        back={ name="ルディアノスマント", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
 	-- 共通WS定義読み込み
@@ -338,7 +339,7 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect 
 
     -- 被ファランクス
-    --sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
+    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
     sets.midcast.IncreasedProtect = sets.midcast.Protect
