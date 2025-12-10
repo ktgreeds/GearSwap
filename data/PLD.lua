@@ -26,6 +26,8 @@ function job_setup()
     -- gs c cycle SubWeapons
     state.SubWeapons   = M{'Duban','Aegis'}
     
+    state.Increased    = M(false)
+    
     send_command('bind ~F7 gs c cycle SubWeapons')
 end
 
