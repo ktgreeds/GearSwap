@@ -413,30 +413,32 @@ require('sets')
 require('chat')
 filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
-    if filter_mode:contains(original_mode) then
-        if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
-            if sets.midcast.IncreasedRegenerated then
-                send_command('gs equip sets.midcast.IncreasedRegenerated; wait 3; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
-            if sets.midcast.IncreasedPhalanx then
-                send_command('gs equip sets.midcast.IncreasedPhalanx; wait 3; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
-            if sets.midcast.IncreasedRefresh then
-                send_command('gs equip sets.midcast.IncreasedRefresh; wait 3; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
-            if sets.midcast.IncreasedProtect then
-                send_command('gs equip sets.midcast.IncreasedProtect; wait 3; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
-            if sets.midcast.IncreasedShell then
-                send_command('gs equip sets.midcast.IncreasedShell; wait 3; gs c Idle;')
-            end
-        elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
-            if sets.midcast.IncreasedCursna then
-                send_command('gs equip sets.midcast.IncreasedCursna; wait 3; gs c Idle;')
+    if state.Increased and state.Increased.value then
+        if filter_mode:contains(original_mode) then
+            if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
+                if sets.midcast.IncreasedRegenerated then
+                    send_command('gs equip sets.midcast.IncreasedRegenerated; wait 3; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
+                if sets.midcast.IncreasedPhalanx then
+                    send_command('gs equip sets.midcast.IncreasedPhalanx; wait 3; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
+                if sets.midcast.IncreasedRefresh then
+                    send_command('gs equip sets.midcast.IncreasedRefresh; wait 3; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
+                if sets.midcast.IncreasedProtect then
+                    send_command('gs equip sets.midcast.IncreasedProtect; wait 3; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
+                if sets.midcast.IncreasedShell then
+                    send_command('gs equip sets.midcast.IncreasedShell; wait 3; gs c Idle;')
+                end
+            elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
+                if sets.midcast.IncreasedCursna then
+                    send_command('gs equip sets.midcast.IncreasedCursna; wait 3; gs c Idle;')
+                end
             end
         end
     end
