@@ -6,7 +6,7 @@ end
 
 function init_gear_sets()
 	-- ロックスタイル番号
-	lockstyleset = 41
+	lockstyleset = 7
     
 	-- 片手剣
 	gear.Burtgang	        = {name="ブルトガング"}
@@ -92,7 +92,8 @@ function init_gear_sets()
         left_ear="驕慢の耳",
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
         left_ring="ヴェクサーリング+1",
-        right_ring="シュネデックリング",
+--        right_ring="シュネデックリング",
+        right_ring="ヴェクサーリング+1",
         back="サルブスマント",
 	}
 
@@ -103,7 +104,7 @@ function init_gear_sets()
     })
 
     -- 近接対魔法
-    sets.engaged.Magical = set_combine(sets.idle,{
+    sets.engaged.Magical = set_combine(sets.idle.Magical,{
         right_ring="ヴェクサーリング+1",
 	})
 
@@ -239,18 +240,18 @@ function init_gear_sets()
 
 	-- WS魔攻
 	sets.precast.WS.Magic = {
-		ammo="ストンチタスラム+1",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
-		neck="シビルスカーフ",
-		waist="オルペウスサッシュ",
-		left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-		right_ear="フリオミシピアス",
-		left_ring={ name="メタモルリング+1", augments={'Path: A',}},
-		right_ring="メダダリング",
+        ammo="ストンチタスラム+1",
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ",
+        legs="ニャメフランチャ",
+        feet="ニャメソルレット",
+        neck={name="アンムーヴカラー+1",prioruity=16},
+        waist="オルペウスサッシュ",
+        left_ear={name="アスプロピアス",priority=14},
+        right_ear="フリオミシピアス",
+        left_ring={name="ゼラチナスリング+1",priority=15},
+        right_ring="メダダリング",
         back={ name="ルディアノスマント", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
