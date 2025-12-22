@@ -19,7 +19,7 @@ function job_setup()
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
     
     -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Nirvana'}
+    state.MainWeapons   = M{'Gridarvor','Opashoro'}
     
     -- gs c cycle SubWeapons
     state.SubWeapons    = M{'ElanStrap'}
@@ -44,16 +44,26 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
+function job_buff_change(buff, gain)
+    if state.Buff['アストラルパッセージ'] then
+        if gain then
+            equip(sets.midcast.Pet.AvatarPhysicalPacts)
+            disable('main','sub','range','ammo','head','body','hands','legs','feet','neck','waist','left_ear','right_ear','left_ring','right_ring','back')
+            send_command('wait 30; gs enable all')
+        end
+    end
+end
 
 function custom_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'bp' then --【召喚】パッセ
         if buffactive['アストラルパッセージ'] then
-            if player.mp < 229 then
+            if player.mp < 230 then
                 send_command('input /ja '..windower.to_shift_jis("コンバート")..' <me>')
                 send_command('input /item '..windower.to_shift_jis("ルシドエリクサーII")..' <me>')
-            else
-            bp_commnad(cmdParams)
             end
+            bp_commnad(cmdParams)
+            send_command('wait 1; gs c bp rage 1 t')
+
         else
             bp_commnad(cmdParams)
         end
