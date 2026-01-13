@@ -393,6 +393,9 @@ function ActionEnmityRange()
     local recast_time_Stinking  = spell_recasts[537]/60
     local recast_time_Poisonga  = spell_recasts[225]/60
     local recast_time_Lullaby   = spell_recasts[376]/60
+    local recast_time_Banishga  = spell_recasts[38]/60
+    local recast_time_Diaga     = spell_recasts[33]/60
+    
     if player.sub_job == '青' and recast_time_FrightfulRoar == 0 and player.sub_job_level>49 then
         send_command('input /ma '..windower.to_shift_jis('フライトフルロア')..' <stnpc>')--2
     elseif player.sub_job == '青' and recast_time_GeistWall == 0 then
@@ -405,6 +408,10 @@ function ActionEnmityRange()
         send_command('input /ma '..windower.to_shift_jis('シープソング')..' <stnpc>')--3
     elseif player.sub_job == '詩' and recast_time_Lullaby == 0 then
         send_command('input /ma '..windower.to_shift_jis('魔物達のララバイ')..' <stnpc>')--3
+    elseif player.sub_job == '赤' and recast_time_Diaga == 0 then
+        send_command('input /ma '..windower.to_shift_jis('ディアガ')..' <stnpc>')--3
+    elseif recast_time_Banishga == 0 then
+        send_command('input /ma '..windower.to_shift_jis('バニシュガ')..' <stnpc>')--3
     end
 end
 
@@ -471,7 +478,6 @@ windower.register_event("incoming text", function(original, modified, original_m
     end
 end)
 --▲▲▲▲▲ソーティボス技▲▲▲▲▲
-
 
 
 
@@ -810,33 +816,33 @@ function init_weapon_skill()
     sets.precast.WS["シャッターソウル"] = { Normal=sets.precast.WS.Damage,SubtleBlow=set_combine(sets.precast.WS.Damage,sets.precast.WS.SubtleBlow)}
     sets.precast.WS["オシャラ"] = { Normal=sets.precast.WS.Damage,SubtleBlow=set_combine(sets.precast.WS.Damage,sets.precast.WS.SubtleBlow)}
 
-    sets.precast.WS["フレイミングアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["ピアシングアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["ダリングアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["サイドワインダー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["ブラストアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["アーチングアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["エンピリアルアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["リフルジェントアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["南無八幡"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["ジシュヌの光輝"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["エイペクスアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
-    sets.precast.WS["シャルヴ"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["フレイミングアロー"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.ArcheryMagical}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryMagical})}
+    sets.precast.WS["ピアシングアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["ダリングアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["サイドワインダー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["ブラストアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["アーチングアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["エンピリアルアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["リフルジェントアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["南無八幡"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["ジシュヌの光輝"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["エイペクスアロー"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
+    sets.precast.WS["シャルヴ"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.ArcheryPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.ArcheryPhysics})}
 
     sets.precast.WS["ホットショット"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipMagical}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipMagical})}
-    sets.precast.WS["スプリットショット"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["スナイパーショット"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["スラッグショット"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["ブラストショット"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["ヘヴィショット"] ={ Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["デトネーター"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["ナビングショット"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["カラナック"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["スプリットショット"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["スナイパーショット"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["スラッグショット"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["ブラストショット"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["ヘヴィショット"] ={ Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["デトネーター"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["ナビングショット"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["カラナック"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
     sets.precast.WS["トゥルーフライト"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipMagical}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipMagical})}
     sets.precast.WS["レデンサリュート"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipMagical}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipMagical})}
     sets.precast.WS["ワイルドファイア"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipMagical}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipMagical})}
-    sets.precast.WS["ラストスタンド"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
-    sets.precast.WS["ジ・エンド"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["ラストスタンド"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
+    sets.precast.WS["ジ・エンド"] = { Normal=set_combine(sets.precast.WS.Range,{ammo=gear.MarksmanshipPhysics}),SubtleBlow=set_combine(set_combine(sets.precast.WS.Range,sets.precast.WS.SubtleBlow),{ammo=gear.MarksmanshipPhysics})}
 end
 
 --カンニングペーパー
