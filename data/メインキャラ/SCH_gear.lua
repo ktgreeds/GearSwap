@@ -1,32 +1,35 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Musa; wait 0.3; gc set SubWeapons Khonsu')
+    send_command('gs c set MainWeapons Opashoro; wait 0.3; gc set SubWeapons EnkiStrap')
 end
 
 
 function init_gear_sets()
     -- ロックスタイル番号
-    lockstyleset_white  = 139
-    lockstyleset_black  = 140
+    lockstyleset  = 20
+    lockstyleset_white  = 23
+    lockstyleset_black  = 24
 
     -- 両手棍
-    gear.Musa           = { name="ムサ"}
+    gear.Musa           = {name="ムサ"}
+    gear.Opashoro       = {name="オパショーロ"}
     
     -- グリップ
-    gear.Khonsu         = { name="コーンスー"}
+    gear.Khonsu         = {name="コーンスー"}
+    gear.EnkiStrap      = {name="エンキストラップ"}
 
     -- 片手棍
-    gear.BunzisRod      = { name="ブンジロッド"}
-    gear.Daybreak       = { name="デイブレイクワンド"}
+    gear.BunzisRod      = {name="ブンジロッド"}
+    gear.Daybreak       = {name="デイブレイクワンド"}
     
     -- 短剣
     gear.Malevolence    = {name="マレヴォレンス", augments={'INT+9','Mag. Acc.+10','"Mag.Atk.Bns."+9','"Fast Cast"+4',}}
     
     -- 盾
-    gear.AmmurapiShield = { name="アムラピシールド"}
+    gear.AmmurapiShield = {name="アムラピシールド"}
     
     -- その他
-    gear.Slip           = { name="プライムスタッフ"}
+    --gear.Slip           = {name="オパショーロ"}
 	
     -- 監視用バフ
     sets.buff['机上演習']       = { head="ＡＣボード+4",body="ＰＤガウン+3",waist="エンブラサッシュ",}
@@ -38,8 +41,8 @@ function init_gear_sets()
     sets.buff['簡素清貧の章']   = { legs="ＡＢパンツ+3"}
     sets.buff['勤倹小心の章']   = { legs="ＡＢパンツ+3"}
     sets.buff['虚誘掩殺の策']   = { feet="ＡＢローファー+3"}
-    sets.buff['震天動地の章']   = { main="エレマイトワンド",
-                                    sub="玄冥盾",
+    sets.buff['震天動地の章']   = { main="マリグナスポール",
+                                    sub="コーンスー",
                                     ammo="ストンチタスラム+1",
                                     head="レノーアの髪飾り",
                                     body="アダマンアーマー",
@@ -47,7 +50,7 @@ function init_gear_sets()
                                     legs={ name="ＡＭスロップス+1", augments={'INT+12','Elem. magic skill +20','Dark magic skill +20',}},
                                     feet="ＡＣローファー+4",
                                     neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-                                    waist="ヌスクサッシュ",
+                                    waist="ニヌルタサッシュ",
                                     left_ear="ディグニタリピアス",
                                     right_ear="アスプロピアス",
                                     left_ring="シーリチリング+1",
@@ -133,16 +136,6 @@ function init_gear_sets()
 
     sets.precast.FC.value = 80
 
-    -- FC（白グリ用）
-    sets.precast.FC.WhiteMagic=set_combine(sets.precast.FC,{
-        --main="ムサ"
-    })
-
-    -- FC（黒グリ用）
-    sets.precast.FC.BlackMagic=set_combine(sets.precast.FC,{
-        sub="チャンターシールド",
-    })
-
     -- FC（ディスペガ用）
     sets.precast.FC['ディスペガ'] = set_combine( sets.precast.FC,{
         main="デイブレイクワンド",
@@ -173,11 +166,11 @@ function init_gear_sets()
     -- WS魔攻
     sets.precast.WS.Magic = {
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
-        head="ＡＢボネット+3",
-        body="ＡＢガウン+3",
-        hands="ＡＢブレーサー+3",
-        legs="ＡＢパンツ+3",
-        feet="ＡＢローファー+3",
+        head={ name="ニャメヘルム", augments={'Path: B',}},
+        body={ name="ニャメメイル", augments={'Path: B',}},
+        hands={ name="ニャメガントレ", augments={'Path: B',}},
+        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        feet={ name="ニャメソルレット", augments={'Path: B',}},
         neck={ name="アギュトストール+2", augments={'Path: A',}},
         waist="スクリミルコード",
         left_ear="マリグナスピアス",
@@ -192,8 +185,8 @@ function init_gear_sets()
 
     --弱体魔法
     sets.midcast['弱体魔法'] = {
-        main="デイブレイクワンド",
-        sub="アムラピシールド",
+        main="ムサ",
+        sub="エンキストラップ",
         ammo="クォーツタスラム+1",
         head="ＡＣボード+4",
         body="ＡＣガウン+4",
@@ -212,6 +205,7 @@ function init_gear_sets()
     -- 弱体魔法　ディスペガ
     sets.midcast['ディスペガ'] = set_combine(sets.midcast['弱体魔法'],{
         main="デイブレイクワンド",
+        sub="アムラピシールド"
     })
 
     -- 弱体魔法　インパクト
@@ -226,8 +220,8 @@ function init_gear_sets()
 
     -- 精霊魔法
     sets.midcast['精霊魔法'] = {
-        main={ name="ブンジロッド", augments={'Path: A',}},
-        sub="アムラピシールド",
+        main="オパショーロ",
+        sub="エンキストラップ",
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
         head={ name="ＰＤボード+4", augments={'Enh. "Altruism" and "Focalization"',}},
         body={ name="アグゥローブ", augments={'Path: A',}},
@@ -242,14 +236,15 @@ function init_gear_sets()
         right_ring="メダダリング",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
-    
+    sets.midcast['精霊魔法'].weak = set_combine(sets.midcast['精霊魔法'],{
+    })
+
     -- メルトン
-    sets.midcast['メルトン'] =  sets.midcast['精霊魔法']
+    sets.midcast['メルトン'] =  set_combine(sets.midcast['精霊魔法'],{left_ring="アルコンリング"})
 
     -- 計略系
     sets.midcast.Helix = set_combine(sets.midcast['精霊魔法'] ,{
-        sub="カルミナス",
-        right_ear={ name="アバテルピアス+1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+12','Enmity-2',}},
+        right_ear={ name="アバテルピアス+1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+14','Enmity-4',}},
         waist="スクリミルコード",
         back="ブックワームケープ"
     })
@@ -262,7 +257,7 @@ function init_gear_sets()
 
     -- アスピル系
     sets.midcast.Aspir = set_combine(sets.midcast['精霊魔法'] ,{
-        main="ルビカンディティー",
+        --main="ルビカンディティー",
         legs="ＰＤパンツ+4",
         feet="アグゥピガッシュ",
         neck="エーラペンダント",
@@ -315,8 +310,8 @@ function init_gear_sets()
     -- ストンスキン
     sets.midcast['ストンスキン'] = set_combine(sets.midcast['強化魔法'], {
         legs="シェダルサラウィル",
-        neck='ノデンズゴルゲット',
-        left_ear='アースクライピアス',
+        neck="ノデンズゴルゲット",
+        left_ear="アースクライピアス",
         waist="ジーゲルサッシュ"
     })
 
