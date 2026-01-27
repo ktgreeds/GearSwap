@@ -186,6 +186,10 @@ function job_self_command(cmdParams, eventArgs)
         ActionEnmity()
     elseif cmdParams[1] == 'EnmityRange' then       --範囲ヘイトアップ処理
         ActionEnmityRange()
+    elseif cmdParams[1] == 'Lullabys' then          --魔物達のララバイ
+        Lullabys()
+    elseif cmdParams[1] == 'Lullaby' then           --魔物達ララバイ
+        Lullaby()
     elseif cmdParams[1] == 'SortieText' then        --ソーティカンニングペーパー
         if not state.SortieText.value then
             showTextSortie()
@@ -205,7 +209,6 @@ function job_self_command(cmdParams, eventArgs)
             send_command('input /lockstyleset '..lockstyleset)
         end
     end
-
     if type(custom_self_command) == "function" then --カスタムセルフコマンド呼び出し
         custom_self_command(cmdParams, eventArgs)
     end
@@ -355,6 +358,36 @@ function Utsusemi()
     end
 end
 
+--■■■魔物達のララバイ
+function Lullabys()
+    local recasts = windower.ffxi.get_spell_recasts()
+    local recast_time_2 = recasts[376]/60
+    local recast_time_1 = recasts[377]/60
+
+    if recast_time_2 == 0 then
+        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物達のララバイ')..' <stnpc>')
+    elseif recast_time_1 == 0 then
+        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物達のララバイII')..' <stnpc>')
+    else
+        windower.add_to_chat(30, '魔物達のララバイ リキャスト---> 1:%.1fs, 2:%.1fs':format(recast_time_2, recast_time_1))
+    end
+end
+
+--■■■魔物のララバイ
+function Lullaby()
+    local recasts = windower.ffxi.get_spell_recasts()
+    local recast_time_2 = recasts[471]/60
+    local recast_time_1 = recasts[463]/60
+
+    if recast_time_2 == 0 then
+        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物のララバイII')..' <stnpc>')
+    elseif recast_time_1 == 0 then
+        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物のララバイ')..' <stnpc>')
+    else
+        windower.add_to_chat(30, '魔物のララバイ リキャスト---> 1:%.1fs, 2:%.1fs':format(recast_time_1, recast_time_2))
+    end
+end
+
 --■■■単体ヘイトアップ処理
 function ActionEnmity()
     local spell_recasts = windower.ffxi.get_spell_recasts()
@@ -381,7 +414,6 @@ function ActionEnmity()
         send_command('input /ma '..windower.to_shift_jis('アブゾタック')..' <stnpc>')
     end
 end
-
 
 --■■■範囲ヘイトアップ処理
 function ActionEnmityRange()
