@@ -38,15 +38,22 @@ function job_setup()
     state.WeaponskillMode:options('Normal')
         
     -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Musa','BunzisRod','Malevolence','Daybreak'}
+    state.MainWeapons   = M{'Opashoro','Musa','BunzisRod','Malevolence','Daybreak'}
     
     -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'Khonsu','AmmurapiShield','Daybreak'}
+    state.SubWeapons    = M{'EnkiStrap','Khonsu','AmmurapiShield','Daybreak'}
 
     -- gs c cycle VagaryMode
     state.VagaryMode    = M(false, 'Vagary')
 
+    send_command('bind ~F7 gs c cycle VagaryMode')
 end
+
+
+function user_unload()
+    send_command('bind ~F7 gs c cycle OffenseMode')
+end
+
 
 
 function customize_idle_set(idleSet)
@@ -83,8 +90,10 @@ function job_state_change(stateField, newValue, oldValue)
     if stateField == 'Vagary' then
         if newValue then
             equip(sets.precast.FC)
+            --send_command('gs disable all')
             disable('range','ammo','head','neck','left_ear','right_ear','body','hands','left_ring','right_ring','back','waist','legs','feet')
         else
+            --send_command('gs enable all')
             enable('range','ammo','head','neck','left_ear','right_ear','body','hands','left_ring','right_ring','back','waist','legs','feet')
             IdleMelee()
         end
@@ -95,10 +104,6 @@ end
 function job_buff_change(buff, gain)
     if buff == "机上演習:蓄積中" and gain then 
         equip(sets.buff['机上演習'])
-
-    elseif (buff == "黒のグリモア" or buff == "黒の補遺" or buff == "白のグリモア" or buff == "白の補遺") and gain then
-        send_command('gs c lockstyleset')
-        IdleMelee()
     end
 end
 
@@ -122,12 +127,14 @@ sc_mb = {
 
 function custom_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'lockstyleset' then --ロックスタイル固定処理
-        if buffactive['黒のグリモア'] or buffactive['黒の補遺'] then
-            send_command('gs c set MainWeapons BunzisRod; wait 0.1; gs c set SubWeapons AmmurapiShield; wait 1; input /lockstyleset '..lockstyleset_black)
+        if cmdParams[2] == 'black' then
+            send_command('gs c set MainWeapons BunzisRod; wait 0.1; gs c set SubWeapons AmmurapiShield; wait 0.1; input /lockstyleset '..lockstyleset_black)
+        elseif cmdParams[2] == 'white' then
+            send_command('gs c set MainWeapons Musa;      wait 0.1; gs c set SubWeapons Khonsu;         wait 0.1; input /lockstyleset '..lockstyleset_white)
         else
-            send_command('gs c set MainWeapons Musa;      wait 0.1; gs c set SubWeapons Khonsu;         wait 1; input /lockstyleset '..lockstyleset_white)
-
+            send_command('gs c set MainWeapons Opashoro;  wait 0.1; gs c set SubWeapons EnkiStrap;      wait 0.1; input /lockstyleset '..lockstyleset)
         end
+
     elseif cmdParams[1] == 'sc' then --【学者】震天動地連携処理
         if cmdParams[2] == 'start' then
             disp_start_skillchain_message(cmdParams[3],cmdParams[4])
@@ -140,7 +147,6 @@ function custom_self_command(cmdParams, eventArgs)
         end
     end
 end
-
 
 function get_auto_translate_char_squence(phrase)
     local at_start = 0xFD
