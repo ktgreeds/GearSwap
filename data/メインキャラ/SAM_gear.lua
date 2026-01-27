@@ -6,7 +6,7 @@ end
 
 function init_gear_sets()
     -- ロックスタイル番号
-    lockstyleset = 81
+    lockstyleset = 12
 
     -- 両手刀
     gear.DojikiriYasutsuna      = {name="童子切安綱"}
@@ -19,7 +19,7 @@ function init_gear_sets()
     gear.Khonsu                 = {name="コーンスー"}
     
     -- その他
-    gear.Slip                   = {name="原始刀"}
+    --gear.Slip                   = {name="原始刀"}
     
     -- 監視用バフ
     sets.buff['八双']           = {}
@@ -45,19 +45,19 @@ function init_gear_sets()
 
     -- 抜刀装備
     sets.engaged = {
-        ammo="オゲルミルオーブ",
+        ammo="オゲルミルオーブ+1",
         head="極春日烏帽子形兜",
         body="極春日胴丸",
-        hands={ name="バロラスミトン", augments={'Accuracy+20 Attack+20','"Store TP"+1','Accuracy+15','Attack+10',}},
+        hands="越脇戸筒篭手",
         legs="極春日板佩楯",
-        feet={ name="龍王脛当改", augments={'HP+65','"Store TP"+5','"Subtle Blow"+8',}},
+        feet="越脇戸筒脛当",
         neck="月光の喉輪",
-        waist="プラチナモグベルト",
+        waist="ゴウドベルト",
         left_ear="アスプロピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="シーリチリング+1",
+        left_ring="メランリング",
         right_ring="シーリチリング+1",
-        back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
+        back={ name="タカハマント", augments={'STR+3','"Zanshin"+5','"Store TP"+3',}},
     }
 
     -- 抜刀装備　八双 : OffenseMode=Hasso  HybridMode=Normal
@@ -113,13 +113,14 @@ function init_gear_sets()
         body="越左近士胴丸",
         hands="極春日筒篭手",
         legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        feet="極春日筒脛当",
         neck={ name="侍の喉輪+2", augments={'Path: A',}},
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
+        --waist="フォシャベルト",
         left_ear="胡蝶のイヤリング",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
         left_ring="スローダリング",
-        right_ring="王将の指輪",
+        right_ring="エパミノダスリング",
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
