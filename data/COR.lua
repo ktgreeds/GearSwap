@@ -9,7 +9,7 @@ function job_setup()
     state.Buff['トリプルショット']  = buffactive['トリプルショット'] or false
     
     -- gs c cycle IdleMode
-    state.IdleMode:options('Normal','Refresh')
+    state.IdleMode:options('Normal')
 
     -- gs c cycle OffenseMode
     state.OffenseMode:options('Normal')
@@ -28,13 +28,20 @@ function job_setup()
     
     -- gs c cycle RangeWeapons
     state.RangeWeapons      = M{'Fomalhaut','DeathPenalty'}
+    state.LuzafsRing        = M(true)
+
 end
 
 
 function job_post_pretarget(spell, action, spellMap, eventArgs)
         --誤射防止
-    if player.equipment.ammo == gear.HauksbokBullet.name then
+    if player.equipment.ammo == gear.HauksbokBullet.name or player.equipment.ammo == gear.AnimikiiBullet.name then
         equip({ammo=empty})
+    end
+    if spell.type == 'CorsairRoll' then
+        if state.LuzafsRing.value then
+            equip({left_ring=gear.LuzafsRing})
+        end
     end
 end
 
@@ -63,7 +70,7 @@ end
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
     --誤射防止
-    if player.equipment.ammo == gear.HauksbokBullet.name then
+    if player.equipment.ammo == gear.HauksbokBullet.name or player.equipment.ammo == gear.AnimikiiBullet.name then
         equip({ammo=empty})
     end
 end
