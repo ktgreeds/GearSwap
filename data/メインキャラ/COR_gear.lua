@@ -9,7 +9,7 @@ end
 
 function init_gear_sets()
     -- ロックスタイル番号
-    lockstyleset = 111
+    lockstyleset = 17
 
     -- 短剣
     gear.RostamA                    = {name="ロスタム", augments={'Path: A'}}
@@ -33,9 +33,11 @@ function init_gear_sets()
     -- 矢弾
     gear.MarksmanshipPhysics        = {name="クロノブレット"}
     gear.MarksmanshipMagical        = {name="ライヴブレット"}
-    gear.CorsairShot                = {name="ホクスボクブレット"}
     gear.HauksbokBullet             = {name="ホクスボクブレット"}
-    
+    gear.AnimikiiBullet             = {name="アニミキーブレット"}
+    gear.CorsairShot                = gear.AnimikiiBullet 
+    gear.LuzafsRing                 = {name="ルザフリング"}
+
     -- その他
     gear.Slip                       = {name="プライムガン"}
 
@@ -83,6 +85,21 @@ function init_gear_sets()
         back={ name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
     }
 
+    sets.engaged.ACC = {
+        head="マリグナスシャポー",
+        body={ name="アデマジャケット+1", augments={'DEX+12','AGI+12','Accuracy+20',}},
+        hands="ガズブレスレット+1",
+        legs="ＣＳトルーズ+3",
+        feet="マリグナスブーツ",
+        neck="無の喉輪",
+        waist="無の腰当",
+        left_ear="アスプロピアス",
+        right_ear="シャスーピアス+2",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
+        back="無の外装",
+    }
+
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= {left_ear="エアバニピアス"}
 
@@ -108,17 +125,21 @@ function init_gear_sets()
 
     -- FC
     sets.precast.FC = {
+        head={ name="ヘルクリアヘルム", augments={'"Mag.Atk.Bns."+9','"Fast Cast"+6','Mag. Acc.+9',}},
         body="ドレッドジュポン",
         hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
+        legs={ name="ヘルクリアトラウザ", augments={'Mag. Acc.+16','"Fast Cast"+6','STR+10',}},
+        feet={ name="ヘルクリアブーツ", augments={'"Fast Cast"+6','MND+2','Mag. Acc.+2',}},
         neck="オルンミラトルク",
         waist="コーネリアの黒帯",
         left_ear="エテオレートピアス",
         right_ear="エンチャンピアス+1",
         left_ring="キシャールリング",
         right_ring="メダダリング",
+        back="無の外装",
     }
 
-    sets.precast.FC.value = 37
+    sets.precast.FC.value = 62
 
     -- スナップ
     sets.precast.RA = {
@@ -140,14 +161,13 @@ function init_gear_sets()
         range="コンペンセーター",
         head="ＬＡトリコルヌ+3",
         body="イケンガベスト",          --敵対心-10
-        hands="イケンガグローブ",       --敵対心-8
+        hands="ＣＳガントリー+3",
         Legs="デサルタタセッツ",        --敵対心-4
         feet="イケンガクロッグ",        --敵対心-6
         neck="王将の首飾り",
         waist="霊亀腰帯",               --敵対心-2
         left_ear="ベイラピアス",        --敵対心-8
         right_ear="シテレアパール",     --敵対心-4
-        left_ring="ルザフリング", 
         right_ring="クチェクラリング",  --敵対心-7
         back="ガンスリンガマント"       --敵対心-1
     }
@@ -234,6 +254,8 @@ function init_gear_sets()
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",left_ring="アルコンリング"}),sets.precast.WS.SubtleBlow )}
     sets.precast.WS["イオリアンエッジ"] = { Normal=set_combine(sets.precast.WS.Magic,{ammo=gear.HauksbokBullet}),
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{ammo=gear.HauksbokBullet}),sets.precast.WS.SubtleBlow )}
+    sets.precast.WS["エクゼンテレター"] = { Normal      = set_combine(sets.engaged.ACC),
+                                            SubtleBlow  = set_combine(set_combine(sets.engaged.ACC),sets.precast.WS.SubtleBlow )}
 
     --遠隔攻撃
     sets.midcast.RA = {
@@ -244,10 +266,10 @@ function init_gear_sets()
         legs="ＣＳトルーズ+3",
         feet="マリグナスブーツ",
         neck="イスクルゴルゲット",
-        waist="イェマヤベルト",
+        waist="テレンベルト",
         left_ear="昏黄の耳飾り",
         right_ear="テロスピアス",
-        left_ring="シーリチリング+1",
+        left_ring="昏黄の指輪",
         right_ring="シーリチリング+1",
         back={ name="カムラスマント", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}},
     }
@@ -255,4 +277,5 @@ function init_gear_sets()
     -- クイックドロー
     sets.midcast.CorsairShot = set_combine(sets.midcast.RA,{
         ammo=gear.CorsairShot,
-    })end
+    })
+end
