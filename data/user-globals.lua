@@ -208,9 +208,9 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1] == 'HoxneAmpulla' then
         if not state.HoxneAmpulla.value then
             equip({ammo="ホクスニアムプラ"})
-            send_command('gs disable ammo')
+            disable('range','ammo')
         else
-            send_command('gs enable ammo')
+            enable('range','ammo')
         end
         send_command('gs c cycle HoxneAmpulla')
     elseif cmdParams[1] == 'lockstyleset' then      --ロックスタイル固定処理
