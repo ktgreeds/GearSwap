@@ -12,7 +12,7 @@ function job_setup()
     state.IdleMode:options('Normal')
 
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
+    state.OffenseMode:options('Normal','ACC')
     
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal')
@@ -27,8 +27,9 @@ function job_setup()
     state.SubWeapons        = M{'NuskuShield','GletisKnife','Tauret'}
     
     -- gs c cycle RangeWeapons
-    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty'}
+    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','HoxneAmpulla',}
     state.LuzafsRing        = M(true)
+    state.AutoRole          = M(false)
 
 end
 
@@ -89,8 +90,22 @@ end
 function customize_weapon_set()
     if state.MainWeapons.value == 'Naegling' then
         weapon = {range=gear.TPBonus}
+    elseif state.RangeWeapons.value == 'HoxneAmpulla' then
+        weapon = {range=empty,ammo=gear.HoxneAmpulla}
     else
         weapon = {range=gear[state.RangeWeapons.value]}
     end
     return weapon
+end
+
+function job_buff_change(buff, gain)
+    if state.AutoRole.value then
+        if buff == "カオスロール" and not gain then
+            send_command('input /ja '..windower.to_shift_jis("カオスロール")..' <me>;wait 3;input /ja '..windower.to_shift_jis("ダブルアップ")..' <me>')
+        elseif buff == "サムライロール" and not gain then
+            send_command('input /ja '..windower.to_shift_jis("サムライロール")..' <me>;wait 3;input /ja '..windower.to_shift_jis("ダブルアップ")..' <me>')
+        elseif buff == "コルセアズロール" and not gain then
+            send_command('input /ja '..windower.to_shift_jis("コルセアズロール")..' <me>;wait 3;input /ja '..windower.to_shift_jis("ダブルアップ")..' <me>')
+        end
+    end
 end
