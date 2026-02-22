@@ -45,6 +45,10 @@ function user_customize_melee_set(meleeSet)
     if state.Buff['心眼'] then
         meleeSet = set_combine(meleeSet,sets.buff['心眼'] )
     end
+
+    if state.HoxneAmpulla.value then
+        meleeSet = set_combine(sets.engaged.HoxneAmpulla)
+    end
     
     return meleeSet
 end
