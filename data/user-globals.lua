@@ -22,9 +22,9 @@ function user_setup()
     state.RuneText = M(false)
 
     -- ホクスニアムプラ
-    -- gs c cycle IncreHoxneAmpullaased
+    -- gs c cycle HoxneAmpulla
     state.HoxneAmpulla = M(false)
-    
+
     --include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
     --print(res.jobs[player.main_job_id]["ens"])
