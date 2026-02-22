@@ -148,7 +148,7 @@ function init_gear_sets()
         head={ name="テーオンシャポー", augments={'"Snapshot"+5','"Snapshot"+5',}},
         body="ＬＫフラック+4",
         hands={ name="ＬＡガントリー+3", augments={'Enhances "Fold" effect',}},
-        legs="ＬＫトルーズ+3",
+        legs="ＬＫトルーズ+4",
         feet="メガナダジャンボ+2",
         neck={ name="コモドアチャーム+2", augments={'Path: A',}},
         waist="イェマヤベルト",
