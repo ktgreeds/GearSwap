@@ -134,7 +134,7 @@ function user_buff_change(buff, gain)
     elseif buff == "ヴァリエンス" and not gain then
         windower.add_to_chat(167,'■■■ ヴァリエンス切れ ■■■')
     elseif buff == "エンチャント" and not gain then
-        windower.add_to_chat(167,'■■■ エンチャント ■■■')
+        windower.add_to_chat(167,'■■■ エンチャント切れ ■■■')
     end
 end
 
