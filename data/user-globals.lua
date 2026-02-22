@@ -21,7 +21,11 @@ function user_setup()
     -- gs c cycle RuneText
     state.RuneText = M(false)
 
-    include('organizer-lib') 
+    -- ホクスニアムプラ
+    -- gs c cycle IncreHoxneAmpullaased
+    state.HoxneAmpulla = M(false)
+    
+    --include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
     --print(res.jobs[player.main_job_id]["ens"])
 end
@@ -113,6 +117,8 @@ function user_buff_change(buff, gain)
     if state.Buff['睡眠'] then
         equip({main=gear.Slip})
         equip({range=gear.Slip})
+        equip({head=gear.Slip})
+        equip({neck=gear.Slip})
     elseif buff == "ファランクス" and not gain then
         windower.add_to_chat(167,'■■■ ファランクス切れ ■■■')
     elseif buff == "八双" and not gain then
@@ -127,7 +133,9 @@ function user_buff_change(buff, gain)
         windower.add_to_chat(167,'■■■ ヴァレション切れ ■■■')
     elseif buff == "ヴァリエンス" and not gain then
         windower.add_to_chat(167,'■■■ ヴァリエンス切れ ■■■')
-   end
+    elseif buff == "エンチャント" and not gain then
+        windower.add_to_chat(167,'■■■ エンチャント ■■■')
+    end
 end
 
 
@@ -190,20 +198,21 @@ function job_self_command(cmdParams, eventArgs)
         Lullabys()
     elseif cmdParams[1] == 'Lullaby' then           --魔物達ララバイ
         Lullaby()
-    elseif cmdParams[1] == 'SortieText' then        --ソーティカンニングペーパー
-        if not state.SortieText.value then
-            showTextSortie()
-        else
-            hideTextSortie()
-        end
-        send_command('gs c cycle SortieText')
     elseif cmdParams[1] == 'RuneText' then          --ルーンカンニングペーパー
-        if not state.SortieText.value then
+        if not state.RuneText.value then
             showTextRune()
         else
             hideTextRune()
         end
         send_command('gs c cycle RuneText')
+    elseif cmdParams[1] == 'HoxneAmpulla' then
+        if not state.HoxneAmpulla.value then
+            equip({ammo="ホクスニアムプラ"})
+            send_command('gs disable ammo')
+        else
+            send_command('gs enable ammo')
+        end
+        send_command('gs c cycle HoxneAmpulla')
     elseif cmdParams[1] == 'lockstyleset' then      --ロックスタイル固定処理
         if player.main_job ~= '学' then
             send_command('input /lockstyleset '..lockstyleset)
@@ -505,6 +514,13 @@ windower.register_event("incoming text", function(original, modified, original_m
                 windower.add_to_chat(167,'★★★ 土　弱点')
             elseif windower.wc_match(original, windower.to_shift_jis('*フラッシュフラッド*')) then
                 windower.add_to_chat(167,'★★★ 雷　弱点')
+            elseif windower.wc_match(original, windower.to_shift_jis('*ボルケーノステーシス*')) then
+                --send_command('wait 2;input /p '..windower.to_shift_jis('ボルケーノステーシス → 再強化して！<call>'))
+                windower.add_to_chat(167,'★★★ ボルケーノステーシス → 再強化して！')
+
+            elseif windower.wc_match(original, windower.to_shift_jis('*シアリングセレイト*')) then
+                --send_command('wait 2;input /p '..windower.to_shift_jis('シアリングセレイト → パナケイアして！<call>'))
+                windower.add_to_chat(167,'★★★ シアリングセレイト → パナケイアして！')
             end
         end
     end
