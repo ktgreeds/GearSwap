@@ -27,29 +27,24 @@ function job_setup()
 
     -- gs c cycle SubWeapons
     state.SubWeapons    = M{'UtuGrip','Khonsu'}
-end
 
+    -- 被強化バフ
+    -- gs c cycle Increased
+    state.Increased    = M(true)
 
-function job_buff_change(buff, gain)
-    if buff == '八双' then
-        if gain then
-            send_command('gs c set HybridMode Hasso')
-        else
-            send_command('gs c set HybridMode Normal')
-        end
-    elseif buff == '星眼' then
-        if gain then
-            send_command('gs c set HybridMode Seigan')
-        else
-            send_command('gs c set HybridMode Normal')
-        end
-    end
 end
 
 
 function user_customize_melee_set(meleeSet)
+    if state.Buff['八双'] then
+        meleeSet = set_combine(meleeSet,sets.buff['八双'] )
+    elseif state.Buff['星眼'] then
+        meleeSet = set_combine(meleeSet,sets.buff['星眼'] )
+    end
+    
     if state.Buff['心眼'] then
         meleeSet = set_combine(meleeSet,sets.buff['心眼'] )
     end
+    
     return meleeSet
 end
