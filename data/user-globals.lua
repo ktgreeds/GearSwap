@@ -173,6 +173,10 @@ function user_customize_weapon_set()
         weapon = set_combine(weapon,{range=gear[state.RangeWeapons.value]})
     end
 
+    if state.Instruments then
+        weapon = set_combine(weapon,{range=gear[state.Instruments.value]})
+    end
+    
     return weapon
 end
 
