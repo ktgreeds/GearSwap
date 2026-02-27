@@ -29,12 +29,17 @@ function job_setup()
     state.SubWeapons    = M{'Genbu','Aeneas','Malevolence'}
     
     -- gs c cycle Instruments
-    state.Instruments =  M{'Gjallarhorn','Daurdabla','Marsyas','Blurred','MiracleCheer'}
+    state.Instruments =  M{'Gjallarhorn','Daurdabla','Marsyas','Blurred','MiracleCheer','Empty'}
 
     state.UseMiracleCheer = M(false, 'Miracle Cheer')
 
+    send_command('bind ~F7 gs c cycle UseMiracleCheer')
+
 end
 
+function user_unload()
+    send_command('bind ~F7 gs c cycle OffenseMode')
+end
 
 function customize_idle_set(idleSet) 
     idleSet = set_combine(idleSet,{main=gear.Evasion})
@@ -69,13 +74,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 
-function job_post_midcast(spell, action, spellMap, eventArgs)
-    for buff,active in pairs(state.Buff) do
-        if active and sets.buff[buff] then
-            equip(sets.buff[buff])
-        end
-    end
-    
+function job_post_midcast(spell, action, spellMap, eventArgs)    
     if spell.type=='BardSong' then
         if state.UseMiracleCheer.value then
             if spellMap == "Etude" then
@@ -97,7 +96,22 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
 end
 
+function customize_idle_set(idleSet)
+    return set_combine(idleSet,customize_weapon_set())
+end
 
+
+function user_customize_melee_set(meleeSet)
+    return set_combine(meleeSet,customize_weapon_set())
+end
+
+function customize_weapon_set()
+    if state.MainWeapons.value == 'Naegling' then
+        weapon = {range=gear.TPBonus}
+    end
+
+    return weapon
+end
 function set_dummy_song(song_name)
     spell_maps[song_name] = 'Dummy'
 end
