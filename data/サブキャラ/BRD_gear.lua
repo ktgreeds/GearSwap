@@ -1,6 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Carnwenhan; wait 0.5; gs c set SubWeapons Genbu; wait 0.5; gs c set Instruments Gjallarhorn;')
+    send_command('gs c set MainWeapons Carnwenhan; wait 0.5; gs c set SubWeapons Genbu; wait 0.5; gs c set Instruments Empty;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
         send_command('wait 2; gs c set SubWeapons Aeneas')
     end
@@ -9,7 +9,7 @@ end
 
 function init_gear_sets()
     -- ロックスタイル番号
-    lockstyleset = 71
+    lockstyleset = 10
 
     -- 短剣
     gear.Carnwenhan             = {name="カルンウェナン"}
@@ -25,6 +25,7 @@ function init_gear_sets()
     gear.Marsyas                = {name="マルシュアス"}
     gear.Blurred                = {name="ブラーハープ+1"}
     gear.MiracleCheer           = {name="ミラクルチアー"}
+    gear.Empty                  = {name=nil}
 
     -- 盾
     gear.Genbu                  = {name="玄冥盾"}
@@ -35,12 +36,12 @@ function init_gear_sets()
 
     -- 待機装備（通常）
     sets.idle = {
-        range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
-        head="無の面",
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
+        --range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ",
         legs="ＢＲキャニオン+4",
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        feet="ニャメソルレット",
         neck="バーシチョーカー+1",
         waist="無の腰当",
         left_ear="エアバニピアス",
@@ -71,8 +72,8 @@ function init_gear_sets()
         feet="ＦＬコテュルヌ+3",
         neck={ name="バードチャーム+1", augments={'Path: A',}},
         waist="セールフィベルト+1",
-        left_ear="テロスピアス",
-        right_ear={ name="フィリピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        left_ear="アスプロピアス",
+        right_ear="テロスピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back="無の外装",
@@ -102,7 +103,7 @@ function init_gear_sets()
     -- FC
     sets.precast.FC = {
         sub="玄冥盾",
-        range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
+        --range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
         head="ブンジハット",
         body="インヤガジュバ+2",
         hands={ name="レイライングローブ", augments={'Accuracy+12','Mag. Acc.+14','"Mag.Atk.Bns."+15','"Fast Cast"+2',}},
@@ -123,6 +124,7 @@ function init_gear_sets()
         body="ＢＲジュスト+4",
         legs="ＢＩスリッパー+4"
     })
+    sets.precast.FC.value = 47
 
    --FC（ディスペガ用）
    sets.precast.FC['ディスペガ'] = set_combine( sets.precast.FC,{main="デイブレイクワンド",})
@@ -140,7 +142,7 @@ function init_gear_sets()
         left_ear="テロスピアス",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         left_ring="イラブラットリング",
-        right_ring="シーリチリング+1",
+        right_ring="スローダリング",
         back={ name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
@@ -198,6 +200,21 @@ function init_gear_sets()
 
     -- ケアルガ
     sets.midcast.Curaga = sets.midcast.Cure
+    sets.midcast['精霊魔法']={
+        range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ",
+        legs="ニャメフランチャ",
+        feet="ニャメソルレット",
+        neck="シビルスカーフ",
+        waist="エスカンストーン",
+        left_ear="王将の耳飾り",
+        right_ear="フリオミシピアス",
+        left_ring="メダダリング",
+        right_ring="シュネデックリング",
+        back="無の外装",
+    }
 
     -- 強化魔法
     sets.midcast['強化魔法']={
