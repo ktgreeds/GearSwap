@@ -12,7 +12,7 @@ end
 
 function init_gear_sets()
     --ロックスタイル番号
-    lockstyleset = 181
+    lockstyleset = 11
 
     --片手剣
     gear.Naegling               = {name="ネイグリング"}
@@ -100,7 +100,7 @@ function init_gear_sets()
     sets.engaged.dual21= set_combine(sets.engaged.dual11,{back={ name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},})
 
     --監視用バフ
-    sets.buff['トリプルショット']       = set_combine(sets.midcast.RA,{body="ＣＳフラック+3"})
+    sets.buff['ダブルショット']       = set_combine(sets.midcast.RA,{body="オショシベスト+1",feet="オショシレギンス+1"})
 
     --即時発動系
     sets.precast.JA["ランダムディール"] = {body={ name="ＬＡフラック+3", augments={'Enhances "Loaded Deck" effect',}},}
@@ -122,7 +122,8 @@ function init_gear_sets()
         left_ring="ラハブリング",
         right_ring="メダダリング",
     }
-    
+    sets.precast.FC.value = 35
+
     --スナップ
     sets.precast.RA = {
         head={ name="テーオンシャポー", augments={'"Snapshot"+5','"Snapshot"+5',}},
