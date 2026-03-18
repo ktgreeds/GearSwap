@@ -6,6 +6,7 @@ end
 
 
 function job_setup()
+    state.Buff['ダブルショット']  = buffactive['ダブルショット'] or false
     -- gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
     
