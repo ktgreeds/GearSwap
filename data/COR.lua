@@ -45,7 +45,7 @@ function job_post_pretarget(spell, action, spellMap, eventArgs)
             equip({left_ring=gear.LuzafsRing})
         end
         if not buffactive[spell.name] then
-            --equip({main = gear.RostamC})
+            equip({main = gear.RostamC})
         end
     end
 end
