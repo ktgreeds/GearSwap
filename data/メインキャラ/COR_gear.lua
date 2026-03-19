@@ -101,6 +101,21 @@ function init_gear_sets()
         back="無の外装",
     }
 
+    sets.engaged.STP_SubtleBlow = {
+        head="マリグナスシャポー",
+        body="マリグナスタバード",
+        hands="マリグナスグローブ",
+        legs="ＣＳトルーズ+3",
+        feet="マリグナスブーツ",
+        neck="バーシチョーカー+1",
+        waist="ゴウドベルト",
+        left_ear="アスプロピアス",
+        right_ear="テロスピアス",
+        left_ring="メランリング",
+        right_ring="シーリチリング+1",
+        back={ name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
+    }
+    
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= {left_ear="エアバニピアス"}
 
@@ -188,8 +203,10 @@ function init_gear_sets()
     sets.precast.CorsairRoll['コアサーズロール'] = set_combine(sets.precast.CorsairRoll,{
         feet="ＣＳブーツ+3",
     })
-    sets.precast.CorsairRoll['ボルターズロール'] = {
-        main={ name="ロスタム", augments={'Path: C',}},
+    sets.precast.CorsairRoll.short = {
+        range=empty,
+        hands=empty,
+        neck=empty,
     }
 
     -- クイックドロー
@@ -204,15 +221,17 @@ function init_gear_sets()
         hands="ニャメガントレ",
         legs="ニャメフランチャ",
         feet="ニャメソルレット",
-        neck={ name="コモドアチャーム+2", augments={'Path: A',}},
+        --neck={ name="コモドアチャーム+2", augments={'Path: A',}},
+        neck="バーシチョーカー+1",
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear={ name="シャスーピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Crit.hit rate+6','STR+9 AGI+9',}},
         left_ring="スローダリング",
-        right_ring="エパミノダスリング",
+        --right_ring="エパミノダスリング",
+        right_ring="シーリチリング+1",
         back={ name="カムラスマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
-    
+
     -- WS遠隔ダメージ
     sets.precast.WS.Range = {
         ammo=gear.MarksmanshipPhysics,
@@ -280,7 +299,6 @@ function init_gear_sets()
         ammo=gear.CorsairShot,
     })
 
-    --AFと王将に変える
     sets.midcast['ライトショット'] = {
         range="デスペナルティ",
         ammo=gear.CorsairShot,
@@ -297,5 +315,6 @@ function init_gear_sets()
         right_ring="メダダリング",
         back="無の外装",
     }
-end
+    sets.midcast['ダークショット'] = sets.midcast['ライトショット'] 
 
+end
