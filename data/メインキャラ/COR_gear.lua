@@ -204,7 +204,6 @@ function init_gear_sets()
         feet="ＣＳブーツ+3",
     })
     sets.precast.CorsairRoll.short = {
-        range=empty,
         hands=empty,
         neck=empty,
     }
