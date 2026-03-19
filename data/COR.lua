@@ -12,7 +12,7 @@ function job_setup()
     state.IdleMode:options('Normal')
 
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','ACC')
+    state.OffenseMode:options('Normal','ACC','STP_SubtleBlow')
     
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal')
@@ -30,6 +30,7 @@ function job_setup()
     state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','HoxneAmpulla',}
     state.LuzafsRing        = M(true)
     state.AutoRole          = M(false)
+    state.ShortRole         = M(false)
 
 end
 
@@ -43,6 +44,9 @@ function job_post_pretarget(spell, action, spellMap, eventArgs)
         if state.LuzafsRing.value then
             equip({left_ring=gear.LuzafsRing})
         end
+        if not buffactive[spell.name] then
+            --equip({main = gear.RostamC})
+        end
     end
 end
 
@@ -52,8 +56,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         equip(get_hachirin(spell.element))
     end
     if spell.type == 'CorsairRoll' then
-        if not buffactive[spell.name] then
-            equip({main = gear.RostamC})
+
+        if state.ShortRole.value then
+            if spell.name == 'ボルターズロール' then
+                equip(sets.precast.CorsairRoll.short)
+            end
         end
     end
 end
@@ -90,11 +97,8 @@ end
 function customize_weapon_set()
     if state.MainWeapons.value == 'Naegling' then
         weapon = {range=gear.TPBonus}
-    elseif state.RangeWeapons.value == 'HoxneAmpulla' then
-        weapon = {range=empty,ammo=gear.HoxneAmpulla}
-    else
-        weapon = {range=gear[state.RangeWeapons.value]}
     end
+
     return weapon
 end
 
