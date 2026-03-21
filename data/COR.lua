@@ -44,9 +44,7 @@ function job_post_pretarget(spell, action, spellMap, eventArgs)
         if state.LuzafsRing.value then
             equip({left_ring=gear.LuzafsRing})
         end
-        if not buffactive[spell.name] then
-            equip({main = gear.RostamC})
-        end
+
     end
 end
 
@@ -56,11 +54,11 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         equip(get_hachirin(spell.element))
     end
     if spell.type == 'CorsairRoll' then
-
+        if not buffactive[spell.name] then
+            equip({main = gear.RostamC})
+        end
         if state.ShortRole.value then
-            if spell.name == 'ボルターズロール' then
-                equip(sets.precast.CorsairRoll.short)
-            end
+            equip(sets.precast.CorsairRoll.short)
         end
     end
 end
