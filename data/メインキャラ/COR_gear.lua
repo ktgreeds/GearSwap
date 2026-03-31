@@ -202,7 +202,7 @@ function init_gear_sets()
     }
 
     -- WSダメージ（モクシャ）
-    sets.precast.WS.SubtleBlow = {neck="バーシチョーカー+1"}
+    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,{neck="バーシチョーカー+1"})
 
     -- WS遠隔ダメージ
     sets.precast.WS.Range = {
