@@ -1,8 +1,8 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Carnwenhan; wait 0.5; gs c set SubWeapons Genbu; wait 0.5; gs c set Instruments Empty;')
+    send_command('gs c set MainWeapons Carnwenhan; wait 0.1; gs c set SubWeapons Genbu; wait 0.1; gs c set Instruments Empty;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('wait 2; gs c set SubWeapons Aeneas')
+        send_command('wait 1; gs c set SubWeapons Aeneas')
     end
 end
 
@@ -25,6 +25,7 @@ function init_gear_sets()
     gear.Marsyas                = {name="マルシュアス"}
     gear.Blurred                = {name="ブラーハープ+1"}
     gear.MiracleCheer           = {name="ミラクルチアー"}
+    gear.Linos                  = {name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}}
     gear.Empty                  = {name=nil}
 
     -- 盾
@@ -51,17 +52,6 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    -- 待機装備（リフレ）
-    sets.idle.Refresh = set_combine(sets.idle,{
-        head={ name="カイロンハット", augments={'Pet: Phys. dmg. taken -2%','Attack+4','"Refresh"+2','Accuracy+18 Attack+18',}},
-        body={ name="カイロンダブレット", augments={'Mag. Acc.+7','Pet: Haste+3','"Refresh"+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
-        hands={ name="カイロングローブ", augments={'"Mag.Atk.Bns."+23','Accuracy+23','"Refresh"+2',}},
-        legs={ name="カイロンホーズ", augments={'Damage taken-2%','Rng.Acc.+3','"Refresh"+2','Accuracy+5 Attack+5','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
-        feet={ name="カイロンスリッパー", augments={'Spell interruption rate down -5%','Magic dmg. taken -1%','"Refresh"+2','Accuracy+7 Attack+7',}},
-        neck="シビルスカーフ",
-        left_ring="スティキニリング+1",
-    })
-
     -- 抜刀装備
     sets.engaged = {
         range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
@@ -78,6 +68,9 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
         back="無の外装",
     }
+
+    -- 抜刀装備（モクシャ）
+    sets.engaged.SubtleBlow = set_combine(sets.engaged,{neck="バーシチョーカー+1"})
 
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= {
@@ -124,14 +117,14 @@ function init_gear_sets()
         body="ＢＲジュスト+4",
         legs="ＢＩスリッパー+4"
     })
-    sets.precast.FC.value = 47
+    sets.precast.FC.value = 80
 
    --FC（ディスペガ用）
-   sets.precast.FC['ディスペガ'] = set_combine( sets.precast.FC,{main="デイブレイクワンド",})
+   sets.precast.FC['ディスペガ'] = set_combine(sets.precast.FC,{main="デイブレイクワンド",})
 
     -- WSダメージ
     sets.precast.WS.Damage = {
-        range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','Quadruple Attack +3',}},
+        range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','STR+6 DEX+6',}},
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body={ name="ＢＩジュストコル+4", augments={'Enhances "Troubadour" effect',}},
         hands={ name="ニャメガントレ", augments={'Path: B',}},
@@ -146,8 +139,11 @@ function init_gear_sets()
         back={ name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
+    -- WSダメージ（モクシャ）
+    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,{neck="バーシチョーカー+1"})
+
     sets.precast.WS.Critical = {
-        range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','Quadruple Attack +3',}},
+        range={ name="リノス", augments={'Accuracy+15 Attack+15','Crit. hit damage +3%','DEX+8',}},
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body={ name="ＢＩジュストコル+4", augments={'Enhances "Troubadour" effect',}},
         hands={ name="ニャメガントレ", augments={'Path: B',}},
@@ -164,7 +160,7 @@ function init_gear_sets()
 
     -- WS魔攻
     sets.precast.WS.Magic = {
-        range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','Quadruple Attack +3',}},
+        range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','STR+6 DEX+6',}},
         head={ name="ニャメヘルム", augments={'Path: B',}},
         body={ name="ニャメメイル", augments={'Path: B',}},
         hands={ name="ニャメガントレ", augments={'Path: B',}},
@@ -200,6 +196,8 @@ function init_gear_sets()
 
     -- ケアルガ
     sets.midcast.Curaga = sets.midcast.Cure
+
+    -- 精霊魔法
     sets.midcast['精霊魔法']={
         range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
         head="ニャメヘルム",
@@ -252,9 +250,7 @@ function init_gear_sets()
     }
 
     -- 弱体魔法　ディスペガ
-    sets.midcast['ディスペガ'] = set_combine(sets.midcast['弱体魔法'],{
-        main="デイブレイクワンド",
-    })
+    sets.midcast['ディスペガ'] = set_combine(sets.midcast['弱体魔法'],{main="デイブレイクワンド"})
     
     -- ダミー歌
     sets.midcast.song_dummy = {
