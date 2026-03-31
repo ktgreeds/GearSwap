@@ -12,14 +12,17 @@ function job_setup()
     state.IdleMode:options('Normal')
 
     -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','ACC','STP_SubtleBlow')
+    state.OffenseMode:options('Normal','ACC','SubtleBlow')
     
     -- gs c cycle HybridMode
     state.HybridMode:options('Normal')
     
     -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal')
-    
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+
+    -- gs c cycle RangedMode
+    state.RangedMode:options('Normal','SubtleBlow','Critical')
+
     -- gs c cycle MainWeapons
     state.MainWeapons       = M{'RostamA','RostamB','Naegling'}
     
@@ -27,19 +30,29 @@ function job_setup()
     state.SubWeapons        = M{'NuskuShield','GletisKnife','Tauret'}
     
     -- gs c cycle RangeWeapons
-    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','HoxneAmpulla',}
+    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','TPBonus','HoxneAmpulla',}
+
+    -- gs c cycle LuzafsRing
     state.LuzafsRing        = M(true)
-    state.AutoRole          = M(false)
+
+    -- gs c cycle ShortRole
     state.ShortRole         = M(false)
 
 end
 
 
 function job_post_pretarget(spell, action, spellMap, eventArgs)
-        --誤射防止
+    --誤射防止
     if player.equipment.ammo == gear.HauksbokBullet.name or player.equipment.ammo == gear.AnimikiiBullet.name then
         equip({ammo=empty})
     end
+
+    --遠隔攻撃
+    if spell.action_type == 'Ranged Attack' then
+        equip({ammo=gear.MarksmanshipPhysics})
+    end
+
+    --ロール
     if spell.type == 'CorsairRoll' then
         if state.LuzafsRing.value then
             equip({left_ring=gear.LuzafsRing})
@@ -53,10 +66,14 @@ function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.name == 'レデンサリュート' or spell.name == 'イオリアンエッジ' then
         equip(get_hachirin(spell.element))
     end
+
     if spell.type == 'CorsairRoll' then
+        --確実にロスタムCで実行
         if not buffactive[spell.name] then
             equip({main = gear.RostamC})
         end
+
+        --ショートロール用
         if state.ShortRole.value then
             equip(sets.precast.CorsairRoll.short)
         end
@@ -70,7 +87,6 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
             equip(sets.buff['トリプルショット'])
         end
     end
-
 end
 
 
@@ -94,20 +110,16 @@ end
 
 function customize_weapon_set()
     if state.MainWeapons.value == 'Naegling' then
-        weapon = {range=gear.TPBonus}
+        return {range=gear.TPBonus}
     end
-
-    return weapon
 end
 
-function job_buff_change(buff, gain)
-    if state.AutoRole.value then
-        if buff == "カオスロール" and not gain then
-            send_command('input /ja '..windower.to_shift_jis("カオスロール")..' <me>;wait 3;input /ja '..windower.to_shift_jis("ダブルアップ")..' <me>')
-        elseif buff == "サムライロール" and not gain then
-            send_command('input /ja '..windower.to_shift_jis("サムライロール")..' <me>;wait 3;input /ja '..windower.to_shift_jis("ダブルアップ")..' <me>')
-        elseif buff == "コルセアズロール" and not gain then
-            send_command('input /ja '..windower.to_shift_jis("コルセアズロール")..' <me>;wait 3;input /ja '..windower.to_shift_jis("ダブルアップ")..' <me>')
+function job_state_change(stateField,  newValue, oldValue)
+    if stateField == 'Offense Mode' then
+        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode SubtleBlow')        
+        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode Normal')        
         end
     end
 end
