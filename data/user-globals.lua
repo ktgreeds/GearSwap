@@ -6,9 +6,8 @@ function user_setup()
 
     include(player.name .. '/weather_obi')                              --属性帯ロード
     include('smn_avatar')                                               --召喚定義ファイルロード
-   --init_weaponns()                                                     --武器初期化
+    init_weaponns()                                                     --武器初期化
     init_custom_spell_map()                                             --スペルマップ定義再構築
-    define_roll_values()                                                --ロール情報
 
     local res = require('resources')
     send_command('input /si '..res.jobs[player.main_job_id]["ens"])
@@ -16,7 +15,7 @@ function user_setup()
     send_command('gs c set IdleMode Normal; wait 5; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
 
     -- gs c cycle SortieText
-    state.SortieText = M(false)
+    --state.SortieText = M(false)
 
     -- gs c cycle RuneText
     state.RuneText = M(false)
@@ -33,9 +32,6 @@ end
 
 --■■■サブタゲ選択時の処理
 function user_post_pretarget(spell, action, spellMap, eventArgs)
-    if spell.type == 'CorsairRoll' then
-        display_roll_info(spell)
-    end
 end
 
 --■■■アクション前処理（共通実装なし）
@@ -46,12 +42,13 @@ end
 --■■■アクション中処理
 function user_post_midcast(spell, action, spellMap, eventArgs)
     --バフ着替え
-    for buff,active in pairs(state.Buff) do
-        if active and sets.buff[buff] then
-            equip(sets.buff[buff])
+    if spell.action_type ~= 'WeaponsSkill' then
+        for buff,active in pairs(state.Buff) do
+            if active and sets.buff[buff] then
+                equip(sets.buff[buff])
+            end
         end
     end
-
     --詠唱中断着替え
     if sets.midcast.interruption then
         Interruption(spell, action, spellMap, eventArgs)
