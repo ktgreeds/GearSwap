@@ -30,15 +30,19 @@ function init_gear_sets()
     gear.Hangaku                = {name="板額の弓"}
     gear.Fomalhaut              = {name="フォーマルハウト"}
     gear.TPBonus                = {name="スパロウホーク+2"}
+    gear.Crossbow                = {name="ライトクロスボウ"}
     --その他
     gear.Slip                   = {name="プライムガン"}
 
     --矢弾
-    gear.ArcheryPhysics         = {name="石の矢"}
-    gear.MarksmanshipPhysics    = {name="クロノブレット"}
-    gear.MarksmanshipMagical    = {name="クロノブレット"}
-    gear.HauksbokArrow          = {name="ホクスボクアロー"}
-    gear.HauksbokBullet         = {name="ホクスボクブレット"}
+    gear.GunPhysics         = {name="クロノブレット"}
+    gear.GunMagical         = {name="クロノブレット"}
+    gear.BowPhysics         = {name="石の矢"}
+    gear.BowMasical         = {name="石の矢"}
+    gear.CrossbowPhysics    = {name="ブロンズボルト"}
+    gear.CrossbowMasical    = {name="ブロンズボルト"}
+    gear.HauksbokArrow      = {name="ホクスボクアロー"}
+    gear.HauksbokBullet     = {name="ホクスボクブレット"}
 
 
     --待機装備（通常）
