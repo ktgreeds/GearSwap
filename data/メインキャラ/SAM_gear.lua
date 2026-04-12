@@ -1,7 +1,6 @@
 function init_weaponns()
-    -- デフォルト武器を設定
-    send_command('gs c set MainWeapons DojikiriYasutsuna; wait 0.3; gs c set SubWeapons UtuGrip')
 end
+
 
 
 function init_gear_sets()
@@ -10,15 +9,8 @@ function init_gear_sets()
 
     -- 両手刀
     gear.DojikiriYasutsuna      = {name="童子切安綱"}
-    
-    -- 両手槍
     gear.ShiningOne             = {name="シャイニングワン"}
-    
-    -- グリップ
     gear.UtuGrip                = {name="ウトゥグリップ"}
-    gear.Khonsu                 = {name="コーンスー"}
-    
-    -- その他
     gear.Slip                   = {name="フレンジーサリット"}
     
     -- 監視用バフ
@@ -49,23 +41,23 @@ function init_gear_sets()
         head="極春日烏帽子形兜",
         body="極春日胴丸",
         hands="越脇戸筒篭手",
-        legs="極春日板佩楯",
+        legs="極左近士板佩楯",
         feet="越脇戸筒脛当",
         neck="月光の喉輪",
-        waist="ゴウドベルト",
+        waist="ソードフェーテル+1",
         left_ear="アスプロピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
         left_ring="メランリング",
         right_ring="シーリチリング+1",
         back={ name="タカハマント", augments={'STR+3','"Zanshin"+5','"Store TP"+3',}},
     }
-
-    sets.engaged.HoxneAmpulla = set_combine(sets.engaged,{
+    sets.engaged['八双'] = set_combine(sets.engaged, sets.buff['八双'])
+    sets.engaged['星眼'] = set_combine(sets.engaged, sets.buff['星眼'])
+    sets.engaged['エンチャント']  = set_combine(sets.engaged,{
         feet="越左近士筒脛当",
         neck="侍の喉輪+2",
         left_ring="シーリチリング+1",
-        back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
-    })
+        back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},})
 
     -- 即時発動アビリティ
     sets.precast.JA['明鏡止水'] = {
@@ -112,8 +104,8 @@ function init_gear_sets()
         neck={ name="侍の喉輪+2", augments={'Path: A',}},
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="スラッドピアス",
-        right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="エパミノダスリング",
+        right_ear="胡蝶のイヤリング",
+        left_ring="王将の指輪",
         right_ring="スローダリング",
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
@@ -134,9 +126,6 @@ function init_gear_sets()
         right_ring="王将の指輪",
         back={ name="スメルトリオマント", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
     }
-    
-    sets.precast.JA['ジャンプ'] = sets.engaged 
-    sets.precast.JA['ハイジャンプ'] = sets.engaged 
 
     --共通WS定義読み込み
     init_weapon_skill()
