@@ -1,8 +1,6 @@
 function init_weaponns()
-    -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Carnwenhan; wait 0.1; gs c set SubWeapons Genbu; wait 0.1; gs c set Instruments Empty;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('wait 1; gs c set SubWeapons Aeneas')
+        send_command('gs c set SubWeapons Aeneas')
     end
 end
 
@@ -25,16 +23,24 @@ function init_gear_sets()
     gear.Marsyas                = {name="マルシュアス"}
     gear.Blurred                = {name="ブラーハープ+1"}
     gear.MiracleCheer           = {name="ミラクルチアー"}
-    gear.Linos                  = {name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}}
     gear.Empty                  = {name=nil}
 
     -- 盾
     gear.Genbu                  = {name="玄冥盾"}
+    gear.AmmurapiShield			= {name="アムラピシールド"}
     gear.Loughnashade           = {name="ラックナシェード"}
     
     -- その他
     gear.Evasion                = {name="ニビルナイフ"}
 
+    gear.JobMantle={}
+    gear.JobMantle.Critical     = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
+    gear.JobMantle.Magic        = { name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}}
+    gear.JobMantle.WSD          = {}
+    gear.JobMantle.WSD.STR      = { name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD.CHR      = { name="インタラアスケープ", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD.DEX      = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    
     -- 待機装備（通常）
     sets.idle = {
         --range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
@@ -70,12 +76,18 @@ function init_gear_sets()
     }
 
     -- 抜刀装備（モクシャ）
-    sets.engaged.SubtleBlow = set_combine(sets.engaged,{neck="バーシチョーカー+1"})
+    sets.engaged.SubtleBlow = set_combine(sets.engaged,{
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
+    })
 
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= {
         waist="霊亀腰帯",
-        left_ear="エアバニピアス"
+        right_ear="エアバニピアス"
     }
 
     -- 即時発動アビリティ　ソウルボイス
@@ -95,8 +107,6 @@ function init_gear_sets()
 
     -- FC
     sets.precast.FC = {
-        sub="玄冥盾",
-        --range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
         head="ブンジハット",
         body="インヤガジュバ+2",
         hands={ name="レイライングローブ", augments={'Accuracy+12','Mag. Acc.+14','"Mag.Atk.Bns."+15','"Fast Cast"+2',}},
@@ -136,7 +146,7 @@ function init_gear_sets()
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         left_ring="イラブラットリング",
         right_ring="スローダリング",
-        back={ name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
+        back=gear.JobMantle.WSD.STR
     }
 
     -- WSダメージ（モクシャ）
@@ -155,7 +165,7 @@ function init_gear_sets()
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
-        back={ name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+5','Crit.hit rate+10',}},
+        back=gear.JobMantle.Critical
     }
 
     -- WS魔攻
@@ -172,12 +182,19 @@ function init_gear_sets()
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         left_ring="メダダリング",
         right_ring="メタモルリング+1",
-        back={ name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}},    
+        back=gear.JobMantle.Magic
     }
 
     --共通WS定義読み込み
     init_weapon_skill()
+    sets.precast.WS["モーダントライム"]       = { Normal=set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.CHR),
+                                                    SubtleBlow=set_combine(set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.CHR),  sets.precast.WS.SubtleBlow) }
+    sets.precast.WS["ルドラストーム"]         = { Normal=set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.DEX),
+                                                    SubtleBlow=set_combine(set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.DEX),  sets.precast.WS.SubtleBlow) }
+    sets.precast.WS["エヴィサレーション"]     = { Normal=set_combine(sets.precast.WS.Critical,gear.JobMantle.Critical),
+                                                    SubtleBlow=set_combine(set_combine(sets.precast.WS.Critical,gear.JobMantle.Critical),  sets.precast.WS.SubtleBlow) }
     
+
     -- ケアル
     sets.midcast.Cure = {
         head={ name="ケカスミトラ+1", augments={'MP+80','"Cure" spellcasting time -7%','Enmity-6',}},
@@ -252,6 +269,21 @@ function init_gear_sets()
     -- 弱体魔法　ディスペガ
     sets.midcast['ディスペガ'] = set_combine(sets.midcast['弱体魔法'],{main="デイブレイクワンド"})
     
+    sets.midcast['アブゾタック'] = {
+        head="ＦＬキャロ+3",
+        body="ＦＬオングルリヌ+3",
+        hands="ＦＬマンシェト+3",
+        legs="ＦＬラングラヴ+3",
+        feet="ＦＬコテュルヌ+3",
+        neck="無の喉輪",
+        waist="無の腰当",
+        left_ear="昏黄の耳飾り",
+        right_ear={ name="フィリピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        left_ring="スティキニリング+1",
+        right_ring="スティキニリング+1",
+        back="無の外装",
+    }
+
     -- ダミー歌
     sets.midcast.song_dummy = {
         range="ダウルダヴラ",
