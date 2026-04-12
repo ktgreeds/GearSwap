@@ -3,7 +3,7 @@
 --■■■初期ロード
 function user_setup()
     state.Buff['睡眠'] = buffactive['睡眠'] or false                    --監視するバフ・デバフ
-
+    state.Buff['エンチャント'] = buffactive['エンチャント'] or false
     include(player.name .. '/weather_obi')                              --属性帯ロード
     include('smn_avatar')                                               --召喚定義ファイルロード
     init_weaponns()                                                     --武器初期化
@@ -19,10 +19,6 @@ function user_setup()
 
     -- gs c cycle RuneText
     state.RuneText = M(false)
-
-    -- ホクスニアムプラ
-    -- gs c cycle HoxneAmpulla
-    state.HoxneAmpulla = M(false)
 
     --include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
@@ -64,6 +60,7 @@ end
 --■■■アクション後処理（共通実装なし）
 function user_post_aftercast(spell, action, spellMap, eventArgs)
 end
+
 
 
 
@@ -213,14 +210,6 @@ function job_self_command(cmdParams, eventArgs)
             hideTextRune()
         end
         send_command('gs c cycle RuneText')
-    elseif cmdParams[1] == 'HoxneAmpulla' then
-        if not state.HoxneAmpulla.value then
-            equip({ammo="ホクスニアムプラ"})
-            disable('range','ammo')
-        else
-            enable('range','ammo')
-        end
-        send_command('gs c cycle HoxneAmpulla')
     elseif cmdParams[1] == 'lockstyleset' then      --ロックスタイル固定処理
         if player.main_job ~= '学' then
             send_command('input /lockstyleset '..lockstyleset)
