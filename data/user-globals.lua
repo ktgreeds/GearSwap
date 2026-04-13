@@ -54,13 +54,16 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
     if state.TreasureHunter and state.TreasureHunter.value then
         equip(sets.TreasureHunter)
     end
+
+    if spell.name == 'イオリアンエッジ' then
+        equip(get_hachirin(spell.element))
+    end
 end
 
 
 --■■■アクション後処理（共通実装なし）
 function user_post_aftercast(spell, action, spellMap, eventArgs)
 end
-
 
 
 
@@ -114,11 +117,8 @@ end
 
 --■■■バフデバフ変更時の共通処理
 function user_buff_change(buff, gain)
-    if state.Buff['睡眠'] then
-        equip({main=gear.Slip})
-        equip({range=gear.Slip})
-        equip({head=gear.Slip})
-        equip({neck=gear.Slip})
+    if state.Buff['睡眠']  or (buff == "睡眠" and gain) then
+        send_command('wait 1;gs c AutomaticWakeUp')
     elseif buff == "ファランクス" and not gain then
         windower.add_to_chat(167,'■■■ ファランクス切れ ■■■')
     elseif buff == "八双" and not gain then
@@ -137,6 +137,19 @@ function user_buff_change(buff, gain)
         windower.add_to_chat(167,'■■■ エンチャント切れ ■■■')
     end
 end
+
+
+
+function job_state_change(stateField,  newValue, oldValue)
+    if stateField == 'Offense Mode' then
+        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode SubtleBlow')        
+        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode Normal')        
+        end
+    end
+end
+
 
 
 --■■■待機攻撃装備着替え処理
@@ -214,7 +227,12 @@ function job_self_command(cmdParams, eventArgs)
         if player.main_job ~= '学' then
             send_command('input /lockstyleset '..lockstyleset)
         end
+    elseif cmdParams[1]  == 'AutomaticWakeUp' then
+        if state.Buff['睡眠'] then
+            equip({main=gear.Slip,range=gear.Slip,head=gear.Slip,neck=gear.Slip})
+        end
     end
+
     if type(custom_self_command) == "function" then --カスタムセルフコマンド呼び出し
         custom_self_command(cmdParams, eventArgs)
     end
