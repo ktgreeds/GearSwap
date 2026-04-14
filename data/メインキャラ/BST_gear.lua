@@ -11,7 +11,7 @@ end
 
 function init_gear_sets()
     --ロックスタイル番号
-    lockstyleset = 61
+    lockstyleset = 9
 
     --武器
     gear.Dolichenus             = {name="ドリケナス"}
@@ -112,9 +112,9 @@ function init_gear_sets()
         waist="コーネリアの黒帯",
         left_ear="エテオレートピアス",
         right_ear="エンチャンピアス+1",
-        left_ring="メダダリング",
         right_ring="ラハブリング",
     }
+    sets.precast.FC.value = 38
 
     sets.precast.Monster = {
         legs="グレティブリーチズ"
@@ -157,8 +157,8 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="フリオミシピアス",
-        left_ring="エパミノダスリング",
-        right_ring="メダダリング",
+        left_ring="コーネリアリング",
+        right_ring="エパミノダスリング",
         back={ name="アルティオマント", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
