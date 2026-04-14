@@ -8,7 +8,7 @@ function init_gear_sets()
     -- ロックスタイル番号
     lockstyleset = 12
 
-    -- 両手刀
+    -- 武器
     gear.DojikiriYasutsuna      = {name="童子切安綱"}
     gear.ShiningOne             = {name="シャイニングワン"}
     gear.UtuGrip                = {name="ウトゥグリップ"}
