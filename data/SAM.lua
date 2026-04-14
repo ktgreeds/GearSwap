@@ -13,22 +13,11 @@ function job_setup()
     state.Buff['心眼'] = buffactive['心眼'] or false
 
     --state
-    state.OffenseMode:options('Normal', 'SubtleBlow')
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
-    state.MainWeapons = M{'DojikiriYasutsuna', 'ShiningOne'}
+    state.OffenseMode:options('Normal','SubtleBlow')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons = M{'DojikiriYasutsuna','ShiningOne'}
+    state.SubWeapons = M{'UtuGrip'}
     state.Increased   = M(true)
-end
-
-
-
-function job_state_change(stateField,  newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode SubtleBlow')        
-        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode Normal')        
-        end
-    end
 end
 
 
