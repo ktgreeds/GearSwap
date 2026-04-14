@@ -15,7 +15,7 @@ function job_setup()
     state.RangedMode:options('Normal','SubtleBlow','Critical')
     state.MainWeapons       = M{'RostamA','RostamB','Naegling'}
     state.SubWeapons        = M{'NuskuShield','GletisKnife','Tauret'}
-    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','TPBonus','HoxneAmpulla',}
+    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','HoxneAmpulla',}
     state.LuzafsRing        = M(true)
     state.ShortRole         = M(false)
     
@@ -116,4 +116,15 @@ function customize_weapon_set()
     if state.MainWeapons.value == 'Naegling' then
         return {range=gear.TPBonus}
     end
+end
+
+
+function job_buff_change(buff, gain)
+    if state.Buff['エンチャント'] then
+        state.CombatForm:set('エンチャント')
+        disable('range','ammo')
+    elseif not state.Buff['エンチャント']  then
+        enable('range','ammo')
+    end
+    IdleMelee()
 end
