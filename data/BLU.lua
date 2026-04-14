@@ -5,6 +5,7 @@ function get_sets()
 end
 
 
+
 function job_setup()
     state.Buff["エフラックス"]          = buffactive["エフラックス"] or false
     state.Buff["エンチェーンメント"]    = buffactive["エンチェーンメント"] or false
@@ -13,17 +14,9 @@ function job_setup()
     state.Buff["ブルーチェーン"]        = buffactive["ブルーチェーン"] or false
     state.Buff["ブルーバースト"]        = buffactive["ブルーバースト"] or false
     
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
-    
-    -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal','LockWeapons')
-    
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
-
-    -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal')
+    state.OffenseMode:options('Normal','SubtleBlow','LockWeapons')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
 
     -- gs c cycle MainWeapons
     state.MainWeapons   = M{'Tizona','Naegling','Maxentius'}
@@ -38,22 +31,14 @@ function job_setup()
     state.LockWeapons = M(false)
 end
 
-function customize_idle_set(idleSet)
-    idleSet = set_combine(idleSet, {main=gear.ClaidheamhSoluis,sub=gear.Nehushtan})
-    return idleSet
-end
 
-function user_customize_melee_set(meleeSet)
-    return meleeSet
-end
 
-function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if newValue == 'Normal' then
-            enable('main','sub')
-        else
-            equip({main=gear.Tizona,sub=gear.SakpatasSword})
-            disable('main','sub')
-        end
+function job_buff_change(buff, gain)
+    if state.Buff['エンチャント'] then
+        state.CombatForm:set('エンチャント')
+        disable('range','ammo')
+    elseif not state.Buff['エンチャント']  then
+        enable('range','ammo')
     end
+    IdleMelee()
 end
