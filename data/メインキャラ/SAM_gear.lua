@@ -51,7 +51,7 @@ function init_gear_sets()
         head="極春日烏帽子形兜",
         body="極春日胴丸",
         hands="越脇戸筒篭手",
-        legs="極左近士板佩楯",
+        legs="極春日板佩楯",
         feet="越脇戸筒脛当",
         neck="月光の喉輪",
         waist="ソードフェーテル+1",
