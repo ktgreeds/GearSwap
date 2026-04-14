@@ -294,7 +294,7 @@ function init_gear_sets()
         left_ear="アスプロピアス",
         right_ear={ name="シャスーピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Crit.hit rate+6','STR+9 AGI+9',}},
         left_ring="王将の指輪",
-        right_ring="メタモルリング+1,
+        right_ring="メタモルリング+1",
         back="無の外装",
     }
     
