@@ -73,12 +73,14 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    -- モクシャ
+    -- モクシャ(49)
     sets.SubtleBlow = {
         hands="アデマリスト+1",
         neck="バーシチョーカー+1",
         waist="サリサフロイベルト",
         right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
     }
 
     -- 抜刀装備
@@ -108,8 +110,9 @@ function init_gear_sets()
     sets.engaged.SubtleBlow = set_combine(sets.engaged ,sets.SubtleBlow)
     
     --アムプラ
-    sets.engaged['エンチャント']  = set_combine(sets.engaged,{}
-    )
+    sets.engaged['エンチャント']  = set_combine(sets.engaged,{
+        waist="ソードフェーテル+1"
+    })
 
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= { waist="霊亀腰帯",right_ear="エアバニピアス"}
