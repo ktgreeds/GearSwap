@@ -6,39 +6,34 @@ end
 
 
 function job_setup()
+    --buff
     state.Buff['トリプルショット']  = buffactive['トリプルショット'] or false
     
-    -- gs c cycle IdleMode
-    state.IdleMode:options('Normal')
-
-    -- gs c cycle OffenseMode
+    --state
     state.OffenseMode:options('Normal','ACC','SubtleBlow')
-    
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
-    
-    -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal','SubtleBlow')
-
-    -- gs c cycle RangedMode
     state.RangedMode:options('Normal','SubtleBlow','Critical')
-
-    -- gs c cycle MainWeapons
     state.MainWeapons       = M{'RostamA','RostamB','Naegling'}
-    
-    -- gs c cycle SubWeapons
     state.SubWeapons        = M{'NuskuShield','GletisKnife','Tauret'}
-    
-    -- gs c cycle RangeWeapons
     state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','TPBonus','HoxneAmpulla',}
-
-    -- gs c cycle LuzafsRing
     state.LuzafsRing        = M(true)
-
-    -- gs c cycle ShortRole
     state.ShortRole         = M(false)
-
+    
+    define_roll_values()--ロール情報
 end
+
+
+
+local res = require('resources')
+function get_item_id_by_name(name)
+    for id, item in pairs(res.items) do
+        if item and item.name == name then
+            return id
+        end
+    end
+    return nil
+end
+
 
 
 function job_post_pretarget(spell, action, spellMap, eventArgs)
@@ -49,21 +44,25 @@ function job_post_pretarget(spell, action, spellMap, eventArgs)
 
     --遠隔攻撃
     if spell.action_type == 'Ranged Attack' then
-        equip({ammo=gear.MarksmanshipPhysics})
+        if res.items[get_item_id_by_name(player.equipment.range)]["range_type"] == "Gun" then
+            equip({ammo = gear.GunPhysics})
+        end
     end
 
     --ロール
     if spell.type == 'CorsairRoll' then
+        display_roll_info(spell)
         if state.LuzafsRing.value then
             equip({left_ring=gear.LuzafsRing})
         end
-
     end
 end
 
 
+
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.name == 'レデンサリュート' or spell.name == 'イオリアンエッジ' then
+    if spell.name == 'レデンサリュート' 
+    or spell.name == 'イオリアンエッジ' then
         equip(get_hachirin(spell.element))
     end
 
@@ -81,6 +80,7 @@ function job_post_precast(spell, action, spellMap, eventArgs)
 end
 
 
+
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.action_type == 'Ranged Attack' then
         if state.Buff['トリプルショット'] then
@@ -88,6 +88,7 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
         end
     end
 end
+
 
 
 function job_post_aftercast(spell, action, spellMap, eventArgs)
@@ -98,9 +99,11 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
 end
 
 
+
 function customize_idle_set(idleSet)
     return set_combine(idleSet,customize_weapon_set())
 end
+
 
 
 function user_customize_melee_set(meleeSet)
@@ -108,18 +111,9 @@ function user_customize_melee_set(meleeSet)
 end
 
 
+
 function customize_weapon_set()
     if state.MainWeapons.value == 'Naegling' then
         return {range=gear.TPBonus}
-    end
-end
-
-function job_state_change(stateField,  newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode SubtleBlow')        
-        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode Normal')        
-        end
     end
 end
