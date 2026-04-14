@@ -1,4 +1,5 @@
 function init_weaponns()
+    send_command('wait 1; gs c set SubWeapons UtuGrip')
 end
 
 
