@@ -152,8 +152,8 @@ function init_gear_sets()
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="イラブラットリング",
-        right_ring="エパミノダスリング",
+        left_ring="コーネリアリング",
+        right_ring="イラブラットリング",
         back=gear.JobMantle.WSD.STR
     }
 
@@ -164,16 +164,16 @@ function init_gear_sets()
     sets.precast.WS.Critical = {
         ammo="コイストボダー",
         head={ name="ブリスタサリット+1", augments={'Path: A',}},
-        body="グレティキュイラス",
-        hands="グレティガントレ",
-        legs="グレティブリーチズ",
-        feet="グレティブーツ",
+        body="マリグナスタバード",
+        hands="マリグナスグローブ",
+        legs="マリグナスタイツ",
+        feet="マリグナスブーツ",
         neck={ name="ミラージストール+2", augments={'Path: A',}},
         waist="フォシャベルト",
         left_ear="オドルピアス",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="イラブラットリング",
-        right_ring="エポナリング",
+        left_ring="コーネリアリング",
+        right_ring="イラブラットリング",
         back=gear.JobMantle.Critical
     }
 
@@ -189,7 +189,7 @@ function init_gear_sets()
         waist="スクリミルコード",
         left_ear="王将の耳飾り",
         right_ear="フリオミシピアス",
-        left_ring="メダダリング",
+        left_ring="コーネリアリング",
         right_ring="エパミノダスリング",
         back=gear.JobMantle.Magic
     }
@@ -250,7 +250,7 @@ function init_gear_sets()
         waist="無の腰当",
         left_ear="王将の耳飾り",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="メダダリング",
+        left_ring="メランリング",
         right_ring="メタモルリング+1",
         back="無の外装",
     }
