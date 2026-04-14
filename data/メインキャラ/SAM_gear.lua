@@ -59,6 +59,7 @@ function init_gear_sets()
         neck="侍の喉輪+2",
         left_ring="シーリチリング+1",
         back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},})
+    sets.engaged.SubtleBlow = set_combine(sets.engaged ,sets.SubtleBlow)
 
     -- 即時発動アビリティ
     sets.precast.JA['明鏡止水'] = {
@@ -111,6 +112,9 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
+    -- WSダメージ（モクシャ）
+    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,sets.SubtleBlow)
+
     -- WS魔攻
     sets.precast.WS.Magic = {
         ammo="ノブキエリ",
