@@ -1,6 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('wait 1; gs c set SubWeapons SakpatasSword')
+    send_command('gs c set SubWeapons SakpatasSword')
 end
 
 
@@ -123,15 +123,22 @@ function init_gear_sets()
 
     -- FC
     sets.precast.FC = {
-        head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},--14
-        body="ピンガチュニック+1",--15
-        legs="ピンガズボン+1",--13
-        neck="オルンミラトルク",--5
+        sub="サクパタソード",
+        ammo="アマークラスター",
+        head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
+        body="ピンガチュニック+1",
+        hands="ニャメガントレ",
+        legs="ピンガズボン+1",
+        feet="ＡＳチャルク+4",
+        neck="オルンミラトルク",
         waist="コーネリアの黒帯",
-        left_ring="メダダリング",--10
-        back={ name="フィフォレケープ+1", augments={'Path: A',}},--10
+        left_ear="アスプロピアス",
+        right_ear="エアバニピアス",
+        left_ring="キシャールリング",
+        right_ring="ラハブリング",
+        back="フィフォレケープ+1",
     }
-    sets.precast.FC.value = 80 --67 + 15（えらチックフラッター特性）
+    sets.precast.FC.value = 80
 
     -- WSダメージ
     sets.precast.WS.Damage = {
@@ -200,8 +207,6 @@ function init_gear_sets()
 
     --青魔法魔攻
     sets.midcast.BlueMagical = {
-        main=gear.Tizona,
-        sub="ブンジロッド",
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
         head="ＨＳカヴク+3",
         body="ＨＳミンタン+3",
@@ -212,7 +217,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="王将の耳飾り",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="メダダリング",
+        left_ring="メランリング",
         right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back=gear.JobMantle.Magic
     }
@@ -262,7 +267,7 @@ function init_gear_sets()
         waist="無の腰当",
         left_ear="王将の耳飾り",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
-        left_ring="メダダリング",
+        left_ring="メランリング",
         right_ring="メタモルリング+1",
         back="無の外装",
     }
@@ -308,7 +313,6 @@ function init_gear_sets()
     })
 
     sets.midcast['ファランクス'] = {
-        main="サクパタソード",
         head={ name="ヘルクリアヘルム", augments={'Accuracy+11','STR+4','Phalanx +4','Accuracy+6 Attack+6','Mag. Acc.+16 "Mag.Atk.Bns."+16',}},
         body={ name="ヘルクリアベスト", augments={'STR+10','Pet: STR+9','Phalanx +5','Mag. Acc.+3 "Mag.Atk.Bns."+3',}},
         hands={ name="ヘルクリアグローブ", augments={'STR+5','CHR+10','Phalanx +5','Accuracy+14 Attack+14','Mag. Acc.+8 "Mag.Atk.Bns."+8',}},
