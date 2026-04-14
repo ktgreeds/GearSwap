@@ -104,6 +104,10 @@ function init_gear_sets()
         right_ear="ディグニタリピアス",
     })
     
+    --アムプラ
+    sets.engaged['エンチャント']  = set_combine(sets.engaged,{}
+    )
+
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= { waist="霊亀腰帯",right_ear="エアバニピアス"}
 
