@@ -36,6 +36,15 @@ function init_gear_sets()
         back="無の外装",
     }
 
+    -- モクシャ(41)
+    sets.SubtleBlow = {
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
+    }
+
     -- 抜刀装備
     sets.engaged = {
         ammo="オゲルミルオーブ+1",
@@ -111,7 +120,7 @@ function init_gear_sets()
         right_ring="スローダリング",
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
-    
+
     -- WSダメージ（モクシャ）
     sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,sets.SubtleBlow)
 
