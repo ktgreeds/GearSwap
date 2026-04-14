@@ -1,6 +1,6 @@
 function init_weaponns()
     -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Opashoro; wait 0.3; gc set SubWeapons EnkiStrap')
+    send_command('wait 1; gc set SubWeapons EnkiStrap')
 end
 
 
@@ -119,6 +119,7 @@ function init_gear_sets()
 
     -- FC
     sets.precast.FC = {
+        main="ムサ",
         ammo="サピエンスオーブ",
         head="ＰＤボード+4",
         body="ピンガチュニック+1",
@@ -130,7 +131,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="エンチャンピアス+1",
         left_ring="キシャールリング",
-        right_ring="メダダリング",
+        right_ring="ラハブリング",
         back="フィフォレケープ+1",
     }
 
@@ -176,7 +177,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="フレキリング",
-        right_ring="メダダリング",
+        right_ring="コーネリアリング",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
     
@@ -190,7 +191,8 @@ function init_gear_sets()
         ammo="クォーツタスラム+1",
         head="ＡＣボード+4",
         body="ＡＣガウン+4",
-        hands="ＡＣブレーサー+4",
+        --hands="ＡＣブレーサー+4",
+        hands="王将の袖飾り",
         legs="ＡＢパンツ+3",
         feet="ＡＣローファー+4",
         neck={ name="アギュトストール+2", augments={'Path: A',}},
@@ -233,7 +235,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="フレキリング",
-        right_ring="メダダリング",
+        right_ring="メタモルリング+1",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
     sets.midcast['精霊魔法'].weak = set_combine(sets.midcast['精霊魔法'],{
@@ -244,7 +246,7 @@ function init_gear_sets()
 
     -- 計略系
     sets.midcast.Helix = set_combine(sets.midcast['精霊魔法'] ,{
-        right_ear={ name="アバテルピアス+1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+14','Enmity-4',}},
+        right_ear={ name="アバテルピアス+1", augments={'System: 1 ID: 1676 Val: 0','Mag. Acc.+15','Enmity-5',}},
         waist="スクリミルコード",
         back="ブックワームケープ"
     })
@@ -271,6 +273,7 @@ function init_gear_sets()
 
     -- 強化魔法
     sets.midcast['強化魔法'] = {
+        main="ムサ",
         head={ name="テルキネキャップ", augments={'"Cure" potency +5%','Enh. Mag. eff. dur. +10',}},
         body={ name="ＰＤガウン+3", augments={'Enhances "Enlightenment" effect',}},
         hands={ name="テルキネグローブ", augments={'"Cure" potency +7%','Enh. Mag. eff. dur. +10',}},
