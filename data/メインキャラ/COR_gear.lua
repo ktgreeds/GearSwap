@@ -73,6 +73,14 @@ function init_gear_sets()
         back="無の外装",
     }
 
+    -- モクシャ
+    sets.SubtleBlow = {
+        hands="アデマリスト+1",
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+    }
+
     -- 抜刀装備
     sets.engaged = {
         head="マリグナスシャポー",
@@ -97,12 +105,7 @@ function init_gear_sets()
 
 
     -- 抜刀装備（モクシャ）
-    sets.engaged.SubtleBlow = set_combine(sets.engaged ,{
-        hands="アデマリスト+1",
-        neck="バーシチョーカー+1",
-        waist="サリサフロイベルト",
-        right_ear="ディグニタリピアス",
-    })
+    sets.engaged.SubtleBlow = set_combine(sets.engaged ,sets.SubtleBlow)
     
     --アムプラ
     sets.engaged['エンチャント']  = set_combine(sets.engaged,{}
@@ -201,7 +204,7 @@ function init_gear_sets()
     }
 
     -- WSダメージ（モクシャ）
-    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,{neck="バーシチョーカー+1"})
+    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,sets.SubtleBlow)
 
     -- WS遠隔ダメージ
     sets.precast.WS.Range = {
