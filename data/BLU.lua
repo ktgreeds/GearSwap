@@ -15,7 +15,7 @@ function job_setup()
     state.Buff["ブルーバースト"]        = buffactive["ブルーバースト"] or false
     
     state.IdleMode:options('Normal','Refresh')
-    state.OffenseMode:options('Normal','SubtleBlow','LockWeapons')
+    state.OffenseMode:options('Normal','SubtleBlow')
     state.WeaponskillMode:options('Normal','SubtleBlow')
 
     -- gs c cycle MainWeapons
@@ -29,6 +29,18 @@ function job_setup()
 
     -- gs c cycle LockWeapons
     state.LockWeapons = M(false)
+end
+
+
+
+function job_state_change(stateField,  newValue, oldValue)
+    if stateField == 'Offense Mode' then
+        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode SubtleBlow')        
+        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode Normal')        
+        end
+    end
 end
 
 
