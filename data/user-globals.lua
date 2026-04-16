@@ -140,15 +140,6 @@ end
 
 
 
-function job_state_change(stateField,  newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode SubtleBlow')        
-        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode Normal')        
-        end
-    end
-end
 
 
 
