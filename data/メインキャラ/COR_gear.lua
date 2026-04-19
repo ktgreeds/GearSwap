@@ -1,6 +1,5 @@
 function init_weaponns()
-    -- デフォルト武器を設定
-    send_command('gs c set MainWeapons RostamB;')
+    send_command('gs c reset SubWeapons; wait 0.1; gs c set MainWeapons RostamB;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
         send_command('wait 1; gs c set SubWeapons GletisKnife')
     end
@@ -200,9 +199,9 @@ function init_gear_sets()
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear={ name="シャスーピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Crit.hit rate+6','STR+9 AGI+9',}},
-        left_ring="スローダリング",
+        left_ring="コーネリアリング",
         --right_ring="エパミノダスリング",
-        right_ring="シーリチリング+1",
+        right_ring="スローダリング",
         back=gear.JobMantle.WSD.STR
     }
 
@@ -221,8 +220,8 @@ function init_gear_sets()
         waist="テレンベルト",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="テロスピアス",
-        left_ring="ディンジルリング",
-        right_ring="王将の指輪",
+        left_ring="コーネリアリング",
+        right_ring="ディンジルリング",
         back=gear.JobMantle.WSD.AGI
     }
     
