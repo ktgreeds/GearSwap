@@ -1,6 +1,7 @@
 function init_weaponns()
+    send_command('gs c reset SubWeapons;')
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('gs c set SubWeapons Aeneas')
+        send_command('wait 1; gs c set SubWeapons Aeneas')
     end
 end
 
@@ -33,7 +34,7 @@ function init_gear_sets()
     -- その他
     gear.Evasion                = {name="ニビルナイフ"}
 
-    gear.JobMantle={}
+    gear.JobMantle              = {}
     gear.JobMantle.Critical     = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.JobMantle.Magic        = { name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}}
     gear.JobMantle.WSD          = {}
@@ -43,29 +44,43 @@ function init_gear_sets()
     
     -- 待機装備（通常）
     sets.idle = {
-        --range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
-        head="ニャメヘルム",
+        head="ＦＬキャロ+3",
         body="ニャメメイル",
         hands="ニャメガントレ",
         legs="ＢＲキャニオン+4",
         feet="ニャメソルレット",
         neck="バーシチョーカー+1",
         waist="無の腰当",
-        left_ear="エアバニピアス",
-        right_ear="インフューズピアス",
+        left_ear="インフューズピアス",
+        right_ear="エアバニピアス",
         left_ring="メランリング",
         right_ring="シュネデックリング",
         back="無の外装",
     }
 
+    sets.idle.Evasion = set_combine(sets.idle,{
+        range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
+        head="ＦＬキャロ+3",
+        body="レベレプレート",
+        hands="レベレガントレ",
+        legs="レベレブレー",
+        feet="レベレサバトン",
+        neck="バーシチョーカー+1",
+        waist="無の腰当",
+        left_ear="アスプロピアス",
+        right_ear="エアバニピアス",
+        left_ring="メランリング",
+        right_ring="シュネデックリング",
+        back="無の外装",
+    })
     -- 抜刀装備
     sets.engaged = {
         range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
-        head="ＦＬキャロ+3",
-        body="アシェーラハーネス",
-        hands="ＦＬマンシェト+3",
-        legs="ＦＬラングラヴ+3",
-        feet="ＦＬコテュルヌ+3",
+        head="レベレマスク",
+        body="レベレプレート",
+        hands="レベレガントレ",
+        legs="レベレサバトン",
+        feet="レベレサバトン",
         neck={ name="バードチャーム+1", augments={'Path: A',}},
         waist="セールフィベルト+1",
         left_ear="アスプロピアス",
@@ -85,10 +100,7 @@ function init_gear_sets()
     })
 
     -- 二刀流11（サポ忍）
-    sets.engaged.dual11= {
-        waist="霊亀腰帯",
-        right_ear="エアバニピアス"
-    }
+    sets.engaged.dual11= { waist="霊亀腰帯",right_ear="エアバニピアス"}
 
     -- 即時発動アビリティ　ソウルボイス
     sets.precast.JA["ソウルボイス"] = {
