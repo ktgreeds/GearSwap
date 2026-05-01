@@ -190,6 +190,11 @@ function job_self_command(cmdParams, eventArgs)
         IdleMelee()
     elseif cmdParams[1] == 'Medicine' then          --状態異常回復
         Medicine()
+    elseif cmdParams[1] == 'cure' then              --ケアルマクロ節約
+        Cure()
+    elseif cmdParams[1] == 'curaga' then              --ケアルマクロ節約
+        Curaga()
+        
     elseif cmdParams[1] == 'aspir' then             --アスピルマクロ節約
         Aspir()
     elseif cmdParams[1] == 'drain' then             --ドレインマクロ節約
@@ -319,7 +324,50 @@ function IdleMelee()
     end
 end
 
+--■■■ケアルマクロ節約
+function Cure()
+    local recasts = windower.ffxi.get_spell_recasts()
+    local Cure_1 = recasts[1]/60
+    local Cure_2 = recasts[2]/60
+    local Cure_3 = recasts[3]/60
+    local Cure_4 = recasts[4]/60
+    local Cure_5 = recasts[5]/60
+    local Cure_6 = recasts[6]/60
 
+    if Cure_6 == 0 and player.last_subtarget.hpp < 20 and player.main_job == '白' then
+       send_command('input /ma '..windower.to_shift_jis('ケアルVI')..' <lastst>')
+    elseif Cure_5 == 0 and player.last_subtarget.hpp < 40 and player.main_job == '白' then
+       send_command('input /ma '..windower.to_shift_jis('ケアルV')..' <lastst>')
+    elseif Cure_4 == 0 and player.last_subtarget.hpp < 70 then
+       send_command('input /ma '..windower.to_shift_jis('ケアルIV')..' <lastst>')
+    elseif Cure_3 == 0 and player.last_subtarget.hpp < 85 then
+       send_command('input /ma '..windower.to_shift_jis('ケアルIII')..' <lastst>')
+    elseif Cure_2 == 0 and player.last_subtarget.hpp < 95 then
+       send_command('input /ma '..windower.to_shift_jis('ケアルII')..' <lastst>')
+    elseif Cure_1 == 0   then
+       send_command('input /ma '..windower.to_shift_jis('ケアル')..' <lastst>')
+    end
+end
+--■■■ケアルガマクロ節約
+function Curaga()
+    local recasts = windower.ffxi.get_spell_recasts()
+    local Curaga1 = recasts[7]/60
+    local Curaga2 = recasts[8]/60
+    local Curaga3 = recasts[9]/60
+    local Curaga4 = recasts[10]/60
+    local Curaga5 = recasts[11]/60
+    if Curaga5 == 0 and player.last_subtarget.hpp < 20 and player.main_job == '白' then
+       send_command('input /ma '..windower.to_shift_jis('ケアルガV')..' <lastst>')
+    elseif Curaga4 == 0 and player.last_subtarget.hpp < 40 then
+       send_command('input /ma '..windower.to_shift_jis('ケアルガIV')..' <lastst>')
+    elseif Curaga3 == 0 and player.last_subtarget.hpp < 70  and player.sub_job_level >=51 then
+       send_command('input /ma '..windower.to_shift_jis('ケアルガIII')..' <lastst>')
+    elseif Curaga2 == 0 and player.last_subtarget.hpp < 80 then
+       send_command('input /ma '..windower.to_shift_jis('ケアルガII')..' <lastst>')
+    elseif Curaga1 == 0   then
+       send_command('input /ma '..windower.to_shift_jis('ケアルガ')..' <lastst>')
+    end
+end
 --■■■アスピルマクロ節約
 function Aspir()
     local recasts = windower.ffxi.get_spell_recasts()
@@ -449,7 +497,7 @@ function ActionEnmityRange()
     local recast_time_Banishga  = spell_recasts[38]/60
     local recast_time_Diaga     = spell_recasts[33]/60
     
-    if player.sub_job == '青' and recast_time_FrightfulRoar == 0 and player.sub_job_level>49 then
+    if player.sub_job == '青' and recast_time_FrightfulRoar == 0 and player.sub_job_level >= 50 then
         send_command('input /ma '..windower.to_shift_jis('フライトフルロア')..' <stnpc>')--2
     elseif player.sub_job == '青' and recast_time_GeistWall == 0 then
         send_command('input /ma '..windower.to_shift_jis('ガイストウォール')..' <stnpc>')--3
