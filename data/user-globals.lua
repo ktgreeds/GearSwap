@@ -68,6 +68,16 @@ end
 
 
 
+function SubtleBlowChange(stateField,  newValue, oldValue)
+    if stateField == 'Offense Mode' then
+        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode SubtleBlow')        
+        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
+            send_command('gs c set WeaponskillMode Normal')        
+        end
+    end
+end
+
 --詠唱中段非同期処理（sets.Buffを組み込めない）
 function Interruption(spell, action, spellMap, eventArgs)
     if not sets.precast.FC then
