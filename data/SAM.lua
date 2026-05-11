@@ -26,12 +26,13 @@ function user_customize_melee_set(meleeSet)
         meleeSet = set_combine(meleeSet,sets.buff['心眼'] )
     elseif state.HoxneAmpulla then
         if state.HoxneAmpulla.value then
-            equip({ammo="ホクスニアムプラ"})
             meleeSet = set_combine(meleeSet,sets.engaged.HoxneAmpulla)
-            disable('ammo')
         else
-            enable('ammo')
-            state.CombatForm:reset()
+            if state.Buff['八双'] then
+                state.CombatForm:set('八双')
+            elseif state.Buff['星眼'] then
+                state.CombatForm:set('星眼')
+            end
         end
     end
     return meleeSet
@@ -40,6 +41,14 @@ end
 
 function job_state_change(stateField,  newValue, oldValue)
     SubtleBlowChange(stateField,newValue,oldValue)
+    if state.HoxneAmpulla then
+        if state.HoxneAmpulla.value then
+            equip({ammo="ホクスニアムプラ"})
+            disable('ammo')
+        else
+            enable('ammo')
+        end
+    end
 end
 
 
