@@ -8,45 +8,26 @@ end
 function job_setup()
     state.Buff["魔力の泉"]       = buffactive["魔力の泉"] or false
     state.Buff["マナウォール"]   = buffactive["マナウォール"] or false
-    
-    --gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
-    
-    --gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
-
-    -- gs c cycle WeaponskillMode
+    state.OffenseMode:options('Normal','SubtleBlow')
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
-    
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'BunzisRod','MarinStaff'}
-
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'AmmurapiShield','EnkiStrap'}
-    
-    --gs c cycle MPsavings
-    state.MPsavings = M(true, 'MPsave')
+    state.MainWeapons   = M{'ブンジロッド','マランスタッフ'}
+    state.SubWeapons    = M{'アムラピシールド','エンキストラップ'}
+    state.MPsavings     = M(true)
 end
 
-weakmagic = S{'ストーン','ストーンII','ストーンIII','ウォータ','ウォータII','ウォータIII','エアロ','エアロII','エアロIII','ファイア','ファイアII','ファイアIII','ブリザド','ブリザドII','ブリザドIII','サンダー','サンダーII','サンダーIII'}
 
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    for buff,active in pairs(state.Buff) do
-        if active and sets.buff[buff] then
-            equip(sets.buff[buff])
-        end
-
-        if spell.skill == '精霊魔法' then
-            if not state.Buff["魔力の泉"] then
-                if state.MPsavings.value and spell.name ~= "インパクト" then
-                    equip(sets.midcast['精霊魔法'].MPsavings)
-                end
+    if spell.skill == '精霊魔法' then
+        if not state.Buff["魔力の泉"] then
+            if state.MPsavings.value and spell.name ~= "インパクト" then
+                equip(sets.midcast['精霊魔法'].MPsavings)
             end
-            if weakmagic:contains(spell.japanese) then
-                equip(sets.midcast['精霊魔法'].weak)
-            end
-            equip(get_hachirin(spell.element))
         end
+        if weakmagic:contains(spell.japanese) then
+            equip(sets.midcast['精霊魔法'].weak)
+        end
+        equip(get_hachirin(spell.element))
     end
 end
 
