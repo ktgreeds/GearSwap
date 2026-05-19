@@ -1,7 +1,9 @@
 function init_weaponns()
-    send_command('gs c reset SubWeapons;')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('カルンウェナン'))
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('wait 1; gs c set SubWeapons Aeneas')
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('エーネアス'))
+    else
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('アムラピシールド'))
     end
 end
 
@@ -10,30 +12,23 @@ function init_gear_sets()
     -- ロックスタイル番号
     lockstyleset = 10
 
-    -- 短剣
-    gear.Carnwenhan             = {name="カルンウェナン"}
-    gear.Aeneas                 = {name="エーネアス"}
-    gear.Malevolence            = {name="マレヴォレンス", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}
-
-    -- 片手剣
-    gear.Naegling               = {name="ネイグリング"}
-    
-    -- 楽器
-    gear.Gjallarhorn            = {name="ギャッラルホルン"}
-    gear.Daurdabla              = {name="ダウルダヴラ"}
-    gear.Marsyas                = {name="マルシュアス"}
-    gear.Blurred                = {name="ブラーハープ+1"}
-    gear.MiracleCheer           = {name="ミラクルチアー"}
+    -- 武器
+    gear['カルンウェナン']      = {name="カルンウェナン"}
+    gear['エーネアス']          = {name="エーネアス"}
+    gear['マレヴォレンス']      = {name="マレヴォレンス", augments={'INT+10','Mag. Acc.+10','"Mag.Atk.Bns."+10','"Fast Cast"+5',}}
+    gear['ネイグリング']        = {name="ネイグリング"}
+    gear['ギャッラルホルン']    = {name="ギャッラルホルン"}
+    gear['ダウルダヴラ']        = {name="ダウルダヴラ"}
+    gear['マルシュアス']        = {name="マルシュアス"}
+    gear['ブラーハープ']        = {name="ブラーハープ+1"}
+    gear['ラックナシェード']    = {name="ラックナシェード"}
+    gear['ミラクルチアー']      = {name="ミラクルチアー"}
+    gear['玄冥盾']              = {name="玄冥盾"}
+    gear['アムラピシールド']    = {name="アムラピシールド"}
     gear.Empty                  = {name=nil}
-
-    -- 盾
-    gear.Genbu                  = {name="玄冥盾"}
-    gear.AmmurapiShield			= {name="アムラピシールド"}
-    gear.Loughnashade           = {name="ラックナシェード"}
-    
-    -- その他
     gear.Evasion                = {name="ニビルナイフ"}
 
+    -- マント
     gear.JobMantle              = {}
     gear.JobMantle.Critical     = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.JobMantle.Magic        = { name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}}
@@ -42,6 +37,14 @@ function init_gear_sets()
     gear.JobMantle.WSD.CHR      = { name="インタラアスケープ", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.JobMantle.WSD.DEX      = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     
+    sets.SubtleBlow = {
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
+    }
+
     -- 待機装備（通常）
     sets.idle = {
         head="ＦＬキャロ+3",
@@ -58,6 +61,7 @@ function init_gear_sets()
         back="無の外装",
     }
 
+    -- 待機装備（回避）
     sets.idle.Evasion = set_combine(sets.idle,{
         range={ name="リノス", augments={'Evasion+14','"Regen"+1','AGI+7',}},
         head="ＦＬキャロ+3",
@@ -73,6 +77,7 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back="無の外装",
     })
+
     -- 抜刀装備
     sets.engaged = {
         range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
@@ -91,31 +96,18 @@ function init_gear_sets()
     }
 
     -- 抜刀装備（モクシャ）
-    sets.engaged.SubtleBlow = set_combine(sets.engaged,{
-        neck="バーシチョーカー+1",
-        waist="サリサフロイベルト",
-        right_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    })
+    sets.engaged.SubtleBlow = set_combine(sets.engaged ,sets.SubtleBlow)
 
     -- 二刀流11（サポ忍）
     sets.engaged.dual11= { waist="霊亀腰帯",right_ear="エアバニピアス"}
 
-    -- 即時発動アビリティ　ソウルボイス
-    sets.precast.JA["ソウルボイス"] = {
-        legs="ＢＩキャニオンズ+3"
-    }
-    
-    -- 即時発動アビリティ　ナイチンゲール
-    sets.precast.JA["ナイチンゲール"] = {
-        feet="ＢＩスリッパー+3"
-    }
-
-    -- 即時発動アビリティ　トルバドゥール
-    sets.precast.JA["トルバドゥール"] = {
-        body="ＢＩジュストコル+4"
-    }
+    sets.precast.JA["ソウルボイス"]     = {legs="ＢＩキャニオンズ+3"}
+    sets.precast.JA["ピアニッシモ"]     = {}
+    sets.precast.JA["ナイチンゲール"]   = {feet="ＢＩスリッパー+3"}
+    sets.precast.JA["トルバドゥール"]   = {body="ＢＩジュストコル+4"}
+    sets.precast.JA["テヌート"]         = {}
+    sets.precast.JA["マルカート"]       = {}
+    sets.precast.JA["クラリオンコール"] = {}
 
     -- FC
     sets.precast.FC = {
@@ -126,10 +118,10 @@ function init_gear_sets()
         feet="ＦＬコテュルヌ+3",
         neck="オルンミラトルク",
         waist="エンブラサッシュ",
-        left_ear={ name="アスプロピアス", augments={'Path: A',}},
-        right_ear={ name="フィリピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="メランリング",
-        right_ring="メダダリング",
+        left_ear="エテオレートピアス",
+        right_ear="エンチャンピアス+1",
+        left_ring="キシャールリング",
+        right_ring="ラハブリング",
         back={ name="フィフォレケープ+1", augments={'Path: A',}},
     }
 
@@ -139,10 +131,9 @@ function init_gear_sets()
         body="ＢＲジュスト+4",
         legs="ＢＩスリッパー+4"
     })
-    sets.precast.FC.value = 80
 
-   --FC（ディスペガ用）
-   sets.precast.FC['ディスペガ'] = set_combine(sets.precast.FC,{main="デイブレイクワンド",})
+    --FC（ディスペガ用）
+    sets.precast.FC['ディスペガ'] = set_combine(sets.precast.FC,{main="デイブレイクワンド",})
 
     -- WSダメージ
     sets.precast.WS.Damage = {
@@ -160,9 +151,6 @@ function init_gear_sets()
         right_ring="スローダリング",
         back=gear.JobMantle.WSD.STR
     }
-
-    -- WSダメージ（モクシャ）
-    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,{neck="バーシチョーカー+1"})
 
     sets.precast.WS.Critical = {
         range={ name="リノス", augments={'Accuracy+15 Attack+15','Crit. hit damage +3%','DEX+8',}},
@@ -192,7 +180,7 @@ function init_gear_sets()
         waist="アキュイテベルト+1",
         left_ear="王将の耳飾り",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="メダダリング",
+        left_ring="コーネリアリング",
         right_ring="メタモルリング+1",
         back=gear.JobMantle.Magic
     }
@@ -238,8 +226,8 @@ function init_gear_sets()
         waist="エスカンストーン",
         left_ear="王将の耳飾り",
         right_ear="フリオミシピアス",
-        left_ring="メダダリング",
-        right_ring="シュネデックリング",
+        left_ring="メランリング",
+        right_ring="メタモルリング+1",
         back="無の外装",
     }
 

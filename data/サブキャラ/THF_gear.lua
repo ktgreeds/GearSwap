@@ -1,21 +1,55 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons Gandring')
-    send_command('gs c set SubWeapons Acrontica')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ガンドリング')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('アクロンティカ'))
 end
 
 
 function init_gear_sets()
     --ロックスタイル番号
-    lockstyleset = 31
+    lockstyleset = 6
 
-    --短剣
-    gear.Khonsu                 = {name="コーンスー"}
-    gear.Gandring               = {name="ガンドリング"}
-    gear.Malevolence            = {name="マレヴォレンス"}
-    gear.Tauret                 = {name="トーレット"}
-    gear.Aeneas                 = {name="エーネアス"}
-    gear.Acrontica              = {name="アクロンティカ"}
+    --武器
+    gear['ガンドリング']    = {name="ガンドリング"}
+    gear['マレヴォレンス']  = {name="マレヴォレンス"}
+    gear['トーレット']      = {name="トーレット"}
+    gear['エーネアス']      = {name="エーネアス"}
+    gear['アクロンティカ']  = {name="アクロンティカ"}
+
+    --トレハン
+    sets.TreasureHunter = {
+        feet="ＳＫプーレーヌ+3",
+    } 
+
+    -- 敵対心
+	sets.Enmity = {
+        head="ハリタスヘルム",
+        body="ＰＤベスト+3",
+        body="ＰＤベスト+3",
+        waist="ウォーダチャーム+1",
+        right_ring="ビグラッジリング",
+        back="霊亀外套"
+    }
+    
+    --バフ
+    sets.precast.JA                     = sets.Enmity
+    sets.buff['不意打ち']               = {hands="ＳＫアムレット+2"}
+    sets.buff['だまし討ち']             = {body="ＰＤベスト+3",hands="ＰＬアムレット+2"}
+    sets.precast.JA['絶対回避']         = {hands="ＰＤアムレット+3"}
+    sets.precast.JA['ぬすむ']           = {legs="アサシンキュロット",feet="ＰＬプーレーヌ+3",ammo="バラスルーム",neck="ペンタラグチャーム"}
+    sets.precast.JA['アカンプリス']     = {head="ＳＫボンネット+2"}
+    sets.precast.JA['不意打ち']         = {}
+    sets.precast.JA['とんずら']         = {feet="ＰＬプーレーヌ+3"}
+    sets.precast.JA['だまし討ち']       = {}
+    sets.precast.JA['かすめとる']       = {hands="ＰＤアムレット+3"}
+    sets.precast.JA['かくれる']         = {}
+    sets.precast.JA['アカンプリス']     = {}
+    sets.precast.JA['コラボレーター']   = {head="ＳＫボンネット+2"}
+    sets.precast.JA['アサシンチャージ'] = {}
+    sets.precast.JA['フェイント']       = {legs="ＰＤキュロット+3"}
+    sets.precast.JA['ぶんどる']         = {legs="ＳＫキュロット+2",feet="ＳＫプーレーヌ+3"}
+    sets.precast.JA['コンスピレーター'] = {}
+    sets.precast.JA['まどわす']         = {}
+    sets.precast.JA['ラーセニー']       = {}
+
 
     --待機装備（通常）
     sets.idle = {
@@ -29,7 +63,7 @@ function init_gear_sets()
         waist="無の腰当",
         left_ear="エアバニピアス",
         right_ear="インフューズピアス",
-        left_ring="ヴェンジフルリング",
+        left_ring="メランリング",
         right_ring="シュネデックリング",
         back="無の外装",
     }
@@ -59,46 +93,20 @@ function init_gear_sets()
     }
 
     sets.engaged.Multi = {
-        ammo={ name="コイストボダー", augments={'Path: A',}},
-        head={ name="アデマボンネット+1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-        body={ name="アデマジャケット+1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-        hands={ name="アデマリスト+1", augments={'Accuracy+20','Attack+20','"Subtle Blow"+8',}},
+        ammo="コイストボダー",
+        head="マリグナスシャポー",
+        body="マリグナスタバード",
+        hands="マリグナスグローブ",
         legs="マリグナスタイツ",
         feet="マリグナスブーツ",
         neck={ name="アサシンゴルゲ+2", augments={'Path: A',}},
-        waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="エアバニピアス",
+        waist="セールフィベルト+1",
+        left_ear="アスプロピアス",
         right_ear={ name="スカルカピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+13','Mag. Acc.+13','"Store TP"+4',}},
         left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-        back="無の外装",
+        right_ring="ゲリリング",
+        back={ name="トゥタティスケープ", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%',}},
     }
-    --トレハン
-    sets.TreasureHunter = {
-        hands={ name="ＰＤアムレット+3", augments={'Enhances "Perfect Dodge" effect',}},
-        feet="ＳＫプーレーヌ+3",    
-    }
-
-    --トレハン抜刀
-    sets.engaged.TH = set_combine(sets.engaged, sets.TreasureHunter)
-    
-    
-    --遠隔攻撃
-    sets.precast.RA ={range="アルビンベーン"}
-
-    --バフ監視用
-    sets.buff['不意打ち']               = {hands="ＳＫアムレット+2"}
-    sets.buff['だまし討ち']             = {body="ＰＤベスト+3",hands="ＰＬアムレット+2"}
-
-    --即時発動系
-    sets.precast.JA['アカンプリス']     = {head="ＳＫボンネット+2"}
-    sets.precast.JA['コラボレーター']   = {head="ＳＫボンネット+2"}
-    sets.precast.JA['絶対回避']         = {hands="ＰＤアムレット+3"}
-    sets.precast.JA['フェイント']       = {legs="ＰＤキュロット+3"}
-    sets.precast.JA['とんずら']         = {feet="ＰＬプーレーヌ+3"}
-    sets.precast.JA['ぬすむ']           = {legs="アサシンキュロット",feet="ＰＬプーレーヌ+3",ammo="バラスルーム",neck="ペンタラグチャーム"}
-    sets.precast.JA['かすめとる']       = {hands="ＰＤアムレット+3"}
-    sets.precast.JA['ぶんどる']         = {legs="ＳＫキュロット+2",feet="ＳＫプーレーヌ+3"}
 
     --FC
     sets.precast.FC = {
@@ -120,34 +128,34 @@ function init_gear_sets()
     --WSダメージ
     sets.precast.WS.Damage = {
         ammo="コイストボダー",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body="ＳＫベスト+3",
+        head="ニャメヘルム",
+        body="ニャメメイル",
         hands="ニャメガントレ",
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        legs="ニャメフランチャ",
         feet="ニャメソルレット",
         neck={ name="アサシンゴルゲ+2", augments={'Path: A',}},
         waist="フォシャベルト",
         left_ear="シェリダピアス",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="王将の指輪",
-        right_ring="ゲリリング",
+        left_ring="コーネリアリング",
+        right_ring="エパミノダスリング",
         back={ name="トゥタティスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},
     }
     
     --WSクリティカル
     sets.precast.WS.Critical = {
-        ammo="パルーグストーン",
-        head={ name="アデマボンネット+1", augments={'DEX+12','AGI+12','Accuracy+20',}},
-        body="ＰＬベスト+3",
-        hands={ name="ＰＤアムレット+3", augments={'Enhances "Perfect Dodge" effect',}},
-        legs="ＰＬキュロット+3",
-        feet="ＳＫプーレーヌ+3",
+        ammo="コイストボダー",
+        head="マリグナスシャポー",
+        body="マリグナスタバード",
+        hands="マリグナスグローブ",
+        legs="マリグナスタイツ",
+        feet="マリグナスブーツ",
         neck="フォシャゴルゲット",
         waist="フォシャベルト",
         left_ear="シェリダピアス",
         right_ear="オドルピアス",
         left_ring="王将の指輪",
-        right_ring="ゲリリング",
+        right_ring="イラブラットリング",
         back={ name="トゥタティスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},
     }
     
@@ -161,33 +169,32 @@ function init_gear_sets()
         feet="ＳＫプーレーヌ+3",
         neck="シビルスカーフ",
         waist="オルペウスサッシュ",
-       -- waist="エスカンストーン",
         left_ear="フリオミシピアス",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        --left_ring="メランリング",
-        left_ring="ディンジルリング",
-        right_ring="メダダリング",
+        left_ring="コーネリアリング",
+        right_ring="ディンジルリング",
         back={ name="トゥタティスケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-    }
-
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        right_ear="シェリダピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
     }
     
     --共通WS定義読み込み
     init_weapon_skill()
 
+    sets.precast.WS["イオリアンエッジ"] = { Normal=sets.precast.WS.Magic,
+                                            TreasureHunter=set_combine(sets.precast.WS.Magic,sets.TreasureHunter)}
+    sets.precast.WS["ルドラストーム"] = { Normal=sets.precast.WS.Magic,
+                                            TreasureHunter=set_combine(sets.precast.WS.Damage,sets.TreasureHunter)}
+    sets.precast.WS["エヴィサレーション"] = { Normal=sets.precast.WS.Magic,
+                                            TreasureHunter=set_combine(sets.precast.WS.Critical,sets.TreasureHunter)}                                            
     --ワルツ
-    sets.precast.Waltz={
+    sets.precast.Waltz=set_combine(sets.Enmity,{
         ammo="ヤメラング",
         body="グレティキュイラス",
         legs="ダッシングサブリガ",
-    }
+    })
+
+    --遠隔攻撃
+    sets.precast.RA ={range="アルビンベーン"}
+
+    sets.midcast['精霊魔法'] = set_combine(sets.precast.WS.Magic,sets.TreasureHunter)
+    sets.midcast['暗黒魔法'] = set_combine(sets.precast.WS.Magic,sets.TreasureHunter)
 end

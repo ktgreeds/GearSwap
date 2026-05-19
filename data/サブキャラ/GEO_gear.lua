@@ -1,18 +1,16 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons Idris')
-    send_command('gs c set SubWeapons Genbu')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('イドリス')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('玄冥盾'))
 end
 
 
 function init_gear_sets()
     --ロックスタイル番号
-    lockstyleset = 141
+    lockstyleset = 21
 
     --武器
-    gear.Idris                  = {name="イドリス"}
-    gear.Genbu                  = {name="玄冥盾"}
-    gear.Slip                   = {name="プライムモール"}
+    gear['イドリス'] = {name="イドリス"}
+    gear['玄冥盾']   = {name="玄冥盾"}
+    gear.Slip        = {name="プライムモール"}
 
     --待機装備（通常）
     sets.idle = {
@@ -64,13 +62,29 @@ function init_gear_sets()
     --待機装備（羅盤リフレ）
     sets.idle.Luopan.Refresh = set_combine(sets.idle.Luopan,sets.idle.Refresh)
     
+    --バフ
+    sets.buff['エントラスト']               = {main={ name="ガーダ", augments={'Indi. eff. dur. +11','"Mag.Atk.Bns."+19','DMG:+7',}},}
+    sets.precast.JA['ボルスター']           = {body="ＢＡチュニック+1"}
+    sets.precast.JA['フルサークル']         = {head="ＡＺフード+3"}
+    sets.precast.JA['エンデュアエマネイト'] = {}
+    sets.precast.JA['サークルエンリッチ']   = {}
+    sets.precast.JA['コリメイトファーバー'] = {}
+    sets.precast.JA['ライフサイクル']       = {body="ＧＯチュニック+1"}
+    sets.precast.JA['グローリーブレイズ']   = {}
+    sets.precast.JA['デマテリアライズ']     = {}
+    sets.precast.JA['エントラスト']         = {}
+    sets.precast.JA['メンドハレイション']   = {Legs="ＢＡパンツ+3"}
+    sets.precast.JA['レイディアルアルカナ'] = {feet="ＢＡサンダル+3"}
+    sets.precast.JA['タウマテルギフォカス'] = {}
+    sets.precast.JA['コンセントリクパルス'] = {}
+
     --FC
     sets.precast.FC = {
         range={ name="デュンナ", augments={'MP+20','Mag. Acc.+10','"Fast Cast"+3',}},
         head={ name="マーリンフード", augments={'"Fast Cast"+5','DEX+9','Mag. Acc.+9',}},
         body={ name="マーリンジュバ", augments={'Mag. Acc.+26','"Fast Cast"+6','MND+1',}},
         hands={ name="アグゥゲージ", augments={'Path: A',}},
-        legs={ name="サイクロスラッパ", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
+        legs="アグゥスロップス",
         feet={ name="マーリンクラッコー", augments={'"Mag.Atk.Bns."+2','"Fast Cast"+5','AGI+6','Mag. Acc.+14',}},
         neck="オルンミラトルク",
         waist="エンブラサッシュ",
@@ -83,23 +97,6 @@ function init_gear_sets()
 
     --FC（ディスペガ用）
    sets.precast.FC['ディスペガ'] = set_combine( sets.precast.FC,{main="デイブレイクワンド",})
-
-    --即時発動系
-    sets.precast.JA["ライフサイクル"]               = {body="ＧＯチュニック+1"}
-    sets.precast.JA["ボルスター"]                   = {body="ＢＡチュニック+1"}
-    sets.precast.JA["メンドハレイション"]           = {Legs="ＢＡパンツ+3"}
-    sets.precast.JA["レイディアルアルカナ"]         = {feet="ＢＡサンダル+3"}
-    sets.precast.JA["フルサークル"]                 = {head="ＡＺフード+3"}
-        
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    }
     
     --共通WS定義読み込み
     init_weapon_skill()
@@ -190,10 +187,5 @@ function init_gear_sets()
         left_ring={ name="メランリング", augments={'Path: A',}},
         right_ring="守りの指輪",
         back={ name="龍脈の外套", augments={'Geomancy Skill +8','Indi. eff. dur. +20','Pet: Damage taken -3%',}},
-    }
-
-    --エントラスト
-    sets.midcast.Entrust={
-        main={ name="ガーダ", augments={'Indi. eff. dur. +11','"Mag.Atk.Bns."+19','DMG:+7',}},
     }
 end

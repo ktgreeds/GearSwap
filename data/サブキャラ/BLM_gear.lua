@@ -1,19 +1,17 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons MarinStaff')
-    send_command('gs c set SubWeapons EnkiStrap')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ブンジロッド')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('アムラピシールド'))
 end
 
 
 function init_gear_sets()
     --ロックスタイル番号
-    lockstyleset = 11
+    lockstyleset = 4
 
     --武器
-    gear.BunzisRod             = {name="ブンジロッド"}
-    gear.MarinStaff            = {name="マランスタッフ+1"}
-    gear.EnkiStrap             = {name="エンキストラップ"}
-    gear.AmmurapiShield        = {name="アムラピシールド"}
+    gear['ブンジロッド']        = {name="ブンジロッド"}
+    gear['マランスタッフ']      = {name="マランスタッフ+1"}
+    gear['エンキストラップ']    = {name="エンキストラップ"}
+    gear['アムラピシールド']    = {name="アムラピシールド"}
 
     
     --待機装備（通常）
@@ -44,11 +42,15 @@ function init_gear_sets()
         left_ring="スティキニリング+1",}
     )
         
-    --監視用バフ
-    sets.buff['マナウォール']   = {feet="ＷＣサボ+3", back="タラナスケープ"}
-
-    --即時発動系
-    sets.precast.JA['魔力の泉'] = { body="ＡＲコート+3"}
+    -- バフ
+    sets.buff['マナウォール']           = {feet="ＷＣサボ+3", back="タラナスケープ"}
+    sets.precast.JA['魔力の泉']         = {body="ＡＲコート+3"}
+    sets.precast.JA['精霊の印']         = {}
+    sets.precast.JA['マナウォール']     = {}
+    sets.precast.JA['カスケード']       = {}
+    sets.precast.JA['エンミティダウス'] = {}
+    sets.precast.JA['魔力の雫']         = {body="ＡＲコート+3"}
+    sets.precast.JA['サテルソーサリー'] = {}
 
     --FC
     sets.precast.FC = {
@@ -56,7 +58,7 @@ function init_gear_sets()
         head={ name="マーリンフード", augments={'"Fast Cast"+5','DEX+9','Mag. Acc.+9',}},
         body={ name="マーリンジュバ", augments={'Mag. Acc.+26','"Fast Cast"+6','MND+1',}},
         hands={ name="アグゥゲージ", augments={'Path: A',}},
-        legs={ name="サイクロスラッパ", augments={'MP+80','Mag. Acc.+15','"Fast Cast"+7',}},
+        legs="アグゥスロップス",
         feet={ name="マーリンクラッコー", augments={'"Mag.Atk.Bns."+2','"Fast Cast"+5','AGI+6','Mag. Acc.+14',}},
         neck="オルンミラトルク",
         waist="エンブラサッシュ",
@@ -66,7 +68,6 @@ function init_gear_sets()
         right_ring="キシャールリング",
         back={ name="フィフォレケープ+1", augments={'Path: A',}},
     }
-    sets.precast.FC.value = 47
 
     --FC（インパクト）
     sets.precast.FC['インパクト'] = set_combine(sets.precast.FC,{head=empty,body="トワイライトプリス",})
@@ -87,22 +88,9 @@ function init_gear_sets()
         right_ring="アルコンリング",
         back={ name="フィフォレケープ+1", augments={'Path: A',}},
     }
-
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    }
     
     --共通WS定義読み込み
     init_weapon_skill()
-    sets.precast.WS["ミルキル"] = { Normal=sets.precast.WS.Mp,
-                                    SubtleBlow=set_combine(sets.precast.WS.Mp,sets.precast.WS.SubtleBlow)}
-
 
     --強化魔法
     sets.midcast['強化魔法']={
@@ -138,8 +126,8 @@ function init_gear_sets()
     }
     
     --精霊弱体系
-    sets.midcast['インパクト'] = set_combine(sets.midcast['弱体魔法'],{head=empty,body="トワイライトプリス",})
-    sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['弱体魔法'], {legs="ＡＲトンバン+3",feet="ＡＲサボ+3",left_ring="メダダリング"})
+    sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['弱体魔法'], {hands="ＡＲグローブ+3",legs="アグゥスロップス",feet="ＡＲサボ+3",left_ring="メダダリング"})
+    sets.midcast['インパクト'] = set_combine(sets.midcast.ElementalEnfeeble,{head=empty,body="トワイライトプリス",})
     sets.midcast['暗黒魔法'] = sets.midcast['弱体魔法'] 
     
     -- アスピル系
@@ -173,8 +161,8 @@ function init_gear_sets()
         right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back={ name="タラナスケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10','Occ. inc. resist. to stat. ailments+10',}},
     }
-    sets.midcast['精霊魔法'].weak = set_combine(sets.midcast['精霊魔法'],{
-    })
+
+    sets.midcast['精霊魔法'].weak = sets.midcast['精霊魔法']
 
     sets.midcast['デス'] = set_combine(sets.midcast['精霊魔法'],{
         head="妖蟲の髪飾り+1",

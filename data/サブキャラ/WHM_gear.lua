@@ -1,6 +1,6 @@
 function init_weaponns()
     --デフォルト武器を設定
-    send_command('gs c set MainWeapons QuellerRod; wait 0.3; gs c set SubWeapons ArchdukesShield')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('クェラーロッド')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('デュークシールド'))
 end
 
 
@@ -9,12 +9,13 @@ function init_gear_sets()
 	lockstyleset = 3
 
 	--武器
-    gear.QuellerRod         = {name="クェラーロッド"}
-    gear.Genbu              = {name="玄冥盾"}
-    gear.Slip               = {name="プライムモール"}
-    gear.ArchdukesShield    = {name="デュークシールド"}
+    gear['クェラーロッド']       = {name="クェラーロッド"}
+    gear['玄冥盾']               = {name="玄冥盾"}
+    gear['デュークシールド']     = {name="デュークシールド"}
+    gear.slip                    = {name="プライムモール"}
 
-	--待機装備
+
+    --待機装備
 	sets.idle = {
         ammo="ストンチタスラム+1",
         head="ＥＢキャップ+3",
@@ -31,6 +32,7 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back={ name="アラウナスケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','Mag. Evasion+10','Haste+10','Occ. inc. resist. to stat. ailments+10',}},
 	}
+
 	sets.idle.Refresh = set_combine(sets.idle,{
         head={ name="カイロンハット", augments={'Pet: Phys. dmg. taken -2%','Attack+4','"Refresh"+2','Accuracy+18 Attack+18',}},
         body="ＥＢブリオー+3",
@@ -40,19 +42,23 @@ function init_gear_sets()
         neck="シビルスカーフ",
         left_ring="スティキニリング+1",
     })
-	--抜刀装備
-	sets.engaged = {
-    }
 
-	--監視用バフ
+	--抜刀装備
+	sets.engaged = {}
+
+	--バフ
 	sets.buff['ハートオブソラス'] 		= {body="ＥＢブリオー+3",legs="ＰＩダックビル+3",back="アラウナスケープ"}
 	sets.buff['ハートオブミゼリ'] 		= {legs="ＰＩパンタロン+3"}
-	sets.buff['女神の印']   	    	= {head="ＥＢキャップ+3"}
-
-	--即時発動系
-	sets.precast.JA['デヴォーション']   = {head="ＰＩキャップ+3"}
+	sets.buff['女神の愛撫']   	    	= {hands="ＥＢミトン+3",back="メンディングケープ"}
     sets.precast.JA['女神の祝福']       = {body="ＰＩブリオー+1"}
-    sets.precast.JA['女神の愛撫']       = {hands="ＥＢミトン+3"}
+    sets.precast.JA['女神の印']         = {}
+    sets.precast.JA['ハートオブソラス'] = {}
+    sets.precast.JA['ハートオブミゼリ'] = {}
+    sets.precast.JA['マーター']         = {hands="ＰＩミトン+1"}
+	sets.precast.JA['デヴォーション']   = {head="ＰＩキャップ+3"}
+    sets.precast.JA['女神の愛撫']       = {}
+    sets.precast.JA['女神の聖域']       = {}
+    sets.precast.JA['女神の羽衣']       = {}
 	
 	--FC
     sets.precast.FC = {
@@ -72,7 +78,6 @@ function init_gear_sets()
         right_ring={name="メタモルリング+1",priority=15},--60
         back={name="フィフォレケープ+1",priority=13},--45
     }
-	    sets.precast.FC.value = 47
  
 	--FC（ディスペガ）
 	sets.precast.FC['ディスペガ'] = set_combine(sets.precast.FC,{main="デイブレイクワンド",})
