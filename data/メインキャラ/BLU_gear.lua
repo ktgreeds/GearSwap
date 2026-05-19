@@ -1,6 +1,5 @@
 function init_weaponns()
-    -- デフォルト武器を設定
-    send_command('gs c set SubWeapons SakpatasSword')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ティソーナ')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('サクパタソード'))
 end
 
 
@@ -8,38 +7,37 @@ function init_gear_sets()
     -- ロックスタイル番号
     lockstyleset = 16
     
-    -- 片手剣
-    gear.Tizona                 = {name="ティソーナ"}
-    gear.SakpatasSword          = {name="サクパタソード"}
-    gear.Naegling               = {name="ネイグリング"}
-    gear.ClaidheamhSoluis       = {name="クラウソラス", augments={'Evasion+15','Phys. dmg. taken -4%','AGI+17',}}
-    
-    -- 片手棍
-    gear.BunzisRod              = {name="ブンジロッド"}
-    gear.Maxentius              = {name="マクセンチアス"}
-    gear.Nehushtan              = {name="シャルウル", augments={'Evasion+15','Phys. dmg. taken -4%','AGI+17',}}
-
-    -- 短剣
-    gear.QutrubKnife            = {name="クトゥルブナイフ"}
-    gear.EtherealDagger         = {name="幽世の短剣"}
-    
-    -- その他
-    gear.Slip  					= {name="カリブルヌス"}
+    -- 武器
+    gear['ティソーナ']      = {name="ティソーナ"}
+    gear['サクパタソード']  = {name="サクパタソード"}
+    gear['ネイグリング']    = {name="ネイグリング"}
+    gear['ブンジロッド']    = {name="ブンジロッド"}
+    gear['マクセンチアス']  = {name="マクセンチアス"}
+    gear.Slip  				= {name="カリブルヌス"}
         
     -- ジョブマント
     gear.JobMantle              = {}
     gear.JobMantle.Dual         = { name="ロスメルタケープ", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Dual Wield"+10','Damage taken-5%',}}
     gear.JobMantle.Critical     = { name="ロスメルタケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}}
-    gear.JobMantle.Magic    = { name="コンフラワーケープ", augments={'MP+23','Accuracy+3','Blue Magic skill +10',}}
+    gear.JobMantle.Magic        = { name="コンフラワーケープ", augments={'MP+23','Accuracy+3','Blue Magic skill +10',}}
     gear.JobMantle.WSD          = {}
     gear.JobMantle.WSD.STR      = { name="ロスメルタケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%',}}
-
 
     -- トレハン
     sets.TreasureHunter = {
         ammo="完璧な幸運の卵",
         body="ヴォルトジュポン",
         waist="チャークベルト"
+    }
+
+    -- モクシャ(49)
+    sets.SubtleBlow = {
+        hands="アデマリスト+1",
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
     }
 
     -- 待機装備（通常）
@@ -59,17 +57,7 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back="無の外装",
     }
-
-    -- モクシャ(49)
-    sets.SubtleBlow = {
-        hands="アデマリスト+1",
-        neck="バーシチョーカー+1",
-        waist="サリサフロイベルト",
-        right_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    }
-
+ 
     -- 待機装備（リフレ）
     sets.idle.Refresh = set_combine(sets.idle, {
         ammo="ストンチタスラム+1",
@@ -91,45 +79,45 @@ function init_gear_sets()
         legs="マリグナスタイツ",
         feet="マリグナスブーツ",
         neck={ name="ミラージストール+2", augments={'Path: A',}},
-        waist="ソードフェーテル+1",
+        waist="セールフィベルト+1",
         left_ear="アスプロピアス",
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back=gear.JobMantle.Dual
     }
-
+    sets.engaged.HoxneAmpulla = {
+        ammo="ホクスニアムプラ",
+        waist="ソードフェーテル+1",
+    }
     -- 抜刀装備（モクシャ）
     sets.engaged.SubtleBlow = set_combine(sets.engaged ,sets.SubtleBlow)
 
-    --アムプラ
-    sets.engaged['エンチャント']  = set_combine(sets.engaged,{
-    })
-
     -- バフ監視用
-    sets.buff['エフラックス']           = {legs="ＨＳタイト+3"}
-    sets.buff['エンチェーンメント']     = {}
-    sets.buff['コンバージェンス']       = {}
-    sets.buff['ディフュージョン']       = {feet="ＬＬチャルク+3"}
-    sets.buff['ブルーチェーン']         = {}
-    sets.buff['ブルーバースト']         = {feet="ＨＳバシュマク+3"}
-
-	-- 即時発動系バフ
-    sets.precast.JA['アジュールロー']   = {hands="ＬＬバズバンド+1"}
-    sets.precast.JA['N.ウィズドム']     = {}
+    sets.buff['エフラックス']               = {legs="ＨＳタイト+3"}
+    sets.buff['ディフュージョン']           = {feet="ＬＬチャルク+3"}
+    sets.buff['ブルーチェーン']             = {head="ＨＳカヴク+3",feet="ＡＳチャルク+4"}
+    sets.buff['ブルーバースト']             = {feet="ＨＳバシュマク+3"}
+    sets.precast.JA['アジュールロー']       = {hands="ＬＬバズバンド+1"}
+    sets.precast.JA['ブルーバースト']       = {}
+    sets.precast.JA['ブルーチェーン']       = {}
+    sets.precast.JA['コンバージェンス']     = {}
+    sets.precast.JA['ディフュージョン']     = {}
+    sets.precast.JA['エフラックス']         = {}
+    sets.precast.JA['ノートリアスナレッジ'] = {}
+    sets.precast.JA['N.ウィズドム']         = {}
 
     -- 遠隔攻撃
     sets.precast.RA = {range="ラミアベーン"}
 
     -- FC
     sets.precast.FC = {
-        sub="サクパタソード",
-        ammo="アマークラスター",
+        ammo="サピエンスオーブ",
         head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
         body="ピンガチュニック+1",
-        hands="ニャメガントレ",
+        hands="レイライングローブ",
         legs="ピンガズボン+1",
-        feet="ＡＳチャルク+4",
+        feet="カマイングリーヴ",
         neck="オルンミラトルク",
         waist="コーネリアの黒帯",
         left_ear="アスプロピアス",
@@ -138,7 +126,6 @@ function init_gear_sets()
         right_ring="ラハブリング",
         back="フィフォレケープ+1",
     }
-    sets.precast.FC.value = 80
 
     -- WSダメージ
     sets.precast.WS.Damage = {
@@ -153,17 +140,14 @@ function init_gear_sets()
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear={ name="ハシシンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+20','Mag. Acc.+20','"Dbl.Atk."+8','STR+15 INT+15',}},
         left_ring="コーネリアリング",
-        right_ring="イラブラットリング",
+        right_ring="エパミノダスリング",
         back=gear.JobMantle.WSD.STR
     }
-
-    -- WSダメージ（モクシャ）
-    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,sets.SubtleBlow)
 
     -- WSクリティカル
     sets.precast.WS.Critical = {
         ammo="コイストボダー",
-        head={ name="ブリスタサリット+1", augments={'Path: A',}},
+        head="マリグナスシャポー",
         body="マリグナスタバード",
         hands="マリグナスグローブ",
         legs="マリグナスタイツ",
@@ -204,7 +188,6 @@ function init_gear_sets()
     sets.precast.WS["サンギンブレード"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),
                                             SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),sets.precast.WS.SubtleBlow)}
 
-
     --青魔法魔攻
     sets.midcast.BlueMagical = {
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
@@ -221,10 +204,6 @@ function init_gear_sets()
         right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back=gear.JobMantle.Magic
     }
-
-    sets.midcast['エントゥーム'] = set_combine(sets.midcast.BlueMagical,{
-        neck="クアンプネックレス",left_ring="ゼラチナスリング+1"
-    })
 
     sets.midcast['テネブラルクラッシュ'] = set_combine(sets.midcast.BlueMagical,{
         head="妖蟲の髪飾り+1",

@@ -1,39 +1,52 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons CroceaC; wait 0.5; gs c set SubWeapons Genbu;')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('クロセアモースC'))
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-		send_command('wait 2; gs c set SubWeapons TernionDagger')
-	end
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('ターニオンダガー'))
+    else
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('アムラピシールド'))
+    end
 end
 
 
 function init_gear_sets()
 	--ロックスタイル番号
-	lockstyleset = 21
+	lockstyleset = 5
 
-	--片手剣
-    gear.CroceaC                = {name="クロセアモース", augments={'Path: C'}}
-    gear.Naegling               = {name="ネイグリング"}
-
-    --短剣
-    gear.Tauret                 = {name="トーレット"}
-    gear.Malevolence            = {name="マレヴォレンス"}
-    gear.TernionDagger          = {name="ターニオンダガー+1"}
-	gear.QutrubKnife    		= {name="クトゥルブナイフ"}
-	gear.EtherealDagger 		= {name="幽世の短剣"}
-
-    --片手棍
-    gear.Maxentius              = {name="マクセンチアス"}
-    gear.KrakenClub             = {name="クラーケンクラブ"}
-    gear.Daybreak               = { name="デイブレイクワンド"}
-
-    --盾
-    gear.Genbu    				= {name="玄冥盾"}
-    gear.AmmurapiShield			= {name="アムラピシールド"}
-    --その他
+	--武器
+    gear['クロセアモースC']     = {name="クロセアモース", augments={'Path: C'}}
+    gear['ネイグリング']        = {name="ネイグリング"}
+    gear['トーレット']          = {name="トーレット"}
+    gear['マレヴォレンス']      = {name="マレヴォレンス"}
+    gear['ターニオンダガー']    = {name="ターニオンダガー+1"}
+	gear['クトゥルブナイフ']    = {name="クトゥルブナイフ"}
+	gear['幽世の短剣'] 		    = {name="幽世の短剣"}
+    gear['マクセンチアス']      = {name="マクセンチアス"}
+    gear['デイブレイクワンド']  = { name="デイブレイクワンド"}
+    gear['玄冥盾']    			= {name="玄冥盾"}
+    gear['アムラピシールド']	= {name="アムラピシールド"}
+    gear['ウルル']              = {name="ウルル"}
     gear.Slip  					= {name="カリブルヌス"}
 
-	--待機装備
+    --モクシャ
+    sets.SubtleBlow = {
+    }
+
+    sets.TreasureHunter = {
+        ammo="完璧な幸運の卵",
+        body="ヴォルトジュポン",
+        waist="チャークベルト"
+    }
+
+	--バフ
+	sets.buff['エンストーン'] 		    = {neck="クアンプネックレス"}
+    sets.precast.JA['連続魔'] 		    = {body="ＶＩタバード+3"}
+    sets.precast.JA['コンバート'] 		= {}
+    sets.precast.JA['コンポージャー'] 	= {}
+	sets.precast.JA['サボトゥール']     = {hands="ＬＴガントロ+2"}
+    sets.precast.JA['クイックマジック'] = {}
+    sets.precast.JA['スタイミー'] 		= {}
+
+    --待機装備
 	sets.idle = {
         ammo="ストンチタスラム+1",
         head={ name="ＶＩシャポー+3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
@@ -52,6 +65,7 @@ function init_gear_sets()
 	
     --抜刀装備
 	sets.engaged = {
+        range=empty,
         ammo={ name="コイストボダー", augments={'Path: A',}},
         head="マリグナスシャポー",
         body="マリグナスタバード",
@@ -60,8 +74,8 @@ function init_gear_sets()
         feet="マリグナスブーツ",
         neck="無の喉輪",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="ディグニタリピアス",
-        right_ear="シェリダピアス",
+        left_ear="アスプロピアス",
+        right_ear="手ロスピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},
@@ -69,14 +83,16 @@ function init_gear_sets()
 
 	--エン殴り装備
 	sets.engaged.Enn = set_combine(sets.engaged,{
-		ammo="スローダタスラム",
-		head="ウムシクハット",
-		hands="アヤモマノポラ+2",
-		legs="ＶＩタイツ+3",
-		waist="オルペウスサッシュ",
-        left_ear="素破の耳",
-        right_ear="エアバニピアス",
-        back={ name="ゴストファイケープ", augments={'Enfb.mag. skill +10','Enha.mag. skill +10','Mag. Acc.+5','Enh. Mag. eff. dur. +16',}},
+        range="ウルル",
+        ammo=empty,
+        hands="アヤモマノポラ+2",
+        legs="ＶＩタイツ+3",
+        waist="オルペウスサッシュ",
+        left_ear="ディグニタリピアス",
+        right_ear={ name="レサジーピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+        left_ring="シーリチリング+1",
+        right_ring="メタモルリング+1",
+        back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
     })
 
 	--二刀流11（サポ忍）
@@ -84,14 +100,6 @@ function init_gear_sets()
 	
 	--二刀流21（サポ踊）
 	sets.engaged.dual21=set_combine(sets.engaged.dual11,{back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},})
-
-
-	--監視用バフ
-	sets.buff['エンストーン'] 		= {neck="クアンプネックレス"}
-
-	--即時発動系
-	sets.precast.JA['サボトゥール'] = {hands="ＬＴガントロ+2"}
-    sets.precast.JA['連続魔'] 		= {body="ＶＩタバード+3"}
 	
 	--FC
     sets.precast.FC = {
@@ -102,10 +110,11 @@ function init_gear_sets()
 		left_ear={name="オノワイヤリング+1",priority=14},
 		right_ear={name="エテオレートピアス",priority=12},
 		left_ring={name="月明の指輪",priority=13},
-		right_ring="メダダリング",
+        left_ring="キシャールリング",
+		right_ring="ラハブリング",
 		back={name="月明の羽衣",priority=16},
     }
-	
+
 	--FC（ディスペガ）
 	sets.precast.FC['ディスペガ'] = set_combine(sets.precast.FC,{main="デイブレイクワンド",})
 	
@@ -135,7 +144,7 @@ function init_gear_sets()
 	--WSクリティカル
     sets.precast.WS.Critical = {
         ammo="イェットシーラ",
-        head={ name="ブリスタサリット+1", augments={'Path: A',}},
+        head="マリグナスシャポー",
         body="マリグナスタバード",
         hands="マリグナスグローブ",
         legs="マリグナスタイツ",
@@ -161,14 +170,10 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="マリグナスピアス",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="メダダリング",
+        left_ring="コーネリアリング",
         right_ring="エパミノダスリング",
         back={ name="スセロスケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','Weapon skill damage +10%',}},
 	}
-
-	--WSモクシャ
-    sets.precast.WS.SubtleBlow = sets.engaged.SubtleBlow
-
 
     --共通WS定義読み込み
     init_weapon_skill()
@@ -190,8 +195,8 @@ function init_gear_sets()
 		neck="水影の首飾り",
 		left_ear="マリグナスピアス",
 		right_ear="王将の耳飾り",
-		left_ring={ name="メタモルリング+1", augments={'Path: A',}},
-		right_ring="メダダリング",
+		left_ring="メランリング",
+		right_ring="メタモルリング+1",
         back={ name="スセロスケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','Weapon skill damage +10%',}},
     }
 	
@@ -207,14 +212,13 @@ function init_gear_sets()
 		waist={ name="オブシテナサッシュ", augments={'Path: A',}},
 		left_ear="マリグナスピアス",
 		right_ear="スノトラピアス",
-		left_ring={ name="メタモルリング+1", augments={'Path: A',}},
-		right_ring="キシャールリング",
+		left_ring="キシャールリング",
+		right_ring="メタモルリング+1",
 		back="無の外装",
 	}
 
 	--暗黒魔法
 	sets.midcast['暗黒魔法'] ={
-        sub="アムラピシールド",
 		ammo="王将の玉",
 		head="ＡＭコイフ+1",
 		body="ＡＭダブレット+1",
@@ -269,7 +273,7 @@ function init_gear_sets()
 
 	--強化魔法（自分）
 	sets.midcast['強化魔法'] = {
-        sub='アムラピシールド',
+        --sub='アムラピシールド',
         head={ name="テルキネキャップ", augments={'"Cure" potency +5%','Enh. Mag. eff. dur. +10',}},
 		body={ name="ＶＩタバード+3", augments={'Enhances "Chainspell" effect',}},
         hands='ＡＴグローブ+3',
@@ -297,8 +301,9 @@ function init_gear_sets()
 	--強化魔法スキル
 	sets.midcast['強化魔法スキル'] =
 	{
+        main="プクラトムージュ+1",
 		ammo="ストンチタスラム+1",
-		head="ビファウルクラウン",
+		head="カマインマスク+1",
 		body={ name="ＶＩタバード+3", augments={'Enhances "Chainspell" effect',}},
 		hands={ name="ＶＩグローブ+3", augments={'Enhancing Magic duration',}},
 		legs="ＡＴタイツ+3",
@@ -313,5 +318,5 @@ function init_gear_sets()
 
 	sets.midcast.Refresh         = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1",body="ＡＴタバード+3",Legs="ＬＴフュゾー+2"})
 	sets.midcast['ストンスキン'] = set_combine(sets.midcast['強化魔法'] ,{legs="シェダルサラウィル", neck="ノデンズゴルゲット", left_ear="アースクライピアス", waist="ジーゲルサッシュ",})
-	sets.midcast['アクアベール'] = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1", legs="シェダルサラウィル"})
+	sets.midcast['アクアベール'] = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1", hands="王将の袖飾り", legs="シェダルサラウィル"})
 end

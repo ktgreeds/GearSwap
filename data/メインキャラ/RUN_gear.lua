@@ -1,28 +1,37 @@
 function init_weaponns()
-    -- デフォルト武器を設定
-    send_command('gs c set MainWeapons Epeolatry; wait 0.3; gs c set SubWeapons Khonsu;')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('エピオラトリー')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('アルバーストラップ'))
 end
 
 
 function init_gear_sets()
     -- ロックスタイル番号
-    lockstyleset = 151
+    lockstyleset = 22
 
-    -- 両手剣
-    gear.Epeolatry          = {name="エピオラトリー"}
-
-    -- 両手斧
-    gear.Lycurgos           = {name="ライカーゴス"}
+    -- 武器
+    gear['エピオラトリー']      = {name="エピオラトリー"}
+    gear['ライカーゴス']        = {name="ライカーゴス"}
+    gear['アルバーストラップ']  = {name="アルバーストラップ"}
     
-    -- グリップ
-    gear.AlberStrap         = {name="アルバーストラップ"}
-    gear.Khonsu             = {name="コーンスー"}
+    -- 敵対心装備 102
+    sets.Enmity = {
+        ammo="サピエンスオーブ",
+        head="ハリタスヘルム",
+        body="エメットハーネス+1",
+        hands="クーリスグローブ",
+        legs="ＥＲレグガード+3",
+        feet="ＥＲグリーヴ+3",
+        neck="月光の首飾り",
+        waist={ name="プラチナモグベルト",priority=16},
+        left_ear={name="アスプロピアス",priority=15},
+        right_ear={ name="クリプティクピアス",priority=12},
+        left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
+        right_ring={ name="アイワツリング",priority=13},
+        back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
+    }
     
-	--監視用バフ
-    sets.buff['エンボルド'] = {back="ディバートケープ"}
-
-    sets.Kiting             = {feet="ヒポメネソックス+1"}
-
+    -- ノックバック
+    sets.KnockBack ={name="リパルスマント"}
+    
     -- 待機装備（通常）
     sets.idle = {
         ammo="ストンチタスラム+1",
@@ -35,7 +44,7 @@ function init_gear_sets()
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
         right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',},priority=15},
-        left_ring="フォテファイリング",
+        left_ring="ワーデンリング",
         right_ring="シュネデックリング",
         back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
     }
@@ -79,57 +88,33 @@ function init_gear_sets()
         feet="トゥルムレギンス+1"
     })
     
-    -- ノックバック+4
-    sets.engaged.KnockBack = set_combine(sets.engaged,{
-        legs="ダッシングサブリガ",
-        back="リパルスマント"
-    }) 
+    --バフ
+    sets.buff['エンボルド']             = {back="ディバートケープ"}
+    sets.precast.JA                     = sets.Enmity
+    sets.precast.JA['E.スフォルツォ']   = set_combine(sets.Enmity,{body="ＦＵコート+3"})
+    sets.precast.JA['ヴァリエンス']     = set_combine(sets.Enmity,{body="ＲＮコート+3",legs="ＦＵトラウザ+3"})
+    sets.precast.JA['ヴァレション']     = set_combine(sets.Enmity,{body="ＲＮコート+3",legs="ＦＵトラウザ+3"})
+    sets.precast.JA['ガンビット']       = set_combine(sets.Enmity,{hands="ＲＮミトン+3"})
+    sets.precast.JA['ソードプレイ']     = set_combine(sets.Enmity,{hands="ＦＵミトン+3"})
+    sets.precast.JA['バットゥタ']       = set_combine(sets.Enmity,{head="ＦＵバンド+3"})
+    sets.precast.JA['ビベイシャス']     = set_combine(sets.Enmity,{main="ペオードクレイモア",head="ＥＲガレア+3",legs="ＲＮトラウザ+4",neck="インカンタートルク",left_ring="スティキニリング+1",})
+    sets.precast.JA['フルーグ']         = set_combine(sets.Enmity,{feet="ＲＮブーツ+3"})
+    sets.precast.JA['レイク']           = set_combine(sets.Enmity,{feet="ＦＵブーツ+3"})
+    sets.precast.JA['スワイプ']         =  {ammo="ペムフレドタスラム",
+                                            head={ name="アグゥキャップ", augments={'Path: A',}},
+                                            body={ name="アグゥローブ", augments={'Path: A',}},
+                                            hands={ name="アグゥゲージ", augments={'Path: A',}},
+                                            legs={ name="アグゥスロップス", augments={'Path: A',}},
+                                            feet={ name="アグゥピガッシュ", augments={'Path: A',}},
+                                            neck="シビルスカーフ",
+                                            waist={name="プラチナモグベルト",priority=15},
+                                            left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
+                                            right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
+                                            left_ring="メランリング",
+                                            right_ring="月明の指輪",
+                                            back={name="月明の羽衣",priority=16}}
+    sets.precast.JA['ランジ']           = sets.precast.JA['スワイプ']
     
-
-    -- 敵対心装備 102
-    sets.Enmity = {
-        ammo="サピエンスオーブ",
-        head="ハリタスヘルム",
-        body="エメットハーネス+1",
-        hands="クーリスグローブ",
-        legs="ＥＲレグガード+3",
-        feet="ＥＲグリーヴ+3",
-        neck="月光の首飾り",
-        waist={ name="プラチナモグベルト",priority=16},
-        left_ear={name="アスプロピアス",priority=15},
-        right_ear={ name="クリプティクピアス",priority=12},
-        left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
-        right_ring={ name="アイワツリング",priority=13},
-        back={ name="オーグマケープ", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','DEF+50',}},
-    }
-
-
-	--即時発動系バフ
-    sets.precast.JA = sets.Enmity
-    sets.precast.JA['E.スフォルツォ']       = set_combine(sets.Enmity,{body="ＦＵコート+3"})
-    sets.precast.JA['ヴァリエンス']         = set_combine(sets.Enmity,{body="ＲＮコート+3",legs="ＦＵトラウザ+3"})
-    sets.precast.JA['ヴァレション']         = set_combine(sets.Enmity,{body="ＲＮコート+3",legs="ＦＵトラウザ+3"})
-    sets.precast.JA['ガンビット']           = set_combine(sets.Enmity,{hands="ＲＮミトン+3"})
-    sets.precast.JA['ソードプレイ']         = set_combine(sets.Enmity,{hands="ＦＵミトン+3"})
-    sets.precast.JA['バットゥタ']           = set_combine(sets.Enmity,{head="ＦＵバンド+3"})
-    sets.precast.JA['ビベイシャス']         = set_combine(sets.Enmity,{main="ペオードクレイモア",head="ＥＲガレア+3",legs="ＲＮトラウザ+4",neck="インカンタートルク",left_ring="スティキニリング+1",})
-    sets.precast.JA['フルーグ']             = set_combine(sets.Enmity,{feet="ＲＮブーツ+3"})
-    sets.precast.JA['レイク']               = set_combine(sets.Enmity,{feet="ＦＵブーツ+3"})
-    sets.precast.JA['スワイプ']             =  {ammo="ペムフレドタスラム",
-                                                head={ name="アグゥキャップ", augments={'Path: A',}},
-                                                body={ name="アグゥローブ", augments={'Path: A',}},
-                                                hands={ name="アグゥゲージ", augments={'Path: A',}},
-                                                legs={ name="アグゥスロップス", augments={'Path: A',}},
-                                                feet={ name="アグゥピガッシュ", augments={'Path: A',}},
-                                                neck="シビルスカーフ",
-                                                waist={name="プラチナモグベルト",priority=15},
-                                                left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
-                                                right_ear={ name="エリラズピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+12','Mag. Acc.+12','Damage taken-4%',}},
-                                                left_ring="メダダリング",
-                                                right_ring="月明の指輪",
-                                                back={name="月明の羽衣",priority=16}}
-    sets.precast.JA['ランジ']               = sets.precast.JA['スワイプ']
-
 	-- FC
     sets.precast.FC = {
         ammo="サピエンスオーブ",
@@ -142,11 +127,10 @@ function init_gear_sets()
         waist={ name="プラチナモグベルト",priority=16},
         left_ear={name="アスプロピアス",priority=15},
         right_ear={ name="エテオレートピアス",priority=13},
-        left_ring="メダダリング",
+        left_ring="キシャールリング",
         right_ring={ name="月明の指輪",priority=14},
         back={ name="オーグマケープ", augments={'HP+60','Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Damage taken-5%',},priority=12},
     }
-    
     sets.precast.FC.value = 70
     
     -- WSダメージ
@@ -157,11 +141,11 @@ function init_gear_sets()
         hands="ニャメガントレ",
         legs="ニャメフランチャ",
         feet="ニャメソルレット",
-        neck="無の喉輪",
-        waist={ name="ケンタークベルト+1", augments={'Path: A',}},
-        left_ear="シェリダピアス",
-        right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="ニックマドルリング",
+        neck={ name="フサルクトルク+2", augments={'Path: A',}},
+        waist="セールフィベルト+1",
+        left_ear="アスプロピアス",
+        right_ear="オノワイヤリング+1",
+        left_ring="コーネリアリング",
         right_ring="王将の指輪",
         back="無の外装",
     }
@@ -280,7 +264,7 @@ function init_gear_sets()
     sets.midcast.Shell = sets.midcast.Protect 
 
     -- 被ファランクス
-    --sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
+    sets.midcast.IncreasedPhalanx = sets.midcast['ファランクス']
 
     -- 被プロテス
     sets.midcast.IncreasedProtect = sets.midcast.Protect

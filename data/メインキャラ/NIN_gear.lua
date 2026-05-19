@@ -1,6 +1,5 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons HeishiShorinken; wait 0.3; gc set SubWeapons Tsuru')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('丙子椒林剣')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('鶴'))
 end
 
 
@@ -9,11 +8,12 @@ function init_gear_sets()
     lockstyleset = 13
 
     -- 武器
-    gear.TernionDagger          = {name="ターニオンダガー+1"}
-    gear.HeishiShorinken        = {name="丙子椒林剣"}
-    gear.Tsuru                  = {name="鶴"}
-    gear.Malevolence            = {name="マレヴォレンス"}
+    gear['ターニオンダガー']    = {name="ターニオンダガー+1"}
+    gear['丙子椒林剣']          = {name="丙子椒林剣"}
+    gear['鶴']                  = {name="鶴"}
+    gear['マレヴォレンス']      = {name="マレヴォレンス"}
 
+    sets.SubtleBlow = {}
 
     -- 待機装備（通常）
     sets.idle = {
@@ -59,9 +59,19 @@ function init_gear_sets()
         right_ring="ゲリリング",
         back="無の外装",
     }
+    sets.engaged.SubtleBlow     = set_combine(sets.engaged ,sets.SubtleBlow)
 
-    -- 監視用バフ
-    sets.buff['八双']                       = sets.precast.JA['八双']
+    -- バフ
+    sets.buff['陽忍']                   = {legs="極服部袴"}
+    sets.buff['陰忍']                   = {head="極服部頭巾"}
+    sets.precast.JA['微塵がくれ'] = {legs="越望月袴"}
+    sets.precast.JA['陽忍'] = {head="越望月半首"}
+    sets.precast.JA['陰忍'] = {head="越望月半首"}
+    sets.precast.JA['散華'] = {body="越望月鎖帷子"}
+    sets.precast.JA['二重'] = {hands="極服部手甲"}
+    sets.precast.JA['一隻眼'] = {}
+    sets.precast.JA['身影'] = {}
+
 
 	sets.Enmity = {
         ammo="伊達手裏剣",
@@ -78,7 +88,6 @@ function init_gear_sets()
         right_ring="パニシャスリング",
         back={ name="アンダルタマント", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Enmity+10','Phys. dmg. taken-10%',}},
     }
-    -- 即時発動系バフ
 
     -- FC
     sets.precast.FC = {
@@ -93,10 +102,8 @@ function init_gear_sets()
         right_ring="ラハブリング",
         back={ name="アンダルタマント", augments={'Eva.+20 /Mag. Eva.+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
-    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC,{
-        body="望月鎖帷子改"
-    })
-    sets.precast.FC.value = 47
+
+    sets.precast.FC.Utsusemi = set_combine(sets.precast.FC,{body="望月鎖帷子改"})
 
     --WSダメージ
     sets.precast.WS.Damage = {
@@ -134,18 +141,12 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-    }
 
     --共通WS定義読み込み
     init_weapon_skill()
 
-    sets.midcast['Ninjutsu']=
-    {
-        hands="極望月手甲"
-    }
+    sets.midcast['Ninjutsu'] = {hands="極望月手甲"}
+   
     sets.midcast.Utsusemi = set_combine(sets.midcast['Ninjutsu'],{
         feet="極服部脚絆",
         back="アンダルタマント"

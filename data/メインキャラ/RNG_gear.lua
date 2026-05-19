@@ -1,10 +1,10 @@
 function init_weaponns()
     --デフォルト武器を設定
-    send_command('gs c set MainWeapons Perun;wait 0.3; gs c set RangeWeapons Fomalhaut;wait 0.3; gs c set RangedMode Marksmanship')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ペルーン'))
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('gs c set SubWeapons KrakenClub')
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('クレパスクラナイフ'))
     else
-        send_command('gs c set SubWeapons NuskuShield')
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('ヌスクシールド'))
     end
 
 end
@@ -14,36 +14,26 @@ function init_gear_sets()
     --ロックスタイル番号
     lockstyleset = 11
 
-    --片手剣
-    gear.Naegling               = {name="ネイグリング"}
-    --片手棍
-    gear.KrakenClub             = {name="クラーケンクラブ"}
-    --短剣
-    gear.CrepuscularKnife       = {name="クレパスクラナイフ"}
-    gear.Kustawi                = {name="クスタウィ+1"}
-    gear.Malevolence            = {name="マレヴォレンス"}
-    --片手斧
-    gear.Perun                  = {name="ペルーン+1"}
-    --盾
-    gear.NuskuShield            = {name="ヌスクシールド"}
-    --弓
-    gear.Hangaku                = {name="板額の弓"}
-    gear.Fomalhaut              = {name="フォーマルハウト"}
-    gear.TPBonus                = {name="スパロウホーク+2"}
-    gear.Crossbow                = {name="ライトクロスボウ"}
-    --その他
-    gear.Slip                   = {name="プライムガン"}
-
-    --矢弾
-    gear.GunPhysics         = {name="クロノブレット"}
-    gear.GunMagical         = {name="クロノブレット"}
-    gear.BowPhysics         = {name="石の矢"}
-    gear.BowMasical         = {name="石の矢"}
-    gear.CrossbowPhysics    = {name="ブロンズボルト"}
-    gear.CrossbowMasical    = {name="ブロンズボルト"}
-    gear.HauksbokArrow      = {name="ホクスボクアロー"}
-    gear.HauksbokBullet     = {name="ホクスボクブレット"}
-
+    -- 武器
+    gear['ネイグリング']        = {name="ネイグリング"}
+    gear['クレパスクラナイフ']  = {name="クレパスクラナイフ"}
+    gear['クスタウィ']          = {name="クスタウィ+1"}
+    gear['マレヴォレンス']      = {name="マレヴォレンス"}
+    gear['ペルーン']            = {name="ペルーン+1"}
+    gear['ヌスクシールド']      = {name="ヌスクシールド"}
+    gear['板額の弓']            = {name="板額の弓"}
+    gear['フォーマルハウト']    = {name="フォーマルハウト"}
+    gear['スパロウホーク']      = {name="スパロウホーク+2"}
+    gear['ライトクロスボウ']    = {name="ライトクロスボウ"}
+    gear['プライムガン']        = {name="プライムガン"}
+    gear['ホクスボクアロー']    = {name="ホクスボクアロー"}
+    gear['ホクスボクブレット']  = {name="ホクスボクブレット"}
+    gear.GunPhysics             = {name="クロノブレット"}
+    gear.GunMagical             = {name="クロノブレット"}
+    gear.BowPhysics             = {name="石の矢"}
+    gear.BowMasical             = {name="石の矢"}
+    gear.CrossbowPhysics        = {name="ブロンズボルト"}
+    gear.CrossbowMasical        = {name="ブロンズボルト"}
 
     --待機装備（通常）
     sets.idle = {
@@ -118,13 +108,13 @@ function init_gear_sets()
         body="ドレッドジュポン",
         hands="レイライングローブ",
         legs={ name="ヘルクリアトラウザ", augments={'Mag. Acc.+16','"Fast Cast"+6','STR+10',}},
-        feet={ name="ヘルクリアブーツ", augments={'"Fast Cast"+6','MND+2','Mag. Acc.+2',}},
+        feet="カマイングリーヴ",
         neck="オルンミラトルク",
         waist="コーネリアの黒帯",
         left_ear="エテオレートピアス",
         right_ear="エンチャンピアス+1",
-        left_ring="ラハブリング",
-        right_ring="メダダリング",
+        left_ring="メランリング",
+        right_ring="ラハブリング",
     }
     sets.precast.FC.value = 35
 
@@ -160,7 +150,7 @@ function init_gear_sets()
     --WS遠隔ダメージ
     sets.precast.WS.Range = {
         head="ニャメヘルム",
-        body="ニャメメイル4",
+        body="ニャメメイル",
         hands="ニャメガントレ",
         legs="ニャメフランチャ",
         feet="ニャメソルレット",

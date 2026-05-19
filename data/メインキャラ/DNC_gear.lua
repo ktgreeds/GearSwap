@@ -1,24 +1,46 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons CrepuscularKnife')
-    send_command('gs c set SubWeapons TernionDagger')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('クレパスクラナイフ')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ターニオンダガー'))
 end
 
 
 function init_gear_sets()
     --ロックスタイル番号
-    lockstyleset = 161
+    lockstyleset = 19
 
-    --短剣
-    gear.CrepuscularKnife       = {name="クレパスクラナイフ"}
-    gear.TernionDagger          = {name="ターニオンダガー+1"}
-    gear.Acrontica              = {name="アクロンティカ"}
-    gear.Tauret                 = {name="トーレット"}
-    gear.TPBonus                = {name="フセット+2"}
-    --片手剣
-    gear.OnionSword             = {name="真オニオンソード"}
-    --その他
-    gear.Slip  					= {name="プライムダガー"}
+    --武器
+    gear['クレパスクラナイフ']  = {name="クレパスクラナイフ"}
+    gear['ターニオンダガー']    = {name="ターニオンダガー+1"}
+    gear['アクロンティカ']      = {name="アクロンティカ"}
+    gear['トーレット']          = {name="トーレット"}
+    gear['フセット']            = {name="フセット+2"}
+    gear['真オニオンソード']    = {name="真オニオンソード"}
+    gear['プライムダガー']  	= {name="プライムダガー"}
+
+    --敵対心装備
+    sets.Enmity = {
+        ammo="サピエンスオーブ",
+        head="ハリタスヘルム",
+        body="エメットハーネス+1",
+        hands="クーリスグローブ",
+        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
+        waist="プラチナモグベルト",
+        left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
+        right_ear="クリプティクピアス",
+        left_ring="ヴェクサーリング+1",
+        right_ring="アイワツリング",
+        back="月明の羽衣",
+    }
+
+    --モクシャ46
+    sets.SubtleBlow = 
+    {
+        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
+        waist="サリサフロイベルト",--5
+        left_ear="ディグニタリピアス",--5
+        right_ear="シェリダピアス",--II 5
+        left_ring="シーリチリング+1",--10
+        right_ring="シーリチリング+1",--10
+    }
 
     --待機装備（通常）
     sets.idle = {
@@ -63,6 +85,8 @@ function init_gear_sets()
         back="無の外装",
     }
 
+    sets.engaged.SubtleBlow     = set_combine(sets.engaged ,sets.SubtleBlow)
+
     --抜刀装備（受け流し）
     sets.engaged.Parry = {
         ammo="ヤメラング",
@@ -80,68 +104,30 @@ function init_gear_sets()
         back={ name="セヌーナマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Parrying rate+5%',}},
     }
     
-    --モクシャ46
-    sets.engaged.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-        waist="サリサフロイベルト",--5
-        left_ear="ディグニタリピアス",--5
-        right_ear="シェリダピアス",--II 5
-        left_ring="シーリチリング+1",--10
-        right_ring="シーリチリング+1",--10
-    }
+    --バフ
+    sets.buff['C.フラリッシュ']                 = {head="ＭＣティアラ+3"}
+    sets.buff['S.フラリッシュ']                 = {body="ＭＣカザク+3"}
+	sets.precast.JA                             = sets.Enmity
+    sets.precast.JA['トランス']                 = {head="ＨＯティアラ+3"}
+    sets.precast.JA.Samba                       = {head="ＭＸティアラ+3",back="セヌーナマント"}
+    sets.precast.JA.Waltz                       = {head="ＨＯティアラ+3",body="ＭＸカザク+3",feet="ＭＸトーシュー+3",neck="エトワールゴルゲ+2"}
+    sets.precast.JA.Step                        = {head="ＭＸティアラ+3",hands="ＭＸバングル+3",feet="ＨＯトーシュー+3"}
+    sets.precast.JA.Step["フェザーステップ"]    = set_combine(sets.precast.JA.Step,{feet="ＭＣトーシュー+3"})
+    sets.precast.JA["A.フラリッシュ"]           = sets.Enmity
+    sets.precast.JA["D.フラリッシュ"]           = {}
+    sets.precast.JA["V.フラリッシュ"]           = {body="ＨＯカザク+3"}
+    sets.precast.JA["R.フラリッシュ"]           = {hands="ＭＣバングル+3",back="トータッパーマント"}
+    sets.precast.JA["B.フラリッシュ"]           = {}
+    sets.precast.JA["W.フラリッシュ"]           = {}
+    sets.precast.JA["C.フラリッシュ"]           = {}
+    sets.precast.JA["S.フラリッシュ"]           = {}
+    sets.precast.JA["T.フラリッシュ"]           = {}
+    sets.precast.JA.Jig                         = {Legs="ＨＯタイツ+3",feet="ＭＸトーシュー+3"}
+    sets.precast.JA["プレスト"]                 = {}
+    sets.precast.JA['扇の舞い']                 = {hands="ＨＯバングル+3"}
+    sets.precast.JA['剣の舞い']                 = {legs="ＨＯタイツ+3"}
+    sets.precast.JA['ノーフットライズ']         = {body="ＨＯカザク+3"}
 
-    --敵対心装備
-    sets.Enmity = {
-        ammo="サピエンスオーブ",
-        head="ハリタスヘルム",
-        body="エメットハーネス+1",
-        hands="クーリスグローブ",
-        neck={ name="ウォーダチャーム+1", augments={'Path: A',}},
-        waist="プラチナモグベルト",
-        left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
-        right_ear="クリプティクピアス",
-        left_ring="ヴェクサーリング+1",
-        right_ring="アイワツリング",
-        back="月明の羽衣",
-    }
-
-    --監視用バフ
-    sets.buff['C.フラリッシュ']         = {head="ＭＣティアラ+3"}
-    sets.buff['S.フラリッシュ']         = {body="ＭＣカザク+3"}
-
-    --即時発動系バフ
-    sets.precast.JA['トランス'] = {head = "ＨＯティアラ+3"}
-    sets.precast.JA['ノーフットライズ'] = {body = "ＨＯカザク+3"}
-    sets.precast.JA['扇の舞い'] = {hands = "ＨＯバングル+3"}
-    sets.precast.JA['剣の舞い'] = {legs = "ＨＯタイツ+3"}
-    sets.precast.JA.Samba = {
-        head = "ＭＸティアラ+3",
-        back = "セヌーナマント"
-    }
-    
-    sets.precast.JA.Step = {
-        hands = "ＭＸバングル+3",
-        feet = "ＨＯトーシュー+3"
-    }
-
-    sets.precast.JA.Step["フェザーステップ"] = {
-        feet = "ＭＣトーシュー+3"
-    }
-
-    sets.precast.JA.Jig = {
-        Legs="ＨＯタイツ+3",
-        feet="ＭＸトーシュー+3"
-    }
-
-    sets.precast.JA["R.フラリッシュ"] = {
-        hands="ＭＣバングル+3",
-        back="トータッパーマント"
-    }
-    
-    sets.precast.JA["A.フラリッシュ"] = sets.Enmity
-    sets.precast.JA["挑発"] = sets.Enmity
-    
     --FC
     sets.precast.FC = {
         ammo="サピエンスオーブ",
@@ -154,8 +140,8 @@ function init_gear_sets()
         waist="プラチナモグベルト",
         left_ear="エテオレートピアス",
         right_ear="エンチャンピアス+1",
-        left_ring="ラハブリング",
-        right_ring="メダダリング",
+        left_ring="メランリング",
+        right_ring="ラハブリング",
         back="月明の羽衣",
     }
 
@@ -171,8 +157,8 @@ function init_gear_sets()
         waist={ name="ケンタークベルト+1", augments={'Path: A',}},
         left_ear="王将の指輪",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="王将の指輪",
-        right_ring="エパミノダスリング",
+        left_ring="コーネリアリング",
+        right_ring="王将の指輪",
         back="サクロマント",
     }
 
@@ -205,41 +191,13 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="オドルピアス",
         right_ear="フリオミシピアス",
-        left_ring="エパミノダスリング",
-        right_ring="メダダリング",
+        left_ring="コーネリアリング",
+        right_ring="エパミノダスリング",
         back="無の外装",
-    }
-
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        right_ear="シェリダピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
     }
 
     --共通WS定義読み込み
     init_weapon_skill()
-
-    --ワルツ
-    sets.precast.JA.Waltz = {
-        ammo="ヤメラング",
-        head="ムンムボンネット+2",
-        body="ＭＸカザク+3",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet="ＭＸトーシュー+3",
-        neck={ name="エトワールゴルゲ+2", augments={'Path: A',}},
-        waist="プラチナモグベルト",
-        left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
-        right_ear="クリプティクピアス",
-        left_ring="メランリング",
-        right_ring={ name="ゼラチナスリング+1", augments={'Path: A',}},
-        back={ name="トータッパーマント", augments={'"Store TP"+2','"Dual Wield"+4','"Rev. Flourish"+30',}},
-    }
 
     --遠隔攻撃
     sets.precast.RA ={range="ラミアベーン"}

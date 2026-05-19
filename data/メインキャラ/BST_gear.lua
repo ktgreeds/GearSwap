@@ -1,10 +1,9 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons AnkusaAxe')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('アンクサアクス'))
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-		send_command('gs c set SubWeapons KrakenClub')
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('クレパスクラナイフ'))
 	else
-		send_command('gs c set SubWeapons AdapaShield')
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('アダパシールド'))
 	end
 end
 
@@ -14,15 +13,25 @@ function init_gear_sets()
     lockstyleset = 9
 
     --武器
-    gear.Dolichenus             = {name="ドリケナス"}
-    gear.AnkusaAxe              = {name="アンクサアクス"}
-    gear.AdapaShield            = {name="アダパシールド"}
-    gear.Tauret                 = {name="トーレット"}
-    gear.Malevolence            = {name="マレヴォレンス"}
-    gear.CrepuscularKnife       = {name="クレパスクラナイフ"}
-    gear.KrakenClub             = {name="クラーケンクラブ"}
-    gear.Naegling               = {name="ネイグリング"}
-    gear.OnionSword             = {name="真オニオンソード"}
+    gear['ドリケナス']          = {name="ドリケナス"}
+    gear['アンクサアクス']      = {name="アンクサアクス"}
+    gear['トーレット']          = {name="トーレット"}
+    gear['マレヴォレンス']      = {name="マレヴォレンス"}
+    gear['クレパスクラナイフ']  = {name="クレパスクラナイフ"}
+    gear['ネイグリング']        = {name="ネイグリング"}
+    gear['真オニオンソード']    = {name="真オニオンソード"}
+    gear['アダパシールド']      = {name="アダパシールド"}
+
+    --モクシャ46
+    sets.SubtleBlow = 
+    {
+        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
+        waist="サリサフロイベルト",--5
+        left_ear="ディグニタリピアス",--5
+        right_ear="シェリダピアス",--II 5
+        left_ring="シーリチリング+1",--10
+        right_ring="シーリチリング+1",--10
+    }
 
     --待機装備
     sets.idle = {
@@ -58,9 +67,6 @@ function init_gear_sets()
         back={ name="アルティオマント", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}},
     }
 
-    --走り回る用
-    sets.Kiting={right_ring="シュネデックリング",}
-
     --抜刀装備
     sets.engaged = {
         ammo={ name="コイストボダー", augments={'Path: A',}},
@@ -78,24 +84,15 @@ function init_gear_sets()
         back={ name="アルティオマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}},
     }
     
-    --モクシャ46
-    sets.engaged.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},--11
-        waist="サリサフロイベルト",--5
-        left_ear="ディグニタリピアス",--5
-        right_ear="シェリダピアス",--II 5
-        left_ring="シーリチリング+1",--10
-        right_ring="シーリチリング+1",--10
-    }
-    
+    sets.engaged.SubtleBlow     = set_combine(sets.engaged ,sets.SubtleBlow)
+
     --二刀流11（サポ忍）
     sets.engaged.dual11= {waist="霊亀腰帯",left_ear="エアバニピアス",}
     
     --二刀流21（サポ踊）
     sets.engaged.dual21= set_combine(sets.engaged.dual11,{back={ name="アルティオマント", augments={'DEX+20','Accuracy+20 Attack+20','"Dual Wield"+10','Pet: Phys. dmg. taken-10%',}},})
 
-    --即時発動系
+    --バフ
     sets.precast.JA['K.インスティンクト']   = {head="ＡＫヘルム+4"}
     sets.precast.JA['よびだす']             = {hands="ＡＫグローブ+3"}
     sets.precast.JA['しょうしゅう']         = sets.precast.JA['よびだす']
@@ -114,7 +111,6 @@ function init_gear_sets()
         right_ear="エンチャンピアス+1",
         right_ring="ラハブリング",
     }
-    sets.precast.FC.value = 38
 
     sets.precast.Monster = {
         legs="グレティブリーチズ"
@@ -134,7 +130,6 @@ function init_gear_sets()
         hands={ name="ニャメガントレ", augments={'Path: B',}},
         legs={ name="ニャメフランチャ", augments={'Path: B',}},
         feet={ name="ニャメソルレット", augments={'Path: B',}},
-        --neck="ウォーダチャーム+1",
         neck="共和プラチナ章",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
@@ -196,17 +191,6 @@ function init_gear_sets()
         back={ name="アルティオマント", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: "Regen"+10','Pet: Damage taken -5%',}},
     }
     
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        right_ear="シェリダピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    }
-
     init_weapon_skill()
 
     --ペット技：弱体

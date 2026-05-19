@@ -1,7 +1,6 @@
 function init_weaponns()
-    send_command('wait 0.1; gs c set SubWeapons UtuGrip')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('童子切安綱')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ウトゥグリップ'))
 end
-
 
 
 function init_gear_sets()
@@ -9,21 +8,40 @@ function init_gear_sets()
     lockstyleset = 12
 
     -- 武器
-    gear.DojikiriYasutsuna          = {name="童子切安綱"}
-    gear.ShiningOne                 = {name="シャイニングワン"}
-    gear.UtuGrip                    = {name="ウトゥグリップ"}
-    gear.Slip                       = {name="フレンジーサリット"}
+    gear['童子切安綱']          = {name="童子切安綱"}
+    gear['シャイニングワン']    = {name="シャイニングワン"}
+    gear['ウトゥグリップ']      = {name="ウトゥグリップ"}
+    gear.Slip                   = {name="フレンジーサリット"}
     
+    -- モクシャ(41)
+    sets.SubtleBlow = {
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
+    }
+
     -- バフ
     sets.buff['八双']               = {hands="越脇戸筒篭手"}
     sets.buff['星眼']               = {head="極春日烏帽子形兜"}
     sets.buff['心眼']               = {legs="極左近士板佩楯"}
+    sets.buff['石火之機']           = {legs="極春日筒篭手"}
     sets.precast.JA['明鏡止水']     = {legs="左近士筒脛当改"}
-    sets.precast.JA['黙想']         = {head="極脇戸桃形兜",hands="極左近士筒篭手",back="スメルトリオマント"}
-    sets.precast.JA['先義後利']     = {legs="極春日筒脛当"}
     sets.precast.JA['護摩の守護円'] = {head="極脇戸桃形兜"}
-
-
+    sets.precast.JA['心眼']         = {}
+    sets.precast.JA['八双']         = {}
+    sets.precast.JA['黙想']         = {head="極脇戸桃形兜",hands="極左近士筒篭手",back="スメルトリオマント"}
+    sets.precast.JA['星眼']         = {}
+    sets.precast.JA['石火之機']     = {}
+    sets.precast.JA['渾然一体']     = {}
+    sets.precast.JA['士気昂揚']     = {legs="極左近士板佩楯"}
+    sets.precast.JA['峰打ち']       = {hands="極左近士筒篭手"}
+    sets.precast.JA['先義後利']     = {legs="極春日筒脛当"}
+    sets.precast.JA['破魔の刃']     = {}
+    sets.precast.JA['葉隠']         = {}
+    sets.precast.JA['八重霞']       = {}
+    
     -- 待機装備
     sets.idle = {
         ammo="ストンチタスラム+1",
@@ -41,15 +59,6 @@ function init_gear_sets()
         back="無の外装",
     }
 
-    -- モクシャ(41)
-    sets.SubtleBlow = {
-        neck="バーシチョーカー+1",
-        waist="サリサフロイベルト",
-        right_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    }
-
     -- 抜刀装備
     sets.engaged = {
         ammo="オゲルミルオーブ+1",
@@ -57,7 +66,7 @@ function init_gear_sets()
         body="極春日胴丸",
         hands="越脇戸筒篭手",
         legs="極春日板佩楯",
-        feet="越脇戸筒脛当",
+        feet="越脇戸筒脛当",    
         neck="月光の喉輪",
         waist="ソードフェーテル+1",
         left_ear="アスプロピアス",
@@ -66,18 +75,18 @@ function init_gear_sets()
         right_ring="シーリチリング+1",
         back={ name="タカハマント", augments={'STR+3','"Zanshin"+5','"Store TP"+3',}},
     }
-    sets.engaged['八双']        = set_combine(sets.engaged, sets.buff['八双'])
-    sets.engaged['星眼']        = set_combine(sets.engaged, sets.buff['星眼'])
+    
+    -- モクシャ
     sets.engaged.SubtleBlow     = set_combine(sets.engaged ,sets.SubtleBlow)
-    sets.engaged.HoxneAmpulla   = {
+    
+    -- ホクスニアムプラ
+    sets.engaged.HoxneAmpulla   = set_combine(sets.engaged,{
         feet="越左近士筒脛当",
         neck="侍の喉輪+2",
         left_ring="シーリチリング+1",
         back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
-    }
+    })
     
-
-
     -- FC装備
     sets.precast.FC = {
         ammo="サピエンスオーブ",
@@ -90,7 +99,6 @@ function init_gear_sets()
         left_ring="メランリング",
         right_ring="ラハブリング",
     }
-
 
     -- WSダメージ
     sets.precast.WS.Damage = {
@@ -109,11 +117,6 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
-
-    -- WSダメージ（モクシャ）
-    sets.precast.WS.SubtleBlow = set_combine(sets.precast.WS.Damage,sets.SubtleBlow)
-    
-    
     -- WS魔攻
     sets.precast.WS.Magic = {
         ammo="ノブキエリ",
@@ -131,10 +134,8 @@ function init_gear_sets()
         back={ name="スメルトリオマント", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
     }
 
-
     --共通WS定義読み込み
     init_weapon_skill()
-
 
     --被魔法強化装備
     sets.midcast.IncreasedProtect   = {right_ring="シェルターリング"}

@@ -1,5 +1,5 @@
 function init_weaponns()
-    --デフォルト武器を設定
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ゴッドハンド'))
 end
 
 
@@ -8,8 +8,8 @@ function init_gear_sets()
     lockstyleset = 2
 
     -- 武器
-    gear.Godhands                   = {name="ゴッドハンド"}
-    gear.Slip                       = {name="フレンジーサリット"}
+    gear['ゴッドハンド']    = {name="ゴッドハンド"}
+    gear.Slip               = {name="フレンジーサリット"}
 
 
     -- 敵対心
@@ -64,10 +64,6 @@ function init_gear_sets()
 
     --WS魔攻
     sets.precast.WS.Magic = {
-    }
-
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = {
     }
 
     --共通WS定義読み込み

@@ -1,7 +1,5 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons Zantetsu')
-    send_command('gs c set SubWeapons UtuGrip')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('クレパスクラサイズ')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ウトゥグリップ'))
 end
 
 
@@ -10,11 +8,12 @@ function init_gear_sets()
     lockstyleset = 8
 
     --武器
-    gear.Zantetsu               = {name="真・斬鉄剣"}
-    gear.Deathbane              = {name="デスベインサイズ"}
-    gear.UtuGrip                = {name="ウトゥグリップ"}
-    gear.Khonsu                 = {name="コーンスー"}
+    gear['真・斬鉄剣']          = {name="真・斬鉄剣"}
+    gear['クレパスクラサイズ']  = {name="クレパスクラサイズ"}
+    gear['ウトゥグリップ']      = {name="ウトゥグリップ"}
     
+    sets.SubtleBlow = {}
+
     --待機装備（通常）
     sets.idle = {
         ammo="ストンチタスラム+1",
@@ -24,9 +23,9 @@ function init_gear_sets()
         legs="サクパタクウィス",
         feet="サクパタレギンス",
         neck={ name="暗黒の数珠+2", augments={'Path: A',}},
-        waist="キャリアーサッシュ",
-        left_ear="インフューズピアス",
-        right_ear="ハーティーピアス",
+        waist="無の腰当",
+        left_ear="アスプロピアス",
+        right_ear="エアバニピアス",
         left_ring="メランリング",
         right_ring="シュネデックリング",
         back={ name="アンコウマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Phys. dmg. taken-10%',}},
@@ -40,37 +39,45 @@ function init_gear_sets()
 
     --抜刀装備
     sets.engaged = {
-        ammo="コイストボダー",
         head="サクパタヘルム",
-        body="デーゴンブレスト",
+        body="サクパタブレスト",
         hands="サクパタガントレ",
         legs="サクパタクウィス",
         feet="サクパタレギンス",
-        neck="暗黒の数珠+2",
-        waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="テロスピアス",
-        right_ear={ name="ヒーズンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Weapon skill damage +4%','STR+9 INT+9',}},
-        left_ring="シーリチリング+1",
-        right_ring="ニックマドゥリング",
-		back="無の外装",
+        neck={ name="暗黒の数珠+2", augments={'Path: A',}},
+        waist="ソードフェーテル+1",
+        left_ear="アスプロピアス",
+        right_ear="シェレピアス",
+        left_ring="ニックマドゥリング",
+        right_ring="シーリチリング+1",
+        back="無の外装",
     }
-    
-    --監視用バフ
-    sets.buff['ドレッドスパイク']           = {body="ＨＴキュイラス+2"}
-    sets.buff['ダークシール']               = {head="ＦＬバーゴネット+1",body="アダマンアーマー"}
-    sets.buff['ネザーヴォイド']             = {body="アクロサーコート",legs="ＨＴフランチャ+2",feet="ラトリソルレット"}
 
-    --即時発動系
+    sets.engaged.SubtleBlow     = set_combine(sets.engaged ,sets.SubtleBlow)
+
+    --バフ
+    sets.buff['ドレッドスパイク']           = {body="ＨＴキュイラス+2"}
+    sets.buff['ダークシール']               = {head="ＦＬバーゴネット+1"}
+    sets.buff['ネザーヴォイド']             = {body="アクロサーコート",legs="ＨＴフランチャ+2",feet="ラトリソルレット"}
+    sets.precast.JA['ブラッドウェポン']     = {body="ＦＬキュイラス+4"}
+    sets.precast.JA['アルケインサークル']   = {feet="ＩＧソルレット+4"}
     sets.precast.JA['ラストリゾート']       = {feet="ＦＬソルレット+3",back="アンコウマント"}
-    sets.precast.JA['ネザーヴォイド']       = {legs="ＨＴフランチャ+2"}
     sets.precast.JA['ウェポンバッシュ']     = {head="ＩＧガントレ+2"}
+    sets.precast.JA['暗黒']                 = {}
+    sets.precast.JA['コンスームマナ']       = {}
+    sets.precast.JA['ダークシール']         = {}
+    sets.precast.JA['ディアボリクアイ']     = {hands="ＦＬガントレット+4"}
+    sets.precast.JA['ネザーヴォイド']       = {legs="ＨＴフランチャ+2"}
+    sets.precast.JA['アルケインクレスト']   = {}
+    sets.precast.JA['レッドデリリアム']     = {}
+    sets.precast.JA['ソールエンスレーヴ']   = {}
     
     --FC
     sets.precast.FC = {
         ammo="サピエンスオーブ",
         head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
         body="サクロブレスト",
-        hands={ name="レイライングローブ", augments={'Accuracy+6','Mag. Acc.+2','"Mag.Atk.Bns."+6',}},
+        hands="レイライングローブ",
         legs={ name="オディシアクウィス", augments={'"Fast Cast"+6','AGI+9','Mag. Acc.+2',}},
         feet={ name="オディシアグリーヴ", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','"Fast Cast"+6','VIT+2','Mag. Acc.+2','"Mag.Atk.Bns."+13',}},
         neck="オルンミラトルク",
@@ -79,22 +86,21 @@ function init_gear_sets()
         left_ring="キシャールリング",
         right_ring="ラハブリング",
     }
-    sets.precast.FC.value = 47
 
     --WSダメージ
     sets.precast.WS.Damage = {
         ammo="ノブキエリ",
-        head={ name="ＦＬバーゴネット+3", augments={'Enhances "Dark Seal" effect',}},
-        body="ＩＧキュイラス+3",
-        hands={ name="ＦＬガントレット+3", augments={'Enhances "Diabolic Eye" effect',}},
-        legs={ name="ＦＬフランチャー+3", augments={'Enhances "Muted Soul" effect',}},
+        head="ＦＬバーゴネット+3",
+        body="ニャメメイル",
+        hands="ニャメガントレ",
+        legs="ニャメフランチャ",
         feet="ＨＴソルレット+2",
         neck={ name="暗黒の数珠+2", augments={'Path: A',}},
-        waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="テロスピアス",
+        waist="セールフィベルト+1",
+        left_ear="胡蝶のイヤリング",
         right_ear={ name="ヒーズンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Weapon skill damage +4%','STR+9 INT+9',}},
-        left_ring="エパミノダスリング",
-        right_ring="コーネリアリング",
+        left_ring="コーネリアリング",
+        right_ring="王将の指輪",
         back={ name="アンコウマント", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
@@ -113,17 +119,6 @@ function init_gear_sets()
         left_ring="エパミノダスリング",
         right_ring="コーネリアリング",
         back={ name="アンコウマント", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
-    }
-
-    --WSモクシャ
-    sets.precast.WS.SubtleBlow = 
-    {
-        neck={ name="バーシチョーカー+1", augments={'Path: A',}},
-		body="デーゴンブレスト",
-        waist="サリサフロイベルト",
-        left_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
     }
     
     --共通WS定義読み込み

@@ -1,6 +1,5 @@
 function init_weaponns()
-    --デフォルト武器を設定
-    send_command('gs c set MainWeapons Opashoro; wait 0.3; gs c set SubWeapons ElanStrap')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('オパショーロ')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('エランストラップ'))
 end
 
 
@@ -8,10 +7,34 @@ function init_gear_sets()
     --ロックスタイル番号
     lockstyleset = 15
 
-    gear.Gridarvor              = {name="グリダーヴォル"}
-    gear.Opashoro               = {name="オパショーロ"}
-    gear.ElanStrap              = {name="エランストラップ+1"}
+    --武器
+    gear['グリダーヴォル']      = {name="グリダーヴォル"}
+    gear['オパショーロ']        = {name="オパショーロ"}
+    gear['エランストラップ']    = {name="エランストラップ+1"}
     gear.Slip                   = {name="プライムスタッフ"}
+
+    sets.SmnSkill = {
+        head="バヤミハット",
+        body="バヤミローブ",
+        hands={ name="ＧＬブレーサー+3", augments={'Inc. Sp. "Blood Pact" magic burst dmg.',}},
+        legs="ＢＣスパッツ+2",
+        feet="バヤミサボ",
+        neck="インカンタートルク",
+        waist="ルセデティサッシュ",
+        left_ear="パルーグピアス",
+        right_ear="ロードルピアス",
+        left_ring="エボカーリング",
+        right_ring="スティキニリング+1",
+        back={ name="コンベイケープ", augments={'Summoning magic skill +4','Pet: Enmity+8','Blood Pact Dmg.+2','Blood Pact ab. del. II -2',}},
+    }
+
+    --バフ
+    sets.precast.JA['アストラルフロウ']     = {head="ＧＬホーン+3"}
+    sets.precast.JA['エレメントサイフォン'] = set_combine(sets.SMNSkill,{feet="ＢＣピガッシュ+2"})
+    sets.precast.JA['神獣の加護']           = {head="ＢＣホーン+2"}
+    sets.precast.JA['アポジー']             = {}
+    sets.precast.JA['マナシード']           = {hads="ＢＣブレーサー+3"}
+    sets.precast.JA['アストラルパッセージ'] = {}
 
     --待機装備（通常）
     sets.idle = {
@@ -48,27 +71,6 @@ function init_gear_sets()
     }
     sets.idle.Avatar.Favor = sets.idle.Avatar
 
-    sets.SmnSkill = {
-        head="バヤミハット",
-        body="バヤミローブ",
-        hands={ name="ＧＬブレーサー+3", augments={'Inc. Sp. "Blood Pact" magic burst dmg.',}},
-        legs="ＢＣスパッツ+2",
-        feet="バヤミサボ",
-        neck="インカンタートルク",
-        waist="ルセデティサッシュ",
-        left_ear="パルーグピアス",
-        right_ear="ロードルピアス",
-        left_ring="エボカーリング",
-        right_ring="スティキニリング+1",
-        back={ name="コンベイケープ", augments={'Summoning magic skill +4','Pet: Enmity+8','Blood Pact Dmg.+2','Blood Pact ab. del. II -2',}},
-    }
-    
-    --即時発動系
-    sets.precast.JA['アストラルフロウ'] = {head="ＧＬホーン+3"}
-    sets.precast.JA['神獣の加護']       = {head="ＢＣホーン+2"}
-    sets.precast.JA['マナシード']       = {hads="ＢＣブレーサー+3"}
-    sets.precast.JA['エレメントサイフォン'] = set_combine(sets.SMNSkill,{feet="ＢＣピガッシュ+2"})
-    
     --FC
     sets.precast.FC = {
         ammo="サピエンスオーブ",
@@ -85,8 +87,6 @@ function init_gear_sets()
         right_ring="ラハブリング",
         back="フィフォレケープ+1"
     }
-    
-    sets.precast.FC.value = 80
 
     --履行短縮（バフ・デバフ）
     sets.precast.BloodPactWard = {

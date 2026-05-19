@@ -1,6 +1,5 @@
 function init_weaponns()
-    -- デフォルト武器を設定
-	send_command('gs c set MainWeapons Burtgang; wait 0.3; gs c set SubWeapons Duban;')
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ブルトガング')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ドゥバン'))
 end
 
 
@@ -8,23 +7,32 @@ function init_gear_sets()
 	-- ロックスタイル番号
 	lockstyleset = 7
     
-	-- 片手剣
-	gear.Burtgang	        = {name="ブルトガング"}
-	
-    -- 短剣
-    gear.Malevolence        = {name="マレヴォレンス", augments={'INT+9','Mag. Acc.+10','"Mag.Atk.Bns."+9','"Fast Cast"+4',}}
-	
-    -- 盾
-    gear.Duban		        = {name="ドゥバン"}
-	gear.Aegis 		        = {name="イージス"}
-    
-    -- その他
+	-- 武器
+	gear['ブルトガング']	= {name="ブルトガング"}
+    gear['マレヴォレンス']  = {name="マレヴォレンス", augments={'INT+9','Mag. Acc.+10','"Mag.Atk.Bns."+9','"Fast Cast"+4',}}
+    gear['ドゥバン']		= {name="ドゥバン"}
+	gear['イージス'] 		= {name="イージス"}
 	gear.Slip  		        = {name="カリブルヌス"}
     
-	--監視用バフ
-    sets.buff['神聖の印']   = {
-        feet="ＣＶサバトン+3"
-    }
+    -- 敵対心装備　128
+	sets.Enmity = {
+        ammo="サピエンスオーブ",
+        head={ name="ロースバルブータ+1", augments={'Path: A',}},
+        body="ＲＶサーコート+4",
+        hands={ name="ＳＶハントシュ+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%'}},
+        legs={ name="ＳＶディヒリン+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        feet="ＣＶサバトン+3",
+        neck="月光の首飾り",
+        waist={name="クリードボードリエ",priority=13},
+        left_ear={name="アスプロピアス",priority=16},
+        right_ear="無知の耳",
+        left_ring="メランリング",
+        right_ring={ name="アペリエリング+1", augments={'Path: A',}},
+        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Damage taken-5%',},priority=15},
+	}
+
+    -- ノックバック
+    sets.KnockBack = {back="リパルスマント"}
 
     sets.BoostHP={
         ammo="ストンチタスラム+1",
@@ -53,7 +61,7 @@ function init_gear_sets()
         neck="オルンミラトルク",
         waist="オドンブラサッシュ",
         left_ear="メンデカントピアス",
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
         left_ring="メランリング",
         right_ring="守りの指輪",
         back={ name="ルディアノスマント", augments={'DEX+20','Accuracy+20 Attack+20','"Store TP"+10','Damage taken-5%',}},
@@ -64,15 +72,15 @@ function init_gear_sets()
         sub="ドゥバン",
         ammo="ストンチタスラム+1",
         head="ＣＶアーメット+3",
-        body="サクロブレスト",
+        body="ＣＶキュイラス+3",
         hands="ＣＶガントレ+3",
         legs="ＣＶクウィス+3",
-        feet="ヒポメネソックス+1",
+        feet="ＣＶサバトン+3",
         neck={ name="騎士の数珠+2", augments={'Path: A',}},
         waist={name="プラチナモグベルト",priority=16},
         left_ear={ name="ズワゾピアス+1", augments={'Path: A',}},
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="フォテファイリング",
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
+        left_ring="ワーデンリング",
         right_ring="シュネデックリング",
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
@@ -82,17 +90,16 @@ function init_gear_sets()
         main="マリグナスソード",
         sub="イージス",
         ammo="ヴァニアバッテリー",
-        head="サクパタヘルム",
+        head="無の面",
         body="アダマンアーマー",
-        hands="サクパタガントレ",
+        hands="ヴォルトブレーサー",
         legs="サクパタクウィス",
         feet="サクパタレギンス",
         neck="コアトゴルゲット+1",
         waist="クリードボードリエ",
         left_ear="驕慢の耳",
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
         left_ring="ヴェクサーリング+1",
---        right_ring="シュネデックリング",
         right_ring="ヴェクサーリング+1",
         back="サルブスマント",
 	}
@@ -108,69 +115,18 @@ function init_gear_sets()
         right_ring="ヴェクサーリング+1",
 	})
 
-    -- ノックバック
-    sets.engaged.KnockBack = {
-        legs="ダッシングサブリガ",
-        back="リパルスマント",
-    }
-
-	-- 敵対心装備　149
-	sets.Enmity = {
-        ammo="サピエンスオーブ",
-        head={ name="ロースバルブータ+1", augments={'Path: A',}},
-        body={ name="ＳＶキュイラス+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        hands={ name="ＳＶハントシュ+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%'}},
-        legs={ name="ＳＶディヒリン+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-        neck="月光の首飾り",
-        waist={name="クリードボードリエ",priority=13},
-        left_ear="無知の耳",
-        right_ear={name="クリプティクピアス",priority=14},
-        left_ring={name="アイワツリング",priority=15},
-        right_ring={ name="アペリエリング+1", augments={'Path: A',}},
-        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Damage taken-5%',},priority=16},
-	}
-
-	sets.precast.JA = sets.Enmity
-    
-    -- 即時発動アビリティ　かばう
-	sets.precast.JA['かばう'] = set_combine(sets.Enmity,{
-        head="ＲＶコロネット+1",
-        legs="ＣＢブリーチズ+3"
-    })
-    
-    -- 即時発動アビリティ　センチネル
-	sets.precast.JA['センチネル'] = set_combine(sets.Enmity,{
-        feet="ＣＢレギンス+4"
-    })
-    
-    -- 即時発動アビリティ　ホーリーサークル
-	sets.precast.JA['ホーリーサークル'] = set_combine(sets.Enmity,{
-        feet="ＲＶレギンス+3"
-    })
-    
-    -- 即時発動アビリティ　インビンシブル
-	sets.precast.JA['インビンシブル'] = set_combine(sets.Enmity,{
-        legs="ＣＢブリーチズ+3"
-    })
-    
-    -- 即時発動アビリティ　シールドバッシュ
-    sets.precast.JA['シールドバッシュ'] = set_combine(sets.Enmity,{
-        hands="ＣＢガントレ+3"
-    })
-    
-    -- 即時発動アビリティ　ランパート
-	sets.precast.JA['ランパート'] = set_combine(sets.Enmity,{
-        head="ＣＢコロネット+3"
-    })
-    
-    -- 即時発動アビリティ　フィールティ
-	sets.precast.JA['フィールティ'] = set_combine(sets.Enmity,{
-        body="ＣＢサーコート+3"
-    })
-    
-    -- 即時発動アビリティ　シバルリー
-	sets.precast.JA['シバルリー'] = {
+	--監視用バフ
+    sets.buff['神聖の印']               = {feet="ＣＶサバトン+3"}
+	sets.precast.JA                     = sets.Enmity
+	sets.precast.JA['インビンシブル']   = set_combine(sets.Enmity,{legs="ＣＢブリーチズ+3"})
+	sets.precast.JA['ホーリーサークル'] = set_combine(sets.Enmity,{feet="ＲＶレギンス+3"})
+    sets.precast.JA['シールドバッシュ'] = set_combine(sets.Enmity,{hands="ＣＢガントレ+3"})
+	sets.precast.JA['センチネル']       = set_combine(sets.Enmity,{feet="ＣＢレギンス+4"})
+	sets.precast.JA['かばう']           = set_combine(sets.Enmity,{head="ＲＶコロネット+1",legs="ＣＢブリーチズ+3"})
+	sets.precast.JA['ランパート']       = set_combine(sets.Enmity,{head="ＣＢコロネット+3"})
+	sets.precast.JA['マジェスティ']     = sets.Enmity
+    sets.precast.JA['フィールティ']     = set_combine(sets.Enmity,{body="ＣＢサーコート+3"})
+	sets.precast.JA['シバルリー']       = {
         ammo="クォーツタスラム+1",
         head="ＣＶアーメット+3",
         body="ＲＶサーコート+4",
@@ -180,13 +136,17 @@ function init_gear_sets()
         neck={ name="騎士の数珠+2", augments={'Path: A',}},
         waist="プラチナモグベルト",
         left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
         left_ring="スティキニリング+1",
         right_ring={ name="メタモルリング+1", augments={'Path: A',}},
         back={ name="ルディアノスマント", augments={'VIT+20','Eva.+20 /Mag. Eva.+20','VIT+10','Enmity+10','Chance of successful block +5',}},
 	}
+	sets.precast.JA['神聖の印']         = sets.Enmity
+	sets.precast.JA['セプルカー']       = sets.Enmity
+	sets.precast.JA['パリセード']       = sets.Enmity
+	sets.precast.JA['インターヴィーン'] = sets.Enmity
 
-	-- FC
+	-- FC64
 	sets.precast.FC = {
         ammo="サピエンスオーブ",
         head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
@@ -197,12 +157,12 @@ function init_gear_sets()
         neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},
         left_ear={name="アスプロピアス",priority=15},
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="メダダリング",
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
+        left_ring="キシャールリング",
         right_ring={name="月明の指輪",priority=14},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
-    sets.precast.FC.value = 71
+    sets.precast.FC.value = 64
 
 	-- WSダメージ
 	sets.precast.WS.Damage = {
@@ -215,9 +175,9 @@ function init_gear_sets()
 		neck="フォシャゴルゲット",
 		waist="フォシャベルト",
 		left_ear="テロスピアス",
-		right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-		left_ring="王将の指輪",
-		right_ring="エパミノダスリング",
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
+        left_ring="コーネリアリング",
+        right_ring="エパミノダスリング",
 		back={name="月明の羽衣",priority=16},
     }
 
@@ -232,9 +192,9 @@ function init_gear_sets()
 		neck="フォシャゴルゲット",
 		waist="フォシャベルト",
 		left_ear="テロスピアス",
-		right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-		left_ring="王将の指輪",
-		right_ring="エパミノダスリング",
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
+        left_ring="コーネリアリング",
+        right_ring="王将の指輪",
 		back={name="月明の羽衣",priority=16},
     }
 
@@ -250,8 +210,8 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear={name="アスプロピアス",priority=14},
         right_ear="フリオミシピアス",
-        left_ring={name="ゼラチナスリング+1",priority=15},
-        right_ring="メダダリング",
+        left_ring="コーネリアリング",
+        right_ring="エパミノダスリング",
         back={ name="ルディアノスマント", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     
@@ -276,7 +236,7 @@ function init_gear_sets()
 		neck="月光の首飾り",
 		waist="オドンブラサッシュ",
 		left_ear="磁界の耳",
-		right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
 		left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=16},
         right_ring={ name="月明の指輪",priority=15},
 		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
@@ -284,6 +244,7 @@ function init_gear_sets()
 
     -- フラッシュ
     sets.midcast['フラッシュ'] = set_combine(sets.Enmity,{
+        left_ear={name="アスプロピアス",priority=14},
         waist="コーネリアの黒帯"
     })
 
@@ -297,8 +258,8 @@ function init_gear_sets()
 		main="サクパタソード",
 		sub="プリュウェン",
 		ammo="ストンチタスラム+1",
-		head={ name="オディシアヘルム", augments={'"Dbl.Atk."+3','"Mag.Atk.Bns."+3','Phalanx +5',}},
-		body={ name="オディシアプレート", augments={'VIT+8','Attack+1','Phalanx +5',}},
+        head={ name="バロラスマスク", augments={'Pet: DEX+5','Weapon skill damage +3%','Phalanx +5','Accuracy+2 Attack+2',}},
+        body={ name="バロラスメイル", augments={'Pet: Attack+9 Pet: Rng.Atk.+9','STR+10','Phalanx +5','Mag. Acc.+1 "Mag.Atk.Bns."+1',}},
 		hands={ name="ＳＶハントシュ+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
 		legs="サクパタクウィス",
 		feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
@@ -322,14 +283,42 @@ function init_gear_sets()
         neck="月光の首飾り",
         waist="スローダベルト",
         left_ear="磁界の耳",
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
+        right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
         left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=14},
         right_ring={name="月明の指輪",priority=15},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
 	}
-    
-    -- 青魔法
-	sets.midcast.BlueMagic = sets.Enmity
+
+    sets.midcast['ストンスキン'] = {
+        body="アダマンアーマー",
+        hands="ストーンマフラ",
+        legs="ヘイヴンホーズ",
+		feet="サクパタレギンス",
+        neck="ストーンゴルゲット",
+        waist="ジーゲルサッシュ",
+        left_ear="アースクライピアス",
+		left_ring="メランリング",
+        back={ name="月明の羽衣",priority=16},
+    }
+
+    -- 青魔法 敵対心100
+	sets.midcast.BlueMagic = {
+        main="ブルトガング",
+        sub="ドゥバン",
+        ammo="サピエンスオーブ",
+        head="ＣＶアーメット+3",
+        body="ＣＶキュイラス+3",
+        hands="ＣＶガントレ+3",
+        legs="ＣＶクウィス+3",
+        feet="ＣＶサバトン+3",
+        neck="月光の首飾り",
+        waist={name="プラチナモグベルト",priority=16},
+        left_ear={name="アスプロピアス",priority=15},
+        right_ear="無知の耳",
+        left_ring="メランリング",
+        right_ring="アペリエリング+1",
+        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','Enmity+10','Damage taken-5%',},priority=14},
+    }
 
     -- プロテス
     sets.midcast.Protect = {
