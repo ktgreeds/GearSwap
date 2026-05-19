@@ -6,36 +6,17 @@ end
 
 
 function job_setup()
-    state.Buff['エンストーン']  = buffactive['エンストーン'] or false
-    
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
-
-    -- gs c cycle OffenseMode
     state.OffenseMode:options('Normal','Enn')
-    
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
-
-    -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
-    
-    -- gs c cycle MainWeapons
-    state.MainWeapons = M{'CroceaC','Naegling','Maxentius','Tauret','QutrubKnife'}
-    
-    -- gs c cycle SubWeapons
-    state.SubWeapons = M{'Genbu','TernionDagger','Malevolence','Daybreak','EtherealDagger',}
+    state.MainWeapons   = M{'クロセアモースC','ネイグリング','マクセンチアス','トーレット','クトゥルブナイフ'}
+    state.SubWeapons    = M{'玄冥盾','ターニオンダガー','マレヴォレンス','デイブレイクワンド','幽世の短剣'}
 end
 
 
-function user_customize_melee_set(meleeSet)
+function job_customize_melee_set(meleeSet)
     if state.OffenseMode.value=='Enn' then
         meleeSet = sets.engaged.Enn
-        for buff,active in pairs(state.Buff) do
-            if active and sets.buff[buff] then
-                meleeSet = set_combine(meleeSet,sets.buff[buff])
-            end
-        end
     end
     return meleeSet
 end
@@ -48,7 +29,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 
         elseif spell.name == 'サイレス' then
             equip(sets.midcast.EnfeeblingEffectMnd)
-
+        elseif spell.name == 'ディアIII' then
+            equip(sets.TreasureHunter)
         else
             equip(sets.midcast['弱体魔法'])
         end
@@ -71,4 +53,8 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
     elseif spell.name == 'イオリアンエッジ' then
         equip(get_hachirin(spell.element))
     end
+end
+
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end

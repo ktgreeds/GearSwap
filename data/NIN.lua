@@ -6,21 +6,24 @@ end
 
 
 function job_setup()
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
-    
-    -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
-    
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
-    
-    -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal')
+    state.OffenseMode:options('Normal','SubtleBlow')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons   = M{'丙子椒林剣','マレヴォレンス'}
+    state.SubWeapons    = M{'鶴'}
+end
 
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'HeishiShorinken','Malevolence'}
-    
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'Tsuru'}
+
+function job_customize_melee_set(meleeSet)
+    if state.Buff["陽忍"] then
+        meleeSet = set_combine(meleeSet,sets.buff['陽忍'])
+    elseif state.Buff["陰忍"] then
+        meleeSet = set_combine(meleeSet,sets.buff['陰忍'])
+    end
+    return meleeSet
+end
+
+
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end

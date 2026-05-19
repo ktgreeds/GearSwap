@@ -12,20 +12,12 @@ function job_setup()
     state.Buff['だまし討ち'] = buffactive['だまし討ち'] or false
     state.Buff['フェイント'] = buffactive['フェイント'] or false
     
-    -- gs c cycle OffenseMode
     state.OffenseMode:options('Normal','Multi')
-    
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
-    
-    -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
-        
-    -- gs c cycle MainWeapons
-    state.MainWeapons = M{'Gandring','Tauret'}
-
-    -- gs c cycle SubWeapons
-    state.SubWeapons  = M{'Tauret','Aeneas','Acrontica'}
+    state.MainWeapons = M{'ガンドリング','エーネアス'}
+    state.SubWeapons  = M{'アクロンティカ','トーレット'}
+    state.TreasureHunter = M(true)
 end
 
 

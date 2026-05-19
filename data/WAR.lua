@@ -11,16 +11,23 @@ function job_setup()
     state.Buff['リタリエーション']      = buffactive['リタリエーション'] or false
     state.Buff['ウォリアーチャージ']    = buffactive['ウォリアーチャージ'] or false
     state.Buff['リストレント']          = buffactive['リストレント'] or false
-
-
-    state.OffenseMode:options('Normal','SubtleBlow')
+    state.OffenseMode:options('Normal','SubtleBlow','RangeHunting','HoxneAmpulla')
     state.WeaponskillMode:options('Normal','SubtleBlow')
-    state.MainWeapons   = M{'ShiningOne'}
-    state.SubWeapons    = M{'UtuGrip'}
+    state.MainWeapons   = M{'マレヴォレンス','ネイグリング','ライカーゴス','ゾアノン'}
+    state.SubWeapons    = M{'アダパシールド','ウトゥグリップ','ブラーシールド'}
     state.Increased     = M(true)
+    state.HoxneAmpulla  = M(false)
+end
+
+
+function job_customize_melee_set(meleeSet)
+    if state.Buff['ディフェンダー'] then
+        meleeSet = set_combine(meleeSet,sets.buff['ディフェンダー'] )
+    end
+    return meleeSet
 end
 
 
 function job_state_change(stateField,  newValue, oldValue)
-    SubtleBlowChange(stateField,newValue,oldValue)
+    user_state_change(stateField, newValue, oldValue)
 end

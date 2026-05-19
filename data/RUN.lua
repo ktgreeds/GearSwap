@@ -6,36 +6,29 @@ end
 
 
 function job_setup()
-    state.Buff['ファストキャスト'] = buffactive['ファストキャスト'] or false
-    
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
-    
-    -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal', 'Stp')
-
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal',  'KnockBack', 'Parry')
-    
-    -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
-
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Epeolatry', 'Lycurgos'}
-
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'AlberStrap', 'Khonsu'}
+    state.OffenseMode:options('Normal','Stp')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons   = M{'エピオラトリー','ライカーゴス'}
+    state.SubWeapons    = M{'アルバーストラップ'}
+    state.Increased     = M(false)
+    state.KnockBack     = M(false)
 end
 
-function job_buff_change(buff, gain)
-    if buff == 'バットゥタ' then
-        if gain then
-            send_command('gs c set HybridMode Parry')
-        else
-            send_command('gs c set HybridMode Normal')
-        end
 
-    elseif buff == 'エンボルド' then
+function job_customize_melee_set(meleeSet)
+    if state.Buff['バットゥタ'] then
+        meleeSet = set_combine(meleeSet,sets.buff['バットゥタ'] )
+    end
+    if state.KnockBack.value then
+        meleeSet = set_combine(meleeSet,sets.KnockBack)
+    end
+    return meleeSet
+end 
+
+
+function job_buff_change(buff, gain)
+    if buff == 'エンボルド' then
         if gain then
             equip(sets.buff['エンボルド'])
             disable('back')
@@ -46,14 +39,7 @@ function job_buff_change(buff, gain)
     end
 end
 
-function job_state_change(stateField, newValue, oldValue)
-    if stateField == 'RuneText' then
-        if newValue then
-            showTextRune()
-        else
-            hideTextRune()
-        end
-    end
+
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end
-
-

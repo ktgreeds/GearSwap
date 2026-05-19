@@ -6,24 +6,16 @@ end
 
 
 function job_setup()
-    state.Buff["魔力の泉"]       = buffactive["魔力の泉"] or false
-    state.Buff["マナウォール"]   = buffactive["マナウォール"] or false
+    state.Buff["女神の愛撫"]       = buffactive["女神の愛撫"] or false
+    state.Buff["女神の慈悲"]       = buffactive["女神の慈悲"] or false
+    state.Buff["ハートオブソラス"]   = buffactive["ハートオブソラス"] or false
+    state.Buff["ハートオブミゼリ"]   = buffactive["ハートオブミゼリ"] or false
     
-    --gs c cycle OffenseMode
     state.OffenseMode:options('Normal')
-    
-    --gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
-
-    -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal')
-    
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'QuellerRod'}
-
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'ArchdukesShield'}
-    
+    state.MainWeapons   = M{'クェラーロッド'}
+    state.SubWeapons    = M{'デュークシールド'}
 end
 
 

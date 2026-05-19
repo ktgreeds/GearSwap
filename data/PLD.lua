@@ -8,36 +8,25 @@ end
 function job_setup()
     state.Buff['神聖の印']      = buffactive['神聖の印'] or false
 
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
-
-    --gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
-
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal', 'KnockBack')
+    state.OffenseMode:options('Normal','SubtleBlow')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons   = M{'ブルトガング','マレヴォレンス'}
+    state.SubWeapons    = M{'ドゥバン','イージス'}
+    state.Increased     = M(false)
+    state.KnockBack     = M(false)
     
-    -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal')
-
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Burtgang','Malevolence'}
-
-    -- gs c cycle SubWeapons
-    state.SubWeapons   = M{'Duban','Aegis'}
-    
-    state.Increased    = M(false)
-    
-    send_command('bind ~F7 gs c cycle SubWeapons')
+    send_command('bind ~7 gs c cycle SubWeapons')
 end
 
 
 function user_unload()
-    send_command('bind ~F7 gs c cycle OffenseMode')
+    send_command('bind ~7 gs c cycle OffenseMode')
 end
 
-function customize_idle_set(idleSet)
-    if state.SubWeapons.value == "Duban" then
+
+function job_customize_idle_set(idleSet)
+    if state.SubWeapons.value == "ドゥバン" then
         idleSet = idleSet
     else
         idleSet = set_combine(idleSet,sets.idle.Magical)
@@ -46,15 +35,21 @@ function customize_idle_set(idleSet)
     return idleSet
 end
 
-function user_customize_melee_set(meleeSet)
-    if state.SubWeapons.value == "Duban" then
+
+function job_customize_melee_set(meleeSet)
+    if state.SubWeapons.value == "ドゥバン" then
         meleeSet = set_combine(meleeSet,sets.engaged)
     else
         meleeSet = set_combine(meleeSet,sets.engaged.Magical)
     end
     
-    if state.HybridMode.value == "KnockBack" then
-        meleeSet = set_combine(meleeSet,sets.engaged.KnockBack)
+    if state.KnockBack.value then
+        meleeSet = set_combine(meleeSet,sets.KnockBack)
     end
     return meleeSet
+end
+
+
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end

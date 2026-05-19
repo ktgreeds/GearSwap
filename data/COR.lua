@@ -8,20 +8,18 @@ end
 function job_setup()
     --buff
     state.Buff['トリプルショット']  = buffactive['トリプルショット'] or false
-    
+
     --state
-    state.OffenseMode:options('Normal','ACC','SubtleBlow')
+    state.OffenseMode:options('Normal','SubtleBlow','ACC')
     state.WeaponskillMode:options('Normal','SubtleBlow')
     state.RangedMode:options('Normal','SubtleBlow','Critical')
-    state.MainWeapons       = M{'RostamA','RostamB','Naegling'}
-    state.SubWeapons        = M{'NuskuShield','GletisKnife','Tauret'}
-    state.RangeWeapons      = M{'Fomalhaut','DeathPenalty','HoxneAmpulla',}
+    state.MainWeapons       = M{'ロスタムA','ロスタムB','ネイグリング'}
+    state.SubWeapons        = M{'ヌスクシールド','グレティナイフ','クレパスクラナイフ'}
+    state.RangeWeapons      = M{'フォーマルハウト','デスペナルティ','アナーキー'}
     state.LuzafsRing        = M(true)
     state.ShortRole         = M(false)
-    
     define_roll_values()--ロール情報
 end
-
 
 
 local res = require('resources')
@@ -35,54 +33,40 @@ function get_item_id_by_name(name)
 end
 
 
-
 function job_post_pretarget(spell, action, spellMap, eventArgs)
-    --誤射防止
-    if player.equipment.ammo == gear.HauksbokBullet.name or player.equipment.ammo == gear.AnimikiiBullet.name then
+    if player.equipment.ammo == gear['ホクスボクブレット'].name or player.equipment.ammo == gear['アニミキーブレット'].name then --誤射防止
         equip({ammo=empty})
-    end
-
-    --遠隔攻撃
-    if spell.action_type == 'Ranged Attack' then
+    
+    elseif spell.action_type == 'Ranged Attack' then --遠隔攻撃
         if res.items[get_item_id_by_name(player.equipment.range)]["range_type"] == "Gun" then
             equip({ammo = gear.GunPhysics})
         end
-    end
-
-    --ロール
-    if spell.type == 'CorsairRoll' then
+    
+    elseif spell.type == 'CorsairRoll' then --ロール
         display_roll_info(spell)
         if state.LuzafsRing.value then
-            equip({left_ring=gear.LuzafsRing})
+            equip({left_ring=gear['ルザフリング']})
         end
     end
 end
-
 
 
 function job_post_precast(spell, action, spellMap, eventArgs)
-    if spell.name == 'レデンサリュート' 
-    or spell.name == 'イオリアンエッジ' then
+    if spell.name == 'レデンサリュート' then
         equip(get_hachirin(spell.element))
-    end
-
-    if spell.type == 'CorsairRoll' then
+    
+    elseif spell.type == 'CorsairRoll' then
         --確実にロスタムCで実行
         if not buffactive[spell.name] then
-            equip({main = gear.RostamC})
+            equip({main = gear['ロスタムC']})
         end
 
-        --ショートロール用
-        if state.ShortRole.value then
-            equip(sets.precast.CorsairRoll.short)
-        end
     end
 end
 
 
-
 function job_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.action_type == 'Ranged Attack' then
+    if spell.action_type == 'Ranged Attack' and spell.action_type ~= 'WeaponsSkill' then
         if state.Buff['トリプルショット'] then
             equip(sets.buff['トリプルショット'])
         end
@@ -90,14 +74,12 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 
-
 function job_post_aftercast(spell, action, spellMap, eventArgs)
     --誤射防止
-    if player.equipment.ammo == gear.HauksbokBullet.name or player.equipment.ammo == gear.AnimikiiBullet.name then
+    if player.equipment.ammo == gear['ホクスボクブレット'].name or player.equipment.ammo == gear['アニミキーブレット'].name then
         equip({ammo=empty})
     end
 end
-
 
 
 function customize_idle_set(idleSet)
@@ -105,39 +87,30 @@ function customize_idle_set(idleSet)
 end
 
 
-
 function user_customize_melee_set(meleeSet)
     return set_combine(meleeSet,customize_weapon_set())
 end
 
 
-
 function customize_weapon_set()
     if state.MainWeapons.value == 'Naegling' then
-        return {range=gear.TPBonus}
+       -- return {range=gear.TPBonus}
     end
 end
-
 
 
 function job_state_change(stateField,  newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode SubtleBlow')        
-        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode Normal')        
-        end
-    end
+    user_state_change(stateField,  newValue, oldValue)
+    RangeSubtleBlowChange(stateField,newValue,oldValue)
 end
 
 
-
-function job_buff_change(buff, gain)
-    if state.Buff['エンチャント'] then
-        state.CombatForm:set('エンチャント')
-        disable('range','ammo')
-    elseif not state.Buff['エンチャント']  then
-        enable('range','ammo')
+function RangeSubtleBlowChange(stateField,  newValue, oldValue)
+    if stateField == 'Offense Mode' then
+        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
+            send_command('gs c set RangedMode SubtleBlow')
+        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
+            send_command('gs c set RangedMode Normal')
+        end
     end
-    IdleMelee()
 end

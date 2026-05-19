@@ -7,31 +7,12 @@ end
 
 function job_setup()
     state.Buff['ダブルショット']  = buffactive['ダブルショット'] or false
-    -- gs c cycle IdleMode
-    state.IdleMode:options('Normal','Refresh')
-    
-    -- gs c cycle OffenseMode
+    state.IdleMode:options('Normal')
     state.OffenseMode:options('Normal','SubtleBlow')
-
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
-
-    -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
-    
-    -- gs c cycle MainWeapons
-    state.MainWeapons       = M{'Perun','Naegling','Malevolence','KrakenClub'}
-    
-    -- gs c cycle SubWeapons
-    state.SubWeapons        = M{'CrepuscularKnife','KrakenClub','NuskuShield'}
-    
-    -- gs c cycle RangeWeapons
-    state.RangeWeapons      = M{'Fomalhaut','Hangaku','TPBonus','Crossbow'}
-    state.RangedMode        = M('Archery','Marksmanship')
-end
-
-
-function job_state_change(stateField,  newValue, oldValue)
+    state.MainWeapons       = M{'ネイグリング','ペルーン','マレヴォレンス'}
+    state.SubWeapons        = M{'クレパスクラナイフ','ヌスクシールド'}
+    state.RangeWeapons      = M{'フォーマルハウト','板額の弓','スパロウホーク','ライトクロスボウ'}
 end
 
 
@@ -48,8 +29,8 @@ end
 
 function job_post_pretarget(spell, action, spellMap, eventArgs)
         --誤射防止
-    if player.equipment.ammo == gear.HauksbokArrow.name 
-    or player.equipment.ammo == gear.HauksbokBullet.name then
+    if player.equipment.ammo == gear['ホクスボクアロー'].name 
+    or player.equipment.ammo == gear['ホクスボクブレット'].name then
         send_command('input /equip ammo')
     end
 
@@ -62,9 +43,9 @@ function job_post_pretarget(spell, action, spellMap, eventArgs)
             equip({ammo = gear.CrossbowPhysics})
         end
     elseif spell.name == 'サベッジブレード' then
-        equip({ammo=gear.HauksbokArrow})
+        equip({ammo=gear['ホクスボクアロー']})
     elseif spell.name == 'イオリアンエッジ' then
-        equip({ammo=gear.HauksbokBullet})
+        equip({ammo=gear['ホクスボクブレット']})
     end
 end
 
@@ -95,4 +76,9 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
     or spell.name == 'イオリアンエッジ' then
         send_command('input /equip ammo')
     end
+end
+
+
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end

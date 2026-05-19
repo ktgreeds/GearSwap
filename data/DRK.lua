@@ -6,27 +6,15 @@ end
 
 
 function job_setup()
-	state.Buff["ラストリゾート"]    = buffactive["ラストリゾート"] or false	
-	state.Buff["暗黒"]              = buffactive["暗黒"] or false
     state.Buff["ドレッドスパイク"]  = buffactive["ドレッドスパイク"] or false
     state.Buff["ダークシール"]      = buffactive["ダークシール"] or false
     state.Buff["ネザーヴォイド"]    = buffactive["ネザーヴォイド"] or false
     
-    
-    -- gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
-    
-    -- gs c cycle IdleMode
-    state.IdleMode:options('Normal','Refresh')
-    
-    -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal', 'SubtleBlow')
-
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Zantetsu','Deathbane'}
-
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'UtuGrip','Khonsu'}
+    state.OffenseMode:options('Normal','SubtleBlow')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons   = M{'クレパスクラサイズ','真・斬鉄剣'}
+    state.SubWeapons    = M{'ウトゥグリップ'}
+    state.Increased     = M(true)
 end
 
 
@@ -58,8 +46,8 @@ function customize_melee_set(meleeSet)
 end
 
 
-function job_buff_change(buff, gain)
-    if buff == "ドレッドスパイク" and not gain then
-        IdleMelee()
-    end
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end
+
+

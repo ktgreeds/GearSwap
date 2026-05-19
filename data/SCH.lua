@@ -20,47 +20,21 @@ function job_setup()
     state.Buff['不惜身命の章']      = buffactive['不惜身命の章'] or false
     state.Buff['無憂無風の章']      = buffactive['無憂無風の章'] or false
     state.Buff['令狸執鼠の章']      = buffactive['令狸執鼠の章'] or false
-    state.Buff['白のグリモア']      = buffactive['白のグリモア'] or false
-    state.Buff['黒のグリモア']      = buffactive['黒のグリモア'] or false
-    state.Buff['白の補遺']          = buffactive['白の補遺'] or false
-    state.Buff['黒の補遺']          = buffactive['黒の補遺'] or false
     
-    --gs c cycle IdleMode
     state.IdleMode:options('Normal','Refresh')
-    
-    --gs c cycle OffenseMode
-    state.OffenseMode:options('Normal')
-    
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
+    state.OffenseMode:options('Normal','SubtleBlow')
+    state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons       = M{'オパショーロ','ムサ','ブンジロッド','マレヴォレンス','デイブレイクワンド'}
+    state.SubWeapons        = M{'エンキストラップ','コーンスー','アムラピシールド','デイブレイクワンド'}
+    state.VagaryMode        = M(false, 'Vagary')
+    state.TreasureHunter    = M(false)
 
-    -- gs c cycle WeaponskillMode
-    state.WeaponskillMode:options('Normal')
-        
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Opashoro','Musa','BunzisRod','Malevolence','Daybreak'}
-    
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'EnkiStrap','Khonsu','AmmurapiShield','Daybreak'}
-
-    -- gs c cycle VagaryMode
-    state.VagaryMode    = M(false, 'Vagary')
-
-    send_command('bind ~F7 gs c cycle VagaryMode')
+    send_command('bind ~7 gs c cycle VagaryMode')
 end
 
 
 function user_unload()
-    send_command('bind ~F7 gs c cycle OffenseMode')
-end
-
-
-
-function customize_idle_set(idleSet)
-    if state.Buff['机上演習:蓄積中'] then
-        idleSet = set_combine(idleSet, sets.buff['机上演習'])
-    end
-    return idleSet
+    send_command('bind ~7 gs c cycle OffenseMode')
 end
 
 
@@ -86,14 +60,21 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 
+function job_customize_idle_set(idleSet)
+    if state.Buff['机上演習:蓄積中'] then
+        idleSet = set_combine(idleSet, sets.buff['机上演習'])
+    end
+    return idleSet
+end
+
+
 function job_state_change(stateField, newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
     if stateField == 'Vagary' then
         if newValue then
             equip(sets.precast.FC)
-            --send_command('gs disable all')
             disable('range','ammo','head','neck','left_ear','right_ear','body','hands','left_ring','right_ring','back','waist','legs','feet')
         else
-            --send_command('gs enable all')
             enable('range','ammo','head','neck','left_ear','right_ear','body','hands','left_ring','right_ring','back','waist','legs','feet')
             IdleMelee()
         end
@@ -128,11 +109,11 @@ sc_mb = {
 function custom_self_command(cmdParams, eventArgs)
     if cmdParams[1] == 'lockstyleset' then --ロックスタイル固定処理
         if cmdParams[2] == 'black' then
-            send_command('gs c set MainWeapons BunzisRod; wait 0.1; gs c set SubWeapons AmmurapiShield; wait 0.1; input /lockstyleset '..lockstyleset_black)
+            send_command('gs c set MainWeapons '..windower.to_shift_jis('ブンジロッド')..'; wait 0.1; gs c set SubWeapons '..windower.to_shift_jis('アムラピシールド')..'; wait 0.1; input /lockstyleset '..lockstyleset_black)
         elseif cmdParams[2] == 'white' then
-            send_command('gs c set MainWeapons Musa;      wait 0.1; gs c set SubWeapons Khonsu;         wait 0.1; input /lockstyleset '..lockstyleset_white)
+            send_command('gs c set MainWeapons '..windower.to_shift_jis('ムサ')..';wait 0.1; gs c set SubWeapons '..windower.to_shift_jis('コーンスー')..';         wait 0.1; input /lockstyleset '..lockstyleset_white)
         else
-            send_command('gs c set MainWeapons Opashoro;  wait 0.1; gs c set SubWeapons EnkiStrap;      wait 0.1; input /lockstyleset '..lockstyleset)
+            send_command('gs c set MainWeapons '..windower.to_shift_jis('オパショーロ')..';  wait 0.1; gs c set SubWeapons '..windower.to_shift_jis('エンキストラップ')..';      wait 0.1; input /lockstyleset '..lockstyleset)
         end
 
     elseif cmdParams[1] == 'sc' then --【学者】震天動地連携処理
@@ -184,7 +165,7 @@ function disp_start_skillchain_message(sc_name,count)
     end
     local start_msg = get_auto_translate_char_squence('準備中です。')
 
-    msg = msg..start_msg..windower.to_shift_jis(' → ')..' <t> <call21>'
+    msg = msg..start_msg..windower.to_shift_jis('   → ')..' <t> <scall21>'
     send_command(msg)
 end
 

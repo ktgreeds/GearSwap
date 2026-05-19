@@ -5,7 +5,6 @@ function get_sets()
 end
 
 
-
 function job_setup()
     state.Buff["エフラックス"]          = buffactive["エフラックス"] or false
     state.Buff["エンチェーンメント"]    = buffactive["エンチェーンメント"] or false
@@ -15,42 +14,15 @@ function job_setup()
     state.Buff["ブルーバースト"]        = buffactive["ブルーバースト"] or false
     
     state.IdleMode:options('Normal','Refresh')
-    state.OffenseMode:options('Normal','SubtleBlow')
+    state.OffenseMode:options('Normal','SubtleBlow','HoxneAmpulla')
     state.WeaponskillMode:options('Normal','SubtleBlow')
-
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Tizona','Naegling','Maxentius'}
-    
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'SakpatasSword'}
-    
-    -- gs c cycle TreasureHunter
-    state.TreasureHunter = M(false)
-
-    -- gs c cycle LockWeapons
-    state.LockWeapons = M(false)
+    state.MainWeapons       = M{'ティソーナ','ネイグリング','マクセンチアス'}
+    state.SubWeapons        = M{'サクパタソード','ブンジロッド'}
+    state.TreasureHunter    = M(false)
+    state.HoxneAmpulla      = M(false)
 end
-
 
 
 function job_state_change(stateField,  newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode SubtleBlow')        
-        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode Normal')        
-        end
-    end
-end
-
-
-
-function job_buff_change(buff, gain)
-    if state.Buff['エンチャント'] then
-        state.CombatForm:set('エンチャント')
-        disable('range','ammo')
-    elseif not state.Buff['エンチャント']  then
-        enable('range','ammo')
-    end
-    IdleMelee()
+    user_state_change(stateField, newValue, oldValue)
 end

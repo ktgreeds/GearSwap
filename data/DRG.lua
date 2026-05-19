@@ -6,21 +6,14 @@ end
 
 
 function job_setup()
-    -- gs c cycle IdleMode
     state.IdleMode:options('Normal')
-
-    -- gs c cycle OffenseMode
     state.OffenseMode:options('Normal','SubtleBlow')
-    
-    -- gs c cycle HybridMode
-    state.HybridMode:options('Normal')
-
-    -- gs c cycle WeaponskillMode
     state.WeaponskillMode:options('Normal','SubtleBlow')
+    state.MainWeapons   = M{'アラム','ゲイルレズ','シャイニングワン'}
+    state.SubWeapons    = M{'ウトゥグリップ'}
+    state.Increased     = M(true)
+end
 
-    -- gs c cycle MainWeapons
-    state.MainWeapons   = M{'Geirrothr','ShiningOne'}
-    
-    -- gs c cycle SubWeapons
-    state.SubWeapons    = M{'UtuGrip','Khonsu'}
+function job_state_change(stateField,  newValue, oldValue)
+    user_state_change(stateField,  newValue, oldValue)
 end

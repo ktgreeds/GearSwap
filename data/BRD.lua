@@ -5,7 +5,6 @@ function get_sets()
 end
 
 
-
 function job_setup()
     --dummy
     set_dummy_song('戦士達のピーアン')
@@ -13,37 +12,35 @@ function job_setup()
     set_dummy_song('戦士達のピーアンIII')
 
     --state
+    state.IdleMode:options('Normal','Evasion')
     state.OffenseMode:options('Normal','SubtleBlow')
     state.WeaponskillMode:options('Normal','SubtleBlow')
-    state.MainWeapons     = M{'Carnwenhan','Naegling'}
-    state.SubWeapons      = M{'AmmurapiShield','Genbu','Aeneas','Malevolence'}
-    --state.Instruments     = M{'Empty','Gjallarhorn','Daurdabla','Marsyas','Blurred','MiracleCheer'}
+    state.MainWeapons     = M{'カルンウェナン','ネイグリング'}
+    state.SubWeapons      = M{'アムラピシールド','玄冥盾','エーネアス','マレヴォレンス'}
     state.UseMiracleCheer = M(false,'Miracle Cheer')
 end
-
 
 
 function job_post_precast(spell, action, spellMap, eventArgs)
     if spell.type=='BardSong' then
         if spell.name == '栄典の戴冠マーチ' then
-            equip({range=gear.Marsyas})
+            equip({range=gear['マルシュアス']})
         elseif spell.name == '冷静と情熱のアリア' then
-            equip({range=gear.Loughnashade})
+            equip({range=gear['ラックナシェード']})
         elseif spell.name == '魔物達のララバイ' or spell.name == '魔物達のララバイII' then
-            equip({range=gear.Blurred})
+            equip({range=gear['ブラーハープ']})
         elseif spellMap == 'Dummy' then
-            equip({range=gear.Daurdabla})
+            equip({range=gear['ダウルダヴラ']})
         else
             if not state.UseMiracleCheer.value 
             or spell.target.type == "MONSTER" then
-                equip({range=gear.Gjallarhorn})
+                equip({range=gear['ギャッラルホルン']})
             else
-                equip({range=gear.MiracleCheer})
+                equip({range=gear['ミラクルチアー']})
             end
         end
     end 
 end
-
 
 
 function job_post_midcast(spell, action, spellMap, eventArgs)    
@@ -65,17 +62,9 @@ function job_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 
-
 function job_state_change(stateField,  newValue, oldValue)
-    if stateField == 'Offense Mode' then
-        if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode SubtleBlow')        
-        elseif state.WeaponskillMode.value == 'SubtleBlow' and newValue ~= 'SubtleBlow' then
-            send_command('gs c set WeaponskillMode Normal')        
-        end
-    end
+    user_state_change(stateField,  newValue, oldValue)
 end
-
 
 
 function set_dummy_song(song_name)
