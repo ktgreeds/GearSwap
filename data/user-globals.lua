@@ -84,7 +84,7 @@ function user_state_change(stateField,  newValue, oldValue)
                 disable('ammo')
             else
                 enable('ammo')
-                send_command('gs c reset OffenseMode HoxneAmpulla')
+                send_command('gs c reset OffenseMode')
             end
         end
     end
