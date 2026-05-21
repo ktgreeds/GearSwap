@@ -135,10 +135,10 @@ function init_gear_sets()
         feet="ニャメソルレット",
         neck={ name="アサシンゴルゲ+2", augments={'Path: A',}},
         waist="フォシャベルト",
-        left_ear="シェリダピアス",
+        left_ear="オドルピアス",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         left_ring="コーネリアリング",
-        right_ring="エパミノダスリング",
+        right_ring="イラブラットリング",
         back={ name="トゥタティスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%',}},
     }
     
@@ -152,8 +152,8 @@ function init_gear_sets()
         feet="マリグナスブーツ",
         neck="フォシャゴルゲット",
         waist="フォシャベルト",
-        left_ear="シェリダピアス",
-        right_ear="オドルピアス",
+        left_ear="オドルピアス",
+        right_ear="シェリダピアス",
         left_ring="王将の指輪",
         right_ring="イラブラットリング",
         back={ name="トゥタティスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10',}},
