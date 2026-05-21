@@ -82,23 +82,6 @@ function job_post_aftercast(spell, action, spellMap, eventArgs)
 end
 
 
-function customize_idle_set(idleSet)
-    return set_combine(idleSet,customize_weapon_set())
-end
-
-
-function user_customize_melee_set(meleeSet)
-    return set_combine(meleeSet,customize_weapon_set())
-end
-
-
-function customize_weapon_set()
-    if state.MainWeapons.value == 'Naegling' then
-       -- return {range=gear.TPBonus}
-    end
-end
-
-
 function job_state_change(stateField,  newValue, oldValue)
     user_state_change(stateField,  newValue, oldValue)
     RangeSubtleBlowChange(stateField,newValue,oldValue)

@@ -20,36 +20,21 @@ function job_setup()
     state.TreasureHunter = M(true)
 end
 
-
+function job_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then
+        if state.Buff['不意打ち'] then
+            equip(sets.buff['不意打ち'])
+        elseif state.Buff['だまし討ち'] then
+            equip(sets.buff['だまし討ち'])
+        elseif spell.name == 'イオリアンエッジ' then
+            equip(get_hachirin(spell.element))
+        end
+    end
+end
 function job_post_midcast(spell, action, spellMap, eventArgs)
     if spell.name == 'スリプガ' then
         equip(sets.TreasureHunter)
     elseif spell.name == 'ポイゾガ' then
         equip(sets.TreasureHunter)
-    elseif spell.name == 'アブゾタック' then
-        equip(sets.TreasureHunter)
-    elseif spell.name == 'イオリアンエッジ' then
-        equip(get_hachirin(spell.element))
-    end
-end
-
-
-function job_buff_change(buff, gain)
-    if buff == "不意打ち" then
-        if gain then
-            equip(sets.buff['不意打ち'])
-            disable('hands')
-        else
-            enable('hands')
-            IdleMelee()
-        end
-    elseif buff == "だまし討ち" then
-        if gain then
-            equip(sets.buff['だまし討ち'])
-            disable('body')
-        else
-            enable('body')
-            IdleMelee()
-        end
     end
 end
