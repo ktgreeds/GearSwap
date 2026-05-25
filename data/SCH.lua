@@ -29,12 +29,12 @@ function job_setup()
     state.VagaryMode        = M(false, 'Vagary')
     state.TreasureHunter    = M(false)
 
-    send_command('bind ~7 gs c cycle VagaryMode')
+    send_command('bind ~f7 gs c cycle VagaryMode')
 end
 
 
 function user_unload()
-    send_command('bind ~7 gs c cycle OffenseMode')
+    send_command('bind ~f7 gs c cycle OffenseMode')
 end
 
 

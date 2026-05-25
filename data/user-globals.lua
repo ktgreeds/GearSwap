@@ -11,8 +11,8 @@ function user_setup()
     init_custom_spell_map()                                             --スペルマップ定義再構築
 
     send_command('input /chatmode party')                               --チャットモード変更
-    send_command('wait 2;gs c set IdleMode Normal; wait 1; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
-    send_command('wait 2;input /si '..res.jobs[player.main_job_id]["ens"])
+    send_command('input /si '..res.jobs[player.main_job_id]["ens"])
+    send_command('wait 2; gs c set IdleMode Normal; wait 1; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
 
     -- gs c cycle SortieText
     --state.SortieText = M(false)
@@ -31,33 +31,39 @@ end
 
 --■■■アクション前処理（共通実装なし）
 function user_post_precast(spell, action, spellMap, eventArgs)
+    if spell.type == 'WeaponSkill' then
+        if state.WeaponskillMode then
+            if state.WeaponskillMode.value == 'SubtleBlow' then
+                 --WSモクシャ着替え
+                equip(sets.SubtleBlow)
+            end
+        end
+    end
 end
 
 
 --■■■アクション中処理
 function user_post_midcast(spell, action, spellMap, eventArgs)
-    --WS以外のバフ着替え
     if spell.type ~= 'WeaponSkill' then
         for buff,active in pairs(state.Buff) do
             if active and sets.buff[buff] then
+                --アビリティや魔法時のバフ＋効果の着替え
                 equip(sets.buff[buff])
             end
         end
-    end
-    --詠唱中断着替え
-    if string.find(spell.type, 'Magic') then
+
+    elseif string.find(spell.type, 'Magic') then
         if sets.midcast.interruption then
+            --詠唱中断着替え
             Interruption(spell, action, spellMap, eventArgs)
         end
     end
 
     --トレハン着替え
-    if state.TreasureHunter and state.TreasureHunter.value then
-        equip(sets.TreasureHunter)
-    end
-
-    if spell.name == 'イオリアンエッジ' then
-        equip(get_hachirin(spell.element))
+    if state.TreasureHunter then
+        if state.TreasureHunter.value then
+            equip(sets.TreasureHunter)
+        end
     end
 end
 
@@ -772,245 +778,245 @@ function init_weapon_skill()
     --魔攻：sets.precast.WS.Magic
     --遠隔物理ダメージ：sets.precast.WS.Range
     
-    sets.precast.WS["コンボ"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["タックル"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["短勁"]                     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["バックハンドブロー"]       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["乱撃"]                     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スピンアタック"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["空鳴拳"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["双竜脚"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["夢想阿修羅拳"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["闘魂旋風脚"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ファイナルパラダイス"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ファイナルヘヴン"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["アスケーテンツォルン"]     = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["連環六合圏"]               = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["ビクトリースマイト"]       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["四神円舞"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ドラゴンブロウ"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["マルカラ"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["コンボ"]                   = sets.precast.WS.Damage
+    sets.precast.WS["タックル"]                 = sets.precast.WS.Damage
+    sets.precast.WS["短勁"]                     = sets.precast.WS.Damage
+    sets.precast.WS["バックハンドブロー"]       = sets.precast.WS.Critical
+    sets.precast.WS["乱撃"]                     = sets.precast.WS.Damage
+    sets.precast.WS["スピンアタック"]           = sets.precast.WS.Damage
+    sets.precast.WS["空鳴拳"]                   = sets.precast.WS.Damage
+    sets.precast.WS["双竜脚"]                   = sets.precast.WS.Damage
+    sets.precast.WS["夢想阿修羅拳"]             = sets.precast.WS.Damage
+    sets.precast.WS["闘魂旋風脚"]               = sets.precast.WS.Damage
+    sets.precast.WS["ファイナルパラダイス"]     = sets.precast.WS.Damage
+    sets.precast.WS["ファイナルヘヴン"]         = sets.precast.WS.Damage
+    sets.precast.WS["アスケーテンツォルン"]     = sets.precast.WS.Critical
+    sets.precast.WS["連環六合圏"]               = sets.precast.WS.Critical
+    sets.precast.WS["ビクトリースマイト"]       = sets.precast.WS.Critical
+    sets.precast.WS["四神円舞"]                 = sets.precast.WS.Damage
+    sets.precast.WS["ドラゴンブロウ"]           = sets.precast.WS.Damage
+    sets.precast.WS["マルカラ"]                 = sets.precast.WS.Damage
 
-    sets.precast.WS["ワスプスティング"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ガストスラッシュ"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["シャドーステッチ"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["バイパーバイト"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["サイクロン"]               = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["エナジースティール"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["エナジードレイン"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ダンシングエッジ"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["シャークバイト"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["エヴィサレーション"]       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["イオリアンエッジ"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["マーシーストローク"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["マンダリクスタッブ"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["モーダントライム"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ピリッククレオス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ルドラストーム"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["エクゼンテレター"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ルースレスストローク"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["ワスプスティング"]         = sets.precast.WS.Damage
+    sets.precast.WS["ガストスラッシュ"]         = sets.precast.WS.Magic
+    sets.precast.WS["シャドーステッチ"]         = sets.precast.WS.Damage
+    sets.precast.WS["バイパーバイト"]           = sets.precast.WS.Damage
+    sets.precast.WS["サイクロン"]               = sets.precast.WS.Magic
+    sets.precast.WS["エナジースティール"]       = sets.precast.WS.Damage
+    sets.precast.WS["エナジードレイン"]         = sets.precast.WS.Damage
+    sets.precast.WS["ダンシングエッジ"]         = sets.precast.WS.Damage
+    sets.precast.WS["シャークバイト"]           = sets.precast.WS.Damage
+    sets.precast.WS["エヴィサレーション"]       = sets.precast.WS.Critical
+    sets.precast.WS["イオリアンエッジ"]         = sets.precast.WS.Magic
+    sets.precast.WS["マーシーストローク"]       = sets.precast.WS.Damage
+    sets.precast.WS["マンダリクスタッブ"]       = sets.precast.WS.Damage
+    sets.precast.WS["モーダントライム"]         = sets.precast.WS.Damage
+    sets.precast.WS["ピリッククレオス"]         = sets.precast.WS.Damage
+    sets.precast.WS["ルドラストーム"]           = sets.precast.WS.Damage
+    sets.precast.WS["エクゼンテレター"]         = sets.precast.WS.Damage
+    sets.precast.WS["ルースレスストローク"]     = sets.precast.WS.Damage
 
-    sets.precast.WS["ファストブレード"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["バーニングブレード"]       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["レッドロータス"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["フラットブレード"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["シャインブレード"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["セラフブレード"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["サークルブレード"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スピリッツウィズイン"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ボーパルブレード"]         = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["スウィフトブレード"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["サベッジブレード"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["サンギンブレード"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ナイスオブラウンド"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ナイツオブラウンド"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ロズレーファタール"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ロイエ"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["エクスピアシオン"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ウリエルブレード"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["グローリースラッシュ"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["シャンデュシニュ"]         = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["レクイエスカット"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ファストブレードII"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["インペラトル"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["ファストブレード"]         = sets.precast.WS.Damage
+    sets.precast.WS["バーニングブレード"]       = sets.precast.WS.Magic
+    sets.precast.WS["レッドロータス"]           = sets.precast.WS.Magic
+    sets.precast.WS["フラットブレード"]         = sets.precast.WS.Damage
+    sets.precast.WS["シャインブレード"]         = sets.precast.WS.Magic
+    sets.precast.WS["セラフブレード"]           = sets.precast.WS.Magic
+    sets.precast.WS["サークルブレード"]         = sets.precast.WS.Damage
+    sets.precast.WS["スピリッツウィズイン"]     = sets.precast.WS.Damage
+    sets.precast.WS["ボーパルブレード"]         = sets.precast.WS.Critical
+    sets.precast.WS["スウィフトブレード"]       = sets.precast.WS.Damage
+    sets.precast.WS["サベッジブレード"]         = sets.precast.WS.Damage
+    sets.precast.WS["サンギンブレード"]         = sets.precast.WS.Magic
+    sets.precast.WS["ナイスオブラウンド"]       = sets.precast.WS.Damage
+    sets.precast.WS["ナイツオブラウンド"]       = sets.precast.WS.Damage
+    sets.precast.WS["ロズレーファタール"]       = sets.precast.WS.Damage
+    sets.precast.WS["ロイエ"]                   = sets.precast.WS.Damage
+    sets.precast.WS["エクスピアシオン"]         = sets.precast.WS.Damage
+    sets.precast.WS["ウリエルブレード"]         = sets.precast.WS.Damage
+    sets.precast.WS["グローリースラッシュ"]     = sets.precast.WS.Damage
+    sets.precast.WS["シャンデュシニュ"]         = sets.precast.WS.Critical
+    sets.precast.WS["レクイエスカット"]         = sets.precast.WS.Damage
+    sets.precast.WS["ファストブレードII"]       = sets.precast.WS.Damage
+    sets.precast.WS["インペラトル"]             = sets.precast.WS.Damage
 
-    sets.precast.WS["ハードスラッシュ"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["パワースラッシュ"]         = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["フロストバイト"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["フリーズバイト"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ショックウェーブ"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["クレセントムーン"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["シックルムーン"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スピンスラッシュ"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["グラウンドストライク"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ヘラクレススラッシュ"]     = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["スカージ"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["トアクリーバー"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["レゾルーション"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["デミディエーション"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["フィンブルヴェト"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["ハードスラッシュ"]         = sets.precast.WS.Damage
+    sets.precast.WS["パワースラッシュ"]         = sets.precast.WS.Critical
+    sets.precast.WS["フロストバイト"]           = sets.precast.WS.Magic
+    sets.precast.WS["フリーズバイト"]           = sets.precast.WS.Magic
+    sets.precast.WS["ショックウェーブ"]         = sets.precast.WS.Damage
+    sets.precast.WS["クレセントムーン"]         = sets.precast.WS.Damage
+    sets.precast.WS["シックルムーン"]           = sets.precast.WS.Damage
+    sets.precast.WS["スピンスラッシュ"]         = sets.precast.WS.Damage
+    sets.precast.WS["グラウンドストライク"]     = sets.precast.WS.Damage
+    sets.precast.WS["ヘラクレススラッシュ"]     = sets.precast.WS.Magic
+    sets.precast.WS["スカージ"]                 = sets.precast.WS.Damage
+    sets.precast.WS["トアクリーバー"]           = sets.precast.WS.Damage
+    sets.precast.WS["レゾルーション"]           = sets.precast.WS.Damage
+    sets.precast.WS["デミディエーション"]       = sets.precast.WS.Damage
+    sets.precast.WS["フィンブルヴェト"]         = sets.precast.WS.Damage
 
-    sets.precast.WS["レイジングアクス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スマッシュ"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ラファールアクス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["アバランチアクス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スピニングアクス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ランページ"]               = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["カラミティ"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ミストラルアクス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["デシメーション"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ボーラアクス"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["オンスロート"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["プライマルレンド"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["クラウドスプリッタ"]       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ルイネーター"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ブリッツ"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["レイジングアクス"]         = sets.precast.WS.Damage
+    sets.precast.WS["スマッシュ"]               = sets.precast.WS.Damage
+    sets.precast.WS["ラファールアクス"]         = sets.precast.WS.Damage
+    sets.precast.WS["アバランチアクス"]         = sets.precast.WS.Damage
+    sets.precast.WS["スピニングアクス"]         = sets.precast.WS.Damage
+    sets.precast.WS["ランページ"]               = sets.precast.WS.Critical
+    sets.precast.WS["カラミティ"]               = sets.precast.WS.Damage
+    sets.precast.WS["ミストラルアクス"]         = sets.precast.WS.Damage
+    sets.precast.WS["デシメーション"]           = sets.precast.WS.Damage
+    sets.precast.WS["ボーラアクス"]             = sets.precast.WS.Damage
+    sets.precast.WS["オンスロート"]             = sets.precast.WS.Damage
+    sets.precast.WS["プライマルレンド"]         = sets.precast.WS.Magic
+    sets.precast.WS["クラウドスプリッタ"]       = sets.precast.WS.Magic
+    sets.precast.WS["ルイネーター"]             = sets.precast.WS.Damage
+    sets.precast.WS["ブリッツ"]                 = sets.precast.WS.Damage
 
-    sets.precast.WS["シールドブレイク"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["アイアンテンペスト"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["シュトルムヴィント"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["アーマーブレイク"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["キーンエッジ"]             = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["ウェポンブレイク"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["レイジングラッシュ"]       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["フルブレイク"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スチールサイクロン"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["フェルクリーヴ"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["メタトロントーメント"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["キングズジャスティス"]     = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ウッコフューリー"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["アップヒーバル"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ディザスター"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["シールドブレイク"]         = sets.precast.WS.Damage
+    sets.precast.WS["アイアンテンペスト"]       = sets.precast.WS.Damage
+    sets.precast.WS["シュトルムヴィント"]       = sets.precast.WS.Damage
+    sets.precast.WS["アーマーブレイク"]         = sets.precast.WS.Damage
+    sets.precast.WS["キーンエッジ"]             = sets.precast.WS.Critical
+    sets.precast.WS["ウェポンブレイク"]         = sets.precast.WS.Damage
+    sets.precast.WS["レイジングラッシュ"]       = sets.precast.WS.Critical
+    sets.precast.WS["フルブレイク"]             = sets.precast.WS.Damage
+    sets.precast.WS["スチールサイクロン"]       = sets.precast.WS.Damage
+    sets.precast.WS["フェルクリーヴ"]           = sets.precast.WS.Damage
+    sets.precast.WS["メタトロントーメント"]     = sets.precast.WS.Damage
+    sets.precast.WS["キングズジャスティス"]     = sets.precast.WS.Damage
+    sets.precast.WS["ウッコフューリー"]         = sets.precast.WS.Damage
+    sets.precast.WS["アップヒーバル"]           = sets.precast.WS.Damage
+    sets.precast.WS["ディザスター"]             = sets.precast.WS.Damage
 
-    sets.precast.WS["スライス"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ダークハーベスト"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["シャドーオブデス"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ナイトメアサイス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スピニングサイス"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ボーパルサイス"]           = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["ギロティン"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["クロスリーパー"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スパイラルヘル"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["インファナルサイズ"]       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["カタストロフィ"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["インサージェンシー"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["クワイタス"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["エントロピー"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ジ・オリジン"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["スライス"]                 = sets.precast.WS.Damage
+    sets.precast.WS["ダークハーベスト"]         = sets.precast.WS.Magic
+    sets.precast.WS["シャドーオブデス"]         = sets.precast.WS.Magic
+    sets.precast.WS["ナイトメアサイス"]         = sets.precast.WS.Damage
+    sets.precast.WS["スピニングサイス"]         = sets.precast.WS.Damage
+    sets.precast.WS["ボーパルサイス"]           = sets.precast.WS.Critical
+    sets.precast.WS["ギロティン"]               = sets.precast.WS.Damage
+    sets.precast.WS["クロスリーパー"]           = sets.precast.WS.Damage
+    sets.precast.WS["スパイラルヘル"]           = sets.precast.WS.Damage
+    sets.precast.WS["インファナルサイズ"]       = sets.precast.WS.Magic
+    sets.precast.WS["カタストロフィ"]           = sets.precast.WS.Damage
+    sets.precast.WS["インサージェンシー"]       = sets.precast.WS.Damage
+    sets.precast.WS["クワイタス"]               = sets.precast.WS.Damage
+    sets.precast.WS["エントロピー"]             = sets.precast.WS.Damage
+    sets.precast.WS["ジ・オリジン"]             = sets.precast.WS.Damage
 
-    sets.precast.WS["ダブルスラスト"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["サンダースラスト"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ライデンスラスト"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["足払い"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ペンタスラスト"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ボーパルスラスト"]         = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["スキュアー"]               = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["大車輪"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["インパルスドライヴ"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ソニックスラスト"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ゲイルスコグル"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["雲蒸竜変"]                 = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["カムラン"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スターダイバー"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ダーマット"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["ダブルスラスト"]           = sets.precast.WS.Damage
+    sets.precast.WS["サンダースラスト"]         = sets.precast.WS.Magic
+    sets.precast.WS["ライデンスラスト"]         = sets.precast.WS.Magic
+    sets.precast.WS["足払い"]                   = sets.precast.WS.Damage
+    sets.precast.WS["ペンタスラスト"]           = sets.precast.WS.Damage
+    sets.precast.WS["ボーパルスラスト"]         = sets.precast.WS.Critical
+    sets.precast.WS["スキュアー"]               = sets.precast.WS.Critical
+    sets.precast.WS["大車輪"]                   = sets.precast.WS.Damage
+    sets.precast.WS["インパルスドライヴ"]       = sets.precast.WS.Damage
+    sets.precast.WS["ソニックスラスト"]         = sets.precast.WS.Damage
+    sets.precast.WS["ゲイルスコグル"]           = sets.precast.WS.Damage
+    sets.precast.WS["雲蒸竜変"]                 = sets.precast.WS.Critical
+    sets.precast.WS["カムラン"]                 = sets.precast.WS.Damage
+    sets.precast.WS["スターダイバー"]           = sets.precast.WS.Damage
+    sets.precast.WS["ダーマット"]               = sets.precast.WS.Damage
 
-    sets.precast.WS["臨"]                       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["烈"]                       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["滴"]                       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["凍"]                       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["地"]                       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["影"]                       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["迅"]                       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["天"]                       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["空"]                       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["湧"]                       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["生者必滅"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["カムハブリ"]               = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["秘"]                       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["瞬"]                       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["是生滅法"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["臨"]                       = sets.precast.WS.Critical
+    sets.precast.WS["烈"]                       = sets.precast.WS.Damage
+    sets.precast.WS["滴"]                       = sets.precast.WS.Magic
+    sets.precast.WS["凍"]                       = sets.precast.WS.Magic
+    sets.precast.WS["地"]                       = sets.precast.WS.Magic
+    sets.precast.WS["影"]                       = sets.precast.WS.Magic
+    sets.precast.WS["迅"]                       = sets.precast.WS.Critical
+    sets.precast.WS["天"]                       = sets.precast.WS.Damage
+    sets.precast.WS["空"]                       = sets.precast.WS.Damage
+    sets.precast.WS["湧"]                       = sets.precast.WS.Magic
+    sets.precast.WS["生者必滅"]                 = sets.precast.WS.Damage
+    sets.precast.WS["カムハブリ"]               = sets.precast.WS.Damage
+    sets.precast.WS["秘"]                       = sets.precast.WS.Critical
+    sets.precast.WS["瞬"]                       = sets.precast.WS.Damage
+    sets.precast.WS["是生滅法"]                 = sets.precast.WS.Damage
 
-    sets.precast.WS["壱之太刀・燕飛"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["弐之太刀・鋒縛"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["参之太刀・轟天"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["四之太刀・陽炎"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["五之太刀・陣風"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["六之太刀・光輝"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["七之太刀・雪風"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["八之太刀・月光"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["九之太刀・花車"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["十一之太刀・鳳蝶"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["盛夏之太刀・西瓜割"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["零之太刀・回天"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["十之太刀・乱鴉"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["祖之太刀・不動"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["十二之太刀・照破"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["絶之太刀・無名"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["壱之太刀・燕飛"]           = sets.precast.WS.Damage
+    sets.precast.WS["弐之太刀・鋒縛"]           = sets.precast.WS.Damage
+    sets.precast.WS["参之太刀・轟天"]           = sets.precast.WS.Magic
+    sets.precast.WS["四之太刀・陽炎"]           = sets.precast.WS.Magic
+    sets.precast.WS["五之太刀・陣風"]           = sets.precast.WS.Magic
+    sets.precast.WS["六之太刀・光輝"]           = sets.precast.WS.Magic
+    sets.precast.WS["七之太刀・雪風"]           = sets.precast.WS.Damage
+    sets.precast.WS["八之太刀・月光"]           = sets.precast.WS.Damage
+    sets.precast.WS["九之太刀・花車"]           = sets.precast.WS.Damage
+    sets.precast.WS["十一之太刀・鳳蝶"]         = sets.precast.WS.Damage
+    sets.precast.WS["盛夏之太刀・西瓜割"]       = sets.precast.WS.Damage
+    sets.precast.WS["零之太刀・回天"]           = sets.precast.WS.Damage
+    sets.precast.WS["十之太刀・乱鴉"]           = sets.precast.WS.Damage
+    sets.precast.WS["祖之太刀・不動"]           = sets.precast.WS.Damage
+    sets.precast.WS["十二之太刀・照破"]         = sets.precast.WS.Damage
+    sets.precast.WS["絶之太刀・無名"]           = sets.precast.WS.Damage
 
-    sets.precast.WS["シャインストライク"]       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["セラフストライク"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ブレインシェイカー"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スターライト"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ムーンライト"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スカルブレイカー"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["トゥルーストライク"]       = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["ジャッジメント"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ヘキサストライク"]         = { Normal=sets.precast.WS.Critical,    SubtleBlow=set_combine(sets.precast.WS.Critical,sets.SubtleBlow) }
-    sets.precast.WS["ブラックヘイロー"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["フラッシュノヴァ"]         = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ランドグリース"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ミスティックブーン"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ダガン"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["レルムレイザー"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["エクズデーション"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ダグダ"]                   = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["シャインストライク"]       = sets.precast.WS.Magic
+    sets.precast.WS["セラフストライク"]         = sets.precast.WS.Magic
+    sets.precast.WS["ブレインシェイカー"]       = sets.precast.WS.Damage
+    sets.precast.WS["スターライト"]             = sets.precast.WS.Damage
+    sets.precast.WS["ムーンライト"]             = sets.precast.WS.Damage
+    sets.precast.WS["スカルブレイカー"]         = sets.precast.WS.Damage
+    sets.precast.WS["トゥルーストライク"]       = sets.precast.WS.Critical
+    sets.precast.WS["ジャッジメント"]           = sets.precast.WS.Damage
+    sets.precast.WS["ヘキサストライク"]         = sets.precast.WS.Critical
+    sets.precast.WS["ブラックヘイロー"]         = sets.precast.WS.Damage
+    sets.precast.WS["フラッシュノヴァ"]         = sets.precast.WS.Magic
+    sets.precast.WS["ランドグリース"]           = sets.precast.WS.Damage
+    sets.precast.WS["ミスティックブーン"]       = sets.precast.WS.Damage
+    sets.precast.WS["ダガン"]                   = sets.precast.WS.Damage
+    sets.precast.WS["レルムレイザー"]           = sets.precast.WS.Damage
+    sets.precast.WS["エクズデーション"]         = sets.precast.WS.Damage
+    sets.precast.WS["ダグダ"]                   = sets.precast.WS.Damage
 
-    sets.precast.WS["ヘヴィスイング"]           = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ロッククラッシャー"]       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["アースクラッシャー"]       = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["スターバースト"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["サンバースト"]             = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["シェルクラッシャー"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["フルスイング"]             = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["スピリットテーカー"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["レトリビューション"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["カタクリスム"]             = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["タルタロスゲート"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ヴィゾフニル"]             = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ガーランドオブブリス"]     = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["オムニシエンス"]           = { Normal=sets.precast.WS.Magic ,      SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["タルタロストーパー"]       = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["ミルキル"]                 = { Normal=sets.precast.WS.Mp,          SubtleBlow=set_combine(sets.precast.WS.Mp,      sets.SubtleBlow) }
-    sets.precast.WS["シャッターソウル"]         = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
-    sets.precast.WS["オシャラ"]                 = { Normal=sets.precast.WS.Damage,      SubtleBlow=set_combine(sets.precast.WS.Damage,  sets.SubtleBlow) }
+    sets.precast.WS["ヘヴィスイング"]           = sets.precast.WS.Damage
+    sets.precast.WS["ロッククラッシャー"]       = sets.precast.WS.Magic
+    sets.precast.WS["アースクラッシャー"]       = sets.precast.WS.Magic
+    sets.precast.WS["スターバースト"]           = sets.precast.WS.Magic
+    sets.precast.WS["サンバースト"]             = sets.precast.WS.Magic
+    sets.precast.WS["シェルクラッシャー"]       = sets.precast.WS.Damage
+    sets.precast.WS["フルスイング"]             = sets.precast.WS.Damage
+    sets.precast.WS["スピリットテーカー"]       = sets.precast.WS.Damage
+    sets.precast.WS["レトリビューション"]       = sets.precast.WS.Damage
+    sets.precast.WS["カタクリスム"]             = sets.precast.WS.Magic
+    sets.precast.WS["タルタロスゲート"]         = sets.precast.WS.Damage
+    sets.precast.WS["ヴィゾフニル"]             = sets.precast.WS.Magic
+    sets.precast.WS["ガーランドオブブリス"]     = sets.precast.WS.Magic
+    sets.precast.WS["オムニシエンス"]           = sets.precast.WS.Magic
+    sets.precast.WS["タルタロストーパー"]       = sets.precast.WS.Damage
+    sets.precast.WS["ミルキル"]                 = sets.precast.WS.Mp
+    sets.precast.WS["シャッターソウル"]         = sets.precast.WS.Damage
+    sets.precast.WS["オシャラ"]                 = sets.precast.WS.Damage
 
-    sets.precast.WS["フレイミングアロー"]       = { Normal=sets.precast.WS.Magic,       SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ピアシングアロー"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ダリングアロー"]           = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["サイドワインダー"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ブラストアロー"]           = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["アーチングアロー"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["エンピリアルアロー"]       = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["リフルジェントアロー"]     = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["南無八幡"]                 = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ジシュヌの光輝"]           = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["エイペクスアロー"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["シャルヴ"]                 = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
+    sets.precast.WS["フレイミングアロー"]       = sets.precast.WS.Magic
+    sets.precast.WS["ピアシングアロー"]         = sets.precast.WS.Range
+    sets.precast.WS["ダリングアロー"]           = sets.precast.WS.Range
+    sets.precast.WS["サイドワインダー"]         = sets.precast.WS.Range
+    sets.precast.WS["ブラストアロー"]           = sets.precast.WS.Range
+    sets.precast.WS["アーチングアロー"]         = sets.precast.WS.Range
+    sets.precast.WS["エンピリアルアロー"]       = sets.precast.WS.Range
+    sets.precast.WS["リフルジェントアロー"]     = sets.precast.WS.Range
+    sets.precast.WS["南無八幡"]                 = sets.precast.WS.Range
+    sets.precast.WS["ジシュヌの光輝"]           = sets.precast.WS.Range
+    sets.precast.WS["エイペクスアロー"]         = sets.precast.WS.Range
+    sets.precast.WS["シャルヴ"]                 = sets.precast.WS.Range
 
-    sets.precast.WS["ホットショット"]           = { Normal=sets.precast.WS.Magic,       SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["スプリットショット"]       = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["スナイパーショット"]       = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["スラッグショット"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ブラストショット"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ヘヴィショット"]           = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["デトネーター"]             = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ナビングショット"]         = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["カラナック"]               = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["トゥルーフライト"]         = { Normal=sets.precast.WS.Magic,       SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["レデンサリュート"]         = { Normal=sets.precast.WS.Magic,       SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ワイルドファイア"]         = { Normal=sets.precast.WS.Magic,       SubtleBlow=set_combine(sets.precast.WS.Magic,   sets.SubtleBlow) }
-    sets.precast.WS["ラストスタンド"]           = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
-    sets.precast.WS["ジ・エンド"]               = { Normal=sets.precast.WS.Range,       SubtleBlow=set_combine(sets.precast.WS.Range,   sets.SubtleBlow) }
+    sets.precast.WS["ホットショット"]           = sets.precast.WS.Magic
+    sets.precast.WS["スプリットショット"]       = sets.precast.WS.Range
+    sets.precast.WS["スナイパーショット"]       = sets.precast.WS.Range
+    sets.precast.WS["スラッグショット"]         = sets.precast.WS.Range
+    sets.precast.WS["ブラストショット"]         = sets.precast.WS.Range
+    sets.precast.WS["ヘヴィショット"]           = sets.precast.WS.Range
+    sets.precast.WS["デトネーター"]             = sets.precast.WS.Range
+    sets.precast.WS["ナビングショット"]         = sets.precast.WS.Range
+    sets.precast.WS["カラナック"]               = sets.precast.WS.Range
+    sets.precast.WS["トゥルーフライト"]         = sets.precast.WS.Magic
+    sets.precast.WS["レデンサリュート"]         = sets.precast.WS.Magic
+    sets.precast.WS["ワイルドファイア"]         = sets.precast.WS.Magic
+    sets.precast.WS["ラストスタンド"]           = sets.precast.WS.Range
+    sets.precast.WS["ジ・エンド"]               = sets.precast.WS.Range
 end
 
 --カンニングペーパー

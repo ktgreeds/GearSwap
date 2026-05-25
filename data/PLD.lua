@@ -16,12 +16,12 @@ function job_setup()
     state.Increased     = M(false)
     state.KnockBack     = M(false)
     
-    send_command('bind ~7 gs c cycle SubWeapons')
+    send_command('bind ~f7 gs c cycle SubWeapons')
 end
 
 
 function user_unload()
-    send_command('bind ~7 gs c cycle OffenseMode')
+    send_command('bind ~f7 gs c cycle OffenseMode')
 end
 
 

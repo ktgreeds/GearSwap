@@ -49,11 +49,9 @@ function custom_self_command(cmdParams, eventArgs)
         if state.Buff['アストラルパッセージ']  then
             if player.mp < 230 then
                 send_command('input /ja '..windower.to_shift_jis("コンバート")..' <me>')
-                send_command('input /item '..windower.to_shift_jis("ルシドエリクサーII")..' <me>')
             end
             bp_commnad(cmdParams)
-            send_command('wait 1; gs c bp rage 1 t')
-
+            send_command('wait 0.9; gs c bp rage 1 t')
         else
             bp_commnad(cmdParams)
         end
