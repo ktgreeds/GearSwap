@@ -32,10 +32,9 @@ function init_gear_sets()
     gear.JobMantle              = {}
     gear.JobMantle.Critical     = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.JobMantle.Magic        = { name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}}
-    gear.JobMantle.WSD          = {}
-    gear.JobMantle.WSD.STR      = { name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
-    gear.JobMantle.WSD.CHR      = { name="インタラアスケープ", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
-    gear.JobMantle.WSD.DEX      = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD_STR      = { name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD_CHR      = { name="インタラアスケープ", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD_DEX      = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     
     sets.SubtleBlow = {
         neck="バーシチョーカー+1",
@@ -145,11 +144,11 @@ function init_gear_sets()
         feet={ name="ニャメソルレット", augments={'Path: B',}},
         neck={ name="バードチャーム+1", augments={'Path: A',}},
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="テロスピアス",
+        left_ear="アスプロピアス",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="イラブラットリング",
-        right_ring="スローダリング",
-        back=gear.JobMantle.WSD.STR
+        left_ring="コーネリアリング",
+        right_ring="イラブラットリング",
+        back=gear.JobMantle.WSD_STR
     }
 
     sets.precast.WS.Critical = {
@@ -187,12 +186,9 @@ function init_gear_sets()
 
     --共通WS定義読み込み
     init_weapon_skill()
-    sets.precast.WS["モーダントライム"]       = { Normal=set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.CHR),
-                                                    SubtleBlow=set_combine(set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.CHR),  sets.precast.WS.SubtleBlow) }
-    sets.precast.WS["ルドラストーム"]         = { Normal=set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.DEX),
-                                                    SubtleBlow=set_combine(set_combine(sets.precast.WS.Damage,gear.JobMantle.WSD.DEX),  sets.precast.WS.SubtleBlow) }
-    sets.precast.WS["エヴィサレーション"]     = { Normal=set_combine(sets.precast.WS.Critical,gear.JobMantle.Critical),
-                                                    SubtleBlow=set_combine(set_combine(sets.precast.WS.Critical,gear.JobMantle.Critical),  sets.precast.WS.SubtleBlow) }
+    sets.precast.WS["モーダントライム"]     = set_combine(sets.precast.WS.Damage,{back=gear.JobMantle.WSD_CHR})
+    sets.precast.WS["ルドラストーム"]       = set_combine(sets.precast.WS.Damage,{back=gear.JobMantle.WSD_DEX})
+    sets.precast.WS["エヴィサレーション"]   = set_combine(sets.precast.WS.Critical,{back=gear.JobMantle.Critical})
     
 
     -- ケアル
@@ -261,8 +257,8 @@ function init_gear_sets()
         waist="無の腰当",
         left_ear="王将の耳飾り",
         right_ear={ name="フィリピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="キシャールリング",
-        right_ring={ name="メタモルリング+1", augments={'Path: A',}},
+        left_ring="スティキニリング+1",
+        right_ring="スティキニリング+1",
         back="無の外装",
     }
 
@@ -395,28 +391,27 @@ function init_gear_sets()
     -- レクイエム171%
     sets.midcast.BardSong.Requiem = set_combine(sets.midcast['弱体魔法'],{
         body="ＦＬオングルリヌ+3",
-        legs="インヤガシャルワ+2",
         feet="ＢＲスリッパー+4"
     })
     
     -- エレジー171%
     sets.midcast.BardSong.Elegy = set_combine(sets.midcast['弱体魔法'],{
         body="ＦＬオングルリヌ+3",
-        legs="インヤガシャルワ+2",
+  --      legs="インヤガシャルワ+2",
         feet="ＢＲスリッパー+4"
     })
     
     -- ノクターン171%
     sets.midcast.BardSong['恋情のノクターン'] = set_combine(sets.midcast['弱体魔法'],{
         body="ＦＬオングルリヌ+3",
-        legs="インヤガシャルワ+2",
+--        legs="インヤガシャルワ+2",
         feet="ＢＲスリッパー+4"
     })
         
     -- スレノ177%
-    sets.midcast.BardSong.Threnody = set_combine(sets.midcast.magic_acc, {
+    sets.midcast.BardSong.Threnody = set_combine(sets.midcast['弱体魔法'], {
         body="ムセスマンティル+1",
-        legs="インヤガシャルワ+2",
+--        legs="インヤガシャルワ+2",
         feet="ＢＲスリッパー+4"
     })
 

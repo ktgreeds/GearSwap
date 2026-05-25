@@ -106,12 +106,10 @@ function init_gear_sets()
     init_weapon_skill()
 
     --個別WS定義
-    sets.precast.WS["サンギンブレード"] = { Normal=set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),
-                                            SubtleBlow=set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",}),sets.precast.WS.SubtleBlow)}
-
+    sets.precast.WS["サンギンブレード"] = { set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング",})}
+    
 	--精霊魔法
-    sets.midcast['精霊魔法'] = {
-    }
+--    sets.midcast['精霊魔法'] = {}
 	
 	--弱体魔法時間
 	sets.midcast['弱体魔法'] ={
