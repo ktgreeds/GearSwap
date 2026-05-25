@@ -247,12 +247,10 @@ function init_gear_sets()
     init_weapon_skill()
     
     --個別WS定義
-    sets.precast.WS["レデンサリュート"] = { Normal      = set_combine(            sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング"}),
-                                            SubtleBlow  = set_combine(set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング"}),sets.precast.WS.SubtleBlow )}
-    sets.precast.WS["イオリアンエッジ"] = { Normal      = set_combine(            sets.precast.WS.Magic,{ammo=gear['ホクスボクブレット']}),
-                                            SubtleBlow  = set_combine(set_combine(sets.precast.WS.Magic,{ammo=gear['ホクスボクブレット']}),sets.precast.WS.SubtleBlow )}
-    sets.precast.WS["エクゼンテレター"] = { Normal      = set_combine(            sets.engaged.ACC,{}),
-                                            SubtleBlow  = set_combine(set_combine(sets.engaged.ACC,{}),sets.precast.WS.SubtleBlow )}
+    sets.precast.WS["レデンサリュート"] = set_combine(sets.precast.WS.Magic,{head="妖蟲の髪飾り+1",right_ring="アルコンリング"})
+    sets.precast.WS["イオリアンエッジ"] = set_combine(sets.precast.WS.Magic,{ammo=gear['ホクスボクブレット']})
+    sets.precast.WS["エクゼンテレター"] = set_combine(sets.engaged.ACC,{})
+    
     --遠隔攻撃
     sets.midcast.RA = sets.RA_STP
    

@@ -1,5 +1,5 @@
 function init_weaponns()
-    --デフォルト武器を設定
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('ライカーゴス')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ウトゥグリップ'))
 end
 
 
@@ -53,7 +53,7 @@ function init_gear_sets()
         hands="サクパタガントレ",
         legs="サクパタクウィス",
         feet="サクパタレギンス",
-        neck={name="無の喉輪",priority=15},
+        neck="戦士の数珠+2",
         waist="無の腰当",
         left_ear={name="アスプロピアス",priority=16},
         right_ear={name="ズワゾピアス+1",priority=14},
@@ -133,7 +133,7 @@ function init_gear_sets()
     sets.precast.JA['アグレッサー']         = set_combine(sets.precast.JA,{head="ＰＭマスク+3",body="ＡＧロリカ+3"})
     sets.precast.JA['リタリエーション']     = set_combine(sets.precast.JA,{})
     sets.precast.JA['ウォリアーチャージ']   = set_combine(sets.precast.JA,{})
-    sets.precast.JA['トマホーク']           = set_combine(sets.precast.JA,{feet="ＡＧカリガ+3"})
+    sets.precast.JA['トマホーク']           = set_combine(sets.precast.JA,{ammo="Ｔ．トマホーク",feet="ＡＧカリガ+3"})
     sets.precast.JA['リストレント']         = set_combine(sets.precast.JA,{})
     sets.precast.JA['ブラッドレイジ']       = set_combine(sets.precast.JA,{body="ＢＩロリカ+3"})
     sets.precast.JA['ブラーゼンラッシュ']   = set_combine(sets.precast.JA,{})
@@ -166,7 +166,7 @@ function init_gear_sets()
         hands="ニャメガントレ",
         legs="ＢＩクウィス+3",
         feet="ニャメソルレット",
-        neck="無の喉輪",
+        neck="戦士の数珠+2",
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear="スラッドピアス",
@@ -187,13 +187,13 @@ function init_gear_sets()
         hands="ニャメガントレ",
         legs="ニャメフランチャ",
         feet="ニャメソルレット",
-        neck="無の喉輪",
+        neck="シビルスカーフ",
         waist="オルペウスサッシュ",
         left_ear="アスプロピアス",
         right_ear="ズワゾピアス+1",
         left_ring="メランリング",
         right_ring="コーネリアリング",
-        back="無の外装",
+        back="月明の羽衣",
     }
 
     --共通WS定義読み込み

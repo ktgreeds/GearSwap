@@ -130,7 +130,7 @@ function init_gear_sets()
     sets.midcast.Pet.AvatarPhysicalPacts = {
         ammo="エピタフサシェ",
         head={ name="ヘリオスバンド", augments={'Pet: Accuracy+30 Pet: Rng. Acc.+30','Pet: "Dbl. Atk."+8','Blood Pact Dmg.+7',}},
-        body="ＣＮダブレット+4",
+        body="ＧＬダブレット+3",
         hands="ＢＣブレーサー+3",
         legs={ name="エンタイサーパンツ", augments={'MP+45','Pet: Accuracy+14 Pet: Rng. Acc.+14','Pet: Mag. Acc.+13','Pet: Damage taken -3%',}},
         feet="ブンジサボ",
@@ -142,7 +142,15 @@ function init_gear_sets()
         right_ring="ヴァラールリング+1",
         back={ name="カンペストレケープ", augments={'Pet: Acc.+20 Pet: R.Acc.+20 Pet: Atk.+20 Pet: R.Atk.+20','Eva.+20 /Mag. Eva.+20','Pet: Attack+10 Pet: Rng.Atk.+10',}},
     }
-    
+
+    --フレイムクラッシュ
+    sets.midcast.Pet['フレイムクラッシュ'] = set_combine(sets.midcast.Pet.AvatarPhysicalPacts,{
+        head="パルーグクラウン",
+        body="ＣＮダブレット+4",
+        waist="王将の帯",
+        back={ name="カンペストレケープ", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: Magic Damage+10',}},
+    })
+
     --魔法履行
     sets.midcast.Pet.AvatarMagicalPacts = {
 --        main={ name="グリオアヴァール", augments={'Blood Pact Dmg.+5','Pet: INT+15','Pet: Mag. Acc.+14','Pet: "Mag.Atk.Bns."+25',}},
@@ -159,23 +167,6 @@ function init_gear_sets()
         left_ring="ヴァラールリング+1",
         right_ring="ヴァラールリング+1",
         back={ name="カンペストレケープ", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Pet: Magic Damage+10',}},
-    }
-
-    --フレイムクラッシュ
-    sets.midcast.Pet['フレイムクラッシュ']={
-        ammo="エピタフサシェ",
-        head="パルーグクラウン",
-        body="ＣＮダブレット+4",
-        hands={ name="ヘリオスグローブ", augments={'Pet: Accuracy+30 Pet: Rng. Acc.+30','Pet: "Dbl. Atk."+8','Blood Pact Dmg.+7',}},
-        legs={ name="エンタイサーパンツ", augments={'MP+45','Pet: Accuracy+14 Pet: Rng. Acc.+14','Pet: Mag. Acc.+13','Pet: Damage taken -3%',}},
-        feet="ブンジサボ",
-        neck={ name="召喚士の首輪+2", augments={'Path: A',}},
-        waist="王将の帯",
-        left_ear="ルガルバンダピアス",
-        right_ear={ name="ベコナーピアス+1", augments={'System: 1 ID: 1676 Val: 0','Pet: Accuracy+15 Pet: Rng. Acc.+15','Pet: Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="ヴァラールリング+1",
-        right_ring="ヴァラールリング+1",
-        back={ name="カンペストレケープ", augments={'Pet: M.Acc.+20 Pet: M.Dmg.+20','Eva.+20 /Mag. Eva.+20','Pet: Magic Damage+10',}},
     }
 
     --バフ履行
