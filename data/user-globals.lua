@@ -11,7 +11,7 @@ function user_setup()
     init_custom_spell_map()                                             --スペルマップ定義再構築
 
     send_command('input /chatmode party')                               --チャットモード変更
-    send_command('input /si '..res.jobs[player.main_job_id]["ens"])
+    send_command('wait 1; input /si '..res.jobs[player.main_job_id]["ens"])
     send_command('wait 2; gs c set IdleMode Normal; wait 1; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
 
     -- gs c cycle SortieText
@@ -44,18 +44,17 @@ end
 
 --■■■アクション中処理
 function user_post_midcast(spell, action, spellMap, eventArgs)
-    if spell.type ~= 'WeaponSkill' then
+    if string.find(spell.type, 'Magic') then
+        if sets.midcast.interruption then
+            --詠唱中断着替え
+            Interruption(spell, action, spellMap, eventArgs)
+        end
+    elseif spell.type ~= 'WeaponSkill' then
         for buff,active in pairs(state.Buff) do
             if active and sets.buff[buff] then
                 --アビリティや魔法時のバフ＋効果の着替え
                 equip(sets.buff[buff])
             end
-        end
-
-    elseif string.find(spell.type, 'Magic') then
-        if sets.midcast.interruption then
-            --詠唱中断着替え
-            Interruption(spell, action, spellMap, eventArgs)
         end
     end
 
@@ -232,9 +231,8 @@ function job_self_command(cmdParams, eventArgs)
         Medicine()
     elseif cmdParams[1] == 'cure' then              --ケアルマクロ節約
         Cure()
-    elseif cmdParams[1] == 'curaga' then              --ケアルマクロ節約
+    elseif cmdParams[1] == 'curaga' then             --ケアルマクロ節約
         Curaga()
-        
     elseif cmdParams[1] == 'aspir' then             --アスピルマクロ節約
         Aspir()
     elseif cmdParams[1] == 'drain' then             --ドレインマクロ節約
@@ -388,6 +386,7 @@ function Cure()
        send_command('input /ma '..windower.to_shift_jis('ケアル')..' <lastst>')
     end
 end
+
 --■■■ケアルガマクロ節約
 function Curaga()
     local recasts = windower.ffxi.get_spell_recasts()
@@ -408,6 +407,7 @@ function Curaga()
        send_command('input /ma '..windower.to_shift_jis('ケアルガ')..' <lastst>')
     end
 end
+
 --■■■アスピルマクロ節約
 function Aspir()
     local recasts = windower.ffxi.get_spell_recasts()
@@ -556,103 +556,42 @@ function ActionEnmityRange()
     end
 end
 
-
-
-
-
-
-
-
-
---▼▼▼▼▼▼ パケットログ検知処理
---■■■被強化バフ対応
+--被強化自動着替え
 require('sets')
 require('chat')
+
 filter_mode = S{51,52}
 windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
     if state.Increased and state.Increased.value then
         if filter_mode:contains(original_mode) then
             if windower.wc_match(original,windower.to_shift_jis('*リジェネ*')) then
                 if sets.midcast.IncreasedRegenerated then
-                    send_command('gs equip sets.midcast.IncreasedRegenerated; wait 3; gs c Idle;')
+                    send_command('gs equip sets.midcast.IncreasedRegenerated; wait 3; gs c IdleMelee;')
                 end
             elseif windower.wc_match(original,windower.to_shift_jis('*ファランクス*')) then
                 if sets.midcast.IncreasedPhalanx then
-                    send_command('gs equip sets.midcast.IncreasedPhalanx; wait 3; gs c Idle;')
+                    send_command('gs equip sets.midcast.IncreasedPhalanx; wait 3; gs c IdleMelee;')
                 end
             elseif windower.wc_match(original,windower.to_shift_jis('*リフレシュ*')) then
                 if sets.midcast.IncreasedRefresh then
-                    send_command('gs equip sets.midcast.IncreasedRefresh; wait 3; gs c Idle;')
+                    send_command('gs equip sets.midcast.IncreasedRefresh; wait 3; gs c IdleMelee;')
                 end
             elseif windower.wc_match(original,windower.to_shift_jis('*プロテス*')) then
                 if sets.midcast.IncreasedProtect then
-                    send_command('gs equip sets.midcast.IncreasedProtect; wait 3; gs c Idle;')
+                    send_command('gs equip sets.midcast.IncreasedProtect; wait 3; gs c IdleMelee;')
                 end
             elseif windower.wc_match(original,windower.to_shift_jis('*シェル*')) then
                 if sets.midcast.IncreasedShell then
-                    send_command('gs equip sets.midcast.IncreasedShell; wait 3; gs c Idle;')
+                    send_command('gs equip sets.midcast.IncreasedShell; wait 3; gs c IdleMelee;')
                 end
             elseif windower.wc_match(original,windower.to_shift_jis('*カーズナ*')) then
                 if sets.midcast.IncreasedCursna then
-                    send_command('gs equip sets.midcast.IncreasedCursna; wait 3; gs c Idle;')
+                    send_command('gs equip sets.midcast.IncreasedCursna; wait 3; gs c IdleMelee;')
                 end
             end
         end
     end
 end)
-
-
---■■■ソーティボス技
-filter_mode_enemy = S {100,105,110,111,158}
-windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
-    target = windower.ffxi.get_mob_by_target('t')
-    if target then
-        if filter_mode_enemy:contains(original_mode) then
-            if windower.wc_match(original, windower.to_shift_jis('*シュリーキングゲイル*')) then
-                windower.add_to_chat(167,'★★★ 土　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*アンジュレティングショックウェーブ*')) then
-                windower.add_to_chat(167,'★★★ 氷　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*フレミングキック*')) then
-                windower.add_to_chat(167,'★★★ 水　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*アイシーグラスプ*')) then
-                windower.add_to_chat(167,'★★★ 火　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*エローディングフレッシュ*')) then
-                windower.add_to_chat(167,'★★★ 風　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*ファルミナススマッシュ*')) then
-                windower.add_to_chat(167,'★★★ 土　弱点')
-            elseif windower.wc_match(original, windower.to_shift_jis('*フラッシュフラッド*')) then
-                windower.add_to_chat(167,'★★★ 雷　弱点')
-            end
-        end
-    end
-end)
-
-
---■■■ジェールボス技
-filter_mode_enemy = S {100,105,110,111,158}
-windower.register_event("incoming text", function(original, modified, original_mode, modified_mode, blocked)
-    target = windower.ffxi.get_mob_by_target('t')
-    if target then
-        if filter_mode_enemy:contains(original_mode) then
-            if windower.wc_match(original, windower.to_shift_jis('*ボルケーノステーシス*')) then
-                --send_command('wait 2;input /p '..windower.to_shift_jis('ボルケーノステーシス → 再強化して！<call>'))
-                windower.add_to_chat(167,'★★★ ボルケーノステーシス → 再強化して！')
-
-            elseif windower.wc_match(original, windower.to_shift_jis('*シアリングセレイト*')) then
-                --send_command('wait 2;input /p '..windower.to_shift_jis('シアリングセレイト → パナケイアして！<call>'))
-                windower.add_to_chat(167,'★★★ シアリングセレイト → パナケイアして！')
-            end
-        end
-    end
-end)
-
-
-
-
-
-
-
-
 
 --▼▼▼▼▼▼ その他
 --■■■スペルマップ再構築取得用
