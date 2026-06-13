@@ -9,6 +9,7 @@ function user_setup()
     include('smn_avatar')                                               --召喚定義ファイルロード
     init_weaponns()                                                     --武器初期化
     init_custom_spell_map()                                             --スペルマップ定義再構築
+    define_roll_values()--ロール情報
 
     send_command('input /chatmode party')                               --チャットモード変更
     send_command('wait 1; input /si '..res.jobs[player.main_job_id]["ens"])
@@ -27,6 +28,9 @@ end
 
 --■■■サブタゲ選択時の処理
 function user_post_pretarget(spell, action, spellMap, eventArgs)
+    if spell.type == 'CorsairRoll' then --ロール
+        display_roll_info(spell)
+    end
 end
 
 --■■■アクション前処理（共通実装なし）
@@ -186,15 +190,6 @@ end
 --■■■攻撃装備着替え処理
 function customize_melee_set(meleeSet)
     meleeSet = set_combine(meleeSet,user_customize_IdleMelee_set(meleeSet))
-    if job_customize_melee_set then
-        meleeSet = job_customize_melee_set(meleeSet)
-    end
-    return meleeSet
-end
-
-
---■■■武器変更処理
-function user_customize_IdleMelee_set(IdelMeleeSet)
     if player.sub_job == '忍' then
         --二刀流係数11
         IdelMeleeSet = set_combine(IdelMeleeSet,sets.engaged.dual11)
@@ -202,7 +197,17 @@ function user_customize_IdleMelee_set(IdelMeleeSet)
         --二刀流係数21
         IdelMeleeSet = set_combine(IdelMeleeSet,sets.engaged.dual21)
     end
+    
+    if job_customize_melee_set then
+        meleeSet = job_customize_melee_set(meleeSet)
+    end
+    
+    return meleeSet
+end
 
+
+--■■■武器変更処理
+function user_customize_IdleMelee_set(IdelMeleeSet)
     if state.MainWeapons then
         weapon = {main=gear[state.MainWeapons.value]}
     end
@@ -225,7 +230,7 @@ end
 
 --■■■セルフコマンド
 function job_self_command(cmdParams, eventArgs)
-    if cmdParams[1] == 'Idle' then                  --待機装備着替え
+    if cmdParams[1] == 'IdleMelee' then                  --待機装備着替え
         IdleMelee()
     elseif cmdParams[1] == 'Medicine' then          --状態異常回復
         Medicine()
@@ -263,6 +268,7 @@ function job_self_command(cmdParams, eventArgs)
     elseif cmdParams[1]  == 'AutomaticWakeUp' then
         if state.Buff['睡眠'] then
             equip({main=gear.Slip,range=gear.Slip,head=gear.Slip,neck=gear.Slip})
+        send_command('wait 5; gs c IdleMelee')
         end
     end
 

@@ -18,7 +18,6 @@ function job_setup()
     state.RangeWeapons      = M{'フォーマルハウト','デスペナルティ','アナーキー'}
     state.LuzafsRing        = M(true)
     state.ShortRole         = M(false)
-    define_roll_values()--ロール情報
 end
 
 

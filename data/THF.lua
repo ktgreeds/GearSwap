@@ -16,7 +16,7 @@ function job_setup()
     state.IdleMode:options('Normal','Refresh')
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
     state.MainWeapons = M{'ガンドリング','エーネアス'}
-    state.SubWeapons  = M{'アクロンティカ','トーレット'}
+    state.SubWeapons  = M{'アクロンティカ','トーレット','エーネアス'}
     state.TreasureHunter = M(true)
 end
 

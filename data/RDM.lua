@@ -10,7 +10,7 @@ function job_setup()
     state.OffenseMode:options('Normal','Enn')
     state.WeaponskillMode:options('Normal', 'SubtleBlow')
     state.MainWeapons   = M{'クロセアモースC','ネイグリング','マクセンチアス','トーレット','クトゥルブナイフ'}
-    state.SubWeapons    = M{'玄冥盾','ターニオンダガー','マレヴォレンス','デイブレイクワンド','幽世の短剣'}
+    state.SubWeapons    = M{'玄冥盾','クレパスクラナイフ','マレヴォレンス','デイブレイクワンド','幽世の短剣'}
 end
 
 

@@ -12,7 +12,7 @@ function job_setup()
     set_dummy_song('戦士達のピーアンIII')
 
     --state
-    state.IdleMode:options('Normal','Evasion')
+    state.IdleMode:options('Normal','Evasion','Refresh')
     state.OffenseMode:options('Normal','SubtleBlow')
     state.WeaponskillMode:options('Normal','SubtleBlow')
     state.MainWeapons     = M{'カルンウェナン','ネイグリング'}
