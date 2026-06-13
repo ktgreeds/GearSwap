@@ -39,9 +39,9 @@ function init_gear_sets()
     sets.idle = {
         head="無の面",
         body="アダマンアーマー",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck="無の喉輪",
         waist="無の腰当",
         left_ear="エアバニピアス",

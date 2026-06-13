@@ -18,7 +18,7 @@ function init_gear_sets()
         head="無の面",
         body="ＡＺコート+3",
         hands="ＡＺグローブ+3",
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        legs="ニャメフランチャ", 
         feet="ＡＺゲートル+3",
         neck="シビルスカーフ",
         waist="無の腰当",

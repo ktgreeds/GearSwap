@@ -15,7 +15,7 @@ function init_gear_sets()
     gear['ウトゥグリップ']      = {name="ウトゥグリップ"}
     gear['アダパシールド']      = {name="アダパシールド"}
     gear['ブラーシールド']      = {name="ブラーシールド+1"}
-    gear.Slip                   = {name="フレンジーサリット"}
+    gear.Slip                   = {name="ヴィムトルク"}
 
     -- ジョブマント
     gear.JobMantle                  = {}

@@ -121,7 +121,7 @@ function init_gear_sets()
         head="ＲＮバンド+3",
         body="ＥＲサーコート+3",
         hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        legs="ニャメフランチャ", 
         feet={ name="カマイングリーヴ", augments={'HP+60','STR+10','INT+10',}},
         neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},

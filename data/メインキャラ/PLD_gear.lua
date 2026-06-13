@@ -167,11 +167,11 @@ function init_gear_sets()
 	-- WSダメージ
 	sets.precast.WS.Damage = {
 		ammo="昏黄の礫",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
 		neck="フォシャゴルゲット",
 		waist="フォシャベルト",
 		left_ear="テロスピアス",

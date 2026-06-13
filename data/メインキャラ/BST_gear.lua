@@ -36,11 +36,11 @@ function init_gear_sets()
     --待機装備
     sets.idle = {
         ammo="ストンチタスラム+1",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
+        head="ニャメヘルム",
         body="アダマンアーマー",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
         left_ear="エアバニピアス",
@@ -53,7 +53,7 @@ function init_gear_sets()
     --待機装備（ペット呼び出し時）
     sets.idle.Pet = {
         ammo="ストンチタスラム+1",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
+        head="ニャメヘルム",
         body="ＴＯジャック+3",
         hands="グレティガントレ",
         legs="ＮＫキホーテ+3",
@@ -125,11 +125,11 @@ function init_gear_sets()
     --WSダメージ
     sets.precast.WS.Damage = {
         ammo={ name="コイストボダー", augments={'Path: A',}},
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck="共和プラチナ章",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
@@ -143,11 +143,11 @@ function init_gear_sets()
     --WS魔攻
     sets.precast.WS.Magic = {
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck="シビルスカーフ",
         waist="オルペウスサッシュ",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},

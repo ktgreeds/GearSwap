@@ -127,11 +127,11 @@ function init_gear_sets()
 
     --WS魔攻
     sets.precast.WS.Magic = {
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck="シビルスカーフ",
         waist="オルペウスサッシュ",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},

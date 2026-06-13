@@ -1,7 +1,7 @@
 function init_weaponns()
     send_command('gs c set MainWeapons '..windower.to_shift_jis('クロセアモースC'))
     if player.sub_job == '忍' or player.sub_job == 'NIN' or player.sub_job == '踊' or player.sub_job == 'DNC' then
-        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('ターニオンダガー'))
+        send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('クレパスクラナイフ'))
     else
         send_command('wait 1; gs c set SubWeapons '..windower.to_shift_jis('アムラピシールド'))
     end
@@ -18,10 +18,11 @@ function init_gear_sets()
     gear['トーレット']          = {name="トーレット"}
     gear['マレヴォレンス']      = {name="マレヴォレンス"}
     gear['ターニオンダガー']    = {name="ターニオンダガー+1"}
+    gear['クレパスクラナイフ']  = {name="クレパスクラナイフ"}
 	gear['クトゥルブナイフ']    = {name="クトゥルブナイフ"}
 	gear['幽世の短剣'] 		    = {name="幽世の短剣"}
     gear['マクセンチアス']      = {name="マクセンチアス"}
-    gear['デイブレイクワンド']  = { name="デイブレイクワンド"}
+    gear['デイブレイクワンド']  = {name="デイブレイクワンド"}
     gear['玄冥盾']    			= {name="玄冥盾"}
     gear['アムラピシールド']	= {name="アムラピシールド"}
     gear['ウルル']              = {name="ウルル"}
@@ -51,9 +52,9 @@ function init_gear_sets()
         ammo="ストンチタスラム+1",
         head={ name="ＶＩシャポー+3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
         body="ＬＴサヨン+3",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
         left_ear="エアバニピアス",
@@ -73,9 +74,9 @@ function init_gear_sets()
         legs="マリグナスタイツ",
         feet="マリグナスブーツ",
         neck="無の喉輪",
-        waist={ name="セールフィベルト+1", augments={'Path: A',}},
+        waist="ウィンバフベルト+1",
         left_ear="アスプロピアス",
-        right_ear="手ロスピアス",
+        right_ear="テロスピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
         back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Store TP"+10','Phys. dmg. taken-10%',}},
@@ -83,13 +84,12 @@ function init_gear_sets()
 
 	--エン殴り装備
 	sets.engaged.Enn = set_combine(sets.engaged,{
-        range="ウルル",
-        ammo=empty,
+        --range="ウルル",
+        --ammo=empty,
         hands="アヤモマノポラ+2",
         legs="ＶＩタイツ+3",
         waist="オルペウスサッシュ",
-        left_ear="ディグニタリピアス",
-        right_ear={ name="レサジーピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+        right_ear="レサジーピアス+1",
         left_ring="シーリチリング+1",
         right_ring="メタモルリング+1",
         back={ name="スセロスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%',}},
@@ -127,10 +127,10 @@ function init_gear_sets()
 	--WSダメージ
     sets.precast.WS.Damage = {
         ammo="昏黄の礫",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
         feet="ＬＴウゾー+3",
         neck="共和プラチナ章",
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
@@ -161,10 +161,10 @@ function init_gear_sets()
 	--WS魔攻
     sets.precast.WS.Magic = {
         ammo="ペムフレドタスラム",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
         feet="ＬＴウゾー+3",
         neck="シビルスカーフ",
         waist="オルペウスサッシュ",
@@ -281,7 +281,7 @@ function init_gear_sets()
 		neck={ name="デュエルトルク+2", augments={'Path: A',}},
 		waist="エンブラサッシュ",
 		left_ear={ name="オノワイヤリング+1", augments={'Path: A',}},
-		right_ear={ name="レサジーピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+11','Mag. Acc.+11','"Dbl.Atk."+3',}},
+		right_ear="レサジーピアス+1",
 		left_ring="スティキニリング+1",
 		right_ring={ name="ゼラチナスリング+1", augments={'Path: A',}},
         back={ name="ゴストファイケープ", augments={'Enfb.mag. skill +10','Enha.mag. skill +10','Mag. Acc.+5','Enh. Mag. eff. dur. +16',}},
@@ -301,21 +301,22 @@ function init_gear_sets()
 	sets.midcast['強化魔法スキル'] =
 	{
         main="プクラトムージュ+1",
-		ammo="ストンチタスラム+1",
-		head="カマインマスク+1",
+        sub="フォフェンド+1",
+        ammo="ストンチタスラム+1",
+		head="ビファウルクラウン",
 		body={ name="ＶＩタバード+3", augments={'Enhances "Chainspell" effect',}},
 		hands={ name="ＶＩグローブ+3", augments={'Enhancing Magic duration',}},
 		legs="ＡＴタイツ+3",
 		feet="ＬＴウゾー+3",
-		neck="インカンタートルク",
-		waist="オリンポスサッシュ",
+		neck="ホクスニトルク",
+		waist="エンブラサッシュ",
 		left_ear="ミミルピアス",
 		right_ear="アンドアーピアス",
-		left_ring="スティキニリング+1",
+		right_ring="スティキニリング",
         back={ name="ゴストファイケープ", augments={'Enfb.mag. skill +10','Enha.mag. skill +10','Mag. Acc.+5','Enh. Mag. eff. dur. +16',}},
 	}
 
-	sets.midcast.Refresh         = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1",body="ＡＴタバード+3",Legs="ＬＴフュゾー+2"})
-	sets.midcast['ストンスキン'] = set_combine(sets.midcast['強化魔法'] ,{legs="シェダルサラウィル", neck="ノデンズゴルゲット", left_ear="アースクライピアス", waist="ジーゲルサッシュ",})
-	sets.midcast['アクアベール'] = set_combine(sets.midcast['強化魔法'] ,{head="ＡＭコイフ+1", hands="王将の袖飾り", legs="シェダルサラウィル"})
+	sets.midcast.Refresh         = set_combine(sets.midcast['強化魔法'],{head="ＡＭコイフ+1",body="ＡＴタバード+3",Legs="ＬＴフュゾー+2"})
+	sets.midcast['ストンスキン'] = set_combine(sets.midcast['強化魔法'],{legs="シェダルサラウィル", neck="ノデンズゴルゲット", left_ear="アースクライピアス", waist="ジーゲルサッシュ",})
+	sets.midcast['アクアベール'] = set_combine(sets.midcast['強化魔法'],{head="ＡＭコイフ+1", hands="王将の袖飾り", legs="シェダルサラウィル"})    
 end

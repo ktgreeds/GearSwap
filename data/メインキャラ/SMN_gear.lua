@@ -58,7 +58,7 @@ function init_gear_sets()
         ammo="ストンチタスラム+1",
         head="ＢＣホーン+2",
         body="ＢＣダブレット+2",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
+        hands="ニャメガントレ", 
         legs="ＢＣスパッツ+2",
         feet="ＢＣピガッシュ+2",
         neck="シビルスカーフ",

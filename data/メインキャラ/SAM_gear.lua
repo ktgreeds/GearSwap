@@ -1,5 +1,5 @@
 function init_weaponns()
-    send_command('gs c set MainWeapons '..windower.to_shift_jis('童子切安綱')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ウトゥグリップ'))
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('正宗')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ウトゥグリップ'))
 end
 
 
@@ -8,10 +8,13 @@ function init_gear_sets()
     lockstyleset = 12
 
     -- 武器
+    gear['正宗']                = {name="正宗"}
     gear['童子切安綱']          = {name="童子切安綱"}
     gear['シャイニングワン']    = {name="シャイニングワン"}
     gear['ウトゥグリップ']      = {name="ウトゥグリップ"}
-    gear.Slip                   = {name="フレンジーサリット"}
+    gear.Slip                   = {name="ヴィムトルク"}
+
+    gear.TPBounus               = {head="ムパカキャップ",left_ear="胡蝶のイヤリング"}
     
     -- モクシャ(41)
     sets.SubtleBlow = {
@@ -103,14 +106,14 @@ function init_gear_sets()
     -- WSダメージ
     sets.precast.WS.Damage = {
         ammo="ノブキエリ",
-        head={ name="ニャメヘルム", augments={'Path: A',}},
+        head="ニャメヘルム",
         body="越左近士胴丸",
         hands="ニャメガントレ",
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        legs="ニャメフランチャ", 
         feet="極春日筒脛当",
         neck={ name="侍の喉輪+2", augments={'Path: A',}},
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
-        left_ear="胡蝶のイヤリング",
+        left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
         left_ring="コーネリアリング",
         right_ring="ベーシルリング",
@@ -120,17 +123,17 @@ function init_gear_sets()
     -- WS魔攻
     sets.precast.WS.Magic = {
         ammo="ノブキエリ",
-        head={ name="ニャメヘルム", augments={'Path: A',}},
-        body="越左近士胴丸",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム", 
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="侍の喉輪+2", augments={'Path: A',}},
         waist="オルペウスサッシュ",
-        left_ear="胡蝶のイヤリング",
+        left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
         left_ring="コーネリアリング",
-        right_ring="ベーシルリング",
+        right_ring="スローダリング",
         back={ name="スメルトリオマント", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
     }
 
@@ -143,7 +146,8 @@ function init_gear_sets()
     sets.midcast.IncreasedPhalanx   = {
         head={ name="バロラスマスク", augments={'Pet: DEX+5','Weapon skill damage +3%','Phalanx +5','Accuracy+2 Attack+2',}},
         body={ name="バロラスメイル", augments={'Pet: Attack+9 Pet: Rng.Atk.+9','STR+10','Phalanx +5','Mag. Acc.+1 "Mag.Atk.Bns."+1',}},
-        hands={ name="バロラスミトン", augments={'Pet: INT+13','Attack+13','Phalanx +3','Accuracy+1 Attack+1','Mag. Acc.+5 "Mag.Atk.Bns."+5',}},
-        legs={ name="バロラスホーズ", augments={'Pet: Mag. Acc.+9','Pet: "Regen"+2','Phalanx +3','Accuracy+13 Attack+13','Mag. Acc.+12 "Mag.Atk.Bns."+12',}},
+        hands={ name="バロラスミトン", augments={'DEX+8','Pet: Mag. Acc.+6','Phalanx +4','Accuracy+11 Attack+11',}},
+        legs={ name="バロラスホーズ", augments={'INT+9','"Conserve MP"+5','Phalanx +4',}},
+        feet={ name="バロラスグリーヴ", augments={'Weapon Skill Acc.+10','MND+1','Phalanx +4','Accuracy+11 Attack+11',}},
     }
 end
