@@ -162,7 +162,7 @@ function init_gear_sets()
     --WS魔攻
     sets.precast.WS.Magic = {
         ammo="ペムフレドタスラム",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
+        head="ニャメヘルム",
         body="ニャメメイル",
         hands="ニャメガントレ",
         legs="ニャメフランチャ",

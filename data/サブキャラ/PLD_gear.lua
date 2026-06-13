@@ -184,29 +184,29 @@ function init_gear_sets()
 	-- FC
 	sets.precast.FC = {
         ammo="サピエンスオーブ",
-        head={ name="オディシアヘルム", augments={'Mag. Acc.+19','"Fast Cast"+5','"Mag.Atk.Bns."+11',}},
+        head="ＣＶアーメット+3",
         body="ＲＶサーコート+3",
         hands="レイライングローブ",
         legs="ＣＶクウィス+3",
         feet={ name="オディシアグリーヴ", augments={'"Fast Cast"+5','AGI+6','Mag. Acc.+14',}},
         neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},
-        left_ear={name="アスプロピアス",priority=15},
-        right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-        left_ring="メダダリング",
-        right_ring={name="月明の指輪",priority=14},
+        left_ear="ロケイシャスピアス",
+        right_ear="エテオレートピアス",
+        left_ring="メランリング",
+        right_ring="ラハブリング",
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
-    sets.precast.FC.value = 69
+    sets.precast.FC.value = 63
 
 	-- WSダメージ
 	sets.precast.WS.Damage = {
 		ammo="昏黄の礫",
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
 		neck="フォシャゴルゲット",
 		waist="フォシャベルト",
 		left_ear="テロスピアス",
@@ -259,19 +259,19 @@ function init_gear_sets()
 
 	-- 詠唱中断
 	sets.midcast.interruption = {
-		ammo="ストンチタスラム+1",
-		head="エスカイトヘルム",
-		body="ＣＶキュイラス+3",
-		hands="ＣＶガントレ+3",
-		legs="ファウンダホーズ",
-		feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
-		neck="月光の首飾り",
-		waist="オドンブラサッシュ",
-		left_ear="磁界の耳",
+        ammo="ストンチタスラム+1",
+        head={ name="エスカイトヘルム", augments={'Mag. Evasion+15','Spell interruption rate down +15%','Enmity+7',}},
+        body="ＣＶキュイラス+3",
+        hands="ＣＶガントレ+3",
+        legs={ name="ファウンダホーズ", augments={'MND+3','Mag. Acc.+3','Attack+7','Breath dmg. taken -1%',}},
+        feet={ name="ＳＶシュー+1", augments={'HP+105','Enmity+9','Potency of "Cure" effect received +15%',}},
+        neck="ロリケートトルク+1",
+        waist="オドンブラサッシュ",
+        left_ear={name="アスプロピアス",priority=16},
         right_ear={ name="シバリエピアス+1", augments={'System: 1 ID: 1676 Val: 0','Accuracy+15','Mag. Acc.+15','Damage taken-5%',}},
-		left_ring={ name="ゼラチナスリング+1", augments={'Path: A',},priority=16},
-        right_ring={ name="月明の指輪",priority=15},
-		back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',},priority=14},
+        left_ring="メランリング",
+        right_ring={name="月明の指輪",priority=15},
+        back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
 	}
 
     -- フラッシュ

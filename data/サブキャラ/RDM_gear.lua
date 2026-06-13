@@ -21,19 +21,20 @@ function init_gear_sets()
 	gear['クトゥルブナイフ']    = {name="クトゥルブナイフ"}
 	gear['幽世の短剣'] 		    = {name="幽世の短剣"}
     gear['マクセンチアス']      = {name="マクセンチアス"}
-    gear['デイブレイクワンド']  = { name="デイブレイクワンド"}
+    gear['デイブレイクワンド']  = {name="デイブレイクワンド"}
     gear['玄冥盾']    			= {name="玄冥盾"}
     gear['アムラピシールド']	= {name="アムラピシールド"}
     gear['ウルル']              = {name="ウルル"}
     gear.Slip  					= {name="カリブルヌス"}
+    
 	--待機装備
 	sets.idle = {
         ammo="ストンチタスラム+1",
         head={ name="ＶＩシャポー+3", augments={'Enfeebling Magic duration','Magic Accuracy',}},
         body="ＬＴサヨン+2",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
         left_ear="エアバニピアス",

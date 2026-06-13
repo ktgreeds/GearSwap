@@ -96,10 +96,10 @@ function init_gear_sets()
     -- 待機装備（通常）
     sets.idle = {
         head="無の面",
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
         left_ear="インフューズピアス",
@@ -210,10 +210,10 @@ function init_gear_sets()
     -- WS遠隔ダメージ
     sets.precast.WS.Range = {
         ammo=gear.GunPhysics,
-        head={ name="ニャメヘルム", augments={'Path: B',}},
+        head="ニャメヘルム",
         body="ＬＫフラック+4",
         hands="ＣＳガントリー+3",
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        legs="ニャメフランチャ", 
         feet={ name="ＬＡブーツ+4", augments={'Enhances "Wild Card" effect',}},
         neck="イスクルゴルゲット",
         waist="テレンベルト",
@@ -227,11 +227,11 @@ function init_gear_sets()
     -- WS遠隔魔攻
     sets.precast.WS.Magic = {
         ammo=gear.GunMagical,
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
         body="ＬＡフラック+4",
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
         feet={ name="ＬＡブーツ+4", augments={'Enhances "Wild Card" effect',}},
         neck="シビルスカーフ",
         waist="オルペウスサッシュ",

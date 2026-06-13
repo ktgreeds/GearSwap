@@ -59,6 +59,14 @@ function init_gear_sets()
         right_ring="シュネデックリング",
         back="無の外装",
     }
+    sets.idle.Refresh = set_combine(sets.idle,{
+        head={ name="カイロンハット", augments={'Pet: Phys. dmg. taken -2%','Attack+4','"Refresh"+2','Accuracy+18 Attack+18',}},
+        body={ name="カイロンダブレット", augments={'Mag. Acc.+7','Pet: Haste+3','"Refresh"+2','Mag. Acc.+20 "Mag.Atk.Bns."+20',}},
+        hands={ name="カイロングローブ", augments={'"Mag.Atk.Bns."+23','Accuracy+23','"Refresh"+2',}},
+        legs={ name="カイロンホーズ", augments={'Damage taken-2%','Rng.Acc.+3','"Refresh"+2','Accuracy+5 Attack+5','Mag. Acc.+14 "Mag.Atk.Bns."+14',}},
+        feet={ name="カイロンスリッパー", augments={'Spell interruption rate down -5%','Magic dmg. taken -1%','"Refresh"+2','Accuracy+7 Attack+7',}},
+        neck="シビルスカーフ",
+    })
 
     -- 待機装備（回避）
     sets.idle.Evasion = set_combine(sets.idle,{
@@ -137,11 +145,11 @@ function init_gear_sets()
     -- WSダメージ
     sets.precast.WS.Damage = {
         range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','STR+6 DEX+6',}},
-        head={ name="ニャメヘルム", augments={'Path: B',}},
+        head="ニャメヘルム",
         body={ name="ＢＩジュストコル+4", augments={'Enhances "Troubadour" effect',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="バードチャーム+1", augments={'Path: A',}},
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="アスプロピアス",
@@ -153,11 +161,11 @@ function init_gear_sets()
 
     sets.precast.WS.Critical = {
         range={ name="リノス", augments={'Accuracy+15 Attack+15','Crit. hit damage +3%','DEX+8',}},
-        head={ name="ニャメヘルム", augments={'Path: B',}},
+        head="ニャメヘルム",
         body={ name="ＢＩジュストコル+4", augments={'Enhances "Troubadour" effect',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck={ name="バードチャーム+1", augments={'Path: A',}},
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="テロスピアス",
@@ -170,11 +178,11 @@ function init_gear_sets()
     -- WS魔攻
     sets.precast.WS.Magic = {
         range={ name="リノス", augments={'Accuracy+15 Attack+15','Weapon skill damage +3%','STR+6 DEX+6',}},
-        head={ name="ニャメヘルム", augments={'Path: B',}},
-        body={ name="ニャメメイル", augments={'Path: B',}},
-        hands={ name="ニャメガントレ", augments={'Path: B',}},
-        legs={ name="ニャメフランチャ", augments={'Path: B',}},
-        feet={ name="ニャメソルレット", augments={'Path: B',}},
+        head="ニャメヘルム",
+        body="ニャメメイル",
+        hands="ニャメガントレ", 
+        legs="ニャメフランチャ", 
+        feet="ニャメソルレット", 
         neck="シビルスカーフ",
         waist="アキュイテベルト+1",
         left_ear="王将の耳飾り",
