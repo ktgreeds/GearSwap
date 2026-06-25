@@ -1,5 +1,5 @@
 function init_weaponns()
-    send_command('gs c set MainWeapons '..windower.to_shift_jis('正宗')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ウトゥグリップ'))
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('正宗')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ダデュコグリップ'))
 end
 
 
@@ -12,19 +12,10 @@ function init_gear_sets()
     gear['童子切安綱']          = {name="童子切安綱"}
     gear['シャイニングワン']    = {name="シャイニングワン"}
     gear['ウトゥグリップ']      = {name="ウトゥグリップ"}
+    gear['ダデュコグリップ']    = {name="ダデュコグリップ"}
     gear.Slip                   = {name="ヴィムトルク"}
-
     gear.TPBounus               = {head="ムパカキャップ",left_ear="胡蝶のイヤリング"}
     
-    -- モクシャ(41)
-    sets.SubtleBlow = {
-        neck="バーシチョーカー+1",
-        waist="サリサフロイベルト",
-        right_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
-    }
-
     -- バフ
     sets.buff['八双']               = {hands="越脇戸筒篭手"}
     sets.buff['星眼']               = {head="極春日烏帽子形兜"}
@@ -45,6 +36,15 @@ function init_gear_sets()
     sets.precast.JA['葉隠']         = {}
     sets.precast.JA['八重霞']       = {}
     
+    -- モクシャ(41)
+    sets.SubtleBlow = {
+        neck="バーシチョーカー+1",
+        waist="サリサフロイベルト",
+        right_ear="ディグニタリピアス",
+        left_ring="シーリチリング+1",
+        right_ring="シーリチリング+1",
+    }
+
     -- 待機装備
     sets.idle = {
         ammo="ストンチタスラム+1",

@@ -146,13 +146,14 @@ function init_gear_sets()
 	sets.precast.JA['パリセード']       = sets.Enmity
 	sets.precast.JA['インターヴィーン'] = sets.Enmity
 
-	-- FC64
+	-- FC68
 	sets.precast.FC = {
         ammo="サピエンスオーブ",
         head={ name="カマインマスク+1", augments={'Accuracy+20','Mag. Acc.+12','"Fast Cast"+4',}},
         body="ＲＶサーコート+4",
         hands={ name="レイライングローブ", augments={'Accuracy+15','Mag. Acc.+15','"Mag.Atk.Bns."+15','"Fast Cast"+3',}},
-        legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',}},
+        --legs={ name="カマインクウィス+1", augments={'HP+80','STR+12','INT+12',}},
+        legs="スオーンブレー",
         feet={ name="オディシアグリーヴ", augments={'Mag. Acc.+1 "Mag.Atk.Bns."+1','"Fast Cast"+6','VIT+2','Mag. Acc.+2','"Mag.Atk.Bns."+13',}},
         neck="オルンミラトルク",
         waist={ name="プラチナモグベルト",priority=16},
@@ -162,7 +163,7 @@ function init_gear_sets()
         right_ring={name="月明の指輪",priority=14},
         back={ name="ルディアノスマント", augments={'HP+60','Eva.+20 /Mag. Eva.+20','HP+20','"Fast Cast"+10','Spell interruption rate down-10%',}},
     }
-    sets.precast.FC.value = 64
+    sets.precast.FC.value = 72
 
 	-- WSダメージ
 	sets.precast.WS.Damage = {

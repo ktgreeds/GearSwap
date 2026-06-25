@@ -214,12 +214,12 @@ function init_gear_sets()
         main="オパショーロ",
         sub="エンキストラップ",
         ammo={ name="ガストリタスラム+1", augments={'Path: A',}},
-        head={ name="ＰＤボード+4", augments={'Enh. "Altruism" and "Focalization"',}},
-        body={ name="アグゥローブ", augments={'Path: A',}},
-        hands={ name="アグゥゲージ", augments={'Path: A',}},
-        legs={ name="アグゥスロップス", augments={'Path: A',}},
-        feet="ＡＢローファー+3",
-        neck={ name="アギュトストール+2", augments={'Path: A',}},
+        head={ name="ＰＤボード+4", augments={'Enh. "Altruism" and "Focalization"',}},--II +4
+        body={ name="アグゥローブ", augments={'Path: A',}},--+10
+        hands={ name="アグゥゲージ", augments={'Path: A',}},--+8 II+5
+        legs={ name="アグゥスロップス", augments={'Path: A',}},--+9
+        feet="ＡＢローファー+3",--II +5
+        neck={ name="アギュトストール+2", augments={'Path: A',}},--+10
         waist="スクリミルコード+1",
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
