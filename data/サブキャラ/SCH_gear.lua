@@ -107,14 +107,14 @@ function init_gear_sets()
         head="ＰＤボード+4",
         body="ピンガチュニック+1",
         hands="ＡＣブレーサー+4",
-        legs="ピンガズボン+1",
+        legs="ピンガズボン",
         feet="ＡＣローファー+4",
         neck="オルンミラトルク",
         waist="エンブラサッシュ",
         left_ear="マリグナスピアス",
         right_ear="エンチャンピアス+1",
         left_ring="キシャールリング",
-        right_ring="メダダリング",
+        right_ring="ラハブリング",
         back="フィフォレケープ+1",
     }
     sets.precast.FC.value = 47
@@ -225,7 +225,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="フレキリング",
-        right_ring="メダダリング",
+        right_ring="メタモルリング+1",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
     sets.midcast['精霊魔法'].weak = set_combine(sets.midcast['精霊魔法'],{
