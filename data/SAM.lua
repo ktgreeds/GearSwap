@@ -12,7 +12,7 @@ function job_setup()
     state.OffenseMode:options('Normal','SubtleBlow','HoxneAmpulla')
     state.WeaponskillMode:options('Normal','SubtleBlow')
     state.MainWeapons   = M{'正宗','童子切安綱','シャイニングワン'}
-    state.SubWeapons    = M{'ウトゥグリップ'}
+    state.SubWeapons    = M{'ダデュコグリップ','ウトゥグリップ'}
     state.Increased     = M(true)
     state.HoxneAmpulla  = M(false)
 

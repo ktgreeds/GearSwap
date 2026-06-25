@@ -6,7 +6,8 @@ end
 
 
 function job_setup()
-    state.IdleMode:options('Normal')
+    state.Buff['バットゥタ'] = buffactive['バットゥタ'] or false
+    state.IdleMode:options('Normal','Refresh')
     state.OffenseMode:options('Normal','Stp')
     state.WeaponskillMode:options('Normal','SubtleBlow')
     state.MainWeapons   = M{'エピオラトリー','ライカーゴス'}
