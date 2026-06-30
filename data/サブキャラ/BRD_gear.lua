@@ -27,9 +27,12 @@ function init_gear_sets()
     gear['アムラピシールド']    = {name="アムラピシールド"}
     gear.Empty                  = {name=nil}
     gear.Evasion                = {name="ニビルナイフ"}
+    gear.Slip                   = {name="プライムダガー"}
 
     -- マント
     gear.JobMantle              = {}
+    gear.JobMantle.Idle         = { name="インタラアスケープ", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity-10','Occ. inc. resist. to stat. ailments+10',}}
+
     gear.JobMantle.Critical     = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.JobMantle.Magic        = { name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}}
     gear.JobMantle.WSD_STR      = { name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
@@ -47,17 +50,17 @@ function init_gear_sets()
     -- 待機装備（通常）
     sets.idle = {
         head="ＦＬキャロ+3",
-        body="ニャメメイル",
+        body="アダマンアーマー",
         hands="ニャメガントレ",
         legs="ＢＲキャニオン+4",
         feet="ニャメソルレット",
         neck="バーシチョーカー+1",
         waist="無の腰当",
-        left_ear="インフューズピアス",
-        right_ear="エアバニピアス",
+        left_ear="ハーティーピアス",
+        right_ear="アレテデルルナ+1",
         left_ring="メランリング",
         right_ring="シュネデックリング",
-        back="無の外装",
+        back={ name="インタラアスケープ", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity-10','Occ. inc. resist. to stat. ailments+10',}},
     }
     sets.idle.Refresh = set_combine(sets.idle,{
         head={ name="カイロンハット", augments={'Pet: Phys. dmg. taken -2%','Attack+4','"Refresh"+2','Accuracy+18 Attack+18',}},
