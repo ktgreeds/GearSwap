@@ -2,7 +2,7 @@
 
 --■■■初期ロード
 function user_setup()
-    local res = require('resources')
+    res = require('resources')
     state.Buff['睡眠'] = buffactive['睡眠'] or false                    --監視するバフ・デバフ
     state.Buff['エンチャント'] = buffactive['エンチャント'] or false
     include(player.name .. '/weather_obi')                              --属性帯ロード
@@ -12,8 +12,8 @@ function user_setup()
     define_roll_values()--ロール情報
 
     send_command('input /chatmode party')                               --チャットモード変更
-    send_command('wait 1; input /si '..res.jobs[player.main_job_id]["ens"])
-    send_command('wait 2; gs c set IdleMode Normal; wait 1; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
+    send_command('input /si '..res.jobs[player.main_job_id]["ens"])
+    send_command('wait 1; gs c set IdleMode Normal; wait 4; gs c lockstyleset;')--待機装備着替え後にロックスタイル固定
 
     -- gs c cycle SortieText
     --state.SortieText = M(false)
@@ -24,6 +24,15 @@ function user_setup()
     --include('organizer-lib') 
     --table.vprint(res.jobs[player.main_job_id]["ens"])
     --print(res.jobs[player.main_job_id]["ens"])
+end
+
+--■■■アクション前デフォルト着替え前処理（共通実装なし）
+function user_precast(spell, action, spellMap, eventArgs)
+    --リキャストがまだならデフォルト着替えを行わず処理中断
+    if not chaeck_Recast(spell) then
+        cancel_spell()
+        eventArgs.handled = true
+     end
 end
 
 --■■■サブタゲ選択時の処理
@@ -44,7 +53,6 @@ function user_post_precast(spell, action, spellMap, eventArgs)
         end
     end
 end
-
 
 --■■■アクション中処理
 function user_post_midcast(spell, action, spellMap, eventArgs)
@@ -70,11 +78,32 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
     end
 end
 
+magic_types = S{'WhiteMagic','BlackMagic','BlueMagic','SummonerPact','Geomancy','Ninjutsu','BardSong','Trust'}
+function chaeck_Recast(spell)
+    if magic_types:contains(spell.type)  then
+        local m_recasts = windower.ffxi.get_spell_recasts()
+        local m_recast = m_recasts[spell.recast_id]/60
+        if m_recast and m_recast > 0 then
+            windower.add_to_chat(39, '[ RECAST ] '..spell.name..': '..('%.1fs'):format(m_recast))
+            return false
+        end
+    end
+
+    local a_recasts = windower.ffxi.get_ability_recasts()
+    if a_recasts[spell.recast_id] then
+        local a_recast = a_recasts[spell.recast_id]
+        if a_recast and a_recast > 0 then
+            windower.add_to_chat(39, '[ RECAST ] '..spell.name..': '..('%.1fs'):format(a_recast))
+            return false
+        end
+    end
+    return true
+end
 
 --■■■アクション後処理（共通実装なし）
 function user_post_aftercast(spell, action, spellMap, eventArgs)
+    
 end
-
 
 
 function user_state_change(stateField,  newValue, oldValue)
@@ -131,7 +160,6 @@ function Interruption(spell, action, spellMap, eventArgs)
     local adjust = 0.15
     local cast_time = (spell.cast_time*(1-fc))-adjust
 
-    --IdleMelee()
     equip(sets.midcast.interruption)
 
     if sets.midcast[spell.name] then
@@ -428,7 +456,7 @@ function Aspir()
     elseif recast_time_1 == 0 then
         send_command('input /ma '..windower.to_shift_jis('アスピル')..' <stnpc>')
     else
-        windower.add_to_chat(30, 'アスピル リキャスト---> III: %.1fs, II: %.1fs, I: %.1fs':format(recast_time_3, recast_time_1, recast_time_1))
+        windower.add_to_chat(30, ('アスピル リキャスト---> III: %.1fs, II: %.1fs, I: %.1fs'):format(recast_time_3, recast_time_2, recast_time_1))
     end
 end
 
@@ -447,7 +475,7 @@ function Drain()
     elseif recast_time_1 == 0 then
         send_command('input /ma '..windower.to_shift_jis('ドレイン')..' <stnpc>')
     else
-        windower.add_to_chat(30, 'ドレイン リキャスト---> III: %.1fs,II: %.1fs, I: %.1fs':format(recast_time_3, recast_time_2, recast_time_1))
+        windower.add_to_chat(30, ('ドレイン リキャスト---> III: %.1fs,II: %.1fs, I: %.1fs'):format(recast_time_3, recast_time_2, recast_time_1))
     end
 end
 
@@ -466,7 +494,7 @@ function Utsusemi()
     elseif recast_time_1 == 0 then
         send_command('input /ma '..windower.to_shift_jis('空蝉の術:壱')..' <me>')
     else
-        windower.add_to_chat(30, '空蝉の術 リキャスト---> 参: %.1fs, 弐: %.1fs, 壱: %.1fs':format(recast_time_3, recast_time_2, recast_time_1))
+        windower.add_to_chat(30, ('空蝉の術 リキャスト---> 参: %.1fs, 弐: %.1fs, 壱: %.1fs'):format(recast_time_3, recast_time_2, recast_time_1))
     end
 end
 
@@ -478,11 +506,11 @@ function Lullabys()
     local recast_time_1 = recasts[377]/60
 
     if recast_time_2 == 0 then
-        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物達のララバイ')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('魔物達のララバイ')..' <stnpc>')
     elseif recast_time_1 == 0 then
-        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物達のララバイII')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('魔物達のララバイII')..' <stnpc>')
     else
-        windower.add_to_chat(30, '魔物達のララバイ リキャスト---> 1:%.1fs, 2:%.1fs':format(recast_time_2, recast_time_1))
+        windower.add_to_chat(30, ('魔物達のララバイ リキャスト---> 1:%.1fs, 2:%.1fs'):format(recast_time_2, recast_time_1))
     end
 end
 
@@ -494,11 +522,11 @@ function Lullaby()
     local recast_time_1 = recasts[463]/60
 
     if recast_time_2 == 0 then
-        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物のララバイII')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('魔物のララバイII')..' <stnpc>')
     elseif recast_time_1 == 0 then
-        send_command('input /targetbnpc; input /ma '..windower.to_shift_jis('魔物のララバイ')..' <stnpc>')
+        send_command('input /ma '..windower.to_shift_jis('魔物のララバイ')..' <stnpc>')
     else
-        windower.add_to_chat(30, '魔物のララバイ リキャスト---> 1:%.1fs, 2:%.1fs':format(recast_time_1, recast_time_2))
+        windower.add_to_chat(30, ('魔物のララバイ リキャスト---> 1:%.1fs, 2:%.1fs'):format(recast_time_1, recast_time_2))
     end
 end
 
@@ -513,7 +541,7 @@ function ActionEnmity()
     local recast_time_abzotac   = spell_recasts[275]/60
     
     local ability_recasts = windower.ffxi.get_ability_recasts()
-    local recast_time_Provoke = spell_recasts[5]/60
+    local recast_time_Provoke = ability_recasts[5]
 
     if recast_time_Flash == 0 then
         send_command('input /ma '..windower.to_shift_jis('フラッシュ')..' <stnpc>')
@@ -707,11 +735,11 @@ weakmagic = S{'ストーン','ストーンII','ストーンIII','ウォータ','
 
 --■■■ロール情報出力
 function display_roll_info(spell)
-    rollinfo = rolls[spell.japanese]
+    local rollinfo = rolls[spell.name]
     if rollinfo then
-        local desc = rolls[spell.name].bonus
-        local lucky = rolls[spell.name].lucky
-        local unlucky = rolls[spell.name].unlucky
+        local desc = rollinfo.bonus
+        local lucky = rollinfo.lucky
+        local unlucky = rollinfo.unlucky
         windower.add_to_chat(2, spell.name .. ' [' ..desc ..'] Lucky=' .. lucky .. ' '.. ' Unluck='.. unlucky)
     end
 end

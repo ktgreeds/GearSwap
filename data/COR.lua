@@ -42,7 +42,6 @@ function job_post_pretarget(spell, action, spellMap, eventArgs)
         end
     
     elseif spell.type == 'CorsairRoll' then --ロール
-        display_roll_info(spell)
         if state.LuzafsRing.value then
             equip({left_ring=gear['ルザフリング']})
         end

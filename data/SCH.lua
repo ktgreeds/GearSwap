@@ -151,6 +151,10 @@ end
 
 
 function disp_start_skillchain_message(sc_name,count)
+    if not sc_mb[sc_name] then
+        windower.add_to_chat(123, '[SC] 未定義の連携名: ' .. tostring(sc_name))
+        return
+    end
     local sc_msg = get_auto_translate_char_squence(sc_name)
     local sc_mb_msg = {}
 
