@@ -79,6 +79,7 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 magic_types = S{'WhiteMagic','BlackMagic','BlueMagic','SummonerPact','Geomancy','Ninjutsu','BardSong','Trust'}
+charge_recast_ids = S{231, 255, 195}
 function chaeck_Recast(spell)
     if magic_types:contains(spell.type)  then
         local m_recasts = windower.ffxi.get_spell_recasts()
@@ -88,7 +89,9 @@ function chaeck_Recast(spell)
             return false
         end
     end
-
+    if charge_recast_ids:contains(spell.recast_id) then
+        return true
+    end
     local a_recasts = windower.ffxi.get_ability_recasts()
     if a_recasts[spell.recast_id] then
         local a_recast = a_recasts[spell.recast_id]
@@ -159,6 +162,7 @@ function Interruption(spell, action, spellMap, eventArgs)
     
     local adjust = 0.15
     local cast_time = (spell.cast_time*(1-fc))-adjust
+windower.add_to_chat(39, 'DEBUG cast_time='..tostring(cast_time)..' fc='..tostring(fc))
 
     equip(sets.midcast.interruption)
 
