@@ -1,5 +1,5 @@
 function init_weaponns()
-    send_command('gs c set MainWeapons '..windower.to_shift_jis('正宗')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ダデュコグリップ'))
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('草薙剣')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ダデュコグリップ'))
 end
 
 
@@ -8,6 +8,7 @@ function init_gear_sets()
     lockstyleset = 12
 
     -- 武器
+    gear['草薙剣']              = {name="草薙剣"}
     gear['正宗']                = {name="正宗"}
     gear['童子切安綱']          = {name="童子切安綱"}
     gear['シャイニングワン']    = {name="シャイニングワン"}
@@ -49,31 +50,33 @@ function init_gear_sets()
     sets.idle = {
         ammo="ストンチタスラム+1",
         head="ニャメヘルム",
-        body="ニャメメイル",
+        body="アダマンアーマー",
         hands="ニャメガントレ",
         legs="ニャメフランチャ",
         feet="ニャメソルレット",
         neck="バーシチョーカー+1",
         waist="無の腰当",
-        left_ear="エアバニピアス",
-        right_ear="インフューズピアス",
+        left_ear="ハーティーピアス",
+        right_ear="アレテデルルナ+1",
         left_ring="メランリング",
         right_ring="シュネデックリング",
-        back="無の外装",
+        back={ name="スメルトリオマント", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity-10','Occ. inc. resist. to stat. ailments+10',}},
     }
 
     -- 抜刀装備
     sets.engaged = {
-        ammo="オゲルミルオーブ+1",
+        ammo="コイストボダー",
         head="極春日烏帽子形兜",
         body="極春日胴丸",
         hands="越脇戸筒篭手",
         legs="極春日板佩楯",
-        feet="越脇戸筒脛当",    
+--        feet="越脇戸筒脛当",    
+        feet="龍王脛当改",    
         neck="月光の喉輪",
-        waist="ソードフェーテル+1",
+        waist="イオスケハベルト+1",
         left_ear="アスプロピアス",
-        right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
+        right_ear="シェレピアス",
+--        right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
         left_ring="メランリング",
         right_ring="シーリチリング+1",
         back={ name="タカハマント", augments={'STR+3','"Zanshin"+5','"Store TP"+3',}},
@@ -84,9 +87,11 @@ function init_gear_sets()
     
     -- ホクスニアムプラ
     sets.engaged.HoxneAmpulla   = set_combine(sets.engaged,{
+        ammo="オゲルミルオーブ+1",
         feet="越左近士筒脛当",
         neck="侍の喉輪+2",
         left_ring="シーリチリング+1",
+        waist="ソードフェーテル+1",
         back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
     })
     

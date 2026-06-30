@@ -40,7 +40,7 @@ function init_gear_sets()
     sets.idle = {
         ammo="ストンチタスラム+1",
         head="無の面",
-        body="ＲＮコート+3",
+        body="ＲＮコート+4",
         hands="ＥＲガントレ+3",
         legs="ＲＮトラウザ+4",
         feet="ＥＲグリーヴ+3",
@@ -56,7 +56,7 @@ function init_gear_sets()
     -- 待機装備（リフレ）
     sets.idle.Refresh = set_combine(sets.idle, {
         head={ name="ヘルクリアヘルム", augments={'Weapon skill damage +2%','AGI+6','"Refresh"+2','Accuracy+9 Attack+9',}},
-        body="ＲＮコート+3",
+        body="ＲＮコート+4",
         hands={ name="ヘルクリアグローブ", augments={'Spell interruption rate down -6%','Attack+5','"Refresh"+2','Accuracy+8 Attack+8',}},
         legs={ name="ヘルクリアトラウザ", augments={'Pet: VIT+10','"Subtle Blow"+10','"Refresh"+2','Accuracy+8 Attack+8',}},
         feet={ name="ヘルクリアブーツ", augments={'"Mag.Atk.Bns."+17','STR+9','"Refresh"+2',}},
@@ -67,7 +67,7 @@ function init_gear_sets()
     sets.engaged = {
         ammo="ストンチタスラム+1",
         head="無の面",
-        body="ＲＮコート+3",
+        body="ＲＮコート+4",
         hands="ＥＲガントレ+3",
         legs="ＲＮトラウザ+4",
         feet="ＥＲグリーヴ+3",
@@ -99,8 +99,8 @@ function init_gear_sets()
     
     sets.precast.JA                     = sets.Enmity
     sets.precast.JA['E.スフォルツォ']   = set_combine(sets.Enmity,{body="ＦＵコート+3"})
-    sets.precast.JA['ヴァリエンス']     = set_combine(sets.Enmity,{body="ＲＮコート+3",legs="ＦＵトラウザ+3"})
-    sets.precast.JA['ヴァレション']     = set_combine(sets.Enmity,{body="ＲＮコート+3",legs="ＦＵトラウザ+3"})
+    sets.precast.JA['ヴァリエンス']     = set_combine(sets.Enmity,{body="ＲＮコート+4",legs="ＦＵトラウザ+3"})
+    sets.precast.JA['ヴァレション']     = set_combine(sets.Enmity,{body="ＲＮコート+4",legs="ＦＵトラウザ+3"})
     sets.precast.JA['ガンビット']       = set_combine(sets.Enmity,{hands="ＲＮミトン+3"})
     sets.precast.JA['ソードプレイ']     = set_combine(sets.Enmity,{hands="ＦＵミトン+3"})
     sets.precast.JA['バットゥタ']       = set_combine(sets.Enmity,{head="ＦＵバンド+3"})
