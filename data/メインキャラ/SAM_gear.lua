@@ -120,8 +120,8 @@ function init_gear_sets()
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="コーネリアリング",
-        right_ring="ベーシルリング",
+        left_ring="イフラマドリング",
+        right_ring="王将の指輪",
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
 
@@ -137,13 +137,14 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="スローダリング",
         back={ name="スメルトリオマント", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
     }
 
     --共通WS定義読み込み
     init_weapon_skill()
+    sets.precast.WS["絶之太刀・無名"]           = set_combine(sets.precast.WS.Damage,{waist="ケンタークベルト+1"})
 
     --被魔法強化装備
     sets.midcast.IncreasedProtect   = {right_ring="シェルターリング"}

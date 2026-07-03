@@ -79,7 +79,7 @@ function init_gear_sets()
     }
 
     -- 待機装備（リフレ）
-    sets.idle.Refresh={
+    sets.idle.Refresh = {
         ammo="ホミリアリ",
         head={ name="マーリンフード", augments={'STR+5','Accuracy+6','"Refresh"+2','Accuracy+10 Attack+10',}},
         body="ＡＢガウン+3",
@@ -87,7 +87,7 @@ function init_gear_sets()
         legs={ name="マーリンシャルワ", augments={'CHR+11','"Cure" potency +2%','"Refresh"+2','Accuracy+16 Attack+16','Mag. Acc.+19 "Mag.Atk.Bns."+19',}},
         feet={ name="マーリンクラッコー", augments={'CHR+12','Accuracy+5','"Refresh"+2',}},
         neck="シビルスカーフ",
-        waist="風鳥の帯",
+        waist="無の腰当",
         left_ear="アスプロピアス",
         right_ear="エテオレートピアス",
         left_ring="スティキニリング+1",
@@ -166,7 +166,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="フレキリング",
-        right_ring="コーネリアリング",
+        right_ring="イフラマドリング",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
     
@@ -229,7 +229,8 @@ function init_gear_sets()
     }
     sets.midcast['精霊魔法'].weak = set_combine(sets.midcast['精霊魔法'],{
     })
-
+    sets.midcast['神聖魔法'] = set_combine(sets.midcast['精霊魔法'],{
+    })
     -- メルトン
     sets.midcast['メルトン'] =  set_combine(sets.midcast['精霊魔法'],{left_ring="アルコンリング"})
 
