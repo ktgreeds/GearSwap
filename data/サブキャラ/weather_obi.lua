@@ -1,7 +1,7 @@
-weather = {}
-weather_strong = {}
-weaken_element = {}
-elemental_obi = {}
+local weather = {}
+local weather_strong = {}
+local weaken_element = {}
+local elemental_obi = {}
 
 -- 弱天候
 weather['火'] = '熱波'
@@ -34,17 +34,16 @@ weaken_element['光'] = '闇'
 weaken_element['闇'] = '光'
 
 -- 所持している属性帯(所持していない場合はnil)
-elemental_obi = {}
-elemental_obi['火'] = {waist="火輪の帯",}
-elemental_obi['水'] = {waist="水輪の帯",}
-elemental_obi['雷'] = {waist="雷輪の帯",}
-elemental_obi['土'] = {waist="土輪の帯",}
-elemental_obi['風'] = {waist="風輪の帯",}
-elemental_obi['氷'] = {waist="氷輪の帯",}
-elemental_obi['光'] = {waist="光輪の帯",}
-elemental_obi['闇'] = {waist="闇輪の帯",}
+elemental_obi['火'] = nil
+elemental_obi['水'] = nil
+elemental_obi['雷'] = nil
+elemental_obi['土'] = nil
+elemental_obi['風'] = nil
+elemental_obi['氷'] = nil
+elemental_obi['光'] = nil
+elemental_obi['闇'] = nil
 
-hachirin = nil
+local hachirin = {waist="八輪の帯"}
 
 function get_hachirin(spell_element)
     if elemental_obi[spell_element] then -- 属性帯がある場合
@@ -62,7 +61,7 @@ function get_hachirin(spell_element)
         elseif world.day_element == spell_element
                and world.weather ~= weather_strong[weaken_element[spell_element]]
                and world.weather ~= weather[weaken_element[spell_element]] then -- 同属性曜日 かつ 天候が非干渉 
-            return hachirin
+             return hachirin
         else
             return nil
         end
