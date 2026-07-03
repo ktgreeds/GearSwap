@@ -296,7 +296,7 @@ bp_other=S{'ルビーの癒し','レイズII','リレイズII','風の囁き','�
 avatar_list=S{'Shiva','Ramuh','Garuda','Leviathan','Diabolos','Titan','Fenrir','Ifrit','Carbuncle','Fire Spirit','Air Spirit','Ice Spirit',
             'Thunder Spirit','Light Spirit','Dark Spirit','Earth Spirit','Water Spirit','Cait Sith','Alexander','Odin','Atomos'}
 
-spirit_element = {}
+local spirit_element = {}
 spirit_element['火']='火精霊召喚'
 spirit_element['土']='土精霊召喚'
 spirit_element['水']='水精霊召喚'
@@ -307,7 +307,7 @@ spirit_element['光']='光精霊召喚'
 spirit_element['闇']='闇精霊召喚'
 
 -- 弱天候
-weather = {}
+local weather = {}
 weather['熱波'] = '火'
 weather['雨'] = '水'
 weather['雷'] = '雷'
@@ -318,7 +318,7 @@ weather['オーロラ'] = '光'
 weather['妖霧'] = '闇'
 
 -- 強天候
-weather_strong = {}
+local weather_strong = {}
 weather_strong['灼熱波'] = '火'
 weather_strong['スコール'] = '水'
 weather_strong['雷雨'] = '雷'
@@ -329,7 +329,7 @@ weather_strong['神光'] = '光'
 weather_strong['闇'] = '闇'
 
 -- 弱点属性
-weaken_element = {}
+local weaken_element = {}
 weaken_element['火'] = '水'
 weaken_element['水'] = '雷'
 weaken_element['雷'] = '土'

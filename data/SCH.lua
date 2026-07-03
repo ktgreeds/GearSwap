@@ -134,19 +134,18 @@ function get_auto_translate_char_squence(phrase)
     local at_end = 0xFD
     local at_type = 0x02
     local at_lang = 0x01
-    local phrase_id = gearswap.res.auto_translates:with('ja', phrase).id
 
-    if phrase_id then
-        local phrase_id_upper = bit.band(bit.rshift(phrase_id, 8), 0xFF)
-        local phrase_id_lower = bit.band(phrase_id, 0xFF)
-        
-        if phrase_id_lower == 0x00 then
-            return nil
-        else
-            return string.char(at_start, at_type, at_lang, phrase_id_upper, phrase_id_lower, at_end)
-        end
+    local at_entry = gearswap.res.auto_translates:with('ja', phrase)
+    if not at_entry or not at_entry.id or at_entry.id == 0 then
+        -- 辞書に無い場合は生テキストにフォールバック
+        return windower.to_shift_jis(phrase)
     end
-    return nil
+
+    local phrase_id = at_entry.id
+    local phrase_id_upper = bit.band(bit.rshift(phrase_id, 8), 0xFF)
+    local phrase_id_lower = bit.band(phrase_id, 0xFF)
+
+    return string.char(at_start, at_type, at_lang, phrase_id_upper, phrase_id_lower, at_end)
 end
 
 
@@ -155,6 +154,9 @@ function disp_start_skillchain_message(sc_name,count)
         windower.add_to_chat(123, '[SC] 未定義の連携名: ' .. tostring(sc_name))
         return
     end
+
+    count = count or ''  -- countが省略されたときのガード
+
     local sc_msg = get_auto_translate_char_squence(sc_name)
     local sc_mb_msg = {}
 
@@ -163,18 +165,26 @@ function disp_start_skillchain_message(sc_name,count)
     end
 
     local msg = 'input /p '..windower.to_shift_jis(count)..sc_msg
-    
+
     for i,v in ipairs(sc_mb_msg) do
         msg = msg..v
     end
+
     local start_msg = get_auto_translate_char_squence('準備中です。')
 
     msg = msg..start_msg..windower.to_shift_jis('   → ')..' <t> <scall21>'
-    send_command(msg)
+    send_command('wait 0.2; '..msg)
 end
 
 
 function disp_end_skillchain_message(sc_name,count)
+    if not sc_mb[sc_name] then
+        windower.add_to_chat(123, '[SC] 未定義の連携名: ' .. tostring(sc_name))
+        return
+    end
+
+    count = count or ''
+
     local sc_msg = get_auto_translate_char_squence(sc_name)
     local sc_mb_msg = {}
 
@@ -183,13 +193,14 @@ function disp_end_skillchain_message(sc_name,count)
     end
 
     local msg = 'input /p '..windower.to_shift_jis(count)..sc_msg
-    
+
     for i,v in ipairs(sc_mb_msg) do
         msg = msg..v
     end
+
     local end_msg = get_auto_translate_char_squence('全力で攻撃だ！')
 
     msg = msg..end_msg..windower.to_shift_jis(' → ')..' <t> '..windower.to_shift_jis('※').. '<recast='..windower.to_shift_jis("戦術魔道書")..'>'
-    send_command(msg)
+    send_command('wait 0.2; '..msg)
 end
 --▲▲▲▲▲震天動地連携用▲▲▲▲▲

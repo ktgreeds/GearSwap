@@ -51,6 +51,7 @@ function user_post_precast(spell, action, spellMap, eventArgs)
                 equip(sets.SubtleBlow)
             end
         end
+        send_command('timers c WS 10 down')
     end
 end
 
@@ -79,7 +80,7 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 magic_types = S{'WhiteMagic','BlackMagic','BlueMagic','SummonerPact','Geomancy','Ninjutsu','BardSong','Trust'}
-charge_recast_ids = S{231, 255, 195}
+charge_recast_ids = S{231, 255, 195}--戦術魔導書　しじをさせろ　クイックドロー
 function chaeck_Recast(spell)
     if magic_types:contains(spell.type)  then
         local m_recasts = windower.ffxi.get_spell_recasts()
@@ -162,7 +163,6 @@ function Interruption(spell, action, spellMap, eventArgs)
     
     local adjust = 0.15
     local cast_time = (spell.cast_time*(1-fc))-adjust
-windower.add_to_chat(39, 'DEBUG cast_time='..tostring(cast_time)..' fc='..tostring(fc))
 
     equip(sets.midcast.interruption)
 
