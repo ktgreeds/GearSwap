@@ -1,5 +1,5 @@
 function init_weaponns()
-    send_command('gs c set MainWeapons '..windower.to_shift_jis('草薙剣')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('ダデュコグリップ'))
+    send_command('gs c set MainWeapons '..windower.to_shift_jis('草薙剣')..'; wait 1; gs c set SubWeapons '..windower.to_shift_jis('テロパノグリップ'))
 end
 
 
@@ -13,7 +13,7 @@ function init_gear_sets()
     gear['童子切安綱']          = {name="童子切安綱"}
     gear['シャイニングワン']    = {name="シャイニングワン"}
     gear['ウトゥグリップ']      = {name="ウトゥグリップ"}
-    gear['ダデュコグリップ']    = {name="ダデュコグリップ"}
+    gear['テロパノグリップ']    = {name="テロパノグリップ"}
     gear.Slip                   = {name="ヴィムトルク"}
     gear.TPBounus               = {head="ムパカキャップ",left_ear="胡蝶のイヤリング"}
     
@@ -120,7 +120,7 @@ function init_gear_sets()
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="王将の指輪",
         back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
@@ -137,7 +137,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="スローダリング",
         back={ name="スメルトリオマント", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
     }

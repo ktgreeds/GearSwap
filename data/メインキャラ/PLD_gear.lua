@@ -177,7 +177,7 @@ function init_gear_sets()
 		waist="フォシャベルト",
 		left_ear="テロスピアス",
         right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="エパミノダスリング",
 		back={name="月明の羽衣",priority=16},
     }
@@ -194,7 +194,7 @@ function init_gear_sets()
 		waist="フォシャベルト",
 		left_ear="テロスピアス",
         right_ear={ name="シバリエピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+18','Mag. Acc.+18','Damage taken-7%','STR+11 VIT+11',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="王将の指輪",
 		back={name="月明の羽衣",priority=16},
     }
@@ -211,7 +211,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear={name="アスプロピアス",priority=14},
         right_ear="フリオミシピアス",
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="エパミノダスリング",
         back={ name="ルディアノスマント", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','Magic Damage +10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }

@@ -170,7 +170,7 @@ function init_gear_sets()
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear="スラッドピアス",
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="ベーシルリング",
         back=gear.JobMantle.WSD_STR,
     }
@@ -192,7 +192,7 @@ function init_gear_sets()
         left_ear="アスプロピアス",
         right_ear="ズワゾピアス+1",
         left_ring="メランリング",
-        right_ring="イフラマドリング",
+        right_ring="コーネリアリング",
         back="月明の羽衣",
     }
 

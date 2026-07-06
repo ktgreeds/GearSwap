@@ -99,7 +99,7 @@ function init_gear_sets()
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear={ name="ヒーズンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Weapon skill damage +4%','STR+9 INT+9',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="王将の指輪",
         back={ name="アンコウマント", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
@@ -117,7 +117,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear={ name="ヒーズンピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Weapon skill damage +4%','STR+9 INT+9',}},
         left_ring="エパミノダスリング",
-        right_ring="イフラマドリング",
+        right_ring="コーネリアリング",
         back={ name="アンコウマント", augments={'VIT+20','Accuracy+20 Attack+20','VIT+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }
     

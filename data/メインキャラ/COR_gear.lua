@@ -203,7 +203,7 @@ function init_gear_sets()
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear={ name="シャスーピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Crit.hit rate+6','STR+9 AGI+9',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="スローダリング",
         back=gear.JobMantle.WSD_STR
     }
@@ -220,7 +220,7 @@ function init_gear_sets()
         waist="テレンベルト",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="テロスピアス",
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="ディンジルリング",
         back=gear.JobMantle.WSD_AGI
     }
@@ -238,7 +238,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="フリオミシピアス",
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="ディンジルリング",
         back=gear.JobMantle.WSD_Magic
     }

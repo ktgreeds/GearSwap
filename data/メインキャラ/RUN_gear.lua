@@ -152,7 +152,7 @@ function init_gear_sets()
         waist="セールフィベルト+1",
         left_ear="アスプロピアス",
         right_ear="オノワイヤリング+1",
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="王将の指輪",
         back="無の外装",
     }

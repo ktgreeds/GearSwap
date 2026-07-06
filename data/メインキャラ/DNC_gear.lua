@@ -157,7 +157,7 @@ function init_gear_sets()
         waist={ name="ケンタークベルト+1", augments={'Path: A',}},
         left_ear="王将の指輪",
         right_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="王将の指輪",
         back="サクロマント",
     }
@@ -191,7 +191,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="オドルピアス",
         right_ear="フリオミシピアス",
-        left_ring="イフラマドリング",
+        left_ring="コーネリアリング",
         right_ring="エパミノダスリング",
         back="無の外装",
     }
