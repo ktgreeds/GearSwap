@@ -12,7 +12,7 @@ function job_setup()
     state.OffenseMode:options('Normal','SubtleBlow','HoxneAmpulla')
     state.WeaponskillMode:options('Normal','SubtleBlow')
     state.MainWeapons   = M{'草薙剣','正宗','童子切安綱','シャイニングワン'}
-    state.SubWeapons    = M{'ダデュコグリップ','ウトゥグリップ'}
+    state.SubWeapons    = M{'テロパノグリップ','ウトゥグリップ'}
     state.Increased     = M(true)
     state.HoxneAmpulla  = M(false)
 
@@ -23,6 +23,7 @@ local tp_bonus_ws = S{
     "祖之太刀・不動",
     "五之太刀・陣風",
     "絶之太刀・無名",
+    "絶之太刀・無名"
 }
 
 function job_post_precast(spell, action, spellMap, eventArgs)

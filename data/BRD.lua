@@ -7,9 +7,9 @@ end
 
 function job_setup()
     --dummy
-    set_dummy_song('戦士達のピーアン')
-    set_dummy_song('戦士達のピーアンII')
-    set_dummy_song('戦士達のピーアンIII')
+--    set_dummy_song('戦士達のピーアン')
+--    set_dummy_song('戦士達のピーアンII')
+--    set_dummy_song('戦士達のピーアンIII')
 
     --state
     state.IdleMode:options('Normal','Evasion')
@@ -32,9 +32,9 @@ function job_post_precast(spell, action, spellMap, eventArgs)
         elseif spellMap == 'Dummy' then
             equip({range=gear['ダウルダヴラ']})
         else
-            if not state.UseMiracleCheer.value 
-            or spell.target.type == "MONSTER" then
-                equip({range=gear['ギャッラルホルン']})
+            if not state.UseMiracleCheer.value or spell.target.type == "MONSTER" then
+                --equip({range=gear['ギャッラルホルン']})
+                equip({range=gear['ラックナシェード']})
             else
                 equip({range=gear['ミラクルチアー']})
             end

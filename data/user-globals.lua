@@ -27,22 +27,31 @@ function user_setup()
 end
 
 --■■■アクション前デフォルト着替え前処理（共通実装なし）
+local base_user_precast = user_precast
 function user_precast(spell, action, spellMap, eventArgs)
     --リキャストがまだならデフォルト着替えを行わず処理中断
     if not chaeck_Recast(spell) then
         cancel_spell()
         eventArgs.handled = true
      end
+    if base_user_precast then
+        base_user_precast(spell, action, spellMap, eventArgs)
+    end
 end
 
 --■■■サブタゲ選択時の処理
+local base_user_post_pretarget = user_post_pretarget
 function user_post_pretarget(spell, action, spellMap, eventArgs)
     if spell.type == 'CorsairRoll' then --ロール
         display_roll_info(spell)
     end
+    if base_user_post_pretarget then
+        base_user_post_pretarget(spell, action, spellMap, eventArgs)
+    end
 end
 
 --■■■アクション前処理（共通実装なし）
+local base_user_post_precast = user_post_precast
 function user_post_precast(spell, action, spellMap, eventArgs)
     if spell.type == 'WeaponSkill' then
         if state.WeaponskillMode then
@@ -53,9 +62,13 @@ function user_post_precast(spell, action, spellMap, eventArgs)
         end
         send_command('timers c WS 10 down')
     end
+    if base_user_post_precast then
+        base_user_post_precast(spell, action, spellMap, eventArgs)
+    end
 end
 
 --■■■アクション中処理
+local base_user_post_midcast = user_post_midcast
 function user_post_midcast(spell, action, spellMap, eventArgs)
     if string.find(spell.type, 'Magic') then
         if sets.midcast.interruption then
@@ -76,6 +89,9 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
         if state.TreasureHunter.value then
             equip(sets.TreasureHunter)
         end
+    end
+    if base_user_post_midcast then
+        base_user_post_midcast(spell, action, spellMap, eventArgs)
     end
 end
 
@@ -105,11 +121,14 @@ function chaeck_Recast(spell)
 end
 
 --■■■アクション後処理（共通実装なし）
+local base_user_post_aftercast = user_post_aftercast
 function user_post_aftercast(spell, action, spellMap, eventArgs)
-    
+    if base_user_post_aftercast then
+        base_user_post_aftercast(spell, action, spellMap, eventArgs)
+    end
 end
 
-
+local base_user_state_change = user_state_change
 function user_state_change(stateField,  newValue, oldValue)
     if stateField == 'Offense Mode' then
         if state.WeaponskillMode.value ~= 'SubtleBlow' and newValue == 'SubtleBlow' then
@@ -129,6 +148,9 @@ function user_state_change(stateField,  newValue, oldValue)
                 send_command('gs c reset OffenseMode')
             end
         end
+    end
+    if base_user_state_change then
+        base_user_state_change(spell, action, spellMap, eventArgs)
     end
 end
 
