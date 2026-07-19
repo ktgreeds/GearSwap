@@ -15,9 +15,12 @@ function job_setup()
     state.SubWeapons    = M{'テロパノグリップ','ウトゥグリップ'}
     state.Increased     = M(true)
     state.HoxneAmpulla  = M(false)
+    send_command('lua l bars')
 
 end
-
+function user_unload()
+    send_command('lua u bars')
+end
 local tp_bonus_ws = S{
     "絶之太刀・無名",
     "祖之太刀・不動",

@@ -96,7 +96,7 @@ function user_post_midcast(spell, action, spellMap, eventArgs)
 end
 
 magic_types = S{'WhiteMagic','BlackMagic','BlueMagic','SummonerPact','Geomancy','Ninjutsu','BardSong','Trust'}
-charge_recast_ids = S{231, 255, 195}--戦術魔導書　しじをさせろ　クイックドロー
+charge_recast_ids = S{231, 102, 195}--戦術魔導書　しじをさせろ　クイックドロー
 function chaeck_Recast(spell)
     if magic_types:contains(spell.type)  then
         local m_recasts = windower.ffxi.get_spell_recasts()

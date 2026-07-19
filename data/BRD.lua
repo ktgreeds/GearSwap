@@ -7,7 +7,7 @@ end
 
 function job_setup()
     --dummy
---    set_dummy_song('戦士達のピーアン')
+    set_dummy_song('戦士達のピーアン')
 --    set_dummy_song('戦士達のピーアンII')
 --    set_dummy_song('戦士達のピーアンIII')
 
