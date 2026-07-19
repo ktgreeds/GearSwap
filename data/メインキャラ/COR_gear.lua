@@ -33,22 +33,21 @@ function init_gear_sets()
 
     -- ジョブマント
     gear.JobMantle              = {}
-    gear.JobMantle.Melee_STP    = { name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Phys. dmg. taken-10%'}}
+    gear.JobMantle.Melee_STP    = { name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%'}}
     gear.JobMantle.Melee_Dual   = { name="カムラスマント", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','"Dual Wield"+10','Phys. dmg. taken-10%'}}
     gear.JobMantle.Snap         = { name="カムラスマント", augments={'"Snapshot"+10'}}
     gear.JobMantle.RA           = { name="カムラスマント", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','Rng.Acc.+10','"Store TP"+10',}}
-    gear.JobMantle.WSD_STR      = { name="カムラスマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD_STR      = { name="カムラスマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Damage taken-5%',}}
     gear.JobMantle.WSD_AGI      = { name="カムラスマント", augments={'AGI+20','Rng.Acc.+20 Rng.Atk.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.JobMantle.WSD_Magic    = { name="カムラスマント", augments={'AGI+20','Mag. Acc+20 /Mag. Dmg.+20','AGI+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
 
-    -- モクシャ(49)
     sets.SubtleBlow = {
-        hands="アデマリスト+1",
-        neck="バーシチョーカー+1",
-        waist="サリサフロイベルト",
-        right_ear="ディグニタリピアス",
-        left_ring="シーリチリング+1",
-        right_ring="シーリチリング+1",
+        --hands="アデマリスト+1",--8
+        neck="バーシチョーカー+1",--11
+        waist="サリサフロイベルト",--5
+        right_ear="ディグニタリピアス",--5,
+        left_ring="シーリチリング+1",--10
+        right_ring="シーリチリング+1",--10
     }
 
     -- ロール
@@ -103,9 +102,9 @@ function init_gear_sets()
         feet="ニャメソルレット", 
         neck={ name="バーシチョーカー+1", augments={'Path: A',}},
         waist="無の腰当",
-        left_ear="インフューズピアス",
-        right_ear="エアバニピアス",
-        left_ring={ name="メランリング", augments={'Path: A',}},
+        left_ear="ハーティーピアス",
+        right_ear="アレテデルルナ+1",
+        left_ring="メランリング",
         right_ring="シュネデックリング",
         back="無の外装",
     }
@@ -123,7 +122,7 @@ function init_gear_sets()
         right_ear="テロスピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
-        back="無の外装"
+        back=gear.JobMantle.Melee_STP
     }
 
     -- 抜刀装備（高命中）
@@ -203,7 +202,7 @@ function init_gear_sets()
         waist="セールフィベルト+1",
         left_ear="胡蝶のイヤリング",
         right_ear={ name="シャスーピアス+2", augments={'System: 1 ID: 1676 Val: 0','Accuracy+17','Mag. Acc.+17','Crit.hit rate+6','STR+9 AGI+9',}},
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="スローダリング",
         back=gear.JobMantle.WSD_STR
     }
@@ -220,7 +219,7 @@ function init_gear_sets()
         waist="テレンベルト",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="テロスピアス",
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="ディンジルリング",
         back=gear.JobMantle.WSD_AGI
     }
@@ -238,7 +237,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="フリオミシピアス",
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="ディンジルリング",
         back=gear.JobMantle.WSD_Magic
     }

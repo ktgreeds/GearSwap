@@ -166,7 +166,7 @@ function init_gear_sets()
         left_ear="マリグナスピアス",
         right_ear="王将の耳飾り",
         left_ring="フレキリング",
-        right_ring="コーネリアリング",
+        right_ring="イフラマドリング",
         back={ name="ルッフケープ", augments={'INT+20','Mag. Acc+20 /Mag. Dmg.+20','INT+10','"Mag.Atk.Bns."+10',}},
     }
     

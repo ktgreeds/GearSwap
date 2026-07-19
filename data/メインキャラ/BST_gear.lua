@@ -152,7 +152,7 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear={ name="胡蝶のイヤリング", augments={'Accuracy+4','TP Bonus +250',}},
         right_ear="フリオミシピアス",
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="エパミノダスリング",
         back={ name="アルティオマント", augments={'STR+20','Accuracy+20 Attack+20','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
     }

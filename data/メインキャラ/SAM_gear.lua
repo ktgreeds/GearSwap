@@ -17,6 +17,13 @@ function init_gear_sets()
     gear.Slip                   = {name="ヴィムトルク"}
     gear.TPBounus               = {head="ムパカキャップ",left_ear="胡蝶のイヤリング"}
     
+    -- ジョブマント
+    gear.JobMantle              = {}
+    gear.JobMantle.Idle         = { name="スメルトリオマント", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity-10','Occ. inc. resist. to stat. ailments+10',}}
+    gear.JobMantle.Engaged      = { name="タカハマント", augments={'STR+3','"Zanshin"+5','"Store TP"+3',}}
+    gear.JobMantle.Melee_STP    = { name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
+    gear.JobMantle.WSD_STR      = { name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+
     -- バフ
     sets.buff['八双']               = {hands="越脇戸筒篭手"}
     sets.buff['星眼']               = {head="極春日烏帽子形兜"}
@@ -60,7 +67,7 @@ function init_gear_sets()
         right_ear="アレテデルルナ+1",
         left_ring="メランリング",
         right_ring="シュネデックリング",
-        back={ name="スメルトリオマント", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity-10','Occ. inc. resist. to stat. ailments+10',}},
+        back=gear.JobMantle.Idle
     }
 
     -- 抜刀装備
@@ -79,7 +86,7 @@ function init_gear_sets()
 --        right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
         left_ring="メランリング",
         right_ring="シーリチリング+1",
-        back={ name="タカハマント", augments={'STR+3','"Zanshin"+5','"Store TP"+3',}},
+        back=gear.JobMantle.Engaged
     }
     
     -- モクシャ
@@ -92,7 +99,7 @@ function init_gear_sets()
         neck="侍の喉輪+2",
         left_ring="シーリチリング+1",
         waist="ソードフェーテル+1",
-        back={ name="スメルトリオマント", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}},
+        back=gear.JobMantle.Melee_STP
     })
     
     -- FC装備
@@ -120,9 +127,9 @@ function init_gear_sets()
         waist={ name="セールフィベルト+1", augments={'Path: A',}},
         left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="王将の指輪",
-        back={ name="スメルトリオマント", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}},
+        back=gear.JobMantle.WSD_STR
     }
 
     -- WS魔攻
@@ -137,9 +144,9 @@ function init_gear_sets()
         waist="オルペウスサッシュ",
         left_ear="スラッドピアス",
         right_ear={ name="真春日耳飾り", augments={'System: 1 ID: 1676 Val: 0','Accuracy+19','Mag. Acc.+19','Weapon skill damage +4%','STR+13 DEX+13',}},
-        left_ring="コーネリアリング",
+        left_ring="イフラマドリング",
         right_ring="スローダリング",
-        back={ name="スメルトリオマント", augments={'STR+20','Mag. Acc+20 /Mag. Dmg.+20','STR+10','"Dbl.Atk."+10','Phys. dmg. taken-10%',}},
+        back=gear.JobMantle.WSD_STR
     }
 
     --共通WS定義読み込み
