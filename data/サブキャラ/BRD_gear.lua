@@ -33,9 +33,10 @@ function init_gear_sets()
     gear.JobMantle              = {}
     gear.JobMantle.Idle         = { name="インタラアスケープ", augments={'AGI+20','Eva.+20 /Mag. Eva.+20','Evasion+10','Enmity-10','Occ. inc. resist. to stat. ailments+10',}}
 
+    gear.JobMantle.Stp          = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','Accuracy+10','"Store TP"+10','Damage taken-5%',}}
     gear.JobMantle.Critical     = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Crit.hit rate+10','Phys. dmg. taken-10%',}}
     gear.JobMantle.Magic        = { name="インタラアスケープ", augments={'CHR+20','Mag. Acc+20 /Mag. Dmg.+20','Enmity-10',}}
-    gear.JobMantle.WSD_STR      = { name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
+    gear.JobMantle.WSD_STR      = { name="インタラアスケープ", augments={'STR+20','Accuracy+20 Attack+20','STR+10','Weapon skill damage +10%','Damage taken-5%',}}
     gear.JobMantle.WSD_CHR      = { name="インタラアスケープ", augments={'CHR+20','Accuracy+20 Attack+20','CHR+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     gear.JobMantle.WSD_DEX      = { name="インタラアスケープ", augments={'DEX+20','Accuracy+20 Attack+20','DEX+10','Weapon skill damage +10%','Phys. dmg. taken-10%',}}
     
@@ -45,6 +46,7 @@ function init_gear_sets()
         right_ear="ディグニタリピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
+        legs="ヴォルトタイツ"
     }
 
     -- 待機装備（通常）
@@ -91,18 +93,18 @@ function init_gear_sets()
     -- 抜刀装備
     sets.engaged = {
         range={ name="リノス", augments={'Accuracy+17','"Store TP"+4','Quadruple Attack +3',}},
-        head="レベレマスク",
-        body="レベレプレート",
-        hands="レベレガントレ",
-        legs="レベレサバトン",
-        feet="レベレサバトン",
+        head="ＦＬキャロ+3",
+        body="ニャメメイル",
+        hands="ＦＬマンシェト+3",
+        legs="レベレブレー",
+        feet="ニャメソルレット",
         neck={ name="バードチャーム+1", augments={'Path: A',}},
         waist="セールフィベルト+1",
         left_ear="アスプロピアス",
         right_ear="テロスピアス",
         left_ring="シーリチリング+1",
         right_ring="シーリチリング+1",
-        back="無の外装",
+        back=gear.JobMantle.Stp,
     }
 
     -- 抜刀装備（モクシャ）
